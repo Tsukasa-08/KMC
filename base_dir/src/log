@@ -1,0 +1,244 @@
+INPUTファイルを読み込み
+	KMCのステップ数(何回行うか) NSTEPS =3
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =3
+	拡散種をいくつ配置するか NDIFFS = 2
+
+JMPDATA read
+	jump_total_number = 256
+
+POSCAR read
+	site_total_number = 64
+
+lattice_matrix = 
+	32  0  0
+	 0 32  0
+	 0  0 32
+
+step_counter = 1 start 
+
+	total_time = 0
+
+	main loop start
+
+	loop_counter = 1
+		jumps_possible[0] = 3.25619e+10
+		jumps_possible[1] = 3.08067e+10
+		jumps_possible[2] = 4.51226e+08
+		jumps_possible[3] = 7.58792e+09
+		jumps_possible[4] = 2.02506e+08
+		jumps_possible[5] = 1.49571e+07
+		jumps_possible[6] = 4.64261e+06
+		jumps_possible[7] = 1.13226e+06
+		freq_sum = 7.1631e+10
+		rho_1 = 0.0452119
+		jump_happen_number = 0
+		rho_2 = 0.012704
+		total_time = 6.0949e-11
+
+	Tue Jun 15 16:54:26 2021
+	239 msec
+
+	loop_counter = 2
+		jumps_possible[0] = 1.41968e+06
+		jumps_possible[1] = 6.96996e+06
+		jumps_possible[2] = 255706
+		jumps_possible[3] = 617093
+		jumps_possible[4] = 2.02506e+08
+		jumps_possible[5] = 1.49571e+07
+		jumps_possible[6] = 4.64261e+06
+		jumps_possible[7] = 1.13226e+06
+		freq_sum = 2.32501e+08
+		rho_1 = 0.535838
+		jump_happen_number = 4
+		rho_2 = 0.20452
+		total_time = 6.88712e-09
+
+	Tue Jun 15 16:54:26 2021
+	210 msec
+
+	loop_counter = 3
+		jumps_possible[0] = 1.41968e+06
+		jumps_possible[1] = 6.96996e+06
+		jumps_possible[2] = 255706
+		jumps_possible[3] = 617093
+		jumps_possible[4] = 1.09731e+06
+		jumps_possible[5] = 1.37349e+07
+		jumps_possible[6] = 573835
+		jumps_possible[7] = 4.11162e+07
+		freq_sum = 6.57847e+07
+		rho_1 = 0.493016
+		jump_happen_number = 7
+		rho_2 = 0.417177
+		total_time = 2.01766e-08
+
+	Tue Jun 15 16:54:26 2021
+	208 msec
+	loop_counter finished
+
+	diffusion_species[0]:D_t_3d[0] = 0
+	diffusion_species[0]:D_t_3d[1] = 3.96499e-08
+	diffusion_species[0]:D_t_3d[2] = 0
+
+	diffusion_species[1]:D_t_3d[0] = 0
+	diffusion_species[1]:D_t_3d[1] = 0
+	diffusion_species[1]:D_t_3d[2] = 0
+
+	D_j_3d[0] = 0
+	D_j_3d[1] = 1.9825e-08
+	D_j_3d[2] = 0
+
+Tue Jun 15 16:54:26 2021
+1447 msec
+
+step_counter = 2 start 
+
+	total_time = 0
+
+	main loop start
+
+	loop_counter = 1
+		jumps_possible[0] = 1.09731e+06
+		jumps_possible[1] = 1.37349e+07
+		jumps_possible[2] = 573835
+		jumps_possible[3] = 4.11162e+07
+		jumps_possible[4] = 7.47066e+09
+		jumps_possible[5] = 6.49664e+09
+		jumps_possible[6] = 2.14833e+08
+		jumps_possible[7] = 2.56415e+06
+		freq_sum = 1.42412e+10
+		rho_1 = 0.496277
+		jump_happen_number = 4
+		rho_2 = 0.137952
+		total_time = 1.39092e-10
+
+	Tue Jun 15 16:54:26 2021
+	210 msec
+
+	loop_counter = 2
+		jumps_possible[0] = 1.09731e+06
+		jumps_possible[1] = 1.37349e+07
+		jumps_possible[2] = 573835
+		jumps_possible[3] = 4.11162e+07
+		jumps_possible[4] = 7.17189e+06
+		jumps_possible[5] = 113609
+		jumps_possible[6] = 1031.77
+		jumps_possible[7] = 1.11453e+06
+		freq_sum = 6.49233e+07
+		rho_1 = 0.335327
+		jump_happen_number = 3
+		rho_2 = 0.996811
+		total_time = 1.88283e-10
+
+	Tue Jun 15 16:54:26 2021
+	208 msec
+
+	loop_counter = 3
+		jumps_possible[0] = 7.17189e+06
+		jumps_possible[1] = 113609
+		jumps_possible[2] = 1031.77
+		jumps_possible[3] = 1.11453e+06
+		jumps_possible[4] = 2.02506e+08
+		jumps_possible[5] = 1.49571e+07
+		jumps_possible[6] = 4.64261e+06
+		jumps_possible[7] = 1.13226e+06
+		freq_sum = 2.31639e+08
+		rho_1 = 0.966066
+		jump_happen_number = 5
+		rho_2 = 0.174404
+		total_time = 7.72752e-09
+
+	Tue Jun 15 16:54:26 2021
+	207 msec
+	loop_counter finished
+
+	diffusion_species[0]:D_t_3d[0] = 1.03526e-07
+	diffusion_species[0]:D_t_3d[1] = 1.03526e-07
+	diffusion_species[0]:D_t_3d[2] = 0
+
+	diffusion_species[1]:D_t_3d[0] = 0
+	diffusion_species[1]:D_t_3d[1] = 1.03526e-07
+	diffusion_species[1]:D_t_3d[2] = 0
+
+	D_j_3d[0] = 5.17631e-08
+	D_j_3d[1] = 1.03526e-07
+	D_j_3d[2] = 0
+
+Tue Jun 15 16:54:26 2021
+751 msec
+
+step_counter = 3 start 
+
+	total_time = 0
+
+	main loop start
+
+	loop_counter = 1
+		jumps_possible[0] = 3.32254e+08
+		jumps_possible[1] = 1.9538e+10
+		jumps_possible[2] = 1.60009e+07
+		jumps_possible[3] = 3.09497e+08
+		jumps_possible[4] = 3.2472e+09
+		jumps_possible[5] = 1.3356e+10
+		jumps_possible[6] = 5.3374e+08
+		jumps_possible[7] = 5.78245e+07
+		freq_sum = 3.73905e+10
+		rho_1 = 0.63111
+		jump_happen_number = 5
+		rho_2 = 0.35268
+		total_time = 2.78733e-11
+
+	Tue Jun 15 16:54:26 2021
+	217 msec
+
+	loop_counter = 2
+		jumps_possible[0] = 3.32254e+08
+		jumps_possible[1] = 1.9538e+10
+		jumps_possible[2] = 1.60009e+07
+		jumps_possible[3] = 3.09497e+08
+		jumps_possible[4] = 1.57951e+09
+		jumps_possible[5] = 623413
+		jumps_possible[6] = 2.85981e+06
+		jumps_possible[7] = 2.03827e+06
+		freq_sum = 2.17808e+10
+		rho_1 = 0.900184
+		jump_happen_number = 1
+		rho_2 = 0.0609536
+		total_time = 1.56319e-10
+
+	Tue Jun 15 16:54:26 2021
+	208 msec
+
+	loop_counter = 3
+		jumps_possible[0] = 75746.3
+		jumps_possible[1] = 426159
+		jumps_possible[2] = 1.7075e+07
+		jumps_possible[3] = 1.16096e+09
+		jumps_possible[4] = 1.57951e+09
+		jumps_possible[5] = 623413
+		jumps_possible[6] = 2.85981e+06
+		jumps_possible[7] = 2.03827e+06
+		freq_sum = 2.76357e+09
+		rho_1 = 0.23513
+		jump_happen_number = 3
+		rho_2 = 0.511264
+		total_time = 3.99073e-10
+
+	Tue Jun 15 16:54:26 2021
+	207 msec
+	loop_counter finished
+
+	diffusion_species[0]:D_t_3d[0] = 2.00464e-06
+	diffusion_species[0]:D_t_3d[1] = 2.00464e-06
+	diffusion_species[0]:D_t_3d[2] = 0
+
+	diffusion_species[1]:D_t_3d[0] = 2.00464e-06
+	diffusion_species[1]:D_t_3d[1] = 0
+	diffusion_species[1]:D_t_3d[2] = 0
+
+	D_j_3d[0] = 2.00464e-06
+	D_j_3d[1] = 1.00232e-06
+	D_j_3d[2] = 0
+
+Tue Jun 15 16:54:26 2021
+741 msec
+
