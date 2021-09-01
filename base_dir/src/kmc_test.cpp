@@ -151,6 +151,15 @@ vector<string> split(const string& input, char delimiter)
 int const number_vacancy = 1;
 int const number_proton = 2;
 
+
+//物理定数を定義
+
+double const kb = 1.380649 * pow(10,-23);
+double const ec = 1.60217662 * pow(10,-19);
+
+
+
+
 //メイン関数の開始
 int main()
 {
@@ -419,6 +428,16 @@ int main()
 			double E_along_jump_strength = E_j_dot / jump_vector_cartesian.norm();
 			cout << "E_along_jump_strength = " << E_along_jump_strength << endl;
 		
+			//ΔEmigを求める、1*で良いのはプロトンのみなことに注意
+			double q_charge = 1 * ec;
+			double delta_E_mig = q_charge * E_along_jump_strength * jump_vector_cartesian.norm()/2;
+			cout << "delta_E_mig = " << delta_E_mig << endl;
+
+			//ジャンプ頻度を補正する
+			double fixed_jump_freq = jumps[i].get_freq() * exp(delta_E_mig/(kb*temperture));
+			cout << "jump_frep = " << jumps[i].get_freq() << endl;
+			cout << "fixed_jump_freq = " << fixed_jump_freq << endl;
+			jumps[i].set_freq(fixed_jump_freq);
 			if (i == 3)
 			break;	
 		}

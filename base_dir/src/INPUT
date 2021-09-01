@@ -10,7 +10,7 @@ NLOOPS=3
 NDIFFS=2
 
 #電場の強さ、単位は
-EFIELD=3
+EFIELD=0.005
 
 #温度(K)
 TEMP=500
