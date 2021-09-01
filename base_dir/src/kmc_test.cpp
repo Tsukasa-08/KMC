@@ -343,6 +343,12 @@ int main()
 
 
 
+	//cartesian座標軸方向の単位ベクトルを作成し、電場の大きさをかけて電場ベクトルとする
+	Eigen::Vector3d E_field_vector(1,0,0);
+	E_field_vector *= E_field_strength;
+	cout << "E_field_vector = " << E_field_vector << endl;
+
+
 
 
 	//Site.site_frac_coordsをもとに、Jump.jump_vectorを生成する
