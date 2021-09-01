@@ -167,6 +167,7 @@ int main()
 	int loop_max = param.get<int>("NLOOPS", 0);
 	int p_place_n = param.get<int>("NDIFFS", 0);
 	double E_field_strength = param.get<double>("EFIELD", 0);
+	double temperture = param.get<double>("TEMP", 0);
 	
 	//読み込めたか確認用
 	if (!param) {
@@ -178,6 +179,7 @@ int main()
 	cout << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
 	cout << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
 	cout << "\t" << "電場の強さ EFIELD = " << E_field_strength << endl;
+	cout << "\t" << "温度 TEMP = " << temperture << endl;
 	cout << endl;
 
 
