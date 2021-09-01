@@ -401,6 +401,19 @@ int main()
 		E_field_vector *= E_field_strength;
 		cout << "E_field_vector = " << E_field_vector << endl;
 
+		//生成したジャンプに対し操作を行っていく
+		for (int i = 0; i != jumps.size(); i++) {
+			
+			//ジャンプベクトルをfracからcartesianに直す
+			Eigen::Vector3d jump_vector_frac;
+			Eigen::Vector3d jump_vector_cartesian;
+			jump_vector_frac << jumps[i].get_jump_vector()[0], jumps[i].get_jump_vector()[1], jumps[i].get_jump_vector()[2];
+			jump_vector_cartesian = lattice_matrix*jump_vector_frac;
+			cout << "jump_vector_cartesian = " << jump_vector_cartesian << endl;
+			
+			
+		}
+
 	}
 
 	else {
