@@ -161,11 +161,12 @@ int main()
 	vector< vector<double> > D_c_3d_vector;
 
 
-	//input.cfgを読み込む
+	//INPUTを読み込む
 	param::parameter param("INPUT");
 	int step_max = param.get<int>("NSTEPS", 0);
 	int loop_max = param.get<int>("NLOOPS", 0);
 	int p_place_n = param.get<int>("NDIFFS", 0);
+	double E_field_strength = param.get<double>("EFIELD", 0);
 	
 	//読み込めたか確認用
 	if (!param) {
@@ -176,7 +177,9 @@ int main()
 	cout << "\t" << "KMCのステップ数(何回行うか) NSTEPS =" << step_max << endl;
 	cout << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
 	cout << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
+	cout << "\t" << "電場の強さ EFIELD = " << E_field_strength << endl;
 	cout << endl;
+
 
 	
 	//JMPDATAを読み込む
