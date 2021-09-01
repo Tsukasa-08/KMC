@@ -343,10 +343,6 @@ int main()
 
 
 
-	//cartesian座標軸方向の単位ベクトルを作成し、電場の大きさをかけて電場ベクトルとする
-	Eigen::Vector3d E_field_vector(1,0,0);
-	E_field_vector *= E_field_strength;
-	cout << "E_field_vector = " << E_field_vector << endl;
 
 
 
@@ -395,6 +391,23 @@ int main()
 			cout << "jump[" << i << "].jump_vector[" << j << "] = " << jumps[i].get_jump_vector()[j] << endl;}
 */
 	}
+
+
+	//電場がかかっていた場合、ジャンプ頻度を補正する
+	if (E_field_strength) {
+
+		//cartesian座標軸方向の単位ベクトルを作成し、電場の大きさをかけて電場ベクトルとする
+		Eigen::Vector3d E_field_vector(1,0,0);
+		E_field_vector *= E_field_strength;
+		cout << "E_field_vector = " << E_field_vector << endl;
+
+	}
+
+	else {
+		cout << '\t' << "no E_field" << endl;	
+	}
+
+	return 0;
 
 	//拡散係数記録用のファイルOUTPUTを作成しておく
 	ofstream ofs("OUTPUT", ios::app);
