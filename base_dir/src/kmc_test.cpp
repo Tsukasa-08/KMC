@@ -413,7 +413,14 @@ int main()
 			jump_vector_cartesian = lattice_matrix*jump_vector_frac;
 			cout << "jump_vector_cartesian = " << jump_vector_cartesian << endl;
 			
-			
+			//ジャンプベクトル方向の電場の大きさを計算する
+			double E_j_dot = E_field_vector.dot(jump_vector_cartesian);
+			cout << "E_j_dot = " << E_j_dot << endl;
+			double E_along_jump_strength = E_j_dot / jump_vector_cartesian.norm();
+			cout << "E_along_jump_strength = " << E_along_jump_strength << endl;
+		
+			if (i == 3)
+			break;	
 		}
 
 	}
