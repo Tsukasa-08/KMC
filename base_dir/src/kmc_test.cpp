@@ -145,6 +145,19 @@ vector<string> split(const string& input, char delimiter)
 
 }
 
+//分率座標をcartesian座標に変換するtranscoords関数を定義
+
+Eigen::Vector3d transcoords(const vector<double> vector_frac, Eigen::Matrix3d lattice_matrix)
+{
+	Eigen::Vector3d vector_frac_eigen;
+	vector_frac_eigen << vector_frac[0], vector_frac[1], vector_frac[2];
+	Eigen::Vector3d vector_cartesian;
+	vector_cartesian = lattice_matrix*vector_frac_eigen;
+
+	return vector_cartesian;
+}
+
+
 
 //原子種の数字を定義
 
@@ -415,12 +428,18 @@ int main()
 		//生成したジャンプに対し操作を行っていく
 		for (int i = 0; i != jumps.size(); i++) {
 			
-			//ジャンプベクトルをfracからcartesianに直す
+			//ジャンプベクトルをfracからcartesianに直す(関数作ったので必要なし)
+			/*
 			Eigen::Vector3d jump_vector_frac;
 			Eigen::Vector3d jump_vector_cartesian;
 			jump_vector_frac << jumps[i].get_jump_vector()[0], jumps[i].get_jump_vector()[1], jumps[i].get_jump_vector()[2];
 			jump_vector_cartesian = lattice_matrix*jump_vector_frac;
 			cout << "jump_vector_cartesian = " << jump_vector_cartesian << endl;
+			
+			*/
+
+			//transcoords関数でジャンプベクトルをfracからcartesianに直す
+			Eigen::Vector3d jump_vector_cartesian = transcoords(jumps[i].get_jump_vector(), lattice_matrix);
 			
 			//ジャンプベクトル方向の電場の大きさを計算する
 			double E_j_dot = E_field_vector.dot(jump_vector_cartesian);
@@ -448,7 +467,6 @@ int main()
 		cout << '\t' << "no E_field" << endl;	
 	}
 
-	return 0;
 
 	//拡散係数記録用のファイルOUTPUTを作成しておく
 	ofstream ofs("OUTPUT", ios::app);
@@ -580,8 +598,8 @@ int main()
 
 
 			//確認用
-			//cout << endl;
-			//cout << "\t" << "loop_counter = " << loop_counter << endl;
+			cout << endl;
+			cout << "\t" << "loop_counter = " << loop_counter << endl;
 
 			//系で起きうる事象(今回はジャンプ)を列挙し、jumps_possibleに入れていく
 			//まずは始点のidと原子種が一致するものを抽出しjumps_possible_tmpに入れる
@@ -742,8 +760,8 @@ int main()
 		}
 
 		//ループ終了後
-		//cout << "\t" << "loop_counter finished" << endl;
-		//cout << endl;
+		cout << "\t" << "loop_counter finished" << endl;
+		cout << endl;
 		//
 		//拡散係数を出力およびファイルに出力する
 
@@ -774,10 +792,18 @@ int main()
 		} 
 
 			
-		//jump_total_allを分率座標からcartesian座標に直す
+		//jump_total_allを分率座標からcartesian座標に直す(関数により用済みとなった)
+		/*
 		Eigen::Vector3d jump_total_all_cartesian;
 		jump_total_all_cartesian << jump_total_all[0], jump_total_all[1], jump_total_all[2];
 		Eigen::Vector3d displacement_vector = lattice_matrix*jump_total_all_cartesian;
+		cout << "displacement_vector = " << displacement_vector << endl;
+		*/
+
+		//transcoords関数でjump_total_allを分率座標からcartesian座標に直す
+		Eigen::Vector3d displacement_vector;
+		displacement_vector = transcoords(jump_total_all,lattice_matrix);
+
 		displacement_vector *= pow(10,-8);
 
 		//jump_total_allを2乗したあと拡散種の数で割って、自己拡散係数を出力する
