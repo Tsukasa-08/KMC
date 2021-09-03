@@ -9,6 +9,7 @@
 #include <cmath>
 #include <chrono>
 #include <Eigen/Core>
+#include <Eigen/LU>
 #include <Eigen/Dense>
 
 #include "Site.h"
@@ -170,7 +171,8 @@ int const number_proton = 2;
 double const kb = 1.380649 * pow(10,-23);
 double const ec = 1.60217662 * pow(10,-19);
 
-
+//プロトンの電荷を定義、要改善
+double q_charge = 1 * ec;
 
 
 //メイン関数の開始
@@ -182,6 +184,8 @@ int main()
 	vector< vector<double> > D_j_3d_vector;
 	vector< vector<double> > D_c_3d_vector;
 
+	//make ElectricalConductivity vector
+	vector< vector<double> > Sigma_x_vector;
 
 	//INPUTを読み込む
 	param::parameter param("INPUT");
@@ -448,9 +452,8 @@ int main()
 			cout << "E_along_jump_strength = " << E_along_jump_strength << endl;
 		
 			//ΔEmigを求める、1*で良いのはプロトンのみなことに注意
-			double q_charge = 1 * ec;
 			double delta_E_mig = q_charge * E_along_jump_strength * jump_vector_cartesian.norm()/2;
-			cout << "delta_E_mig = " << delta_E_mig << endl;
+			cout << "delta_E_mig [J] = " << delta_E_mig << endl;
 
 			//ジャンプ頻度を補正する
 			double fixed_jump_freq = jumps[i].get_freq() * exp(delta_E_mig/(kb*temperture));
@@ -769,11 +772,24 @@ int main()
 		//自己拡散係数を求めるために拡散種ごとのjump_totalを準備する
 		vector<double> jump_total_all(3,0.0);
 
+		//拡散種1つ1つに対し操作を行う
 		for (int j = 0; j != diffusion_species.size(); j++) {
+
+
+			//自己拡散係数(および電場勾配化では伝導度)を求めるため
+			//拡散種ごとのjump_totalを足して合計変位を出す
+			for (int i = 0; i != jump_total_all.size(); i++) {
+				jump_total_all[i] += diffusion_species[j].get_jump_total()[i];
+			}
+
+			if (!E_field_strength) {   //電場なしのとき 
 
 			//トレーサー拡散係数を計算し出力
 			vector<double> D_t_3d = diffusion_species[j].get_D(lattice_matrix,total_time);
 			D_t_3d_vector.push_back(D_t_3d);
+
+			//もともとOUTPUTに出力していたが不必要になった
+			/*
 			for (int i = 0; i != D_t_3d.size(); i++) {
 				//cout << "\t"  << "diffusion_species[" << j << "]:D_t_3d[" << i << "] = " << D_t_3d[i] << endl;
 				ofs << D_t_3d[i] << "," ;
@@ -782,12 +798,11 @@ int main()
 				}
 			}
 			//cout << endl;
+			*/
 
-
-			//自己拡散係数を求めるために拡散種ごとのjump_totalを足していく
-			for (int i = 0; i != jump_total_all.size(); i++) {
-				jump_total_all[i] += diffusion_species[j].get_jump_total()[i];
 			}
+
+
 
 		} 
 
@@ -804,20 +819,48 @@ int main()
 		Eigen::Vector3d displacement_vector;
 		displacement_vector = transcoords(jump_total_all,lattice_matrix);
 
-		displacement_vector *= pow(10,-8);
 
-		//jump_total_allを2乗したあと拡散種の数で割って、自己拡散係数を出力する
-		vector<double> D_j_3d(3,0.0);
+		//電場ありの場合、伝導度テンソルを出力
+		if (E_field_strength) {
+			vector<double> Sigma_x(3,0.0);
+			double concentration = diffusion_species.size() / lattice_matrix.determinant();
+			//cout << "lattice_matrix.determinant() = " << lattice_matrix.determinant() << endl;
+			//cout << "concentration = " << concentration << endl;
+		
+			for (int j = 0; j != Sigma_x.size(); j++) {
+				
+				Sigma_x[j] = displacement_vector[j];
+				Sigma_x[j] *= q_charge * concentration / (E_field_strength * total_time);
+				Sigma_x[j] *= pow(10,8); //Å^-1をcm^-1に変換
+				cout << "Sigma_x[" << j << "]  [S/cm] = " << Sigma_x[j] << endl;
 
-		for (int j = 0; j != jump_total_all.size(); j++) {
+
+			}
 			
-			D_j_3d[j] = pow(displacement_vector(j), 2.0);
-			D_j_3d[j] /= diffusion_species.size();
-			D_j_3d[j] /= 2*total_time;
-			//cout << "\t"  << "D_j_3d[" << j << "] = " << D_j_3d[j] << endl;
+			Sigma_x_vector.push_back(Sigma_x);
+
+
 		}
 
-		D_j_3d_vector.push_back(D_j_3d);
+
+
+		//電場なしの場合、自己拡散係数を出力
+		else {
+			displacement_vector *= pow(10,-8);
+
+			//jump_total_allを2乗したあと拡散種の数で割って、自己拡散係数を出力する
+			vector<double> D_j_3d(3,0.0);
+
+			for (int j = 0; j != jump_total_all.size(); j++) {
+				
+				D_j_3d[j] = pow(displacement_vector(j), 2.0);
+				D_j_3d[j] /= diffusion_species.size();
+				D_j_3d[j] /= 2*total_time;
+				//cout << "\t"  << "D_j_3d[" << j << "] = " << D_j_3d[j] << endl;
+			}
+
+			D_j_3d_vector.push_back(D_j_3d);
+		}
 
 
 
