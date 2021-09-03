@@ -889,66 +889,97 @@ int main()
 
 
 
+	//電場なしの場合
+	if (!E_field_strength) {
 
-	//結果を出力するアウトプットファイルを作成する
-	ofstream ofs_diff("DiffusionCoefficient", ios::app);
+		//結果を出力するアウトプットファイルを作成する
+		ofstream ofs_diff("DiffusionCoefficient", ios::app);
 
-	//トレーサー拡散係数
-	ofs_diff << "トレーサー拡散係数 (cm^2/s)" << endl;
-	double Dx = 0;
-	double Dy = 0;
-	double Dz = 0;
-	for (int i = 0; i != D_t_3d_vector.size(); i++) {
+		//トレーサー拡散係数
+		ofs_diff << "トレーサー拡散係数 (cm^2/s)" << endl;
+		double Dx = 0;
+		double Dy = 0;
+		double Dz = 0;
+		for (int i = 0; i != D_t_3d_vector.size(); i++) {
 
-		Dx += D_t_3d_vector[i][0];
-		Dy += D_t_3d_vector[i][1];
-		Dz += D_t_3d_vector[i][2];
-			
-		if (i+1 == D_t_3d_vector.size()) {
+			Dx += D_t_3d_vector[i][0];
+			Dy += D_t_3d_vector[i][1];
+			Dz += D_t_3d_vector[i][2];
+				
+			if (i+1 == D_t_3d_vector.size()) {
 
-			Dx /= D_t_3d_vector.size();
-			Dy /= D_t_3d_vector.size();
-			Dz /= D_t_3d_vector.size();
+				Dx /= D_t_3d_vector.size();
+				Dy /= D_t_3d_vector.size();
+				Dz /= D_t_3d_vector.size();
+			}
+
 		}
+
+		ofs_diff << "Dx = " << Dx << endl; 
+		ofs_diff << "Dy = " << Dy << endl; 
+		ofs_diff << "Dz = " << Dz << endl; 
+		
+		
+		//自己拡散係数
+		ofs_diff << "自己拡散係数 (cm^2/s)" << endl;
+		Dx = 0;
+		Dy = 0;
+		Dz = 0;
+		for (int i = 0; i != D_j_3d_vector.size(); i++) {
+
+			Dx += D_j_3d_vector[i][0];
+			Dy += D_j_3d_vector[i][1];
+			Dz += D_j_3d_vector[i][2];
+				
+			if (i+1 == D_j_3d_vector.size()) {
+
+				Dx /= D_j_3d_vector.size();
+				Dy /= D_j_3d_vector.size();
+				Dz /= D_j_3d_vector.size();
+			}
+
+		}
+
+		ofs_diff << "Dx = " << Dx << endl; 
+		ofs_diff << "Dy = " << Dy << endl; 
+		ofs_diff << "Dz = " << Dz << endl; 
+
+		//化学拡散係数
+		ofs_diff << "化学拡散係数 (cm^2/s)" << endl;
 
 	}
 
-	ofs_diff << "Dx = " << Dx << endl; 
-	ofs_diff << "Dy = " << Dy << endl; 
-	ofs_diff << "Dz = " << Dz << endl; 
-	
-	
-	//自己拡散係数
-	ofs_diff << "自己拡散係数 (cm^2/s)" << endl;
-	Dx = 0;
-	Dy = 0;
-	Dz = 0;
-	for (int i = 0; i != D_j_3d_vector.size(); i++) {
 
-		Dx += D_j_3d_vector[i][0];
-		Dy += D_j_3d_vector[i][1];
-		Dz += D_j_3d_vector[i][2];
+
+	//電場ありの場合
+	if (E_field_strength) {
+
+		//結果を出力するアウトプットファイルを作成する
+		ofstream ofs_sigma("ElectricalConductivity", ios::app);
+
+		//伝導度x成分
+		ofs_sigma << "伝導度 [S/cm]" << endl;
+		vector<double> Sigma_x_vector_total(3,0.0);
+		for (int i = 0; i != Sigma_x_vector.size(); i++) {
+			for (int j = 0; j != Sigma_x_vector_total.size(); j++) {
+
+				Sigma_x_vector_total[j] += Sigma_x_vector[i][j];
+
+				if (i+1 == Sigma_x_vector.size()) {
+					Sigma_x_vector_total[j] /= Sigma_x_vector.size();
+					ofs_sigma << "Sigma_x" << j << " = " << scientific << Sigma_x_vector_total[j] << endl;
+
+				}
 			
-		if (i+1 == D_j_3d_vector.size()) {
-
-			Dx /= D_j_3d_vector.size();
-			Dy /= D_j_3d_vector.size();
-			Dz /= D_j_3d_vector.size();
+			}
 		}
 
+		
+		
+
+
+
 	}
-
-	ofs_diff << "Dx = " << Dx << endl; 
-	ofs_diff << "Dy = " << Dy << endl; 
-	ofs_diff << "Dz = " << Dz << endl; 
-
-	//化学拡散係数
-	ofs_diff << "化学拡散係数 (cm^2/s)" << endl;
-
-
-
-	//コメントを残してみた
-	
 
 
 }
