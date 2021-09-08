@@ -1,16 +1,20 @@
 #設定ファイル
 
 #KMCのステップ数、平均をとるために何回KMCを行うか
-NSTEPS=100000
+NSTEPS=1
 
 #KMCのループ数、1回のKMC中で何回イベントを起こすか
-NLOOPS=10000
+NLOOPS=1
 
 #拡散種を配置する数、今回だったらプロトン
-NDIFFS=2
+NDIFFS=8
 
 #電場の強さ、単位は[J/(C*Å)]
-EFIELD=0
+EFIELD=0.005
 
 #温度(K)
 TEMP=500
+
+#軸方向(x=0,y=1,z=2)
+AXIS=1
+

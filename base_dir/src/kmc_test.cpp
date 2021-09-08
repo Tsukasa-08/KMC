@@ -179,6 +179,13 @@ double q_charge = 1 * ec;
 int main()
 {
 
+	//実行時間を計測する
+	chrono::system_clock::time_point start, end;
+	time_t time_stamp;
+
+
+	start = chrono::system_clock::now();
+
 	//make DiffusionCoefficient vector
 	vector< vector<double> > D_t_3d_vector;
 	vector< vector<double> > D_j_3d_vector;
@@ -194,6 +201,7 @@ int main()
 	int p_place_n = param.get<int>("NDIFFS", 0);
 	double E_field_strength = param.get<double>("EFIELD", 0);
 	double temperture = param.get<double>("TEMP", 0);
+	int E_field_axis = param.get<int>("AXIS", 0);
 	
 	//読み込めたか確認用
 	if (!param) {
@@ -206,6 +214,7 @@ int main()
 	cout << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
 	cout << "\t" << "電場の強さ EFIELD = " << E_field_strength << endl;
 	cout << "\t" << "温度 TEMP = " << temperture << endl;
+	cout << "\t" << "電場方向 " << E_field_axis << " (x=0, y=1, z=2)" << endl;
 	cout << endl;
 
 
@@ -425,7 +434,16 @@ int main()
 	if (E_field_strength) {
 
 		//cartesian座標軸方向の単位ベクトルを作成し、電場の大きさをかけて電場ベクトルとする
-		Eigen::Vector3d E_field_vector(1,0,0);
+		//変数E_field_axisによって作成する単位ベクトルを変える(x=0, y=1, z=2)
+		
+		Eigen::Vector3d E_field_vector(3); 
+
+		switch (E_field_axis) {
+			case 0 : E_field_vector << 1,0,0 ; break;
+			case 1 : E_field_vector << 0,1,0 ; break;
+			case 2 : E_field_vector << 0,0,1 ; break;
+		}
+
 		E_field_vector *= E_field_strength;
 		cout << "E_field_vector = " << E_field_vector << endl;
 
@@ -478,11 +496,11 @@ int main()
 	for (int step_counter = 1; step_counter <= step_max; step_counter++) {
 		
 		//実行時間を計測する
-		chrono::system_clock::time_point start, end;
-		time_t time_stamp;
+	//	chrono::system_clock::time_point start, end;
+	//	time_t time_stamp;
 
 
-		start = chrono::system_clock::now();
+	//	start = chrono::system_clock::now();
 
 
 
@@ -594,10 +612,10 @@ int main()
 
 
 			//実行時間を計測する
-			chrono::system_clock::time_point start, end;
-			time_t time_stamp;
+	//		chrono::system_clock::time_point start, end;
+	//		time_t time_stamp;
 
-			start = chrono::system_clock::now();
+	//		start = chrono::system_clock::now();
 
 
 			//確認用
@@ -746,14 +764,14 @@ int main()
 
 
 			//実行時間の計測
-			end = chrono::system_clock::now();
+	//		end = chrono::system_clock::now();
 
-			auto time = end - start;
+	//		auto time = end - start;
 
-			time_stamp = chrono::system_clock::to_time_t(start);
+	//		time_stamp = chrono::system_clock::to_time_t(start);
 			//cout << "\t" << ctime(&time_stamp);
 
-			auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
+	//		auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
 			//cout << "\t" << msec << " msec" << endl;
 			
 
@@ -873,14 +891,14 @@ int main()
 		}
 
 		//実行時間の計測
-		end = chrono::system_clock::now();
+	//	end = chrono::system_clock::now();
 
-		auto time = end - start;
+	//	auto time = end - start;
 
-		time_stamp = chrono::system_clock::to_time_t(start);
+	//	time_stamp = chrono::system_clock::to_time_t(start);
 		//cout <<  ctime(&time_stamp);
 
-		auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
+	//	auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
 		//cout <<  msec << " msec" << endl;
 		//cout << endl;
 
@@ -981,5 +999,17 @@ int main()
 
 	}
 
+	//実行時間の計測
+	end = chrono::system_clock::now();
+	auto time = end - start;
+
+	time_stamp = chrono::system_clock::to_time_t(start);
+	cout <<  ctime(&time_stamp);
+
+	auto sec = chrono::duration_cast<chrono::seconds>(time).count();
+
+	ofstream ofs_time("Timer", ios::app);
+	ofs_time << sec << " sec" << endl;
+	cout << endl;
 
 }
