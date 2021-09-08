@@ -1007,19 +1007,35 @@ int main()
 		//伝導度x成分
 		ofs_sigma << "伝導度 [S/cm]" << endl;
 		vector<double> Sigma_x_vector_total(3,0.0);
-		for (int i = 0; i != Sigma_x_vector.size(); i++) {
-			for (int j = 0; j != Sigma_x_vector_total.size(); j++) {
+		for (int j = 0; j != Sigma_x_vector_total.size(); j++) {
+			for (int i = 0; i != Sigma_x_vector.size(); i++) {
 
 				Sigma_x_vector_total[j] += Sigma_x_vector[i][j];
 
 				if (i+1 == Sigma_x_vector.size()) {
 					Sigma_x_vector_total[j] /= Sigma_x_vector.size();
-					ofs_sigma << "Sigma_x" << j << " = " << scientific << Sigma_x_vector_total[j] << endl;
+					ofs_sigma << "Sigma_x" << j << " = " << scientific << Sigma_x_vector_total[j] << " ,  " ;
 
 				}
 			
 			}
+
+			double variance_sigma = 0.0 ;
+			double standard_deviation = 0.0 ;
+			for (int i = 0; i != Sigma_x_vector.size(); i++) {
+				variance_sigma += pow(Sigma_x_vector[i][j] - Sigma_x_vector_total[j], 2);
+
+				if (i+1 == Sigma_x_vector.size()) {
+					variance_sigma /= Sigma_x_vector.size();
+					standard_deviation = sqrt(variance_sigma);
+					ofs_sigma << "Standard deviation = " << scientific << standard_deviation << endl;
+					
+				}
+
+			}
 		}
+
+		
 
 		
 		

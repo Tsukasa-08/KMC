@@ -2,7 +2,7 @@ INPUTファイルを読み込み
 	KMCのステップ数(何回行うか) NSTEPS =10
 	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =10
 	拡散種をいくつ配置するか NDIFFS = 8
-	電場の強さ EFIELD = 0.005
+	電場の強さ EFIELD = 0.001
 	温度 TEMP = 500
 	電場方向 1 (x=0, y=1, z=2)
 
@@ -18,8 +18,8 @@ lattice_matrix =
 	 0  0 32
 
 E_field_vector = 
-	    0
-0.005
+    0
+0.001
     0
 
 Execution time = 0 sec
