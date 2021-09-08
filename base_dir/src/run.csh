@@ -7,4 +7,5 @@
 
 rm DiffusionCoefficient
 rm ElectoricalConductivity
+rm log
 ./test_kmc_test  > dev/null
