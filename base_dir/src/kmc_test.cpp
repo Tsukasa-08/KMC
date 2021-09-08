@@ -199,10 +199,16 @@ int main()
 	int step_max = param.get<int>("NSTEPS", 0);
 	int loop_max = param.get<int>("NLOOPS", 0);
 	int p_place_n = param.get<int>("NDIFFS", 0);
-	double E_field_strength = param.get<double>("EFIELD", 0);
+	int E_field_yes = param.get<int>("EFIELDON", 0);
+	double E_field_strength_for_pow = param.get<double>("EFIELD", 0);
+	double E_field_strength = pow(10, E_field_strength_for_pow);
+	
 	double temperture = param.get<double>("TEMP", 0);
 	int E_field_axis = param.get<int>("AXIS", 0);
 	
+	//入力確認用logファイルを作成
+	ofstream ofs_log("log", ios::app);
+
 	//読み込めたか確認用
 	if (!param) {
 		cerr << "Could not find file INPUT" << endl;
@@ -217,6 +223,14 @@ int main()
 	cout << "\t" << "電場方向 " << E_field_axis << " (x=0, y=1, z=2)" << endl;
 	cout << endl;
 
+	ofs_log << "INPUTファイルを読み込み" << endl;
+	ofs_log << "\t" << "KMCのステップ数(何回行うか) NSTEPS =" << step_max << endl;
+	ofs_log << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
+	ofs_log << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
+	ofs_log << "\t" << "電場の強さ EFIELD = " << E_field_strength << endl;
+	ofs_log << "\t" << "温度 TEMP = " << temperture << endl;
+	ofs_log << "\t" << "電場方向 " << E_field_axis << " (x=0, y=1, z=2)" << endl;
+	ofs_log << endl;
 
 	
 	//JMPDATAを読み込む
@@ -239,6 +253,10 @@ int main()
 	cout << "JMPDATA read" << endl;
 	cout << "\t" << "jump_total_number = " << jump_total_number << endl;
 	cout << endl;
+
+	ofs_log << "JMPDATA read" << endl;
+	ofs_log << "\t" << "jump_total_number = " << jump_total_number << endl;
+	ofs_log << endl;
 
 	//int	const jump_total_number = 256;
 	ifstream ifs1("JMPDATA");
@@ -295,6 +313,9 @@ int main()
 	cout << "\t" << "site_total_number = " << site_total_number << endl;
 	cout << endl;
 
+	ofs_log << "POSCAR read" << endl;
+	ofs_log << "\t" << "site_total_number = " << site_total_number << endl;
+	ofs_log << endl;
 
 	//POSCARを1行ごとに読み込んでいく
 	vector<Site> sites(site_total_number,Site());
@@ -378,6 +399,11 @@ int main()
 		} 
 		cout << endl;
 
+		ofs_log << "lattice_matrix = " << endl;
+		for (int i = 0; i <= 2; i++) {
+			ofs_log << "\t"  << lattice_matrix.row(i) << endl;
+		} 
+		ofs_log << endl;
 
 
 
@@ -431,7 +457,7 @@ int main()
 
 
 	//電場がかかっていた場合、ジャンプ頻度を補正する
-	if (E_field_strength) {
+	if (E_field_yes) {
 
 		//cartesian座標軸方向の単位ベクトルを作成し、電場の大きさをかけて電場ベクトルとする
 		//変数E_field_axisによって作成する単位ベクトルを変える(x=0, y=1, z=2)
@@ -446,6 +472,8 @@ int main()
 
 		E_field_vector *= E_field_strength;
 		cout << "E_field_vector = " << E_field_vector << endl;
+		ofs_log << "E_field_vector = " << endl;
+		ofs_log <<  E_field_vector << endl;
 
 		//生成したジャンプに対し操作を行っていく
 		for (int i = 0; i != jumps.size(); i++) {
@@ -486,6 +514,7 @@ int main()
 
 	else {
 		cout << '\t' << "no E_field" << endl;	
+		ofs_log << '\t' << "no E_field" << endl;	
 	}
 
 
@@ -800,7 +829,7 @@ int main()
 				jump_total_all[i] += diffusion_species[j].get_jump_total()[i];
 			}
 
-			if (!E_field_strength) {   //電場なしのとき 
+			if (!E_field_yes) {   //電場なしのとき 
 
 			//トレーサー拡散係数を計算し出力
 			vector<double> D_t_3d = diffusion_species[j].get_D(lattice_matrix,total_time);
@@ -839,7 +868,7 @@ int main()
 
 
 		//電場ありの場合、伝導度テンソルを出力
-		if (E_field_strength) {
+		if (E_field_yes) {
 			vector<double> Sigma_x(3,0.0);
 			double concentration = diffusion_species.size() / lattice_matrix.determinant();
 			//cout << "lattice_matrix.determinant() = " << lattice_matrix.determinant() << endl;
@@ -850,7 +879,7 @@ int main()
 				Sigma_x[j] = displacement_vector[j];
 				Sigma_x[j] *= q_charge * concentration / (E_field_strength * total_time);
 				Sigma_x[j] *= pow(10,8); //Å^-1をcm^-1に変換
-				cout << "Sigma_x[" << j << "]  [S/cm] = " << Sigma_x[j] << endl;
+				//cout << "Sigma_x[" << j << "]  [S/cm] = " << Sigma_x[j] << endl;
 
 
 			}
@@ -908,7 +937,7 @@ int main()
 
 
 	//電場なしの場合
-	if (!E_field_strength) {
+	if (!E_field_yes) {
 
 		//結果を出力するアウトプットファイルを作成する
 		ofstream ofs_diff("DiffusionCoefficient", ios::app);
@@ -970,7 +999,7 @@ int main()
 
 
 	//電場ありの場合
-	if (E_field_strength) {
+	if (E_field_yes) {
 
 		//結果を出力するアウトプットファイルを作成する
 		ofstream ofs_sigma("ElectricalConductivity", ios::app);
@@ -1004,12 +1033,11 @@ int main()
 	auto time = end - start;
 
 	time_stamp = chrono::system_clock::to_time_t(start);
-	cout <<  ctime(&time_stamp);
+	ofs_log <<  endl;
 
 	auto sec = chrono::duration_cast<chrono::seconds>(time).count();
 
-	ofstream ofs_time("Timer", ios::app);
-	ofs_time << sec << " sec" << endl;
+	ofs_log << "Execution time = " << sec << " sec" << endl;
 	cout << endl;
 
 }
