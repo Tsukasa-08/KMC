@@ -1,10 +1,10 @@
 INPUTファイルを読み込み
-	KMCのステップ数(何回行うか) NSTEPS =10
-	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =10
+	KMCのステップ数(何回行うか) NSTEPS =100
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =1000
 	拡散種をいくつ配置するか NDIFFS = 8
-	電場の強さ EFIELD = 0.001
+	電場の強さ EFIELD = 1
 	温度 TEMP = 500
-	電場方向 1 (x=0, y=1, z=2)
+	電場方向 0 (x=0, y=1, z=2)
 
 JMPDATA read
 	jump_total_number = 256
@@ -18,8 +18,108 @@ lattice_matrix =
 	 0  0 32
 
 E_field_vector = 
-    0
-0.001
-    0
+1
+0
+0
+	1 times KMC finished
+	2 times KMC finished
+	3 times KMC finished
+	4 times KMC finished
+	5 times KMC finished
+	6 times KMC finished
+	7 times KMC finished
+	8 times KMC finished
+	9 times KMC finished
+	10 times KMC finished
+	11 times KMC finished
+	12 times KMC finished
+	13 times KMC finished
+	14 times KMC finished
+	15 times KMC finished
+	16 times KMC finished
+	17 times KMC finished
+	18 times KMC finished
+	19 times KMC finished
+	20 times KMC finished
+	21 times KMC finished
+	22 times KMC finished
+	23 times KMC finished
+	24 times KMC finished
+	25 times KMC finished
+	26 times KMC finished
+	27 times KMC finished
+	28 times KMC finished
+	29 times KMC finished
+	30 times KMC finished
+	31 times KMC finished
+	32 times KMC finished
+	33 times KMC finished
+	34 times KMC finished
+	35 times KMC finished
+	36 times KMC finished
+	37 times KMC finished
+	38 times KMC finished
+	39 times KMC finished
+	40 times KMC finished
+	41 times KMC finished
+	42 times KMC finished
+	43 times KMC finished
+	44 times KMC finished
+	45 times KMC finished
+	46 times KMC finished
+	47 times KMC finished
+	48 times KMC finished
+	49 times KMC finished
+	50 times KMC finished
+	51 times KMC finished
+	52 times KMC finished
+	53 times KMC finished
+	54 times KMC finished
+	55 times KMC finished
+	56 times KMC finished
+	57 times KMC finished
+	58 times KMC finished
+	59 times KMC finished
+	60 times KMC finished
+	61 times KMC finished
+	62 times KMC finished
+	63 times KMC finished
+	64 times KMC finished
+	65 times KMC finished
+	66 times KMC finished
+	67 times KMC finished
+	68 times KMC finished
+	69 times KMC finished
+	70 times KMC finished
+	71 times KMC finished
+	72 times KMC finished
+	73 times KMC finished
+	74 times KMC finished
+	75 times KMC finished
+	76 times KMC finished
+	77 times KMC finished
+	78 times KMC finished
+	79 times KMC finished
+	80 times KMC finished
+	81 times KMC finished
+	82 times KMC finished
+	83 times KMC finished
+	84 times KMC finished
+	85 times KMC finished
+	86 times KMC finished
+	87 times KMC finished
+	88 times KMC finished
+	89 times KMC finished
+	90 times KMC finished
+	91 times KMC finished
+	92 times KMC finished
+	93 times KMC finished
+	94 times KMC finished
+	95 times KMC finished
+	96 times KMC finished
+	97 times KMC finished
+	98 times KMC finished
+	99 times KMC finished
+	100 times KMC finished
 
-Execution time = 0 sec
+Execution time = 14 sec

@@ -1005,6 +1005,8 @@ int main()
 
 		//結果を出力するアウトプットファイルを作成する
 		ofstream ofs_sigma("ElectricalConductivity", ios::app);
+		ofstream ofs_sigma_2("sigma_log", ios::app);
+		
 
 		//伝導度x成分
 		ofs_sigma << "伝導度 [S/cm]" << endl;
@@ -1013,10 +1015,12 @@ int main()
 			for (int i = 0; i != Sigma_x_vector.size(); i++) {
 
 				Sigma_x_vector_total[j] += Sigma_x_vector[i][j];
+				ofs_sigma_2 << "Sigma_x_vector[" << i << "][" << j << "] = " << Sigma_x_vector[i][j] << endl;
 
 				if (i+1 == Sigma_x_vector.size()) {
 					Sigma_x_vector_total[j] /= Sigma_x_vector.size();
 					ofs_sigma << "Sigma_x" << j << " = " << scientific << Sigma_x_vector_total[j] << " ,  " ;
+					ofs_sigma_2 << endl;
 
 				}
 			
