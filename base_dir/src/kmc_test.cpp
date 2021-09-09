@@ -493,21 +493,19 @@ int main()
 			
 			//ジャンプベクトル方向の電場の大きさを計算する
 			double E_j_dot = E_field_vector.dot(jump_vector_cartesian);
-			cout << "E_j_dot = " << E_j_dot << endl;
+			//cout << "E_j_dot = " << E_j_dot << endl;
 			double E_along_jump_strength = E_j_dot / jump_vector_cartesian.norm();
-			cout << "E_along_jump_strength = " << E_along_jump_strength << endl;
+			//cout << "E_along_jump_strength = " << E_along_jump_strength << endl;
 		
 			//ΔEmigを求める、1*で良いのはプロトンのみなことに注意
 			double delta_E_mig = q_charge * E_along_jump_strength * jump_vector_cartesian.norm()/2;
-			cout << "delta_E_mig [J] = " << delta_E_mig << endl;
+			//cout << "delta_E_mig [J] = " << delta_E_mig << endl;
 
 			//ジャンプ頻度を補正する
 			double fixed_jump_freq = jumps[i].get_freq() * exp(delta_E_mig/(kb*temperture));
-			cout << "jump_frep = " << jumps[i].get_freq() << endl;
-			cout << "fixed_jump_freq = " << fixed_jump_freq << endl;
+			//cout << "jump_frep = " << jumps[i].get_freq() << endl;
+			//cout << "fixed_jump_freq = " << fixed_jump_freq << endl;
 			jumps[i].set_freq(fixed_jump_freq);
-			if (i == 3)
-			break;	
 		}
 
 	}
@@ -518,8 +516,8 @@ int main()
 	}
 
 
-	//拡散係数記録用のファイルOUTPUTを作成しておく
-	ofstream ofs("OUTPUT", ios::app);
+	//拡散係数記録用のファイルOUTPUTを作成しておく(必要なくなった)
+	//ofstream ofs("OUTPUT", ios::app);
 
 
 	for (int step_counter = 1; step_counter <= step_max; step_counter++) {
@@ -648,8 +646,8 @@ int main()
 
 
 			//確認用
-			cout << endl;
-			cout << "\t" << "loop_counter = " << loop_counter << endl;
+			//cout << endl;
+			//cout << "\t" << "loop_counter = " << loop_counter << endl;
 
 			//系で起きうる事象(今回はジャンプ)を列挙し、jumps_possibleに入れていく
 			//まずは始点のidと原子種が一致するものを抽出しjumps_possible_tmpに入れる
@@ -810,8 +808,8 @@ int main()
 		}
 
 		//ループ終了後
-		cout << "\t" << "loop_counter finished" << endl;
-		cout << endl;
+		//cout << "\t" << "loop_counter finished" << endl;
+		//cout << endl;
 		//
 		//拡散係数を出力およびファイルに出力する
 
@@ -930,6 +928,10 @@ int main()
 	//	auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
 		//cout <<  msec << " msec" << endl;
 		//cout << endl;
+
+		//KMCが何回終わったか
+		cout << '\t' <<  step_counter << " times KMC finished" << endl;
+		ofs_log << '\t' <<  step_counter << " times KMC finished" << endl;
 
 
 	}
