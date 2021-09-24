@@ -275,7 +275,7 @@ int main()
 		jumps[n_lines].set_end_site_atom(stoi(strvec[3]));
 		jumps[n_lines].set_freq(stod(strvec[4]));
 
-//		cout << jumps[n_lines].get_freq() << endl;
+	//	cout << "jumps[" << n_lines << "].freq = " << jumps[n_lines].get_freq() << endl;
 		
 		n_lines += 1;
 	}	
@@ -359,36 +359,38 @@ int main()
 
 		//座標一覧に到達以降
 		else {
-			cout << "n_lines = "  << n_lines << endl;
+		//	cout << "n_lines = "  << n_lines << endl;
 
 			stringstream ss_line; 
 			ss_line << line;
 			string s;
 			int s_counter = 0;
 
+			//座標をコピーするためのfrac_dblvecを作成する
+			vector<double> frac_dblvec(3,0.0);
+			//cout << "s = " << s << endl;
+			//cout << "s_counter = " << s_counter << endl;
+
 			//1行を空白で3つの座標に分割していく
 			while(getline(ss_line, s, ' ')){
 
-				//座標をコピーするためのfrac_dblvecを作成する
-				vector<double> frac_dblvec(3,0.0);
-				cout << "s = " << s << endl;
-				cout << "s_counter = " << s_counter << endl;
-				
 				frac_dblvec[s_counter] = stod(s);
-				cout << "frac_dblvec[" << s_counter << "] = "<< frac_dblvec[s_counter] << endl;
+			//	cout << "frac_dblvec[" << s_counter << "] = "<< frac_dblvec[s_counter] << endl;
 				s_counter += 1;
-
-				//siteのidは「現在の行数-"DIRECT"の行数」
-				int site_id_tmp = n_lines - DIRECT_num;
-
-				//sites自体は0から始まるので、1つずらして代入する
-				sites[site_id_tmp-1].set_site_id(site_id_tmp);
-				sites[site_id_tmp-1].set_site_frac_coords(frac_dblvec);
-
-			//	cout << sites[site_id_tmp-1].get_site_id() << endl;
-			//	for (int i=0; i <3; i++) {
-			//		cout << sites[site_id_tmp-1].get_site_frac_coords()[i] << endl;
 			}
+
+			//siteのidは「現在の行数-"DIRECT"の行数」
+			int site_id_tmp = n_lines - DIRECT_num;
+
+			//sites自体は0から始まるので、1つずらして代入する
+			sites[site_id_tmp-1].set_site_id(site_id_tmp);
+			sites[site_id_tmp-1].set_site_frac_coords(frac_dblvec);
+
+				//cout << sites[site_id_tmp-1].get_site_id() << endl;
+				//for (int i=0; i <3; i++) {
+					//cout << sites[site_id_tmp-1].get_site_frac_coords()[i] << endl;
+				//}
+			
 			
 		}
 
@@ -409,6 +411,14 @@ int main()
 		} 
 		ofs_log << endl;
 
+/*	//Site確認用
+	for (int i = 0; i != sites.size() ; i++) {
+		cout << "sites[" << i << "].id = " << sites[i].get_site_id() << endl;
+		for (int j = 0; j <= 2; j++){
+			cout << '\t' << sites[i].get_site_frac_coords()[j] << endl;
+		}
+	}
+*/
 
 
 
@@ -417,14 +427,19 @@ int main()
 	//Site.site_frac_coordsをもとに、Jump.jump_vectorを生成する
 	for (int i = 0; i != jumps.size(); i++) {
 
+		cout << "jumps_count = " << i << endl;
 		//始点と終点のsite_idを取得
 		int start_site_id_tmp = jumps[i].get_start_site_id();
+		//cout << "start_site_id_tmp = " << start_site_id_tmp << endl;
 		int end_site_id_tmp = jumps[i].get_end_site_id();
+		//cout << "end_site_id_tmp = " << end_site_id_tmp << endl;
 
 		//始点と終点の分率座標を取得
 		//sites[i]のsite_idはi+1なので、tmpから1を引いておく
 		vector<double> start_frac_coords = sites[start_site_id_tmp-1].get_site_frac_coords();
+		//cout << "start_frac_coords = " << start_frac_coords[0] << endl;
 		vector<double> end_frac_coords = sites[end_site_id_tmp-1].get_site_frac_coords();
+		//cout << "end_frac_coords = " << end_frac_coords[0] << endl;
 
 		//仮のjump_vector_tmpを作成する
 		vector<double> jump_vector_tmp(3,0.0);
@@ -444,25 +459,29 @@ int main()
 					jump_vector_tmp[k] += 1;
 				}
 				else {
-					continue;
+					//continue;
 				}
 			}
 
-		}
+
+		//cout << "jump_vector_tmp[" << k << "] = " << jump_vector_tmp[k] << endl;
+		
 
 		//jump_vector_tmpをjump_vectorに代入する
 		jumps[i].set_jump_vector(jump_vector_tmp);
 
-		//確認用
-		for (int j = 0; j != jumps[i].get_jump_vector().size()-2; j++) {
+/*		//確認用
+		for (int j = 0; j != jumps[i].get_jump_vector().size(); j++) {
 			cout << "jump[" << i << "].jump_vector[" << j << "] = " << jumps[i].get_jump_vector()[j] << endl;
-			if (j == 3)
-				break;
+		}
+		*/
+		
+
 		}
 
+
 	}
-	return 0;
-	cout <<  "ここまではこない?" << endl;
+
 
 
 	//電場がかかっていた場合、ジャンプ頻度を補正する

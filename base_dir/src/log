@@ -2,12 +2,12 @@ INPUTファイルを読み込み
 	KMCのステップ数(何回行うか) NSTEPS =2
 	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =2
 	拡散種をいくつ配置するか NDIFFS = 8
-	電場の強さ EFIELD = 1
+	電場の強さ EFIELD = 0.001
 	温度 TEMP = 500
 	電場方向 0 (x=0, y=1, z=2)
 
 JMPDATA read
-	jump_total_number = 256
+	jump_total_number = 34992
 
 POSCAR read
 	site_total_number = 8748
@@ -17,3 +17,11 @@ lattice_matrix =
 	      0 38.1259       0
 	      0       0 38.1259
 
+E_field_vector = 
+0.001
+    0
+    0
+	1 times KMC finished
+	2 times KMC finished
+
+Execution time = 8 sec

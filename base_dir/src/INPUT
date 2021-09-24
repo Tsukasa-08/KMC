@@ -13,7 +13,7 @@ NDIFFS=8
 EFIELDON=1
 
 #電場の強さ、10^()を入力,単位は[eV/Å]
-EFIELD=0
+EFIELD=-3
 
 #温度(K)
 TEMP=500
