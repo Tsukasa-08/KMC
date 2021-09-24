@@ -10,5 +10,5 @@ JMPDATA read
 	jump_total_number = 256
 
 POSCAR read
-	site_total_number = 8756
+	site_total_number = 8748
 

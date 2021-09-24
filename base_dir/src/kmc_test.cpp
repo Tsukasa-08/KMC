@@ -11,6 +11,7 @@
 #include <Eigen/Core>
 #include <Eigen/LU>
 #include <Eigen/Dense>
+#include <regex>
 
 #include "Site.h"
 #include "Jump.h"
@@ -303,7 +304,7 @@ int main()
 		//Directがある行を特定しておく、だいたい7行目
 		if (for_line_reader2.find("Direct") != string::npos) {
 			DIRECT_num = site_total_number;
-			//cout << "Directは" << site_total_number << "行目にあります" << endl;
+			cout << "Directは" << site_total_number << "行目にあります" << endl;
 		}
 	}
 
@@ -356,6 +357,8 @@ int main()
 
 		//座標一覧に到達以降
 		else {
+			cout << "n_lines = "  << n_lines << endl;
+
 			stringstream ss_line; 
 			ss_line << line;
 
@@ -371,7 +374,7 @@ int main()
 					ss_line >> frac_strvec[i];
 					frac_dblvec[i] = stod(frac_strvec[i]);
 
-				//	cout << frac_dblvec[i] << endl;
+					cout << "frac_dblvec[" << i << "] = "<< frac_dblvec[i] << endl;
 				}	
 
 				//siteのidは「現在の行数-"DIRECT"の行数」
