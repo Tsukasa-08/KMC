@@ -453,11 +453,16 @@ int main()
 		//jump_vector_tmpをjump_vectorに代入する
 		jumps[i].set_jump_vector(jump_vector_tmp);
 
-/*		//確認用
+		//確認用
 		for (int j = 0; j != jumps[i].get_jump_vector().size()-2; j++) {
-			cout << "jump[" << i << "].jump_vector[" << j << "] = " << jumps[i].get_jump_vector()[j] << endl;}
-*/
+			cout << "jump[" << i << "].jump_vector[" << j << "] = " << jumps[i].get_jump_vector()[j] << endl;
+			if (j == 3)
+				break;
+		}
+
 	}
+	return 0;
+	cout <<  "ここまではこない?" << endl;
 
 
 	//電場がかかっていた場合、ジャンプ頻度を補正する
