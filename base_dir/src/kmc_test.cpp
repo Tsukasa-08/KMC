@@ -297,12 +297,14 @@ int main()
 	int site_total_number = 0;
 	int DIRECT_num = 0;
 	string for_line_reader2;
+	regex re("direct", regex_constants::icase);
+	smatch m;
 	while (getline(for_line2,for_line_reader2)) {
 
 		site_total_number++;
 		
 		//Directがある行を特定しておく、だいたい7行目
-		if (for_line_reader2.find("Direct") != string::npos) {
+		if (regex_search(for_line_reader2, m, re)) {
 			DIRECT_num = site_total_number;
 			cout << "Directは" << site_total_number << "行目にあります" << endl;
 		}
@@ -361,21 +363,20 @@ int main()
 
 			stringstream ss_line; 
 			ss_line << line;
+			string s;
+			int s_counter = 0;
 
 			//1行を空白で3つの座標に分割していく
-			while(!ss_line.eof()){
+			while(getline(ss_line, s, ' ')){
 
 				//座標をコピーするためのfrac_dblvecを作成する
-				vector<string> frac_strvec(3,"example");
 				vector<double> frac_dblvec(3,0.0);
+				cout << "s = " << s << endl;
+				cout << "s_counter = " << s_counter << endl;
 				
-				for (int i=0; i <= 2; i++) {
-					
-					ss_line >> frac_strvec[i];
-					frac_dblvec[i] = stod(frac_strvec[i]);
-
-					cout << "frac_dblvec[" << i << "] = "<< frac_dblvec[i] << endl;
-				}	
+				frac_dblvec[s_counter] = stod(s);
+				cout << "frac_dblvec[" << s_counter << "] = "<< frac_dblvec[s_counter] << endl;
+				s_counter += 1;
 
 				//siteのidは「現在の行数-"DIRECT"の行数」
 				int site_id_tmp = n_lines - DIRECT_num;

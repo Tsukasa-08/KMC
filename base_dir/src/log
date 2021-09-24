@@ -12,3 +12,12 @@ JMPDATA read
 POSCAR read
 	site_total_number = 8748
 
+lattice_matrix = 
+	38.1259       0       0
+	      0 38.1259       0
+	      0       0 38.1259
+
+E_field_vector = 
+1
+0
+0
