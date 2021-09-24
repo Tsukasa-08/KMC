@@ -6,6 +6,7 @@
 #$ -pe smp 40
 
 rm DiffusionCoefficient
-rm ElectoricalConductivity
+rm ElectricalConductivity
 rm log
+rm sigma_log
 ./test_kmc_test  > dev/null
