@@ -203,7 +203,7 @@ int main()
 	int E_field_yes = param.get<int>("EFIELDON", 0);
 	double E_field_strength_for_pow = param.get<double>("EFIELD", 0);
 	double temperture = param.get<double>("TEMP", 0);
-	int E_field_axis = param.get<int>("AXIS", 0);
+	int E_field_axis = param.get<int>("AXIS", 1);
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
@@ -227,7 +227,7 @@ int main()
 	cout << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
 	cout << "\t" << "電場の強さ EFIELD = " << E_field_strength << endl;
 	cout << "\t" << "温度 TEMP = " << temperture << endl;
-	cout << "\t" << "電場方向 " << E_field_axis << " (x=0, y=1, z=2)" << endl;
+	cout << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	cout << endl;
 
 	ofs_log << "INPUTファイルを読み込み" << endl;
@@ -238,7 +238,7 @@ int main()
 	ofs_log << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
 	ofs_log << "\t" << "電場の強さ EFIELD = " << E_field_strength << endl;
 	ofs_log << "\t" << "温度 TEMP = " << temperture << endl;
-	ofs_log << "\t" << "電場方向 " << E_field_axis << " (x=0, y=1, z=2)" << endl;
+	ofs_log << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	ofs_log << endl;
 
 	
@@ -500,9 +500,12 @@ int main()
 		Eigen::Vector3d E_field_vector(3); 
 
 		switch (E_field_axis) {
-			case 0 : E_field_vector << 1,0,0 ; break;
-			case 1 : E_field_vector << 0,1,0 ; break;
-			case 2 : E_field_vector << 0,0,1 ; break;
+			case 1 : E_field_vector << 1,0,0 ; break;
+			case 2 : E_field_vector << 0,1,0 ; break;
+			case 3 : E_field_vector << 0,0,1 ; break;
+			case -1 : E_field_vector << -1,0,0 ; break;
+			case -2 : E_field_vector << 0,-1,0 ; break;
+			case -3 : E_field_vector << 0,0,-1 ; break;
 		}
 
 		E_field_vector *= E_field_strength;
