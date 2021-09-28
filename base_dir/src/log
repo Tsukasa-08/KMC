@@ -1,6 +1,8 @@
 INPUTファイルを読み込み
-	KMCのステップ数(何回行うか) NSTEPS =2
-	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =2
+	1粒子あたり平均何回イベントを起こすか MCSP =3
+	平均をとる粒子の個数 AVERAGE = 20
+	KMCのステップ数(何回行うか) NSTEPS =3
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =24
 	拡散種をいくつ配置するか NDIFFS = 8
 	電場の強さ EFIELD = 0.001
 	温度 TEMP = 500
@@ -23,5 +25,6 @@ E_field_vector =
     0
 	1 times KMC finished
 	2 times KMC finished
+	3 times KMC finished
 
-Execution time = 8 sec
+Execution time = 151 sec

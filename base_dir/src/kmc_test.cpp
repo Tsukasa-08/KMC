@@ -197,15 +197,19 @@ int main()
 
 	//INPUTを読み込む
 	param::parameter param("INPUT");
-	int step_max = param.get<int>("NSTEPS", 0);
-	int loop_max = param.get<int>("NLOOPS", 0);
+	int mcsp = param.get<int>("MCSP", 0);
+	int average = param.get<int>("AVERAGE", 0);
 	int p_place_n = param.get<int>("NDIFFS", 0);
 	int E_field_yes = param.get<int>("EFIELDON", 0);
 	double E_field_strength_for_pow = param.get<double>("EFIELD", 0);
-	double E_field_strength = pow(10, E_field_strength_for_pow);
-	
 	double temperture = param.get<double>("TEMP", 0);
 	int E_field_axis = param.get<int>("AXIS", 0);
+
+	//読み込んだINPUTをもとに計算
+	int step_max = (average + p_place_n - 1) / p_place_n;
+	int loop_max = mcsp * p_place_n;
+	double E_field_strength = pow(10, E_field_strength_for_pow);
+	
 	
 	//入力確認用logファイルを作成
 	ofstream ofs_log("log", ios::app);
@@ -216,6 +220,8 @@ int main()
 		abort();
 	}
 	cout << "INPUTファイルを読み込み" << endl;
+	cout << "\t" << "1粒子あたり平均何回イベントを起こすか MCSP =" << mcsp << endl;
+	cout << "\t" << "平均をとる粒子の個数 AVERAGE = " << average << endl;
 	cout << "\t" << "KMCのステップ数(何回行うか) NSTEPS =" << step_max << endl;
 	cout << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
 	cout << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
@@ -225,6 +231,8 @@ int main()
 	cout << endl;
 
 	ofs_log << "INPUTファイルを読み込み" << endl;
+	ofs_log << "\t" << "1粒子あたり平均何回イベントを起こすか MCSP =" << mcsp << endl;
+	ofs_log << "\t" << "平均をとる粒子の個数 AVERAGE = " << average << endl;
 	ofs_log << "\t" << "KMCのステップ数(何回行うか) NSTEPS =" << step_max << endl;
 	ofs_log << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
 	ofs_log << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
@@ -427,7 +435,6 @@ int main()
 	//Site.site_frac_coordsをもとに、Jump.jump_vectorを生成する
 	for (int i = 0; i != jumps.size(); i++) {
 
-		cout << "jumps_count = " << i << endl;
 		//始点と終点のsite_idを取得
 		int start_site_id_tmp = jumps[i].get_start_site_id();
 		//cout << "start_site_id_tmp = " << start_site_id_tmp << endl;
