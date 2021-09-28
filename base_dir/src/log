@@ -6,7 +6,7 @@ INPUTファイルを読み込み
 	拡散種をいくつ配置するか NDIFFS = 8
 	電場の強さ EFIELD = 0.001
 	温度 TEMP = 500
-	電場方向 0 (x=0, y=1, z=2)
+	電場方向 1 (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
 
 JMPDATA read
 	jump_total_number = 34992
@@ -27,4 +27,4 @@ E_field_vector =
 	2 times KMC finished
 	3 times KMC finished
 
-Execution time = 151 sec
+Execution time = 150 sec

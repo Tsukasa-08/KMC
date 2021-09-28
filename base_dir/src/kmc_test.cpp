@@ -195,6 +195,9 @@ int main()
 	//make ElectricalConductivity vector
 	vector< vector<double> > Sigma_x_vector;
 
+	//make average_displacement vector
+	vector< vector<double> > average_displacement_vector;
+
 	//INPUTを読み込む
 	param::parameter param("INPUT");
 	int mcsp = param.get<int>("MCSP", 0);
@@ -871,6 +874,8 @@ int main()
 			vector<double> D_t_3d = diffusion_species[j].get_D(lattice_matrix,total_time);
 			D_t_3d_vector.push_back(D_t_3d);
 
+			
+
 			//もともとOUTPUTに出力していたが不必要になった
 			/*
 			for (int i = 0; i != D_t_3d.size(); i++) {
@@ -888,6 +893,15 @@ int main()
 
 
 		} 
+
+		//平均変位を出力しておく
+		vector<double> average_displacement(3,0.0);
+
+		for (int j = 0; j != jump_total_all.size(); j++) {
+			average_displacement[j] = jump_total_all[j] / diffusion_species.size();
+		}
+		
+		average_displacement_vector.push_back(average_displacement);
 
 			
 		//jump_total_allを分率座標からcartesian座標に直す(関数により用済みとなった)
@@ -1044,6 +1058,7 @@ int main()
 		//結果を出力するアウトプットファイルを作成する
 		ofstream ofs_sigma("ElectricalConductivity", ios::app);
 		ofstream ofs_sigma_2("sigma_log", ios::app);
+		ofstream ofs_sigma_data("for_sigma.csv", ios::app);
 		
 
 		//伝導度x成分

@@ -1,12 +1,12 @@
-Sigma_x_vector[0][0] = 0.806334
-Sigma_x_vector[1][0] = -2.04717
-Sigma_x_vector[2][0] = -1.65369
+Sigma_x_vector[0][0] = -0.810812
+Sigma_x_vector[1][0] = 2.51847
+Sigma_x_vector[2][0] = -3.02325
 
-Sigma_x_vector[0][1] = 0.121573
-Sigma_x_vector[1][1] = -2.64546
-Sigma_x_vector[2][1] = 0.216665
+Sigma_x_vector[0][1] = -2.8765
+Sigma_x_vector[1][1] = 0.0986475
+Sigma_x_vector[2][1] = -0.703868
 
-Sigma_x_vector[0][2] = 0.684761
-Sigma_x_vector[1][2] = -7.73696
-Sigma_x_vector[2][2] = 1.0037
+Sigma_x_vector[0][2] = -0.688564
+Sigma_x_vector[1][2] = 6.04472e-16
+Sigma_x_vector[2][2] = -2.0155
 
