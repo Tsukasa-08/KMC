@@ -1048,19 +1048,6 @@ int main()
 		//化学拡散係数
 		ofs_diff << "化学拡散係数 (cm^2/s)" << endl;
 
-		//平均変位を出力, vectorのvectorから平均vectorを作成する関数があってもいいかも
-		ofs_diff << "平均変位 (Å)" << endl;
-		vector<double> av_dis_sum(3,0.0);
-		for (int i = 0; i != av_dis_sum.size(); i++) {
-			for (int j = 0; j != average_displacement_vector.size(); j++) {
-				av_dis_sum[i] += average_displacement_vector[j][i];
-			}
-			av_dis_sum[i] /= average_displacement_vector.size();
-			
-		}
-		ofs_diff << "<x> = " << av_dis_sum[0] << endl;
-		ofs_diff << "<y> = " << av_dis_sum[1] << endl;
-		ofs_diff << "<z> = " << av_dis_sum[2] << endl;
 
 
 	}
@@ -1117,6 +1104,33 @@ int main()
 
 
 	}
+
+	//平均変位を出力, vectorのvectorから平均vectorを作成する関数があってもいいかも
+	ofstream ofs_ave_dis("average_displacement", ios::app);
+	ofs_ave_dis << "平均変位 (Å)" << endl;
+	if (E_field_yes) {
+		ofs_ave_dis << '\t' << "E_field_strength = " << E_field_strength << endl;
+		ofs_ave_dis << '\t' << "E_field_axis = " <<  E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
+	}
+	else {
+		ofs_ave_dis << '\t' << "No E_field" << endl;
+	}
+
+	vector<double> av_dis_sum(3,0.0);
+	for (int i = 0; i != av_dis_sum.size(); i++) {
+		for (int j = 0; j != average_displacement_vector.size(); j++) {
+			av_dis_sum[i] += average_displacement_vector[j][i];
+		}
+		av_dis_sum[i] /= average_displacement_vector.size();
+		
+	}
+
+	//fracからcartesianに変換
+	Eigen::Vector3d  av_dis_sum_eigen = transcoords(av_dis_sum,lattice_matrix);
+
+	ofs_ave_dis << "<x> = " << av_dis_sum_eigen[0] << endl;
+	ofs_ave_dis << "<y> = " << av_dis_sum_eigen[1] << endl;
+	ofs_ave_dis << "<z> = " << av_dis_sum_eigen[2] << endl;
 
 	//実行時間の計測
 	end = chrono::system_clock::now();
