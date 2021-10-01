@@ -894,7 +894,7 @@ int main()
 
 		} 
 
-		//平均変位を出力しておく
+		//平均変位をベクターに格納
 		vector<double> average_displacement(3,0.0);
 
 		for (int j = 0; j != jump_total_all.size(); j++) {
@@ -1047,6 +1047,21 @@ int main()
 
 		//化学拡散係数
 		ofs_diff << "化学拡散係数 (cm^2/s)" << endl;
+
+		//平均変位を出力, vectorのvectorから平均vectorを作成する関数があってもいいかも
+		ofs_diff << "平均変位 (Å)" << endl;
+		vector<double> av_dis_sum(3,0.0);
+		for (int i = 0; i != av_dis_sum.size(); i++) {
+			for (int j = 0; j != average_displacement_vector.size(); j++) {
+				av_dis_sum[i] += average_displacement_vector[j][i];
+			}
+			av_dis_sum[i] /= average_displacement_vector.size();
+			
+		}
+		ofs_diff << "<x> = " << av_dis_sum[0] << endl;
+		ofs_diff << "<y> = " << av_dis_sum[1] << endl;
+		ofs_diff << "<z> = " << av_dis_sum[2] << endl;
+
 
 	}
 
