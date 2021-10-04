@@ -381,14 +381,20 @@ int main()
 			vector<double> frac_dblvec(3,0.0);
 			//cout << "s = " << s << endl;
 			//cout << "s_counter = " << s_counter << endl;
+			for (int i = 0; i <= 2; i++) {
+				ss_line >> s;
+				frac_dblvec[i] = stod(s);
+				cout << "frac_dblvec[" << i << "] = "<< frac_dblvec[i] << endl;
+				
+			}
 
 			//1行を空白で3つの座標に分割していく
-			while(getline(ss_line, s, ' ')){
+			//while(getline(ss_line, s, ' ')){
 
-				frac_dblvec[s_counter] = stod(s);
+			//	frac_dblvec[s_counter] = stod(s);
 			//	cout << "frac_dblvec[" << s_counter << "] = "<< frac_dblvec[s_counter] << endl;
-				s_counter += 1;
-			}
+			//	s_counter += 1;
+			//}
 
 			//siteのidは「現在の行数-"DIRECT"の行数」
 			int site_id_tmp = n_lines - DIRECT_num;

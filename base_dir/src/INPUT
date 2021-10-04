@@ -1,10 +1,10 @@
 #設定ファイル
 
 #Monte Carlo Step per Particle : 1度のKMC内で1粒子あたり何回イベントを起こすか
-MCSP=3
+MCSP=2
 
 #平均を取る粒子数
-AVERAGE=20
+AVERAGE=8
 
 #拡散種を配置する数、今回だったらプロトン
 NDIFFS=8
@@ -13,7 +13,7 @@ NDIFFS=8
 EFIELDON=1
 
 #電場の強さ、10^()を入力,単位は[eV/Å]
-EFIELD=1
+EFIELD=-2
 
 #温度(K)
 TEMP=500
