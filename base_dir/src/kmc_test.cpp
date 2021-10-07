@@ -794,13 +794,13 @@ int main()
 				freq_sum += jumps_possible[i].get_freq();
 			}
 
-			//確認用
+/*			//確認用
 			for (int i = 0; i != jumps_possible.size(); i++) {
 				cout << "\t" << "\t" << "jumps_possible[" << i << "] = " << jumps_possible[i].get_freq() << endl;
 			}
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
-
+*/
 			
 			
 			
@@ -867,17 +867,16 @@ int main()
 
 			}
 
-			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
+/*			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
 
 				cout << "diffusion_siteid_now_list[" << i  << "] = " << Diffusionspecie::diffusion_siteid_now_list[i] << endl;
 			}
+*/
 
 
 			//diffusion_siteid_now_listを更新する
 			vector<int>::iterator itr;
 			int wanted = jumps_start_id;
-			cout << "jumps_start_id = " << jumps_start_id << endl;
-			cout << "wanted = " << wanted << endl;
 			itr = find(Diffusionspecie::diffusion_siteid_now_list.begin(), Diffusionspecie::diffusion_siteid_now_list.end(), wanted);
 			if (itr == Diffusionspecie::diffusion_siteid_now_list.end()) cout << "search failed" << endl;
 			int wanted_index = distance(Diffusionspecie::diffusion_siteid_now_list.begin(), itr);
