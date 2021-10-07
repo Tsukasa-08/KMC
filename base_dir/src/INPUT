@@ -7,7 +7,7 @@ MCSP=2
 AVERAGE=8
 
 #拡散種を配置する数、今回だったらプロトン
-NDIFFS=8
+NDIFFS=2
 
 #電場のありなし、(あり=1, なし=0)
 EFIELDON=1

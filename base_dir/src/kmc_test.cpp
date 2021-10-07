@@ -109,7 +109,9 @@ class Diffusionspecie {
 
 private:
 	int diffusion_id;
+	int diffusion_siteid_now;
 	vector<double> jump_total;
+	static std::vector<int> diffusion_siteid_now_list;
 
 public:
 
@@ -119,12 +121,20 @@ public:
 	//セッタ
 	void set_diffusion_id(int d_id) { diffusion_id = d_id; }
 
-	void set_jump_total(vector<double> jt) { jump_total = jt; }
+	void set_diffusion_siteid_now(int d_sid_now) { diffusion_siteid_now = d_sid_now; }
+
+	void set_jump_total(std::vector<double> jt) { jump_total = jt; }
+
+	void set_diffusion_siteid_now_list(std::vector<int> ds_list) { diffusion_siteid_now_list = ds_list; }
 
 	//ゲッタ
 	int get_diffusion_id() { return diffusion_id; }
 
+	int get_diffusion_siteid_now() { return diffusion_siteid_now; }
+
 	vector<double> get_jump_total() { return jump_total; }
+
+	std::vector<int> get_diffusion_siteid_now_list() { return diffusion_siteid_now_list; }
 };
 
 */
@@ -159,6 +169,19 @@ Eigen::Vector3d transcoords(const vector<double> vector_frac, Eigen::Matrix3d la
 	return vector_cartesian;
 }
 
+//ある値がvector内の要素に含まれているか否か判定する
+int vector_finder(std::vector<int> vec, int number) {
+	auto itr = std::find(vec.begin(), vec.end(), number);
+	size_t index = std::distance(vec.begin(), itr);
+	if (index != vec.size()){
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+
 
 
 //原子種の数字を定義
@@ -175,6 +198,9 @@ double const ec = 1.60217662 * pow(10,-19);
 //プロトンの電荷を定義、要改善
 double q_charge = 1 * ec;
 
+
+//拡散種の配置一覧vectorを定義
+std::vector<int> Diffusionspecie::diffusion_siteid_now_list;
 
 //メイン関数の開始
 int main()
@@ -384,7 +410,7 @@ int main()
 			for (int i = 0; i <= 2; i++) {
 				ss_line >> s;
 				frac_dblvec[i] = stod(s);
-				cout << "frac_dblvec[" << i << "] = "<< frac_dblvec[i] << endl;
+				//cout << "frac_dblvec[" << i << "] = "<< frac_dblvec[i] << endl;
 				
 			}
 
@@ -565,6 +591,7 @@ int main()
 
 	//拡散係数記録用のファイルOUTPUTを作成しておく(必要なくなった)
 	//ofstream ofs("OUTPUT", ios::app);
+	
 
 
 	for (int step_counter = 1; step_counter <= step_max; step_counter++) {
@@ -605,21 +632,21 @@ int main()
 
 		//次に、どのサイトにプロトンを配置するかを決める
 		//(サイトの数-1)を要素にもつvectorを生成
-		vector<int> rnd_p_place_v(site_total_number-1, 0.0);
-		for (int i = 0; i != rnd_p_place_v.size(); i++) {
-			rnd_p_place_v[i] = i + 1;
+		vector<int> random_proton_place_number_vector(site_total_number-1, 0.0);
+		for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
+			random_proton_place_number_vector[i] = i + 1;
 		}
 
 		//乱数を生成し、vectorをシャッフルする
-		shuffle( rnd_p_place_v.begin(), rnd_p_place_v.end(), mt );
+		shuffle( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end(), mt );
 		
 		//先頭からプロトンを配置する数分(p_place_n)だけ抜き出しソートする
-		rnd_p_place_v.resize(p_place_n);
-		sort( rnd_p_place_v.begin(), rnd_p_place_v.end() );
+		random_proton_place_number_vector.resize(p_place_n);
+		sort( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end() );
 
 	/*	//確認用
-		for (int i = 0; i != rnd_p_place_v.size(); i++) {
-			cout << "rnd_p_place_v[" << i << "] = " << rnd_p_place_v[i] << endl;
+		for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
+			cout << "random_proton_place_number_vector[" << i << "] = " << random_proton_place_number_vector[i] << endl;
 		}
 	*/	
 
@@ -639,13 +666,15 @@ int main()
 		
 		int d_id = 1;
 
-		for (int i = 0; i != rnd_p_place_v.size(); i++) {
+		for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
 			for (int k = 0; k != sites.size(); k++) {
 
 				//sites[k]=Siteクラスのsite_idが、プロトンを配置するsite_idかどうかを判定
-				if (sites[k].get_site_id() == rnd_p_place_v[i]) {
+				//同時に、静的メンバ変数であるdiffusion_siteid_now_listにも追加しておく
+				if (sites[k].get_site_id() == random_proton_place_number_vector[i]) {
 					sites[k].set_site_atom(number_proton);
 					sites[k].set_diffusion_id(d_id);
+					Diffusionspecie::diffusion_siteid_now_list.push_back(sites[k].get_site_id());
 					d_id++;
 
 					//cout << "proton at site id = " << sites[k].get_site_id() << endl;
@@ -656,6 +685,7 @@ int main()
 				}
 			}
 		}
+
 
 	//	if ( d_id != p_place_n+1 )
 			//cout << "d_id != p_place_n+1" << endl;
@@ -678,6 +708,8 @@ int main()
 		cout << endl;
 		//cout << "\t" << "total_time = " << total_time << endl;
 
+		
+
 
 		//メインループの開始
 		cout << endl;
@@ -696,11 +728,33 @@ int main()
 			//cout << endl;
 			//cout << "\t" << "loop_counter = " << loop_counter << endl;
 
+
+					
+					
 			//系で起きうる事象(今回はジャンプ)を列挙し、jumps_possibleに入れていく
-			//まずは始点のidと原子種が一致するものを抽出しjumps_possible_tmpに入れる
 			vector<Jump> jumps_possible_tmp;
 			vector<Jump> jumps_possible;
-			for (int i = 0; i != jumps.size(); i++) {
+
+			for (int i = 0, n = jumps.size() ; i != n; i++) {
+				
+				//jumps[i]の始点サイトidが、プロトンの現在サイトのリストに入っていればtmpに追加
+				if (vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps[i].get_start_site_id())) {
+					jumps_possible_tmp.push_back(jumps[i]);
+				}
+			}
+
+			for (int i = 0, n = jumps_possible_tmp.size() ; i != n; i++) {
+				
+				//jumps[i]の終点サイトidが、プロトンの現在サイトのリストに入っていなければtmpに追加
+				if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps[i].get_end_site_id())) {
+					jumps_possible.push_back(jumps_possible_tmp[i]);
+				}
+			}
+
+
+			//まずは始点のidと原子種が一致するものを抽出しjumps_possible_tmpに入れる
+
+	/*		for (int i = 0; i != jumps.size(); i++) {
 				for (int k = 0; k != sites.size(); k++) {
 
 					if ( sites[k].get_site_id() == jumps[i].get_start_site_id() 
@@ -716,7 +770,6 @@ int main()
 
 				}
 			}
-
 			//次に終点のidと原子種が一致するものを抽出しjumps_possibleに入れる
 			for (int i = 0; i != jumps_possible_tmp.size(); i++) {
 				for (int k = 0; k != sites.size(); k++) {
@@ -732,6 +785,7 @@ int main()
 				}
 			}
 		
+	*/
 
 			//起きうるジャンプについて、freqの総和をとりfreq_sumに格納する
 			
@@ -741,13 +795,14 @@ int main()
 			}
 
 			//確認用
-	/*		for (int i = 0; i != jumps_possible.size(); i++) {
+			for (int i = 0; i != jumps_possible.size(); i++) {
 				cout << "\t" << "\t" << "jumps_possible[" << i << "] = " << jumps_possible[i].get_freq() << endl;
 			}
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
+
 			
-			*/
+			
 			
 
 
@@ -812,10 +867,21 @@ int main()
 
 			}
 
+			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
+
+				cout << "diffusion_siteid_now_list[" << i  << "] = " << Diffusionspecie::diffusion_siteid_now_list[i] << endl;
+			}
 
 
-
-
+			//diffusion_siteid_now_listを更新する
+			vector<int>::iterator itr;
+			int wanted = jumps_start_id;
+			cout << "jumps_start_id = " << jumps_start_id << endl;
+			cout << "wanted = " << wanted << endl;
+			itr = find(Diffusionspecie::diffusion_siteid_now_list.begin(), Diffusionspecie::diffusion_siteid_now_list.end(), wanted);
+			if (itr == Diffusionspecie::diffusion_siteid_now_list.end()) cout << "search failed" << endl;
+			int wanted_index = distance(Diffusionspecie::diffusion_siteid_now_list.begin(), itr);
+			Diffusionspecie::diffusion_siteid_now_list[wanted_index] = jumps_end_id;
 
 			//時間を更新する
 			double rho_2 = random0to1(mt);
@@ -974,6 +1040,11 @@ int main()
 			sites[i].set_site_atom(1);
 			sites[i].set_diffusion_id(-1);
 		}
+	
+		//diffusion_siteid_now_listをリセットする
+		Diffusionspecie::diffusion_siteid_now_list.clear();
+
+
 
 		//実行時間の計測
 	//	end = chrono::system_clock::now();

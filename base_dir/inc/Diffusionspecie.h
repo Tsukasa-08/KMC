@@ -9,9 +9,11 @@ class Diffusionspecie {
 
 private:
 	int diffusion_id;
+	int diffusion_siteid_now;
 	std::vector<double> jump_total;
 
 public:
+	static std::vector<int> diffusion_siteid_now_list;
 
 	Diffusionspecie() : diffusion_id(-1), jump_total(3,0.0) {
 	};
@@ -19,12 +21,20 @@ public:
 	//セッタ
 	void set_diffusion_id(int d_id) { diffusion_id = d_id; }
 
+	void set_diffusion_siteid_now(int d_sid_now) { diffusion_siteid_now = d_sid_now; }
+
 	void set_jump_total(std::vector<double> jt) { jump_total = jt; }
+
+	void set_diffusion_siteid_now_list(std::vector<int> ds_list) { diffusion_siteid_now_list = ds_list; }
 
 	//ゲッタ
 	int get_diffusion_id() { return diffusion_id; }
 
+	int get_diffusion_siteid_now() { return diffusion_siteid_now; }
+
 	std::vector<double> get_jump_total() { return jump_total; }
+
+	std::vector<int> get_diffusion_siteid_now_list() { return diffusion_siteid_now_list; }
 
 	
 	//拡散係数を算出する関数(引数にlattice_matrixとtotal_time)
