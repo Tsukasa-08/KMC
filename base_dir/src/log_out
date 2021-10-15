@@ -11,6 +11,7 @@ INPUTファイルを読み込み
 JMPDATA read
 	jump_total_number = 34992
 
+Directは8行目にあります
 POSCAR read
 	site_total_number = 8748
 
@@ -19,14 +20,22 @@ lattice_matrix =
 	      0 38.1259       0
 	      0       0 38.1259
 
-E_field_vector = 
-0.01
+E_field_vector = 0.01
    0
    0
+
+
 	1 times KMC finished
+
+
 	2 times KMC finished
+
+
 	3 times KMC finished
+
+
 	4 times KMC finished
+
+
 	5 times KMC finished
 
-Execution time = 481 sec
