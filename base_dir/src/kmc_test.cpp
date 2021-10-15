@@ -195,7 +195,7 @@ int const number_proton = 2;
 double const kb = 1.380649 * pow(10,-23);
 double const ec = 1.60217662 * pow(10,-19);
 
-//プロトンの電荷を定義、要改善
+//拡散種(今回はプロトン)の電荷を定義、要改善
 double q_charge = 1 * ec;
 
 
@@ -230,14 +230,18 @@ int main()
 	int average = param.get<int>("AVERAGE", 0);
 	int p_place_n = param.get<int>("NDIFFS", 0);
 	int E_field_yes = param.get<int>("EFIELDON", 0);
-	double E_field_strength_for_pow = param.get<double>("EFIELD", 0);
+	//double E_field_strength_for_pow = param.get<double>("EFIELD", 0);
+	double correct_constant_for_pow = param.get<double>("CORRECT", 0);
 	double temperture = param.get<double>("TEMP", 0);
 	int E_field_axis = param.get<int>("AXIS", 1);
+	double distance_jump = param.get<double>("DISTANCEJUMP", 1); //単位は[Å]
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
 	int loop_max = mcsp * p_place_n;
-	double E_field_strength = pow(10, E_field_strength_for_pow);
+	double correct_constant = pow(10, correct_constant_for_pow);
+	//double E_field_strength = pow(10, E_field_strength_for_pow);
+	double E_field_strength = correct_constant * kb * temperture / (q_charge * 0.5 * distance_jump); //単位は[J/Å]
 	
 	
 	//入力確認用logファイルを作成
@@ -254,7 +258,8 @@ int main()
 	cout << "\t" << "KMCのステップ数(何回行うか) NSTEPS =" << step_max << endl;
 	cout << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
 	cout << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
-	cout << "\t" << "電場の強さ EFIELD = " << E_field_strength << endl;
+	cout << "\t" << "電場の強さ EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
+	cout << "\t" << "電場の強さ EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
 	cout << "\t" << "温度 TEMP = " << temperture << endl;
 	cout << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	cout << endl;
@@ -265,7 +270,8 @@ int main()
 	ofs_log << "\t" << "KMCのステップ数(何回行うか) NSTEPS =" << step_max << endl;
 	ofs_log << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
 	ofs_log << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
-	ofs_log << "\t" << "電場の強さ EFIELD = " << E_field_strength << endl;
+	ofs_log << "\t" << "電場の強さ EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
+	ofs_log << "\t" << "電場の強さ EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
 	ofs_log << "\t" << "温度 TEMP = " << temperture << endl;
 	ofs_log << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	ofs_log << endl;
@@ -542,6 +548,7 @@ int main()
 			case -2 : E_field_vector << 0,-1,0 ; break;
 			case -3 : E_field_vector << 0,0,-1 ; break;
 		}
+
 
 		E_field_vector *= E_field_strength;
 		cout << "E_field_vector = " << E_field_vector << endl;
@@ -880,6 +887,7 @@ int main()
 			itr = find(Diffusionspecie::diffusion_siteid_now_list.begin(), Diffusionspecie::diffusion_siteid_now_list.end(), wanted);
 			if (itr == Diffusionspecie::diffusion_siteid_now_list.end()) cout << "search failed" << endl;
 			int wanted_index = distance(Diffusionspecie::diffusion_siteid_now_list.begin(), itr);
+			//始点と終点のidを交換することで更新完了
 			Diffusionspecie::diffusion_siteid_now_list[wanted_index] = jumps_end_id;
 
 			//時間を更新する
@@ -889,7 +897,6 @@ int main()
 			double dt = -log(rho_2)/freq_sum;
 			total_time += dt;
 			//cout << "dt = " << dt << endl;
-			//cout << "\t" << "\t" << "total_time = " << total_time << endl;
 			//cout << endl;
 
 /*			//確認用
@@ -922,7 +929,10 @@ int main()
 		//ループ終了後
 		//cout << "\t" << "loop_counter finished" << endl;
 		//cout << endl;
-		//
+		
+		cout << "\t" << "total_time = " << scientific << total_time << defaultfloat << endl;
+		ofs_log << "\t" << "total_time = " << scientific << total_time << defaultfloat << endl;
+		
 		//拡散係数を出力およびファイルに出力する
 
 
@@ -1217,6 +1227,7 @@ int main()
 
 	auto sec = chrono::duration_cast<chrono::seconds>(time).count();
 
+	cout << "Execution time = " << sec << " sec" << endl;
 	ofs_log << "Execution time = " << sec << " sec" << endl;
 	cout << endl;
 	
