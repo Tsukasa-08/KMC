@@ -14,7 +14,7 @@
 #include <regex>
 
 #include "Site.h"
-#include "Jump.h"
+//#include "Jump.h"
 #include "Diffusionspecie.h"
 #include "param.hpp"
 
@@ -46,6 +46,8 @@ public:
 
 	void set_site_frac_coords(vector<double> v) { site_frac_coords = v; };
 
+	void set_jumps_from_here(std::vector<double> here) { jumps_from_here.push_back(here) ; } ;
+
 	//ゲッタ
 	int get_site_id() { return site_id; } ;
 
@@ -53,7 +55,9 @@ public:
 
 	int get_diffusion_id() { return diffusion_id; } ;
 
-	vector<double> get_site_frac_coords() { return site_frac_coords; } ;
+	std::vector<double> get_site_frac_coords() { return site_frac_coords; } ;
+
+	std::vector<std::vector<double>> get_jumps_from_here() { return jumps_from_here } ;
 };
 
 
@@ -219,7 +223,7 @@ int main()
 	vector< vector<double> > D_c_3d_vector;
 
 	//make ElectricalConductivity vector
-	vector< vector<double> > Sigma_x_vector;
+	vector< vector<double> > Sigma_vector;
 
 	//make average_displacement vector
 	vector< vector<double> > average_displacement_vector;
@@ -261,6 +265,7 @@ int main()
 	cout << "\t" << "電場の強さ EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
 	cout << "\t" << "電場の強さ EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
 	cout << "\t" << "温度 TEMP = " << temperture << endl;
+	cout << "\t" << "ジャンプ頻度補正係数 correct_constant = " << correct_constant << endl;
 	cout << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	cout << endl;
 
@@ -273,6 +278,7 @@ int main()
 	ofs_log << "\t" << "電場の強さ EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
 	ofs_log << "\t" << "電場の強さ EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
 	ofs_log << "\t" << "温度 TEMP = " << temperture << endl;
+	ofs_log << "\t" << "ジャンプ頻度補正係数 correct_constant = " << correct_constant << endl;
 	ofs_log << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	ofs_log << endl;
 
@@ -512,11 +518,15 @@ int main()
 			}
 
 
+		}
 		//cout << "jump_vector_tmp[" << k << "] = " << jump_vector_tmp[k] << endl;
 		
 
 		//jump_vector_tmpをjump_vectorに代入する
 		jumps[i].set_jump_vector(jump_vector_tmp);
+
+		//jump_vector_tmpをSites.jumps_from_hereにpush_backして格納する(set_以下はpush_back用の関数)
+		sites[start_site_id_tmp-1].set_a_jump_jumps_from_here(jumps[i]);
 
 /*		//確認用
 		for (int j = 0; j != jumps[i].get_jump_vector().size(); j++) {
@@ -525,11 +535,28 @@ int main()
 		*/
 		
 
-		}
+		
 
 
 	}
 
+/*	//ジャンプがSitesに属しているか確認用
+	for (int i = 0; i != sites.size(); i++) {
+		cout << "sites[" << i << "]のjump一覧" << endl;
+	
+		for (int j = 0; j != sites[i].get_jumps_from_here().size() ; j++) {
+			cout << "vector " << j << "番目" << endl;
+		
+
+			for (int k = 0 ; k <= 2 ; k++) {
+
+				cout << '\t' << sites[i].get_jumps_from_here()[j].get_jump_vector()[k] << endl;
+			}
+
+		}	
+
+	}
+*/
 
 
 	//電場がかかっていた場合、ジャンプ頻度を補正する
@@ -720,6 +747,12 @@ int main()
 
 		//メインループの開始
 		cout << endl;
+		
+		int start_was = 0;
+		int end_was = 0;
+		vector<Jump> jumps_possible_tmp;
+		vector<Jump> jumps_possible;
+
 		//cout << "\t" << "main loop start" << endl;
 		for (int loop_counter = 1; loop_counter <= loop_max; loop_counter++) { 			
 
@@ -731,83 +764,97 @@ int main()
 	//		start = chrono::system_clock::now();
 
 
-			//確認用
+/*			//確認用
 			//cout << endl;
-			//cout << "\t" << "loop_counter = " << loop_counter << endl;
-
-
-					
-					
-			//系で起きうる事象(今回はジャンプ)を列挙し、jumps_possibleに入れていく
-			vector<Jump> jumps_possible_tmp;
-			vector<Jump> jumps_possible;
-
-			for (int i = 0, n = jumps.size() ; i != n; i++) {
-				
-				//jumps[i]の始点サイトidが、プロトンの現在サイトのリストに入っていればtmpに追加
-				if (vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps[i].get_start_site_id())) {
-					jumps_possible_tmp.push_back(jumps[i]);
-				}
+			cout << "\t" << "loop_counter = " << loop_counter << endl;
+			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
+				cout << "\t" << "diffusion_siteid_now_list[" << i << "] = " << Diffusionspecie::diffusion_siteid_now_list[i] <<endl;
 			}
+*/
 
-			for (int i = 0, n = jumps_possible_tmp.size() ; i != n; i++) {
+
+			//1ループ目のみ
+			if (loop_counter == 1) {
+						
+				//系で起きうる事象(今回はジャンプ)を列挙し、jumps_possibleに入れていく
+				//vector<Jump> jumps_possible_tmp;
+				//vector<Jump> jumps_possible;
 				
-				//jumps[i]の終点サイトidが、プロトンの現在サイトのリストに入っていなければtmpに追加
-				if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps[i].get_end_site_id())) {
-					jumps_possible.push_back(jumps_possible_tmp[i]);
-				}
-			}
 
-
-			//まずは始点のidと原子種が一致するものを抽出しjumps_possible_tmpに入れる
-
-	/*		for (int i = 0; i != jumps.size(); i++) {
-				for (int k = 0; k != sites.size(); k++) {
-
-					if ( sites[k].get_site_id() == jumps[i].get_start_site_id() 
-						 && 
-						 sites[k].get_site_atom() == jumps[i].get_start_site_atom() )
-					{
-
+				for (int i = 0, n = jumps.size() ; i != n; i++) {
+					
+					//jumps[i]の始点サイトidが、プロトンの現在サイトのリストに入っていればtmpに追加
+					if (vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps[i].get_start_site_id())) {
 						jumps_possible_tmp.push_back(jumps[i]);
-				//		 cout << "sites[" << k << "]_id = " << sites[k].get_site_id() << "  " ;
-				//		 cout << "jumps[" << i << "]_id = " << jumps[i].get_start_site_id() << endl;
-
 					}
-
 				}
-			}
-			//次に終点のidと原子種が一致するものを抽出しjumps_possibleに入れる
-			for (int i = 0; i != jumps_possible_tmp.size(); i++) {
-				for (int k = 0; k != sites.size(); k++) {
 
-					if ( sites[k].get_site_id() == jumps_possible_tmp[i].get_end_site_id() 
-						 && 
-						 sites[k].get_site_atom() == jumps_possible_tmp[i].get_end_site_atom() ) {
-
+				for (int i = 0, n = jumps_possible_tmp.size() ; i != n; i++) {
+					
+					//jumps[i]の終点サイトidが、プロトンの現在サイトのリストに入っていなければtmpに追加
+					if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps[i].get_end_site_id())) {
 						jumps_possible.push_back(jumps_possible_tmp[i]);
-
 					}
-
 				}
+
+
 			}
-		
-	*/
+
+			//2ループ目以降
+			else {
+
+				//jumps_possibleを更新する
+				//
+				//まずは始点だったやつのジャンプを削除
+				auto itr = jumps_possible.begin();
+				while (itr != jumps_possible.end()) {
+					if ((*itr).get_start_site_id() == start_was) {
+						itr = jumps_possible.erase(itr);
+					}
+					else {
+						itr++;
+					}
+				}
+
+				//終点だったやつのジャンプを追加
+
+				vector<Jump> temp_jump_vector = sites[end_was-1].get_jumps_from_here();
+				cout << "end_was = " << end_was << endl;
+
+				for (int i = 0; i != sites[end_was-1].get_jumps_from_here().size(); i++) {
+					
+					//終点にプロトンがいなければ追加する
+					if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, temp_jump_vector[i].get_end_site_id())) {
+						jumps_possible.push_back(temp_jump_vector[i]);
+					}
+					
+				}
+
+
+
+					
+
+				
+				
+			}
+
 
 			//起きうるジャンプについて、freqの総和をとりfreq_sumに格納する
 			
 			double freq_sum = 0.0;
-			for (int i = 0; i != jumps_possible.size(); i++) {
+			for (int i = 0, n = jumps_possible.size(); i != n; i++) {
 				freq_sum += jumps_possible[i].get_freq();
 			}
 
-/*			//確認用
+			//確認用
 			for (int i = 0; i != jumps_possible.size(); i++) {
+				cout << "\t" << "\t" << "start = " << jumps_possible[i].get_start_site_id() ; 
+				cout << "\t" << "\t" << "end = " << jumps_possible[i].get_end_site_id() ; 
 				cout << "\t" << "\t" << "jumps_possible[" << i << "] = " << jumps_possible[i].get_freq() << endl;
 			}
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
-*/
+
 			
 			
 			
@@ -827,7 +874,7 @@ int main()
 			//jumps_possibleのfreqを順に足し上げていき、和がfreq_sumを超えたときの整数lを取得する
 			double freq_sum_tmp = 0.0;
 			int jump_happen_number;
-			for (int l = 0; l != jumps_possible.size(); l++) {
+			for (int l = 0, n = jumps_possible.size() ; l != n; l++) {
 				freq_sum_tmp += jumps_possible[l].get_freq();
 
 				if (freq_sum_tmp > rho_1 * freq_sum) {
@@ -855,7 +902,7 @@ int main()
 			sites[jumps_end_id-1].set_diffusion_id(diff_tmp);
 			
 			//diffusion_idをもつdiffusion_species[x].jump_totalにjump_vectorを追加する
-			for (int i = 0; i != diffusion_species.size(); i++) {
+			for (int i = 0, n = diffusion_species.size(); i != n ; i++) {
 				if ( diffusion_species[i].get_diffusion_id() == diff_tmp ) {
 					vector<double> jump_total_tmp(3,0.0);
 					for (int k = 0; k != jump_total_tmp.size(); k++) {
@@ -883,12 +930,14 @@ int main()
 
 			//diffusion_siteid_now_listを更新する
 			vector<int>::iterator itr;
-			int wanted = jumps_start_id;
-			itr = find(Diffusionspecie::diffusion_siteid_now_list.begin(), Diffusionspecie::diffusion_siteid_now_list.end(), wanted);
+			start_was = jumps_start_id;
+			end_was = jumps_end_id;
+			itr = find(Diffusionspecie::diffusion_siteid_now_list.begin(), Diffusionspecie::diffusion_siteid_now_list.end(), start_was);
 			if (itr == Diffusionspecie::diffusion_siteid_now_list.end()) cout << "search failed" << endl;
 			int wanted_index = distance(Diffusionspecie::diffusion_siteid_now_list.begin(), itr);
 			//始点と終点のidを交換することで更新完了
 			Diffusionspecie::diffusion_siteid_now_list[wanted_index] = jumps_end_id;
+
 
 			//時間を更新する
 			double rho_2 = random0to1(mt);
@@ -940,7 +989,7 @@ int main()
 		vector<double> jump_total_all(3,0.0);
 
 		//拡散種1つ1つに対し操作を行う
-		for (int j = 0; j != diffusion_species.size(); j++) {
+		for (int j = 0, n = diffusion_species.size(); j != n; j++) {
 
 
 			//自己拡散係数(および電場勾配化では伝導度)を求めるため
@@ -1015,7 +1064,7 @@ int main()
 
 			}
 			
-			Sigma_x_vector.push_back(Sigma_x);
+			Sigma_vector.push_back(Sigma_x);
 
 
 		}
@@ -1149,18 +1198,30 @@ int main()
 		ofstream ofs_sigma_data("for_sigma.csv", ios::app);
 		
 
+
+		//電場の向きにより出力する伝導度を変える
+		string axis;
+		switch (E_field_axis) {
+			case 1 : axis = "x"; break;
+			case 2 : axis = "y"; break;
+			case 3 : axis = "z"; break;
+			case -1 : axis = "-x"; break;
+			case -2 : axis = "-y"; break;
+			case -3 : axis = "-z"; break;
+		}
+
 		//伝導度x成分
 		ofs_sigma << "伝導度 [S/cm]" << endl;
-		vector<double> Sigma_x_vector_total(3,0.0);
-		for (int j = 0; j != Sigma_x_vector_total.size(); j++) {
-			for (int i = 0; i != Sigma_x_vector.size(); i++) {
+		vector<double> Sigma_vector_total(3,0.0);
+		for (int j = 0; j != Sigma_vector_total.size(); j++) {
+			for (int i = 0; i != Sigma_vector.size(); i++) {
 
-				Sigma_x_vector_total[j] += Sigma_x_vector[i][j];
-				ofs_sigma_2 << "Sigma_x_vector[" << i << "][" << j << "] = " << Sigma_x_vector[i][j] << endl;
+				Sigma_vector_total[j] += Sigma_vector[i][j];
+				ofs_sigma_2 << "Sigma_vector[" << i << "][" << j << "] = " << Sigma_vector[i][j] << endl;
 
-				if (i+1 == Sigma_x_vector.size()) {
-					Sigma_x_vector_total[j] /= Sigma_x_vector.size();
-					ofs_sigma << "Sigma_x" << j << " = " << scientific << Sigma_x_vector_total[j] << " ,  " ;
+				if (i+1 == Sigma_vector.size()) {
+					Sigma_vector_total[j] /= Sigma_vector.size();
+					ofs_sigma << "Sigma_" << axis << "[" << j << "] = " << scientific << Sigma_vector_total[j] << " ,  " ;
 					ofs_sigma_2 << endl;
 
 				}
@@ -1169,11 +1230,11 @@ int main()
 
 			double variance_sigma = 0.0 ;
 			double standard_deviation = 0.0 ;
-			for (int i = 0; i != Sigma_x_vector.size(); i++) {
-				variance_sigma += pow(Sigma_x_vector[i][j] - Sigma_x_vector_total[j], 2);
+			for (int i = 0; i != Sigma_vector.size(); i++) {
+				variance_sigma += pow(Sigma_vector[i][j] - Sigma_vector_total[j], 2);
 
-				if (i+1 == Sigma_x_vector.size()) {
-					variance_sigma /= Sigma_x_vector.size();
+				if (i+1 == Sigma_vector.size()) {
+					variance_sigma /= Sigma_vector.size();
 					standard_deviation = sqrt(variance_sigma);
 					ofs_sigma << "Standard deviation = " << scientific << standard_deviation << endl;
 					

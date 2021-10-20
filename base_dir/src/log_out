@@ -1,13 +1,14 @@
 INPUTファイルを読み込み
-	1粒子あたり平均何回イベントを起こすか MCSP =100
-	平均をとる粒子の個数 AVERAGE = 4
-	KMCのステップ数(何回行うか) NSTEPS =2
-	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =200
-	拡散種をいくつ配置するか NDIFFS = 2
+	1粒子あたり平均何回イベントを起こすか MCSP =2
+	平均をとる粒子の個数 AVERAGE = 5
+	KMCのステップ数(何回行うか) NSTEPS =1
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =10
+	拡散種をいくつ配置するか NDIFFS = 5
 	電場の強さ EFIELD = 6.893867e-03 [V/Å] 
 	電場の強さ EFIELD = 6.893867e+05 [V/cm] 
 	温度 TEMP = 600
-	電場方向 1 (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
+	ジャンプ頻度補正係数 correct_constant = 0.1
+	電場方向 -2 (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
 
 JMPDATA read
 	jump_total_number = 34992
@@ -21,15 +22,291 @@ lattice_matrix =
 	      0 38.1259       0
 	      0       0 38.1259
 
-E_field_vector = 0.00689387
-         0
-         0
+E_field_vector =           0
+-0.00689387
+          0
 
 
-	total_time = 1.210268e-10
+	loop_counter = 1
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 957
+	diffusion_siteid_now_list[2] = 1803
+	diffusion_siteid_now_list[3] = 4327
+	diffusion_siteid_now_list[4] = 5075
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 957		end = 1041		jumps_possible[4] = 1.95842e+11
+		start = 957		end = 8322		jumps_possible[5] = 1.95842e+11
+		start = 957		end = 849		jumps_possible[6] = 3.20114e+09
+		start = 957		end = 876		jumps_possible[7] = 2.7367e+11
+		start = 1803		end = 1722		jumps_possible[8] = 2.27086e+12
+		start = 1803		end = 1965		jumps_possible[9] = 2.88335e+11
+		start = 1803		end = 2613		jumps_possible[10] = 1.72215e+11
+		start = 1803		end = 1155		jumps_possible[11] = 3.73299e+11
+		start = 4327		end = 3679		jumps_possible[12] = 7.80054e+09
+		start = 4327		end = 3706		jumps_possible[13] = 3.6652e+10
+		start = 4327		end = 5218		jumps_possible[14] = 1.5041e+10
+		start = 4327		end = 5299		jumps_possible[15] = 5.09199e+11
+		start = 5075		end = 4994		jumps_possible[16] = 8.47709e+10
+		start = 5075		end = 5237		jumps_possible[17] = 7.44598e+10
+		start = 5075		end = 4238		jumps_possible[18] = 6.79214e+12
+		start = 5075		end = 5696		jumps_possible[19] = 6.79214e+12
+		freq_sum = 1.83172e+13
+	loop_counter = 2
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 957
+	diffusion_siteid_now_list[2] = 1803
+	diffusion_siteid_now_list[3] = 4327
+	diffusion_siteid_now_list[4] = 4238
+end_was = 4238
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 957		end = 1041		jumps_possible[4] = 1.95842e+11
+		start = 957		end = 8322		jumps_possible[5] = 1.95842e+11
+		start = 957		end = 849		jumps_possible[6] = 3.20114e+09
+		start = 957		end = 876		jumps_possible[7] = 2.7367e+11
+		start = 1803		end = 1722		jumps_possible[8] = 2.27086e+12
+		start = 1803		end = 1965		jumps_possible[9] = 2.88335e+11
+		start = 1803		end = 2613		jumps_possible[10] = 1.72215e+11
+		start = 1803		end = 1155		jumps_possible[11] = 3.73299e+11
+		start = 4327		end = 3679		jumps_possible[12] = 7.80054e+09
+		start = 4327		end = 3706		jumps_possible[13] = 3.6652e+10
+		start = 4327		end = 5218		jumps_possible[14] = 1.5041e+10
+		start = 4327		end = 5299		jumps_possible[15] = 5.09199e+11
+		start = 4238		end = 3509		jumps_possible[16] = 3.6652e+10
+		start = 4238		end = 3590		jumps_possible[17] = 7.80054e+09
+		start = 4238		end = 5048		jumps_possible[18] = 1.39352e+10
+		start = 4238		end = 5075		jumps_possible[19] = 5.49605e+11
+		freq_sum = 5.1817e+12
+	loop_counter = 3
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 957
+	diffusion_siteid_now_list[2] = 1722
+	diffusion_siteid_now_list[3] = 4327
+	diffusion_siteid_now_list[4] = 4238
+end_was = 1722
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 957		end = 1041		jumps_possible[4] = 1.95842e+11
+		start = 957		end = 8322		jumps_possible[5] = 1.95842e+11
+		start = 957		end = 849		jumps_possible[6] = 3.20114e+09
+		start = 957		end = 876		jumps_possible[7] = 2.7367e+11
+		start = 4327		end = 3679		jumps_possible[8] = 7.80054e+09
+		start = 4327		end = 3706		jumps_possible[9] = 3.6652e+10
+		start = 4327		end = 5218		jumps_possible[10] = 1.5041e+10
+		start = 4327		end = 5299		jumps_possible[11] = 5.09199e+11
+		start = 4238		end = 3509		jumps_possible[12] = 3.6652e+10
+		start = 4238		end = 3590		jumps_possible[13] = 7.80054e+09
+		start = 4238		end = 5048		jumps_possible[14] = 1.39352e+10
+		start = 4238		end = 5075		jumps_possible[15] = 5.49605e+11
+		start = 1722		end = 1803		jumps_possible[16] = 3.6652e+10
+		start = 1722		end = 1937		jumps_possible[17] = 3.6652e+10
+		start = 1722		end = 2532		jumps_possible[18] = 5.49605e+11
+		start = 1722		end = 1074		jumps_possible[19] = 1.39352e+10
+		freq_sum = 2.71384e+12
+	loop_counter = 4
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 957
+	diffusion_siteid_now_list[2] = 1722
+	diffusion_siteid_now_list[3] = 5299
+	diffusion_siteid_now_list[4] = 4238
+end_was = 5299
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 957		end = 1041		jumps_possible[4] = 1.95842e+11
+		start = 957		end = 8322		jumps_possible[5] = 1.95842e+11
+		start = 957		end = 849		jumps_possible[6] = 3.20114e+09
+		start = 957		end = 876		jumps_possible[7] = 2.7367e+11
+		start = 4238		end = 3509		jumps_possible[8] = 3.6652e+10
+		start = 4238		end = 3590		jumps_possible[9] = 7.80054e+09
+		start = 4238		end = 5048		jumps_possible[10] = 1.39352e+10
+		start = 4238		end = 5075		jumps_possible[11] = 5.49605e+11
+		start = 1722		end = 1803		jumps_possible[12] = 3.6652e+10
+		start = 1722		end = 1937		jumps_possible[13] = 3.6652e+10
+		start = 1722		end = 2532		jumps_possible[14] = 5.49605e+11
+		start = 1722		end = 1074		jumps_possible[15] = 1.39352e+10
+		start = 5299		end = 4402		jumps_possible[16] = 7.94482e+10
+		start = 5299		end = 4429		jumps_possible[17] = 7.94482e+10
+		start = 5299		end = 4327		jumps_possible[18] = 6.79214e+12
+		start = 5299		end = 5785		jumps_possible[19] = 6.79214e+12
+		freq_sum = 1.58883e+13
+	loop_counter = 5
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 957
+	diffusion_siteid_now_list[2] = 1722
+	diffusion_siteid_now_list[3] = 4327
+	diffusion_siteid_now_list[4] = 4238
+end_was = 4327
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 957		end = 1041		jumps_possible[4] = 1.95842e+11
+		start = 957		end = 8322		jumps_possible[5] = 1.95842e+11
+		start = 957		end = 849		jumps_possible[6] = 3.20114e+09
+		start = 957		end = 876		jumps_possible[7] = 2.7367e+11
+		start = 4238		end = 3509		jumps_possible[8] = 3.6652e+10
+		start = 4238		end = 3590		jumps_possible[9] = 7.80054e+09
+		start = 4238		end = 5048		jumps_possible[10] = 1.39352e+10
+		start = 4238		end = 5075		jumps_possible[11] = 5.49605e+11
+		start = 1722		end = 1803		jumps_possible[12] = 3.6652e+10
+		start = 1722		end = 1937		jumps_possible[13] = 3.6652e+10
+		start = 1722		end = 2532		jumps_possible[14] = 5.49605e+11
+		start = 1722		end = 1074		jumps_possible[15] = 1.39352e+10
+		start = 4327		end = 3679		jumps_possible[16] = 7.80054e+09
+		start = 4327		end = 3706		jumps_possible[17] = 3.6652e+10
+		start = 4327		end = 5218		jumps_possible[18] = 1.39352e+10
+		start = 4327		end = 5299		jumps_possible[19] = 5.49605e+11
+		freq_sum = 2.75314e+12
+	loop_counter = 6
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 957
+	diffusion_siteid_now_list[2] = 1722
+	diffusion_siteid_now_list[3] = 5299
+	diffusion_siteid_now_list[4] = 4238
+end_was = 5299
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 957		end = 1041		jumps_possible[4] = 1.95842e+11
+		start = 957		end = 8322		jumps_possible[5] = 1.95842e+11
+		start = 957		end = 849		jumps_possible[6] = 3.20114e+09
+		start = 957		end = 876		jumps_possible[7] = 2.7367e+11
+		start = 4238		end = 3509		jumps_possible[8] = 3.6652e+10
+		start = 4238		end = 3590		jumps_possible[9] = 7.80054e+09
+		start = 4238		end = 5048		jumps_possible[10] = 1.39352e+10
+		start = 4238		end = 5075		jumps_possible[11] = 5.49605e+11
+		start = 1722		end = 1803		jumps_possible[12] = 3.6652e+10
+		start = 1722		end = 1937		jumps_possible[13] = 3.6652e+10
+		start = 1722		end = 2532		jumps_possible[14] = 5.49605e+11
+		start = 1722		end = 1074		jumps_possible[15] = 1.39352e+10
+		start = 5299		end = 4402		jumps_possible[16] = 7.94482e+10
+		start = 5299		end = 4429		jumps_possible[17] = 7.94482e+10
+		start = 5299		end = 4327		jumps_possible[18] = 6.79214e+12
+		start = 5299		end = 5785		jumps_possible[19] = 6.79214e+12
+		freq_sum = 1.58883e+13
+	loop_counter = 7
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 876
+	diffusion_siteid_now_list[2] = 1722
+	diffusion_siteid_now_list[3] = 5299
+	diffusion_siteid_now_list[4] = 4238
+end_was = 876
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 4238		end = 3509		jumps_possible[4] = 3.6652e+10
+		start = 4238		end = 3590		jumps_possible[5] = 7.80054e+09
+		start = 4238		end = 5048		jumps_possible[6] = 1.39352e+10
+		start = 4238		end = 5075		jumps_possible[7] = 5.49605e+11
+		start = 1722		end = 1803		jumps_possible[8] = 3.6652e+10
+		start = 1722		end = 1937		jumps_possible[9] = 3.6652e+10
+		start = 1722		end = 2532		jumps_possible[10] = 5.49605e+11
+		start = 1722		end = 1074		jumps_possible[11] = 1.39352e+10
+		start = 5299		end = 4402		jumps_possible[12] = 7.94482e+10
+		start = 5299		end = 4429		jumps_possible[13] = 7.94482e+10
+		start = 5299		end = 4327		jumps_possible[14] = 6.79214e+12
+		start = 5299		end = 5785		jumps_possible[15] = 6.79214e+12
+		start = 876		end = 1387		jumps_possible[16] = 1.19134e+12
+		start = 876		end = 8668		jumps_possible[17] = 1.19134e+12
+		start = 876		end = 714		jumps_possible[18] = 1.72215e+11
+		start = 876		end = 957		jumps_possible[19] = 3.73299e+11
+		freq_sum = 1.8148e+13
+	loop_counter = 8
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 876
+	diffusion_siteid_now_list[2] = 1722
+	diffusion_siteid_now_list[3] = 5299
+	diffusion_siteid_now_list[4] = 5075
+end_was = 5075
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 1722		end = 1803		jumps_possible[4] = 3.6652e+10
+		start = 1722		end = 1937		jumps_possible[5] = 3.6652e+10
+		start = 1722		end = 2532		jumps_possible[6] = 5.49605e+11
+		start = 1722		end = 1074		jumps_possible[7] = 1.39352e+10
+		start = 5299		end = 4402		jumps_possible[8] = 7.94482e+10
+		start = 5299		end = 4429		jumps_possible[9] = 7.94482e+10
+		start = 5299		end = 4327		jumps_possible[10] = 6.79214e+12
+		start = 5299		end = 5785		jumps_possible[11] = 6.79214e+12
+		start = 876		end = 1387		jumps_possible[12] = 1.19134e+12
+		start = 876		end = 8668		jumps_possible[13] = 1.19134e+12
+		start = 876		end = 714		jumps_possible[14] = 1.72215e+11
+		start = 876		end = 957		jumps_possible[15] = 3.73299e+11
+		start = 5075		end = 4994		jumps_possible[16] = 7.94482e+10
+		start = 5075		end = 5237		jumps_possible[17] = 7.94482e+10
+		start = 5075		end = 4238		jumps_possible[18] = 6.79214e+12
+		start = 5075		end = 5696		jumps_possible[19] = 6.79214e+12
+		freq_sum = 3.12832e+13
+	loop_counter = 9
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 876
+	diffusion_siteid_now_list[2] = 1722
+	diffusion_siteid_now_list[3] = 4327
+	diffusion_siteid_now_list[4] = 5075
+end_was = 4327
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 1722		end = 1803		jumps_possible[4] = 3.6652e+10
+		start = 1722		end = 1937		jumps_possible[5] = 3.6652e+10
+		start = 1722		end = 2532		jumps_possible[6] = 5.49605e+11
+		start = 1722		end = 1074		jumps_possible[7] = 1.39352e+10
+		start = 876		end = 1387		jumps_possible[8] = 1.19134e+12
+		start = 876		end = 8668		jumps_possible[9] = 1.19134e+12
+		start = 876		end = 714		jumps_possible[10] = 1.72215e+11
+		start = 876		end = 957		jumps_possible[11] = 3.73299e+11
+		start = 5075		end = 4994		jumps_possible[12] = 7.94482e+10
+		start = 5075		end = 5237		jumps_possible[13] = 7.94482e+10
+		start = 5075		end = 4238		jumps_possible[14] = 6.79214e+12
+		start = 5075		end = 5696		jumps_possible[15] = 6.79214e+12
+		start = 4327		end = 3679		jumps_possible[16] = 7.80054e+09
+		start = 4327		end = 3706		jumps_possible[17] = 3.6652e+10
+		start = 4327		end = 5218		jumps_possible[18] = 1.39352e+10
+		start = 4327		end = 5299		jumps_possible[19] = 5.49605e+11
+		freq_sum = 1.8148e+13
+	loop_counter = 10
+	diffusion_siteid_now_list[0] = 40
+	diffusion_siteid_now_list[1] = 876
+	diffusion_siteid_now_list[2] = 1722
+	diffusion_siteid_now_list[3] = 4327
+	diffusion_siteid_now_list[4] = 4238
+end_was = 4238
+		start = 40		end = 1012		jumps_possible[0] = 2.65624e+10
+		start = 40		end = 8293		jumps_possible[1] = 2.65624e+10
+		start = 40		end = 148		jumps_possible[2] = 8.93137e+10
+		start = 40		end = 175		jumps_possible[3] = 8.93137e+10
+		start = 1722		end = 1803		jumps_possible[4] = 3.6652e+10
+		start = 1722		end = 1937		jumps_possible[5] = 3.6652e+10
+		start = 1722		end = 2532		jumps_possible[6] = 5.49605e+11
+		start = 1722		end = 1074		jumps_possible[7] = 1.39352e+10
+		start = 876		end = 1387		jumps_possible[8] = 1.19134e+12
+		start = 876		end = 8668		jumps_possible[9] = 1.19134e+12
+		start = 876		end = 714		jumps_possible[10] = 1.72215e+11
+		start = 876		end = 957		jumps_possible[11] = 3.73299e+11
+		start = 4327		end = 3679		jumps_possible[12] = 7.80054e+09
+		start = 4327		end = 3706		jumps_possible[13] = 3.6652e+10
+		start = 4327		end = 5218		jumps_possible[14] = 1.39352e+10
+		start = 4327		end = 5299		jumps_possible[15] = 5.49605e+11
+		start = 4238		end = 3509		jumps_possible[16] = 3.6652e+10
+		start = 4238		end = 3590		jumps_possible[17] = 7.80054e+09
+		start = 4238		end = 5048		jumps_possible[18] = 1.39352e+10
+		start = 4238		end = 5075		jumps_possible[19] = 5.49605e+11
+		freq_sum = 5.01278e+12
+	total_time = 1.569635e-12
 	1 times KMC finished
-
-
-	total_time = 5.261513e-11
-	2 times KMC finished
+Execution time = 0 sec
 

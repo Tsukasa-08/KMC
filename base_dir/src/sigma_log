@@ -1,9 +1,6 @@
-Sigma_x_vector[0][0] = 0.00587142
-Sigma_x_vector[1][0] = 0
+Sigma_vector[0][0] = -0.0230695
 
-Sigma_x_vector[0][1] = -0.00733928
-Sigma_x_vector[1][1] = 0.00675281
+Sigma_vector[0][1] = -0.282948
 
-Sigma_x_vector[0][2] = 0.00733928
-Sigma_x_vector[1][2] = 0.00675281
+Sigma_vector[0][2] = -2.82722e-16
 

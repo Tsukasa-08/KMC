@@ -32,3 +32,7 @@ all: clean $(OBJS) $(TARGET)
 # (12).oファイル、実行ファイル、.dファイルを削除
 clean:
 	-rm -f $(OBJS) $(TARGET) *.d
+
+#tsukasaが追加、作成したプログラムを実行する
+run:
+	./do_kmc.sh
