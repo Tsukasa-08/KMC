@@ -894,6 +894,7 @@ int main()
 					diffusion_species[i].set_jump_total(jump_total_tmp);
 
 					//diffusion_counterを1つ増加
+					cout << "今回拡散したのは" << i << endl;
 					diffusion_species[i].diffusion_counter++;
 
 
@@ -922,6 +923,7 @@ int main()
 			int wanted_index = distance(Diffusionspecie::diffusion_siteid_now_list.begin(), itr);
 			//始点と終点のidを交換することで更新完了
 			Diffusionspecie::diffusion_siteid_now_list[wanted_index] = jumps_end_id;
+			
 
 
 			//時間を更新する
