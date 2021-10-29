@@ -118,6 +118,7 @@ private:
 	static std::vector<int> diffusion_siteid_now_list;
 
 public:
+	int diffusion_counter;
 
 	Diffusionspecie() : diffusion_id(-1), jump_total(3,0.0) {
 	};
@@ -892,6 +893,9 @@ int main()
 					}
 					diffusion_species[i].set_jump_total(jump_total_tmp);
 
+					//diffusion_counterを1つ増加
+					diffusion_species[i].diffusion_counter++;
+
 
 /*					//確認用
 					for (int j = 0; j != diffusion_species[i].get_jump_total().size();j++)
@@ -1089,6 +1093,9 @@ int main()
 				ofs_ave_dis << displacement_vector(j) << "," ;
 				
 			}
+
+			//diffusion_counterを出力する
+			ofs_ave_dis << diffusion_species[i].diffusion_counter;
 
 			//１つの拡散種の変位を出力し終わったら改行する
 			ofs_ave_dis << endl;

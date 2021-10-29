@@ -13,6 +13,7 @@ private:
 	std::vector<double> jump_total;
 
 public:
+	int diffusion_counter;
 	static std::vector<int> diffusion_siteid_now_list;
 
 	Diffusionspecie() : diffusion_id(-1), jump_total(3,0.0) {
@@ -23,6 +24,8 @@ public:
 
 	void set_diffusion_siteid_now(int d_sid_now) { diffusion_siteid_now = d_sid_now; }
 
+	void set_diffusion_counter(int d_ctr) { diffusion_counter = d_ctr; }
+
 	void set_jump_total(std::vector<double> jt) { jump_total = jt; }
 
 	void set_diffusion_siteid_now_list(std::vector<int> ds_list) { diffusion_siteid_now_list = ds_list; }
@@ -31,6 +34,8 @@ public:
 	int get_diffusion_id() { return diffusion_id; }
 
 	int get_diffusion_siteid_now() { return diffusion_siteid_now; }
+
+	int get_diffusion_counter() { return diffusion_counter; }
 
 	std::vector<double> get_jump_total() { return jump_total; }
 

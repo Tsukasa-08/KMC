@@ -1,39 +1,13 @@
 KMC 1 times
-total_time t = 1.533190e-12 [s]
-mean_displacement <x> = 1.711963e-02 [Å]
-mean_displacement <y> = -1.201703e-02 [Å]
-mean_displacement <z> = 1.711963e-02 [Å]
-concentration c = 9.022149e-05 [/Å^3]
-Efield_direction = -z
-Efield_strength = 6.893867e-04 [V/Å]
-Efield_strength = 6.893867e+04 [V/cm]
-Sigma_-zx = 4.463195e+00 [S/cm]
-Sigma_-zy = -3.132917e+00 [S/cm]
-Sigma_-zz = 4.463195e+00 [S/cm]
-
-KMC 2 times
-total_time t = 1.748572e-12 [s]
-mean_displacement <x> = 6.008516e-03 [Å]
-mean_displacement <y> = -2.732482e-02 [Å]
-mean_displacement <z> = -9.059206e-04 [Å]
-concentration c = 9.022149e-05 [/Å^3]
-Efield_direction = -z
-Efield_strength = 6.893867e-04 [V/Å]
-Efield_strength = 6.893867e+04 [V/cm]
-Sigma_-zx = 1.373508e+00 [S/cm]
-Sigma_-zy = -6.246278e+00 [S/cm]
-Sigma_-zz = -2.070877e-01 [S/cm]
-
-KMC 3 times
-total_time t = 1.150629e-12 [s]
-mean_displacement <x> = -2.222222e-02 [Å]
-mean_displacement <y> = -1.811841e-03 [Å]
-mean_displacement <z> = 1.201703e-02 [Å]
-concentration c = 9.022149e-05 [/Å^3]
-Efield_direction = -z
-Efield_strength = 6.893867e-04 [V/Å]
-Efield_strength = 6.893867e+04 [V/cm]
-Sigma_-zx = -7.719689e+00 [S/cm]
-Sigma_-zy = -6.294083e-01 [S/cm]
-Sigma_-zz = 4.174548e+00 [S/cm]
+total_time t = 1.557663e-08 [s]
+mean_displacement <x> = -1.403214e-03 [Å]
+mean_displacement <y> = 8.160472e-03 [Å]
+mean_displacement <z> = 1.528378e-02 [Å]
+concentration c = 3.608860e-03 [/Å^3]
+Efield_direction = x
+Efield_strength = 8.678864e-02 [V/Å]
+Efield_strength = 8.678864e+06 [V/cm]
+Sigma_xx = -4.576334e-04 [S/cm]
+Sigma_xy = 2.661394e-03 [S/cm]
+Sigma_xz = 4.984536e-03 [S/cm]
 
