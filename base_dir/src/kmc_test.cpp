@@ -249,7 +249,6 @@ int main()
 	
 	
 	//入力確認用logファイルを作成
-	ofstream ofs_log("log", ios::app);
 
 	//読み込めたか確認用
 	if (!param) {
@@ -269,20 +268,18 @@ int main()
 	cout << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	cout << endl;
 
-	ofs_log << "INPUTファイルを読み込み" << endl;
-	ofs_log << "\t" << "1粒子あたり平均何回イベントを起こすか MCSP =" << mcsp << endl;
-	ofs_log << "\t" << "平均をとる粒子の個数 AVERAGE = " << average << endl;
-	ofs_log << "\t" << "KMCのステップ数(何回行うか) NSTEPS =" << step_max << endl;
-	ofs_log << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
-	ofs_log << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
-	ofs_log << "\t" << "電場の強さ EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
-	ofs_log << "\t" << "電場の強さ EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
-	ofs_log << "\t" << "温度 TEMP = " << temperture << endl;
-	ofs_log << "\t" << "ジャンプ頻度補正係数 correct_constant = " << correct_constant << endl;
-	ofs_log << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
-	ofs_log << endl;
-
 	
+	//電場の向きにより出力する伝導度を変える
+	string axis;
+	switch (E_field_axis) {
+		case 1 : axis = "x"; break;
+		case 2 : axis = "y"; break;
+		case 3 : axis = "z"; break;
+		case -1 : axis = "-x"; break;
+		case -2 : axis = "-y"; break;
+		case -3 : axis = "-z"; break;
+	}
+
 	//JMPDATAを読み込む
 	//まずは行数を取得
 	ifstream for_line1("JMPDATA");
@@ -304,9 +301,6 @@ int main()
 	cout << "\t" << "jump_total_number = " << jump_total_number << endl;
 	cout << endl;
 
-	ofs_log << "JMPDATA read" << endl;
-	ofs_log << "\t" << "jump_total_number = " << jump_total_number << endl;
-	ofs_log << endl;
 
 	//int	const jump_total_number = 256;
 	ifstream ifs1("JMPDATA");
@@ -365,9 +359,6 @@ int main()
 	cout << "\t" << "site_total_number = " << site_total_number << endl;
 	cout << endl;
 
-	ofs_log << "POSCAR read" << endl;
-	ofs_log << "\t" << "site_total_number = " << site_total_number << endl;
-	ofs_log << endl;
 
 	//POSCARを1行ごとに読み込んでいく
 	vector<Site> sites(site_total_number,Site());
@@ -460,11 +451,6 @@ int main()
 		} 
 		cout << endl;
 
-		ofs_log << "lattice_matrix = " << endl;
-		for (int i = 0; i <= 2; i++) {
-			ofs_log << "\t"  << lattice_matrix.row(i) << endl;
-		} 
-		ofs_log << endl;
 
 /*	//Site確認用
 	for (int i = 0; i != sites.size() ; i++) {
@@ -579,8 +565,6 @@ int main()
 
 		E_field_vector *= E_field_strength;
 		cout << "E_field_vector = " << E_field_vector << endl;
-		ofs_log << "E_field_vector = " << endl;
-		ofs_log <<  E_field_vector << endl;
 
 		//生成したジャンプに対し操作を行っていく
 		for (int i = 0; i != jumps.size(); i++) {
@@ -619,12 +603,9 @@ int main()
 
 	else {
 		cout << '\t' << "no E_field" << endl;	
-		ofs_log << '\t' << "no E_field" << endl;	
 	}
 
 
-	//拡散係数記録用のファイルOUTPUTを作成しておく(必要なくなった)
-	//ofstream ofs("OUTPUT", ios::app);
 	
 
 
@@ -819,7 +800,6 @@ int main()
 				//終点だったやつのジャンプを追加
 
 				vector<Jump> temp_jump_vector = sites[end_was-1].get_jumps_from_here();
-				cout << "end_was = " << end_was << endl;
 
 				for (int i = 0; i != sites[end_was-1].get_jumps_from_here().size(); i++) {
 					
@@ -846,7 +826,7 @@ int main()
 				freq_sum += jumps_possible[i].get_freq();
 			}
 
-			//確認用
+/*          //確認用
 			for (int i = 0; i != jumps_possible.size(); i++) {
 				cout << "\t" << "\t" << "start = " << jumps_possible[i].get_start_site_id() ; 
 				cout << "\t" << "\t" << "end = " << jumps_possible[i].get_end_site_id() ; 
@@ -854,6 +834,7 @@ int main()
 			}
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
+*/
 
 			
 			
@@ -980,7 +961,6 @@ int main()
 		//cout << endl;
 		
 		cout << "\t" << "total_time = " << scientific << total_time << defaultfloat << endl;
-		ofs_log << "\t" << "total_time = " << scientific << total_time << defaultfloat << endl;
 		
 		//拡散係数を出力およびファイルに出力する
 
@@ -1048,8 +1028,8 @@ int main()
 
 
 		//電場ありの場合、伝導度テンソルを出力
+		vector<double> Sigma_x(3,0.0);
 		if (E_field_yes) {
-			vector<double> Sigma_x(3,0.0);
 			double concentration = diffusion_species.size() / lattice_matrix.determinant();
 			//cout << "lattice_matrix.determinant() = " << lattice_matrix.determinant() << endl;
 			//cout << "concentration = " << concentration << endl;
@@ -1090,6 +1070,53 @@ int main()
 		}
 
 
+		//平均変位を出力, vectorのvectorから平均vectorを作成する関数があってもいいかも
+		ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
+		ofs_ave_dis << "KMC " << step_counter << " times" << endl;
+		ofs_ave_dis << "#diffusion_id, mean displacement in x, mean_displacement in y, mean displacement in z [Å]" << endl;
+
+		//それぞれの拡散種について、変位を出力する
+		for (int i = 0, n = diffusion_species.size(); i != n ; i++) {
+			
+			//diffusion_idを出力する
+			ofs_ave_dis << diffusion_species[i].get_diffusion_id() << "," ;
+			
+			//transcoords関数でjump_totalを分率座標からcartesian座標に直す
+			Eigen::Vector3d displacement_vector;
+			displacement_vector = transcoords(diffusion_species[i].get_jump_total(),lattice_matrix);
+
+			for (int j = 0; j != diffusion_species[i].get_jump_total().size(); j++) {
+				ofs_ave_dis << displacement_vector(j) << "," ;
+				
+			}
+
+			//１つの拡散種の変位を出力し終わったら改行する
+			ofs_ave_dis << endl;
+
+		}
+		ofs_ave_dis << endl;
+
+		//OUTPUTファイルをまとめる
+		ofstream ofs_output("OUTPUT", ios::app);
+		ofs_output << "KMC " << step_counter << " times" << endl;
+		ofs_output << "total_time t = " << scientific << total_time << " [s]" << endl;
+		ofs_output << "mean_displacement <x> = " << average_displacement[0]  << " [Å]" << endl;
+		ofs_output << "mean_displacement <y> = " << average_displacement[1]  << " [Å]" << endl;
+		ofs_output << "mean_displacement <z> = " << average_displacement[2]  << " [Å]" << endl;
+		ofs_output << "concentration c = " << diffusion_species.size()/lattice_matrix.determinant() <<  " [/Å^3]" << endl;
+		if (E_field_yes) {
+			ofs_output << "Efield_direction = " << axis << endl;
+			ofs_output << "Efield_strength = " << E_field_strength << " [V/Å]" << endl;
+			ofs_output << "Efield_strength = " << E_field_strength*pow(10,8) << " [V/cm]" << endl;
+			ofs_output << "Sigma_" << axis << "x = " << Sigma_x[0] << " [S/cm]" << endl;
+			ofs_output << "Sigma_" << axis << "y = " << Sigma_x[1] << " [S/cm]" << endl;
+			ofs_output << "Sigma_" << axis << "z = " << Sigma_x[2] << " [S/cm]" << endl;
+		}
+		ofs_output << endl;
+
+
+		
+		
 
 		//cout << endl;
 
@@ -1118,7 +1145,6 @@ int main()
 
 		//KMCが何回終わったか
 		cout << '\t' <<  step_counter << " times KMC finished" << endl;
-		ofs_log << '\t' <<  step_counter << " times KMC finished" << endl;
 
 
 	}
@@ -1194,12 +1220,10 @@ int main()
 
 		//結果を出力するアウトプットファイルを作成する
 		ofstream ofs_sigma("ElectricalConductivity", ios::app);
-		ofstream ofs_sigma_2("sigma_log", ios::app);
-		ofstream ofs_sigma_data("for_sigma.csv", ios::app);
 		
 
 
-		//電場の向きにより出力する伝導度を変える
+/*		//電場の向きにより出力する伝導度を変える(main関数の最初に書いた)
 		string axis;
 		switch (E_field_axis) {
 			case 1 : axis = "x"; break;
@@ -1209,6 +1233,7 @@ int main()
 			case -2 : axis = "-y"; break;
 			case -3 : axis = "-z"; break;
 		}
+*/
 
 		//伝導度x成分
 		ofs_sigma << "伝導度 [S/cm]" << endl;
@@ -1217,12 +1242,10 @@ int main()
 			for (int i = 0; i != Sigma_vector.size(); i++) {
 
 				Sigma_vector_total[j] += Sigma_vector[i][j];
-				ofs_sigma_2 << "Sigma_vector[" << i << "][" << j << "] = " << Sigma_vector[i][j] << endl;
 
 				if (i+1 == Sigma_vector.size()) {
 					Sigma_vector_total[j] /= Sigma_vector.size();
 					ofs_sigma << "Sigma_" << axis << "[" << j << "] = " << scientific << Sigma_vector_total[j] << " ,  " ;
-					ofs_sigma_2 << endl;
 
 				}
 			
@@ -1252,10 +1275,7 @@ int main()
 
 	}
 
-	//平均変位を出力, vectorのvectorから平均vectorを作成する関数があってもいいかも
-	ofstream ofs_ave_dis("average_displacement", ios::app);
-	ofs_ave_dis << "平均変位 (Å)" << endl;
-	if (E_field_yes) {
+	/*if (E_field_yes) {
 		ofs_ave_dis << '\t' << "E_field_strength = " << E_field_strength << endl;
 		ofs_ave_dis << '\t' << "E_field_axis = " <<  E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	}
@@ -1278,18 +1298,17 @@ int main()
 	ofs_ave_dis << "<x> = " << av_dis_sum_eigen[0] << endl;
 	ofs_ave_dis << "<y> = " << av_dis_sum_eigen[1] << endl;
 	ofs_ave_dis << "<z> = " << av_dis_sum_eigen[2] << endl;
+	*/
 
 	//実行時間の計測
 	end = chrono::system_clock::now();
 	auto time = end - start;
 
 	time_stamp = chrono::system_clock::to_time_t(start);
-	ofs_log <<  endl;
 
 	auto sec = chrono::duration_cast<chrono::seconds>(time).count();
 
 	cout << "Execution time = " << sec << " sec" << endl;
-	ofs_log << "Execution time = " << sec << " sec" << endl;
 	cout << endl;
 	
 	
