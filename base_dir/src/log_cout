@@ -1,0 +1,41 @@
+INPUTファイルを読み込み
+	1粒子あたり平均何回イベントを起こすか MCSP =2
+	平均をとる粒子の個数 AVERAGE = 15
+	KMCのステップ数(何回行うか) NSTEPS =3
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =10
+	拡散種をいくつ配置するか NDIFFS = 5
+	電場の強さ EFIELD = 6.893867e-04 [V/Å] 
+	電場の強さ EFIELD = 6.893867e+04 [V/cm] 
+	温度 TEMP = 600
+	ジャンプ頻度補正係数 correct_constant = 0.01
+	電場方向 -3 (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
+
+JMPDATA read
+	jump_total_number = 34992
+
+Directは8行目にあります
+POSCAR read
+	site_total_number = 8748
+
+lattice_matrix = 
+	38.1259       0       0
+	      0 38.1259       0
+	      0       0 38.1259
+
+E_field_vector =            0
+           0
+-0.000689387
+
+
+	total_time = 1.533190e-12
+	1 times KMC finished
+
+
+	total_time = 1.748572e-12
+	2 times KMC finished
+
+
+	total_time = 1.150629e-12
+	3 times KMC finished
+Execution time = 0 sec
+

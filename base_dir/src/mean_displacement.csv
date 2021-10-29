@@ -1,0 +1,24 @@
+KMC 1 times
+#diffusion_id, mean displacement in x, mean_displacement in y, mean displacement in z [Å]
+1,0.972705,0.972705,0,
+2,0,0,0,
+3,0,-2.11811,2.11811,
+4,1.1454,0,1.1454,
+5,1.1454,-1.1454,0,
+
+KMC 2 times
+#diffusion_id, mean displacement in x, mean_displacement in y, mean displacement in z [Å]
+1,0,-0.972705,0.972705,
+2,0,0,0,
+3,2.11811,-2.11811,-2.2908,
+4,-0.972705,-2.11811,1.1454,
+5,0,0,0,
+
+KMC 3 times
+#diffusion_id, mean displacement in x, mean_displacement in y, mean displacement in z [Å]
+1,-1.1454,-1.1454,0,
+2,0,1.94541,0,
+3,-0.972705,0,-0.972705,
+4,-0.972705,0,3.26351,
+5,-1.1454,-1.1454,0,
+

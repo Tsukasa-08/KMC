@@ -1,7 +1,6 @@
 rm DiffusionCoefficient
 rm ElectricalConductivity
-rm log
-rm sigma_log
-rm log_out
-rm average_displacement
-./test_kmc_test  > log_out
+rm mean_displacement.csv
+rm log_cout
+rm OUTPUT
+./test_kmc_test  > log_cout
