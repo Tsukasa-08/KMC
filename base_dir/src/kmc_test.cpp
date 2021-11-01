@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <cmath>
 #include <chrono>
-#include <Eigen/Core>
+#include <Eigen/Core> 
 #include <Eigen/LU>
 #include <Eigen/Dense>
 #include <regex>
@@ -595,8 +595,8 @@ int main()
 
 			//ジャンプ頻度を補正する
 			double fixed_jump_freq = jumps[i].get_freq() * exp(delta_E_mig/(kb*temperture));
-			//cout << "jump_frep = " << jumps[i].get_freq() << endl;
-			//cout << "fixed_jump_freq = " << fixed_jump_freq << endl;
+			cout << "jump_frep = " << jumps[i].get_freq() << endl;
+			cout << "fixed_jump_freq = " << fixed_jump_freq << endl;
 			jumps[i].set_freq(fixed_jump_freq);
 		}
 
@@ -734,6 +734,7 @@ int main()
 		int end_was = 0;
 		vector<Jump> jumps_possible_tmp;
 		vector<Jump> jumps_possible;
+		vector<Jump> jumps_impossible_tmp;
 
 		//cout << "\t" << "main loop start" << endl;
 		for (int loop_counter = 1; loop_counter <= loop_max; loop_counter++) { 			
@@ -746,13 +747,11 @@ int main()
 	//		start = chrono::system_clock::now();
 
 
-/*			//確認用
+			//確認用
 			//cout << endl;
-			cout << "\t" << "loop_counter = " << loop_counter << endl;
-			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
-				cout << "\t" << "diffusion_siteid_now_list[" << i << "] = " << Diffusionspecie::diffusion_siteid_now_list[i] <<endl;
-			}
-*/
+			//cout << "\t" << "loop_counter = " << loop_counter << endl;
+			
+
 
 
 			//1ループ目のみ
@@ -774,8 +773,11 @@ int main()
 				for (int i = 0, n = jumps_possible_tmp.size() ; i != n; i++) {
 					
 					//jumps[i]の終点サイトidが、プロトンの現在サイトのリストに入っていなければtmpに追加
-					if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps[i].get_end_site_id())) {
+					if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps_possible_tmp[i].get_end_site_id())) {
 						jumps_possible.push_back(jumps_possible_tmp[i]);
+					}
+					else {
+						jumps_impossible_tmp.push_back(jumps_possible_tmp[i]);
 					}
 				}
 
@@ -786,30 +788,49 @@ int main()
 			else {
 
 				//jumps_possibleを更新する
-				//
-				//まずは始点だったやつのジャンプを削除
+		
+				//jumps_impossible_tmpをjumps_possibleに追加する
+				for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
+					jumps_possible.push_back(jumps_impossible_tmp[i]);
+				}
+
+				//jumps_impossible_tmpを空にする
+				jumps_impossible_tmp.clear();
+				jumps_impossible_tmp.shrink_to_fit();
+			
+
+				//終点だったやつのジャンプを追加
+				vector<Jump> temp_jump_vector = sites[end_was-1].get_jumps_from_here();
+
+				for (int i = 0; i != temp_jump_vector.size(); i++) {
+					jumps_possible.push_back(temp_jump_vector[i]);
+				}
+
+				//始点だったやつのジャンプと、終点にプロトンがいるジャンプを削除
 				auto itr = jumps_possible.begin();
 				while (itr != jumps_possible.end()) {
+
+					//始点だったジャンプは削除
 					if ((*itr).get_start_site_id() == start_was) {
 						itr = jumps_possible.erase(itr);
 					}
+
+					//終点にプロトンがいるジャンプは一旦jumps_impossible_tmpに格納して削除
+					else if (vector_finder(Diffusionspecie::diffusion_siteid_now_list, (*itr).get_end_site_id())) {
+						jumps_impossible_tmp.push_back(*itr);
+						itr = jumps_possible.erase(itr);
+					}
+
+					//他はスルー
 					else {
 						itr++;
 					}
 				}
 
-				//終点だったやつのジャンプを追加
 
-				vector<Jump> temp_jump_vector = sites[end_was-1].get_jumps_from_here();
 
-				for (int i = 0; i != sites[end_was-1].get_jumps_from_here().size(); i++) {
-					
-					//終点にプロトンがいなければ追加する
-					if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, temp_jump_vector[i].get_end_site_id())) {
-						jumps_possible.push_back(temp_jump_vector[i]);
-					}
-					
-				}
+
+
 
 
 
@@ -827,14 +848,27 @@ int main()
 				freq_sum += jumps_possible[i].get_freq();
 			}
 
-/*          //確認用
+          /*//確認用
+
+			cout << "\t" << "diffusion_siteid_now_list = " ;
+			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size(); i++) {
+				cout << "\t" << Diffusionspecie::diffusion_siteid_now_list[i] ; 
+			}
+			cout << endl;
 			for (int i = 0; i != jumps_possible.size(); i++) {
 				cout << "\t" << "\t" << "start = " << jumps_possible[i].get_start_site_id() ; 
 				cout << "\t" << "\t" << "end = " << jumps_possible[i].get_end_site_id() ; 
 				cout << "\t" << "\t" << "jumps_possible[" << i << "] = " << jumps_possible[i].get_freq() << endl;
 			}
+			cout << endl;
+			for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
+				cout << "\t" << "\t" << "start = " << jumps_impossible_tmp[i].get_start_site_id() ; 
+				cout << "\t" << "\t" << "end = " << jumps_impossible_tmp[i].get_end_site_id() ; 
+				cout << "\t" << "\t" << "jumps_impossible_tmp[" << i << "] = " << jumps_impossible_tmp[i].get_freq() << endl;
+			}
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
+
 */
 
 			
@@ -894,7 +928,6 @@ int main()
 					diffusion_species[i].set_jump_total(jump_total_tmp);
 
 					//diffusion_counterを1つ増加
-					cout << "今回拡散したのは" << i << endl;
 					diffusion_species[i].diffusion_counter++;
 
 
