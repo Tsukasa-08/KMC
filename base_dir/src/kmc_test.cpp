@@ -906,7 +906,7 @@ int main()
 				freq_sum += jumps_possible[i].get_freq();
 			}
 
-          //確認用
+        /*  //確認用
 
 			cout << "\t" << "diffusion_siteid_now_list = " ;
 			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size(); i++) {
@@ -919,15 +919,15 @@ int main()
 				cout << "\t" << "\t" << "jumps_possible[" << i << "] = " << jumps_possible[i].get_freq() << endl;
 			}
 			cout << endl;
-	/*		for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
+		for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
 				cout << "\t" << "\t" << "start = " << jumps_impossible_tmp[i].get_start_site_id() ; 
 				cout << "\t" << "\t" << "end = " << jumps_impossible_tmp[i].get_end_site_id() ; 
 				cout << "\t" << "\t" << "jumps_impossible_tmp[" << i << "] = " << jumps_impossible_tmp[i].get_freq() << endl;
 			}
-*/
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
 
+*/
 
 			
 			
