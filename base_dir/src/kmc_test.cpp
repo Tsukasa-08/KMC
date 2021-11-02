@@ -29,12 +29,18 @@ private:
 	int site_id;
 	int site_atom;
 	int diffusion_id;
-	vector<double> site_frac_coords;
+	std::vector<double> site_frac_coords;
+	std::vector<Jump> jumps_from_here;
+	std::vector<Jump> jumps_to_here;
 
 public:
 	
 	//デフォルトコンストラクタ デフォルトでは空孔にしておく
 	Site() : site_id(0), site_frac_coords(3,0.0), site_atom(1), diffusion_id(-1){
+	}
+
+	//コピーコンストラクタ
+	Site(const Site &src){
 	}
 
 	//セッタ
@@ -44,9 +50,13 @@ public:
 
 	void set_diffusion_id(int d_id) { diffusion_id = d_id; };
 
-	void set_site_frac_coords(vector<double> v) { site_frac_coords = v; };
+	void set_site_frac_coords(std::vector<double> v) { site_frac_coords = v; };
 
-	void set_jumps_from_here(std::vector<double> here) { jumps_from_here.push_back(here) ; } ;
+	void set_jumps_from_here(std::vector<Jump> here) { jumps_from_here = here ; } ;
+
+	void set_a_jump_jumps_from_here(Jump here) { jumps_from_here.push_back(here) ; } ;
+
+	void set_a_jump_jumps_to_here(Jump here) { jumps_to_here.push_back(here) ; } ;
 
 	//ゲッタ
 	int get_site_id() { return site_id; } ;
@@ -57,7 +67,9 @@ public:
 
 	std::vector<double> get_site_frac_coords() { return site_frac_coords; } ;
 
-	std::vector<std::vector<double>> get_jumps_from_here() { return jumps_from_here } ;
+	std::vector<Jump> get_jumps_from_here() { return jumps_from_here; } ;
+
+	std::vector<Jump> get_jumps_to_here() { return jumps_to_here; } ;
 };
 
 
@@ -512,8 +524,6 @@ int main()
 		//jump_vector_tmpをjump_vectorに代入する
 		jumps[i].set_jump_vector(jump_vector_tmp);
 
-		//jump_vector_tmpをSites.jumps_from_hereにpush_backして格納する(set_以下はpush_back用の関数)
-		sites[start_site_id_tmp-1].set_a_jump_jumps_from_here(jumps[i]);
 
 /*		//確認用
 		for (int j = 0; j != jumps[i].get_jump_vector().size(); j++) {
@@ -531,19 +541,20 @@ int main()
 	for (int i = 0; i != sites.size(); i++) {
 		cout << "sites[" << i << "]のjump一覧" << endl;
 	
-		for (int j = 0; j != sites[i].get_jumps_from_here().size() ; j++) {
+		for (int j = 0; j != sites[i].get_jumps_to_here().size() ; j++) {
 			cout << "vector " << j << "番目" << endl;
 		
 
 			for (int k = 0 ; k <= 2 ; k++) {
 
-				cout << '\t' << sites[i].get_jumps_from_here()[j].get_jump_vector()[k] << endl;
+				cout << '\t' << sites[i].get_jumps_to_here()[j].get_jump_vector()[k] << endl;
 			}
 
 		}	
 
 	}
 */
+
 
 
 	//電場がかかっていた場合、ジャンプ頻度を補正する
@@ -605,6 +616,43 @@ int main()
 	else {
 		cout << '\t' << "no E_field" << endl;	
 	}
+
+	//補正したジャンプ頻度情報をSiteと結びつける
+	for (int i = 0, n = jumps.size(); i != n; i++) {
+		
+		//始点と終点のsite_idを取得
+		int start_site_id_tmp = jumps[i].get_start_site_id();
+		int end_site_id_tmp = jumps[i].get_end_site_id();
+		
+		//jump_vector_tmpをSites.jumps_from_hereにpush_backして格納する(set_以下はpush_back用の関数)
+		sites[start_site_id_tmp-1].set_a_jump_jumps_from_here(jumps[i]);
+
+		sites[end_site_id_tmp-1].set_a_jump_jumps_to_here(jumps[i]);
+	}
+
+	//確認用
+	for (int i = 0; i != sites.size(); i++) {
+		for (int j = 0; j != sites[i].get_jumps_from_here().size(); j++) {
+
+			cout << "\t" << "\t" << "start = " << sites[i].get_jumps_from_here()[j].get_start_site_id() ; 
+			cout << "\t" << "\t" << "end = " << sites[i].get_jumps_from_here()[j].get_end_site_id() ; 
+			cout << "\t" << "\t" << "jumps_from_here[" << j << "] = " << sites[i].get_jumps_from_here()[j].get_freq() << endl;
+		}
+	}
+	cout << endl;
+	//
+	//確認用
+	for (int i = 0; i != sites.size(); i++) {
+		for (int j = 0; j != sites[i].get_jumps_to_here().size(); j++) {
+
+			cout << "\t" << "\t" << "start = " << sites[i].get_jumps_to_here()[j].get_start_site_id() ; 
+			cout << "\t" << "\t" << "end = " << sites[i].get_jumps_to_here()[j].get_end_site_id() ; 
+			cout << "\t" << "\t" << "jumps_to_here[" << j << "] = " << sites[i].get_jumps_to_here()[j].get_freq() << endl;
+		}
+	}
+
+	return 0;
+	
 
 
 	

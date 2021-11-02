@@ -10,6 +10,7 @@ private:
 	int diffusion_id;
 	std::vector<double> site_frac_coords;
 	std::vector<Jump> jumps_from_here;
+	std::vector<Jump> jumps_to_here;
 
 public:
 	
@@ -34,6 +35,8 @@ public:
 
 	void set_a_jump_jumps_from_here(Jump here) { jumps_from_here.push_back(here) ; } ;
 
+	void set_a_jump_jumps_to_here(Jump here) { jumps_to_here.push_back(here) ; } ;
+
 	//ゲッタ
 	int get_site_id() { return site_id; } ;
 
@@ -44,4 +47,6 @@ public:
 	std::vector<double> get_site_frac_coords() { return site_frac_coords; } ;
 
 	std::vector<Jump> get_jumps_from_here() { return jumps_from_here; } ;
+
+	std::vector<Jump> get_jumps_to_here() { return jumps_to_here; } ;
 };
