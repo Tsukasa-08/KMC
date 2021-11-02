@@ -606,8 +606,8 @@ int main()
 
 			//ジャンプ頻度を補正する
 			double fixed_jump_freq = jumps[i].get_freq() * exp(delta_E_mig/(kb*temperture));
-			cout << "jump_frep = " << jumps[i].get_freq() << endl;
-			cout << "fixed_jump_freq = " << fixed_jump_freq << endl;
+		//	cout << "jump_frep = " << jumps[i].get_freq() << endl;
+		//	cout << "fixed_jump_freq = " << fixed_jump_freq << endl;
 			jumps[i].set_freq(fixed_jump_freq);
 		}
 
@@ -630,7 +630,8 @@ int main()
 		sites[end_site_id_tmp-1].set_a_jump_jumps_to_here(jumps[i]);
 	}
 
-	//確認用
+
+/*	//確認用
 	for (int i = 0; i != sites.size(); i++) {
 		for (int j = 0; j != sites[i].get_jumps_from_here().size(); j++) {
 
@@ -652,7 +653,7 @@ int main()
 	}
 
 	return 0;
-	
+*/	
 
 
 	
@@ -836,36 +837,18 @@ int main()
 			else {
 
 				//jumps_possibleを更新する
-		
-				//jumps_impossible_tmpをjumps_possibleに追加する
-				for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
-					jumps_possible.push_back(jumps_impossible_tmp[i]);
-				}
 
-				//jumps_impossible_tmpを空にする
-				jumps_impossible_tmp.clear();
-				jumps_impossible_tmp.shrink_to_fit();
-			
 
-				//終点だったやつのジャンプを追加
-				vector<Jump> temp_jump_vector = sites[end_was-1].get_jumps_from_here();
-
-				for (int i = 0; i != temp_jump_vector.size(); i++) {
-					jumps_possible.push_back(temp_jump_vector[i]);
-				}
-
-				//始点だったやつのジャンプと、終点にプロトンがいるジャンプを削除
 				auto itr = jumps_possible.begin();
 				while (itr != jumps_possible.end()) {
 
-					//始点だったジャンプは削除
+					//start_wasからのjumpを削除
 					if ((*itr).get_start_site_id() == start_was) {
 						itr = jumps_possible.erase(itr);
 					}
 
-					//終点にプロトンがいるジャンプは一旦jumps_impossible_tmpに格納して削除
-					else if (vector_finder(Diffusionspecie::diffusion_siteid_now_list, (*itr).get_end_site_id())) {
-						jumps_impossible_tmp.push_back(*itr);
+					//end_wasに向かうjumpを削除
+					else if ((*itr).get_end_site_id() == end_was) {
 						itr = jumps_possible.erase(itr);
 					}
 
@@ -875,14 +858,41 @@ int main()
 					}
 				}
 
+				//start_wasに向かうjumpを追加
+				vector<Jump> temp_jump_vector_to_start = sites[start_was-1].get_jumps_to_here();
+
+				for (int i = 0; i != temp_jump_vector_to_start.size(); i++) {
+					//追加するjumpの始点にちゃんとプロトンがいれば追加
+					if (vector_finder(Diffusionspecie::diffusion_siteid_now_list, temp_jump_vector_to_start[i].get_start_site_id())) {
+						jumps_possible.push_back(temp_jump_vector_to_start[i]);
+					}
+				}
+
+				//end_wasからのjumpsを追加
+				vector<Jump> temp_jump_vector_from_end = sites[end_was-1].get_jumps_from_here();
+
+				for (int i = 0; i != temp_jump_vector_from_end.size(); i++) {
+					//追加するjumpの終点にプロトンがいない、かつ終点がstart_wasじゃなければ追加
+					if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, temp_jump_vector_from_end[i].get_end_site_id()) 
+						&&
+						temp_jump_vector_from_end[i].get_end_site_id() != start_was) {
+						jumps_possible.push_back(temp_jump_vector_from_end[i]);
+					}
+				}
+		
+
+			/*	//jumps_impossible_tmpをjumps_possibleに追加する
+				for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
+					jumps_possible.push_back(jumps_impossible_tmp[i]);
+				}
+
+				//jumps_impossible_tmpを空にする
+				jumps_impossible_tmp.clear();
+				jumps_impossible_tmp.shrink_to_fit();
+			*/
+			
 
 
-
-
-
-
-
-					
 
 				
 				
@@ -896,7 +906,7 @@ int main()
 				freq_sum += jumps_possible[i].get_freq();
 			}
 
-          /*//確認用
+          //確認用
 
 			cout << "\t" << "diffusion_siteid_now_list = " ;
 			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size(); i++) {
@@ -909,15 +919,15 @@ int main()
 				cout << "\t" << "\t" << "jumps_possible[" << i << "] = " << jumps_possible[i].get_freq() << endl;
 			}
 			cout << endl;
-			for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
+	/*		for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
 				cout << "\t" << "\t" << "start = " << jumps_impossible_tmp[i].get_start_site_id() ; 
 				cout << "\t" << "\t" << "end = " << jumps_impossible_tmp[i].get_end_site_id() ; 
 				cout << "\t" << "\t" << "jumps_impossible_tmp[" << i << "] = " << jumps_impossible_tmp[i].get_freq() << endl;
 			}
+*/
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
 
-*/
 
 			
 			
