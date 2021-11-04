@@ -243,9 +243,9 @@ int main()
 
 	//INPUTを読み込む
 	param::parameter param("INPUT");
-	int mcsp = param.get<int>("MCSP", 0);
+	long long mcsp = param.get<int>("MCSP", 0);
 	int average = param.get<int>("AVERAGE", 0);
-	int p_place_n = param.get<int>("NDIFFS", 0);
+	long long p_place_n = param.get<int>("NDIFFS", 0);
 	int E_field_yes = param.get<int>("EFIELDON", 0);
 	//double E_field_strength_for_pow = param.get<double>("EFIELD", 0);
 	double correct_constant_for_pow = param.get<double>("CORRECT", 0);
@@ -255,7 +255,7 @@ int main()
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
-	int loop_max = mcsp * p_place_n;
+	long long loop_max = mcsp * p_place_n;
 	double correct_constant = pow(10, correct_constant_for_pow);
 	//double E_field_strength = pow(10, E_field_strength_for_pow);
 	double E_field_strength = correct_constant * kb * temperture / (q_charge * 0.5 * distance_jump); //単位は[J/Å]
