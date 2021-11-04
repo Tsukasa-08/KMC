@@ -786,7 +786,7 @@ int main()
 		vector<Jump> jumps_impossible_tmp;
 
 		//cout << "\t" << "main loop start" << endl;
-		for (int loop_counter = 1; loop_counter <= loop_max; loop_counter++) { 			
+		for (long long loop_counter = 1; loop_counter <= loop_max; loop_counter++) { 			
 
 
 			//実行時間を計測する
