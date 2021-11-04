@@ -3,10 +3,6 @@
 #$ -V
 #$ -N NAME
 #$ -S /bin/zsh
-#$ -pe smp 40
+#$ -pe smp 1
 
-rm DiffusionCoefficient
-rm ElectricalConductivity
-rm log
-rm sigma_log
-./test_kmc_test  > dev/null
+./test_kmc_test  >& log_cout
