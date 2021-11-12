@@ -1,0 +1,13 @@
+KMC 1 times
+total_time t = 6.870107e-11 [s]
+mean_displacement <x> = 1.915104e-02 [Å]
+mean_displacement <y> = -2.530076e-03 [Å]
+mean_displacement <z> = -6.325189e-04 [Å]
+concentration c = 3.897569e-03 [/Å^3]
+Efield_direction = x
+Efield_strength = 6.893867e-03 [V/Å]
+Efield_strength = 6.893867e+05 [V/cm]
+Sigma_xx = 2.079428e+01 [S/cm]
+Sigma_xy = -2.747167e+00 [S/cm]
+Sigma_xz = -6.867917e-01 [S/cm]
+

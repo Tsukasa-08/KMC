@@ -1123,6 +1123,10 @@ int main()
 		Eigen::Vector3d displacement_vector;
 		displacement_vector = transcoords(jump_total_all,lattice_matrix);
 
+		//transcoords関数でaverage_displacementを分率座標からcartesian座標に直す
+		Eigen::Vector3d average_displacement_eigen;
+		average_displacement_eigen = transcoords(average_displacement, lattice_matrix);
+
 
 		//電場ありの場合、伝導度テンソルを出力
 		vector<double> Sigma_x(3,0.0);
@@ -1133,7 +1137,7 @@ int main()
 		
 			for (int j = 0; j != Sigma_x.size(); j++) {
 				
-				Sigma_x[j] = displacement_vector[j];
+				Sigma_x[j] = average_displacement_eigen[j];
 				Sigma_x[j] *= q_charge * concentration / (E_field_strength * total_time);
 				Sigma_x[j] *= pow(10,8); //Å^-1をcm^-1に変換
 				//cout << "Sigma_x[" << j << "]  [S/cm] = " << Sigma_x[j] << endl;
