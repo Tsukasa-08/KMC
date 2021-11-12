@@ -1204,9 +1204,9 @@ int main()
 		ofstream ofs_output("OUTPUT", ios::app);
 		ofs_output << "KMC " << step_counter << " times" << endl;
 		ofs_output << "total_time t = " << scientific << total_time << " [s]" << endl;
-		ofs_output << "mean_displacement <x> = " << average_displacement[0]  << " [Å]" << endl;
-		ofs_output << "mean_displacement <y> = " << average_displacement[1]  << " [Å]" << endl;
-		ofs_output << "mean_displacement <z> = " << average_displacement[2]  << " [Å]" << endl;
+		ofs_output << "mean_displacement <x> = " << average_displacement_eigen[0]  << " [Å]" << endl;
+		ofs_output << "mean_displacement <y> = " << average_displacement_eigen[1]  << " [Å]" << endl;
+		ofs_output << "mean_displacement <z> = " << average_displacement_eigen[2]  << " [Å]" << endl;
 		ofs_output << "concentration c = " << diffusion_species.size()/lattice_matrix.determinant() <<  " [/Å^3]" << endl;
 		if (E_field_yes) {
 			ofs_output << "Efield_direction = " << axis << endl;
