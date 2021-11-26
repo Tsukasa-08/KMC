@@ -786,6 +786,9 @@ int main()
 		vector<Jump> jumps_impossible_tmp;
 
 		//cout << "\t" << "main loop start" << endl;
+		cout << "\t" << "loop processing…" << endl;
+		cout << "*" ;
+		string processing;
 		for (long long loop_counter = 1; loop_counter <= loop_max; loop_counter++) { 			
 
 
@@ -799,6 +802,14 @@ int main()
 			//確認用
 			//cout << endl;
 			//cout << "\t" << "loop_counter = " << loop_counter << endl;
+			
+			if (loop_counter % (loop_max/10) == 0) {
+				processing += "#";
+				cout  << processing << endl;
+				if (loop_counter == loop_max ) {
+					cout << endl;
+				}
+			}
 			
 
 
@@ -1046,6 +1057,8 @@ int main()
 
 	//		auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
 			//cout << "\t" << msec << " msec" << endl;
+
+
 			
 
 
@@ -1054,7 +1067,7 @@ int main()
 		}
 
 		//ループ終了後
-		//cout << "\t" << "loop_counter finished" << endl;
+		cout << "\t" << "loop_counter finished" << endl;
 		//cout << endl;
 		
 		cout << "\t" << "total_time = " << scientific << total_time << defaultfloat << endl;
