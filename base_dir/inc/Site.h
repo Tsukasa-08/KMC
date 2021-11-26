@@ -11,6 +11,7 @@ private:
 	std::vector<double> site_frac_coords;
 	std::vector<Jump> jumps_from_here;
 	std::vector<Jump> jumps_to_here;
+	std::set<int> blocking_mate_list;
 
 public:
 	
@@ -37,6 +38,8 @@ public:
 
 	void set_a_jump_jumps_to_here(Jump here) { jumps_to_here.push_back(here) ; } ;
 
+	void set_blocking_mate_list(std::set<int> st) { blocking_mate_list = st ; } ;
+
 	//ゲッタ
 	int get_site_id() { return site_id; } ;
 
@@ -49,4 +52,6 @@ public:
 	std::vector<Jump> get_jumps_from_here() { return jumps_from_here; } ;
 
 	std::vector<Jump> get_jumps_to_here() { return jumps_to_here; } ;
+
+	std::set<int> get_blocking_mate_list() { return blocking_mate_list; } ;
 };

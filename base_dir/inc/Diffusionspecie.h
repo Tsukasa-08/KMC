@@ -15,6 +15,7 @@ private:
 public:
 	int diffusion_counter;
 	static std::vector<int> diffusion_siteid_now_list;
+	static std::set<int> blocking_list;
 
 	Diffusionspecie() : diffusion_id(-1), jump_total(3,0.0) {
 	};

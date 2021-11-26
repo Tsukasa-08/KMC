@@ -12,6 +12,7 @@
 #include <Eigen/LU>
 #include <Eigen/Dense>
 #include <regex>
+#include <set>
 
 #include "Site.h"
 //#include "Jump.h"
@@ -32,6 +33,7 @@ private:
 	std::vector<double> site_frac_coords;
 	std::vector<Jump> jumps_from_here;
 	std::vector<Jump> jumps_to_here;
+	std::set<int> blocking_mate_list;
 
 public:
 	
@@ -58,6 +60,8 @@ public:
 
 	void set_a_jump_jumps_to_here(Jump here) { jumps_to_here.push_back(here) ; } ;
 
+	void set_blocking_mate_list(std::set<int> st) { blocking_mate_list = st ; } ;
+
 	//ゲッタ
 	int get_site_id() { return site_id; } ;
 
@@ -70,6 +74,8 @@ public:
 	std::vector<Jump> get_jumps_from_here() { return jumps_from_here; } ;
 
 	std::vector<Jump> get_jumps_to_here() { return jumps_to_here; } ;
+
+	std::set<int> get_blocking_mate_list() { return blocking_mate_list; } ;
 };
 
 
@@ -128,6 +134,7 @@ private:
 	int diffusion_siteid_now;
 	vector<double> jump_total;
 	static std::vector<int> diffusion_siteid_now_list;
+	static std::set<int> blocking_list;
 
 public:
 	int diffusion_counter;
@@ -252,6 +259,7 @@ int main()
 	double temperture = param.get<double>("TEMP", 0);
 	int E_field_axis = param.get<int>("AXIS", 1);
 	double distance_jump = param.get<double>("DISTANCEJUMP", 1); //単位は[Å]
+	int blocking_yes = param.get<int>("BLOCKING", 0);
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
@@ -474,7 +482,56 @@ int main()
 	}
 */
 
+	//blocking_list.csvを読み込む
+	ifstream for_line3("blocking_list.csv");
 
+	//読み込めたか確認用
+	if (!for_line3) {
+		cerr << "Could not find file blocking_list.csv" << endl;
+		abort();
+	}
+
+	int csv_total_number;
+	string for_line_reader3;
+	while (getline(for_line3,for_line_reader3)) {
+
+		csv_total_number++;
+	}
+
+	cout << "blocking_list.csv read" << endl;
+	cout << endl;
+
+
+	ifstream ifs3("blocking_list.csv");
+	vector< set<int> > blocking_list_csv(csv_total_number);
+	n_lines = 0;
+	while (getline(ifs3, line)){
+
+
+		vector<string> strvec = split(line, ',');
+
+		for (int i = 0; i != strvec.size(); i++){
+			blocking_list_csv[n_lines].insert(stoi(strvec[i]));
+		}
+
+
+	//	cout << "jumps[" << n_lines << "].freq = " << jumps[n_lines].get_freq() << endl;
+		
+		n_lines += 1;
+	}	
+
+/*	//csv確認用
+	for (auto itr = blocking_list_csv.begin(); itr != blocking_list_csv.end(); itr++) {
+		for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
+			cout << *itr2 << "," ;
+		}
+		cout << endl;
+	}
+
+*/
+
+	
+	
 
 
 
