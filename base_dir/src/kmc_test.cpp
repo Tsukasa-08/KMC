@@ -12,7 +12,6 @@
 #include <Eigen/LU>
 #include <Eigen/Dense>
 #include <regex>
-#include <set>
 
 #include "Site.h"
 //#include "Jump.h"
@@ -33,7 +32,7 @@ private:
 	std::vector<double> site_frac_coords;
 	std::vector<Jump> jumps_from_here;
 	std::vector<Jump> jumps_to_here;
-	std::set<int> blocking_mate_list;
+	std::vector<int> blocking_mate_list;
 
 public:
 	
@@ -60,7 +59,7 @@ public:
 
 	void set_a_jump_jumps_to_here(Jump here) { jumps_to_here.push_back(here) ; } ;
 
-	void set_blocking_mate_list(std::set<int> st) { blocking_mate_list = st ; } ;
+	void set_blocking_mate_list(std::vector<int> st) { blocking_mate_list = st ; } ;
 
 	//ゲッタ
 	int get_site_id() { return site_id; } ;
@@ -75,7 +74,7 @@ public:
 
 	std::vector<Jump> get_jumps_to_here() { return jumps_to_here; } ;
 
-	std::set<int> get_blocking_mate_list() { return blocking_mate_list; } ;
+	std::vector<int> get_blocking_mate_list() { return blocking_mate_list; } ;
 };
 
 
@@ -134,7 +133,7 @@ private:
 	int diffusion_siteid_now;
 	vector<double> jump_total;
 	static std::vector<int> diffusion_siteid_now_list;
-	static std::set<int> blocking_list;
+	static std::vector<int> blocking_list;
 
 public:
 	int diffusion_counter;
@@ -287,6 +286,7 @@ int main()
 	cout << "\t" << "温度 TEMP = " << temperture << endl;
 	cout << "\t" << "ジャンプ頻度補正係数 correct_constant = " << correct_constant << endl;
 	cout << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
+	cout << "\t" << "ブロックリスト = " << blocking_yes << " (1=あり、0=なし)"<< endl;
 	cout << endl;
 
 	
@@ -483,27 +483,30 @@ int main()
 */
 
 	//blocking_list.csvを読み込む
-	ifstream for_line3("blocking_list.csv");
+	int csv_total_number = 0;
+	if (blocking_yes) {
+		ifstream for_line3("blocking_list.csv");
 
-	//読み込めたか確認用
-	if (!for_line3) {
-		cerr << "Could not find file blocking_list.csv" << endl;
-		abort();
+		//読み込めたか確認用
+		if (!for_line3) {
+			cerr << "Could not find file blocking_list.csv" << endl;
+			abort();
+		}
+
+		string for_line_reader3;
+		while (getline(for_line3,for_line_reader3)) {
+
+			csv_total_number++;
+		}
+
+		cout << "blocking_list.csv read" << endl;
+		cout << endl;
 	}
 
-	int csv_total_number;
-	string for_line_reader3;
-	while (getline(for_line3,for_line_reader3)) {
+	vector< vector<int> > blocking_list_csv(csv_total_number);
 
-		csv_total_number++;
-	}
-
-	cout << "blocking_list.csv read" << endl;
-	cout << endl;
-
-
+	if (blocking_yes) {
 	ifstream ifs3("blocking_list.csv");
-	vector< set<int> > blocking_list_csv(csv_total_number);
 	n_lines = 0;
 	while (getline(ifs3, line)){
 
@@ -511,7 +514,7 @@ int main()
 		vector<string> strvec = split(line, ',');
 
 		for (int i = 0; i != strvec.size(); i++){
-			blocking_list_csv[n_lines].insert(stoi(strvec[i]));
+			blocking_list_csv[n_lines].push_back(stoi(strvec[i]));
 		}
 
 
@@ -538,19 +541,21 @@ int main()
 		}
 	}
 
-/*	//mateがSitesに属しているか確認用
+	/*//mateがSitesに属しているか確認用
 	for (int i = 0; i != sites.size(); i++) {
 		cout << "sites " << sites[i].get_site_id() << "のmate一覧" << endl;
-		set<int> mate_tmp = sites[i].get_blocking_mate_list();
+		vector<int> mate_tmp = sites[i].get_blocking_mate_list();
 	
 		for (auto itr = mate_tmp.begin() ; itr != mate_tmp.end() ; itr++) {
 			cout << '\t' << *itr << endl;
 		}	
 
 	}
+	*/
+
+	}
 		
-	return 0;
-*/	
+	
 
 
 
@@ -593,8 +598,8 @@ int main()
 			}
 
 
-		}
 		//cout << "jump_vector_tmp[" << k << "] = " << jump_vector_tmp[k] << endl;
+		}
 		
 
 		//jump_vector_tmpをjump_vectorに代入する
@@ -613,7 +618,7 @@ int main()
 
 	}
 
-/*	//ジャンプがSitesに属しているか確認用
+/*//ジャンプがSitesに属しているか確認用
 	for (int i = 0; i != sites.size(); i++) {
 		cout << "sites[" << i << "]のjump一覧" << endl;
 	
@@ -629,7 +634,8 @@ int main()
 		}	
 
 	}
-*/
+	*/
+
 
 
 
@@ -729,7 +735,7 @@ int main()
 	}
 
 	return 0;
-*/	
+	*/
 
 
 	
@@ -772,26 +778,35 @@ int main()
 		//cout << "NDIFFS = " << p_place_n << endl;
 
 		//次に、どのサイトにプロトンを配置するかを決める
-		//(サイトの数-1)を要素にもつvectorを生成
-		vector<int> random_proton_place_number_vector(site_total_number-1, 0.0);
-		for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
-			random_proton_place_number_vector[i] = i + 1;
+		vector<int> random_proton_place_number_vector;
+		//blockingありの場合
+		if (blocking_yes) {
 		}
 
-		//乱数を生成し、vectorをシャッフルする
-		shuffle( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end(), mt );
+		//blockingなしの場合
+		else {
+			cout << "blockingなし" << endl;
+			//(サイトの数-1)を要素にもつvectorを生成
+			random_proton_place_number_vector.resize(site_total_number-1);
+			for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
+				random_proton_place_number_vector[i] = i + 1;
+			}
+
+			//乱数を生成し、vectorをシャッフルする
+			shuffle( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end(), mt );
+			
+
+			//先頭からプロトンを配置する数分(p_place_n)だけ抜き出しソートする
+			random_proton_place_number_vector.resize(p_place_n);
+			sort( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end() );
+
+	/*		//確認用
+			for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
+				cout << "random_proton_place_number_vector[" << i << "] = " << random_proton_place_number_vector[i] << endl;
+			}
 		
-
-		//先頭からプロトンを配置する数分(p_place_n)だけ抜き出しソートする
-		random_proton_place_number_vector.resize(p_place_n);
-		sort( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end() );
-
-	/*	//確認用
-		for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
-			cout << "random_proton_place_number_vector[" << i << "] = " << random_proton_place_number_vector[i] << endl;
+*/
 		}
-	*/	
-
 
 		//Diffusionspecieクラスのvectorをつくる(数はプロトン配置数=p_place_n)
 		vector<Diffusionspecie> diffusion_species(p_place_n);
@@ -827,6 +842,8 @@ int main()
 				}
 			}
 		}
+
+
 
 
 	//	if ( d_id != p_place_n+1 )
@@ -993,7 +1010,7 @@ int main()
 				freq_sum += jumps_possible[i].get_freq();
 			}
 
-        /*  //確認用
+/*          //確認用
 
 			cout << "\t" << "diffusion_siteid_now_list = " ;
 			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size(); i++) {
@@ -1006,15 +1023,11 @@ int main()
 				cout << "\t" << "\t" << "jumps_possible[" << i << "] = " << jumps_possible[i].get_freq() << endl;
 			}
 			cout << endl;
-		for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
-				cout << "\t" << "\t" << "start = " << jumps_impossible_tmp[i].get_start_site_id() ; 
-				cout << "\t" << "\t" << "end = " << jumps_impossible_tmp[i].get_end_site_id() ; 
-				cout << "\t" << "\t" << "jumps_impossible_tmp[" << i << "] = " << jumps_impossible_tmp[i].get_freq() << endl;
-			}
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
 
 */
+
 
 			
 			
@@ -1048,6 +1061,7 @@ int main()
 
 
 
+			
 			//実際にイベントを起こす
 			int jumps_start_id = jumps_possible[jump_happen_number].get_start_site_id();
 			int jumps_end_id = jumps_possible[jump_happen_number].get_end_site_id();
@@ -1134,6 +1148,7 @@ int main()
 	//		auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
 			//cout << "\t" << msec << " msec" << endl;
 
+			//cout << "loop_counter " << loop_counter << " finished" << endl;
 
 			
 
