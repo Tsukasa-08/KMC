@@ -779,8 +779,20 @@ int main()
 
 		//次に、どのサイトにプロトンを配置するかを決める
 		vector<int> random_proton_place_number_vector;
+
 		//blockingありの場合
 		if (blocking_yes) {
+			cout << "blockingあり" << endl;
+
+			//乱数を生成し、blocking_list_csv(vector<vector<int>>)をシャッフルする
+			shuffle( blocking_list_csv.begin(), blocking_list_csv.end(), mt );
+			
+			//先頭から抽出する
+			for (int i = 0; i != p_place_n; i++) {
+				shuffle ( blocking_list_csv[i].begin(), blocking_list_csv[i].end(), mt);
+				random_proton_place_number_vector.push_back(blocking_list_csv[i][0]);
+			}
+
 		}
 
 		//blockingなしの場合
@@ -800,13 +812,15 @@ int main()
 			random_proton_place_number_vector.resize(p_place_n);
 			sort( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end() );
 
-	/*		//確認用
-			for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
-				cout << "random_proton_place_number_vector[" << i << "] = " << random_proton_place_number_vector[i] << endl;
-			}
-		
-*/
 		}
+
+		//確認用
+		for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
+			cout << "random_proton_place_number_vector[" << i << "] = " << random_proton_place_number_vector[i] << endl;
+		}
+
+		return 0;
+		
 
 		//Diffusionspecieクラスのvectorをつくる(数はプロトン配置数=p_place_n)
 		vector<Diffusionspecie> diffusion_species(p_place_n);

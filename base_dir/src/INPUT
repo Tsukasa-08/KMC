@@ -28,4 +28,4 @@ TEMP=600
 AXIS=1
 
 #blocking_listのありなし
-BLOCKING=0
+BLOCKING=1
