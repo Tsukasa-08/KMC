@@ -531,7 +531,26 @@ int main()
 */
 
 	
+	//blocking_list_csvをもとに、各Siteのblocking_mate_listに追加していく
+	for (auto itr = blocking_list_csv.begin(); itr != blocking_list_csv.end(); itr++) {
+		for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
+			sites[*itr2-1].set_blocking_mate_list(*itr);
+		}
+	}
+
+/*	//mateがSitesに属しているか確認用
+	for (int i = 0; i != sites.size(); i++) {
+		cout << "sites " << sites[i].get_site_id() << "のmate一覧" << endl;
+		set<int> mate_tmp = sites[i].get_blocking_mate_list();
 	
+		for (auto itr = mate_tmp.begin() ; itr != mate_tmp.end() ; itr++) {
+			cout << '\t' << *itr << endl;
+		}	
+
+	}
+		
+	return 0;
+*/	
 
 
 
@@ -762,6 +781,7 @@ int main()
 		//乱数を生成し、vectorをシャッフルする
 		shuffle( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end(), mt );
 		
+
 		//先頭からプロトンを配置する数分(p_place_n)だけ抜き出しソートする
 		random_proton_place_number_vector.resize(p_place_n);
 		sort( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end() );
@@ -844,7 +864,6 @@ int main()
 
 		//cout << "\t" << "main loop start" << endl;
 		cout << "\t" << "loop processing…" << endl;
-		cout << "*" ;
 		string processing;
 		for (long long loop_counter = 1; loop_counter <= loop_max; loop_counter++) { 			
 

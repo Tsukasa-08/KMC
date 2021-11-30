@@ -31,15 +31,17 @@ blocking_list = []
 for i in O_sites_index :
     list_proton_site = []
     #酸素イオンから距離2Å以下のプロトンサイトを抜き出し、
-    #プロトンサイトのみのPOSCARにしたときのindexを記録する
+    #プロトンサイトのみのPOSCARにしたときのindexを記録する、indexは1から始まることに注意
     for proton_site in structure.get_neighbors(structure[i], 2):
-        list_proton_site.append(proton_site[2]-proton_start_number)
+        list_proton_site.append(proton_site[2]-proton_start_number+1)
     blocking_list.append(list_proton_site)
 
 #csv形式のファイルを開き、出力する
 with open("blocking_list.csv", "w") as f:
     writer = csv.writer(f)
     writer.writerows(blocking_list)
+
+print("indexは1から始まっていることに注意してください")
 
 
 
