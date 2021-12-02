@@ -1,9 +1,9 @@
 INPUTファイルを読み込み
-	1粒子あたり平均何回イベントを起こすか MCSP =100
-	平均をとる粒子の個数 AVERAGE = 216
+	1粒子あたり平均何回イベントを起こすか MCSP =10
+	平均をとる粒子の個数 AVERAGE = 3
 	KMCのステップ数(何回行うか) NSTEPS =1
-	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =21600
-	拡散種をいくつ配置するか NDIFFS = 216
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =30
+	拡散種をいくつ配置するか NDIFFS = 3
 	電場の強さ EFIELD = 6.893867e-03 [V/Å] 
 	電場の強さ EFIELD = 6.893867e+05 [V/cm] 
 	温度 TEMP = 600
@@ -28,220 +28,651 @@ blocking_list.csv read
 E_field_vector = 0.00689387
          0
          0
-blockingあり
-random_proton_place_number_vector[0] = 5300
-random_proton_place_number_vector[1] = 1634
-random_proton_place_number_vector[2] = 1903
-random_proton_place_number_vector[3] = 5
-random_proton_place_number_vector[4] = 4988
-random_proton_place_number_vector[5] = 2476
-random_proton_place_number_vector[6] = 4357
-random_proton_place_number_vector[7] = 7739
-random_proton_place_number_vector[8] = 1409
-random_proton_place_number_vector[9] = 3058
-random_proton_place_number_vector[10] = 378
-random_proton_place_number_vector[11] = 1163
-random_proton_place_number_vector[12] = 4260
-random_proton_place_number_vector[13] = 2167
-random_proton_place_number_vector[14] = 514
-random_proton_place_number_vector[15] = 3190
-random_proton_place_number_vector[16] = 8255
-random_proton_place_number_vector[17] = 4335
-random_proton_place_number_vector[18] = 7407
-random_proton_place_number_vector[19] = 67
-random_proton_place_number_vector[20] = 1368
-random_proton_place_number_vector[21] = 8656
-random_proton_place_number_vector[22] = 5250
-random_proton_place_number_vector[23] = 1559
-random_proton_place_number_vector[24] = 5663
-random_proton_place_number_vector[25] = 51
-random_proton_place_number_vector[26] = 8097
-random_proton_place_number_vector[27] = 1822
-random_proton_place_number_vector[28] = 2573
-random_proton_place_number_vector[29] = 2050
-random_proton_place_number_vector[30] = 6957
-random_proton_place_number_vector[31] = 7171
-random_proton_place_number_vector[32] = 6351
-random_proton_place_number_vector[33] = 1853
-random_proton_place_number_vector[34] = 8443
-random_proton_place_number_vector[35] = 1708
-random_proton_place_number_vector[36] = 5135
-random_proton_place_number_vector[37] = 7967
-random_proton_place_number_vector[38] = 2337
-random_proton_place_number_vector[39] = 7226
-random_proton_place_number_vector[40] = 6869
-random_proton_place_number_vector[41] = 7242
-random_proton_place_number_vector[42] = 4409
-random_proton_place_number_vector[43] = 4583
-random_proton_place_number_vector[44] = 7763
-random_proton_place_number_vector[45] = 2668
-random_proton_place_number_vector[46] = 5306
-random_proton_place_number_vector[47] = 5313
-random_proton_place_number_vector[48] = 5756
-random_proton_place_number_vector[49] = 3227
-random_proton_place_number_vector[50] = 7151
-random_proton_place_number_vector[51] = 1369
-random_proton_place_number_vector[52] = 6233
-random_proton_place_number_vector[53] = 4825
-random_proton_place_number_vector[54] = 2514
-random_proton_place_number_vector[55] = 6984
-random_proton_place_number_vector[56] = 1882
-random_proton_place_number_vector[57] = 7907
-random_proton_place_number_vector[58] = 4
-random_proton_place_number_vector[59] = 2903
-random_proton_place_number_vector[60] = 3915
-random_proton_place_number_vector[61] = 2172
-random_proton_place_number_vector[62] = 7415
-random_proton_place_number_vector[63] = 5786
-random_proton_place_number_vector[64] = 7020
-random_proton_place_number_vector[65] = 6485
-random_proton_place_number_vector[66] = 8568
-random_proton_place_number_vector[67] = 6000
-random_proton_place_number_vector[68] = 5229
-random_proton_place_number_vector[69] = 2725
-random_proton_place_number_vector[70] = 7086
-random_proton_place_number_vector[71] = 2471
-random_proton_place_number_vector[72] = 3602
-random_proton_place_number_vector[73] = 6415
-random_proton_place_number_vector[74] = 3339
-random_proton_place_number_vector[75] = 3704
-random_proton_place_number_vector[76] = 2599
-random_proton_place_number_vector[77] = 1918
-random_proton_place_number_vector[78] = 6591
-random_proton_place_number_vector[79] = 7168
-random_proton_place_number_vector[80] = 2178
-random_proton_place_number_vector[81] = 8033
-random_proton_place_number_vector[82] = 4950
-random_proton_place_number_vector[83] = 3002
-random_proton_place_number_vector[84] = 697
-random_proton_place_number_vector[85] = 995
-random_proton_place_number_vector[86] = 5995
-random_proton_place_number_vector[87] = 8508
-random_proton_place_number_vector[88] = 6262
-random_proton_place_number_vector[89] = 736
-random_proton_place_number_vector[90] = 6030
-random_proton_place_number_vector[91] = 2442
-random_proton_place_number_vector[92] = 7021
-random_proton_place_number_vector[93] = 8338
-random_proton_place_number_vector[94] = 2461
-random_proton_place_number_vector[95] = 8251
-random_proton_place_number_vector[96] = 5296
-random_proton_place_number_vector[97] = 5259
-random_proton_place_number_vector[98] = 3477
-random_proton_place_number_vector[99] = 1939
-random_proton_place_number_vector[100] = 2700
-random_proton_place_number_vector[101] = 2026
-random_proton_place_number_vector[102] = 8580
-random_proton_place_number_vector[103] = 1468
-random_proton_place_number_vector[104] = 4475
-random_proton_place_number_vector[105] = 4998
-random_proton_place_number_vector[106] = 5075
-random_proton_place_number_vector[107] = 6236
-random_proton_place_number_vector[108] = 5678
-random_proton_place_number_vector[109] = 2098
-random_proton_place_number_vector[110] = 4753
-random_proton_place_number_vector[111] = 6936
-random_proton_place_number_vector[112] = 1108
-random_proton_place_number_vector[113] = 1012
-random_proton_place_number_vector[114] = 530
-random_proton_place_number_vector[115] = 8696
-random_proton_place_number_vector[116] = 6038
-random_proton_place_number_vector[117] = 4504
-random_proton_place_number_vector[118] = 8298
-random_proton_place_number_vector[119] = 2081
-random_proton_place_number_vector[120] = 1484
-random_proton_place_number_vector[121] = 2030
-random_proton_place_number_vector[122] = 1501
-random_proton_place_number_vector[123] = 8164
-random_proton_place_number_vector[124] = 2115
-random_proton_place_number_vector[125] = 5544
-random_proton_place_number_vector[126] = 7955
-random_proton_place_number_vector[127] = 1521
-random_proton_place_number_vector[128] = 834
-random_proton_place_number_vector[129] = 791
-random_proton_place_number_vector[130] = 4399
-random_proton_place_number_vector[131] = 958
-random_proton_place_number_vector[132] = 2062
-random_proton_place_number_vector[133] = 3144
-random_proton_place_number_vector[134] = 6689
-random_proton_place_number_vector[135] = 1175
-random_proton_place_number_vector[136] = 1817
-random_proton_place_number_vector[137] = 5147
-random_proton_place_number_vector[138] = 8008
-random_proton_place_number_vector[139] = 1048
-random_proton_place_number_vector[140] = 6806
-random_proton_place_number_vector[141] = 5979
-random_proton_place_number_vector[142] = 3460
-random_proton_place_number_vector[143] = 6431
-random_proton_place_number_vector[144] = 4961
-random_proton_place_number_vector[145] = 1411
-random_proton_place_number_vector[146] = 872
-random_proton_place_number_vector[147] = 7897
-random_proton_place_number_vector[148] = 4613
-random_proton_place_number_vector[149] = 731
-random_proton_place_number_vector[150] = 3956
-random_proton_place_number_vector[151] = 5539
-random_proton_place_number_vector[152] = 1419
-random_proton_place_number_vector[153] = 3071
-random_proton_place_number_vector[154] = 1142
-random_proton_place_number_vector[155] = 2879
-random_proton_place_number_vector[156] = 3830
-random_proton_place_number_vector[157] = 7570
-random_proton_place_number_vector[158] = 6960
-random_proton_place_number_vector[159] = 2532
-random_proton_place_number_vector[160] = 3542
-random_proton_place_number_vector[161] = 8433
-random_proton_place_number_vector[162] = 5160
-random_proton_place_number_vector[163] = 4752
-random_proton_place_number_vector[164] = 6675
-random_proton_place_number_vector[165] = 1076
-random_proton_place_number_vector[166] = 4976
-random_proton_place_number_vector[167] = 5712
-random_proton_place_number_vector[168] = 1219
-random_proton_place_number_vector[169] = 4882
-random_proton_place_number_vector[170] = 561
-random_proton_place_number_vector[171] = 4875
-random_proton_place_number_vector[172] = 2009
-random_proton_place_number_vector[173] = 2252
-random_proton_place_number_vector[174] = 7655
-random_proton_place_number_vector[175] = 7554
-random_proton_place_number_vector[176] = 3038
-random_proton_place_number_vector[177] = 5905
-random_proton_place_number_vector[178] = 479
-random_proton_place_number_vector[179] = 3930
-random_proton_place_number_vector[180] = 8414
-random_proton_place_number_vector[181] = 3638
-random_proton_place_number_vector[182] = 1914
-random_proton_place_number_vector[183] = 8623
-random_proton_place_number_vector[184] = 8494
-random_proton_place_number_vector[185] = 2876
-random_proton_place_number_vector[186] = 61
-random_proton_place_number_vector[187] = 499
-random_proton_place_number_vector[188] = 6697
-random_proton_place_number_vector[189] = 4589
-random_proton_place_number_vector[190] = 7618
-random_proton_place_number_vector[191] = 6808
-random_proton_place_number_vector[192] = 7551
-random_proton_place_number_vector[193] = 5303
-random_proton_place_number_vector[194] = 971
-random_proton_place_number_vector[195] = 2604
-random_proton_place_number_vector[196] = 7502
-random_proton_place_number_vector[197] = 5737
-random_proton_place_number_vector[198] = 5841
-random_proton_place_number_vector[199] = 6927
-random_proton_place_number_vector[200] = 4458
-random_proton_place_number_vector[201] = 3016
-random_proton_place_number_vector[202] = 5861
-random_proton_place_number_vector[203] = 4374
-random_proton_place_number_vector[204] = 7590
-random_proton_place_number_vector[205] = 6393
-random_proton_place_number_vector[206] = 712
-random_proton_place_number_vector[207] = 4439
-random_proton_place_number_vector[208] = 6394
-random_proton_place_number_vector[209] = 6499
-random_proton_place_number_vector[210] = 5442
-random_proton_place_number_vector[211] = 1636
-random_proton_place_number_vector[212] = 5053
-random_proton_place_number_vector[213] = 3389
-random_proton_place_number_vector[214] = 4227
-random_proton_place_number_vector[215] = 2255
+
+
+	loop processing…
+	diffusion_siteid_now_list = 	1	82	109
+blocking_list = 1,82,109,136,219,898,973,1054,1081,8281,8362,8389,
+		start = 1		end = 973		jumps_possible[0] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[1] = 3.4986e+11
+		start = 82		end = 1054		jumps_possible[2] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[3] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[4] = 1.72215e+11
+		start = 109		end = 1081		jumps_possible[5] = 3.98309e+11
+		start = 109		end = 8389		jumps_possible[6] = 3.4986e+11
+		start = 109		end = 244		jumps_possible[7] = 2.5355e+11
+
+		freq_sum = 2.5387e+12
+	start_was = 109
+	start_was_mate_list = 8389,109,1081,136,
+	end_was = 8389
+	end_was_mate_list = 8389,109,1081,136,
+	rotation happend
+	diffusion_siteid_now_list = 	1	82	8389
+blocking_list = 1,82,109,136,219,898,973,1054,1081,8281,8362,8389,
+		start = 1		end = 973		jumps_possible[0] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[1] = 3.4986e+11
+		start = 82		end = 1054		jumps_possible[2] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[3] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[4] = 1.72215e+11
+		start = 8389		end = 109		jumps_possible[5] = 3.98309e+11
+		start = 8389		end = 136		jumps_possible[6] = 8.47709e+10
+		start = 8389		end = 7498		jumps_possible[7] = 2.3491e+11
+		start = 8389		end = 7579		jumps_possible[8] = 2.74776e+09
+
+		freq_sum = 2.25772e+12
+	start_was = 1
+	start_was_mate_list = 8281,898,973,1,
+	end_was = 8281
+	end_was_mate_list = 8281,898,973,1,
+#
+	rotation happend
+	diffusion_siteid_now_list = 	8281	82	8389
+blocking_list = 1,82,109,136,219,898,973,1054,1081,8281,8362,8389,
+		start = 82		end = 1054		jumps_possible[0] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[1] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[2] = 1.72215e+11
+		start = 8389		end = 109		jumps_possible[3] = 3.98309e+11
+		start = 8389		end = 136		jumps_possible[4] = 8.47709e+10
+		start = 8389		end = 7498		jumps_possible[5] = 2.3491e+11
+		start = 8389		end = 7579		jumps_possible[6] = 2.74776e+09
+		start = 8281		end = 1		jumps_possible[7] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[8] = 8.47709e+10
+		start = 8281		end = 7309		jumps_possible[9] = 2.74776e+09
+		start = 8281		end = 7336		jumps_possible[10] = 2.3491e+11
+
+		freq_sum = 2.23029e+12
+	start_was = 8389
+	start_was_mate_list = 8389,109,1081,136,
+	end_was = 7498
+	end_was_mate_list = 8233,7336,7498,7363,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	8281	82	7498
+blocking_list = 1,82,219,898,973,1054,7336,7363,7498,8233,8281,8362,
+		start = 82		end = 1054		jumps_possible[0] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[1] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[2] = 1.72215e+11
+		start = 8281		end = 1		jumps_possible[3] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[4] = 8.47709e+10
+		start = 8281		end = 7309		jumps_possible[5] = 2.74776e+09
+		start = 8281		end = 7336		jumps_possible[6] = 2.3491e+11
+		start = 7498		end = 7336		jumps_possible[7] = 3.07653e+11
+		start = 7498		end = 7363		jumps_possible[8] = 2.12827e+12
+		start = 7498		end = 6931		jumps_possible[9] = 1.59554e+11
+		start = 7498		end = 8389		jumps_possible[10] = 4.02921e+11
+
+		freq_sum = 4.50795e+12
+	start_was = 7498
+	start_was_mate_list = 8233,7336,7498,7363,
+	end_was = 7363
+	end_was_mate_list = 8233,7336,7498,7363,
+	rotation happend
+	diffusion_siteid_now_list = 	8281	82	7363
+blocking_list = 1,82,219,898,973,1054,7336,7363,7498,8233,8281,8362,
+		start = 82		end = 1054		jumps_possible[0] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[1] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[2] = 1.72215e+11
+		start = 8281		end = 1		jumps_possible[3] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[4] = 8.47709e+10
+		start = 8281		end = 7309		jumps_possible[5] = 2.74776e+09
+		start = 8281		end = 7336		jumps_possible[6] = 2.3491e+11
+		start = 7363		end = 7498		jumps_possible[7] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[8] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[9] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[10] = 1.5041e+10
+
+		freq_sum = 2.1071e+12
+	start_was = 8281
+	start_was_mate_list = 8281,898,973,1,
+	end_was = 898
+	end_was_mate_list = 8281,898,973,1,
+##
+	rotation happend
+	diffusion_siteid_now_list = 	898	82	7363
+blocking_list = 1,82,219,898,973,1054,7336,7363,7498,8233,8281,8362,
+		start = 82		end = 1054		jumps_possible[0] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[1] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[2] = 1.72215e+11
+		start = 7363		end = 7498		jumps_possible[3] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[4] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[5] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[6] = 1.5041e+10
+		start = 898		end = 8281		jumps_possible[7] = 1.11654e+12
+		start = 898		end = 973		jumps_possible[8] = 1.27116e+12
+		start = 898		end = 736		jumps_possible[9] = 7.94482e+10
+		start = 898		end = 763		jumps_possible[10] = 7.94482e+10
+
+		freq_sum = 3.93295e+12
+	start_was = 7363
+	start_was_mate_list = 8233,7336,7498,7363,
+	end_was = 6850
+	end_was_mate_list = 6775,5878,5392,6850,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	898	82	6850
+blocking_list = 1,82,219,898,973,1054,5392,5878,6775,6850,8281,8362,
+		start = 82		end = 1054		jumps_possible[0] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[1] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[2] = 1.72215e+11
+		start = 898		end = 8281		jumps_possible[3] = 1.11654e+12
+		start = 898		end = 973		jumps_possible[4] = 1.27116e+12
+		start = 898		end = 736		jumps_possible[5] = 7.94482e+10
+		start = 898		end = 763		jumps_possible[6] = 7.94482e+10
+		start = 6850		end = 5878		jumps_possible[7] = 7.44598e+10
+		start = 6850		end = 6775		jumps_possible[8] = 7.44598e+10
+		start = 6850		end = 7363		jumps_possible[9] = 7.33111e+12
+		start = 6850		end = 7390		jumps_possible[10] = 7.33111e+12
+
+		freq_sum = 1.81465e+13
+	start_was = 6850
+	start_was_mate_list = 6775,5878,5392,6850,
+	end_was = 7363
+	end_was_mate_list = 8233,7336,7498,7363,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	898	82	7363
+blocking_list = 1,82,219,898,973,1054,7336,7363,7498,8233,8281,8362,
+		start = 82		end = 1054		jumps_possible[0] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[1] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[2] = 1.72215e+11
+		start = 898		end = 8281		jumps_possible[3] = 1.11654e+12
+		start = 898		end = 973		jumps_possible[4] = 1.27116e+12
+		start = 898		end = 736		jumps_possible[5] = 7.94482e+10
+		start = 898		end = 763		jumps_possible[6] = 7.94482e+10
+		start = 7363		end = 7498		jumps_possible[7] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[8] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[9] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[10] = 1.5041e+10
+
+		freq_sum = 3.93295e+12
+	start_was = 898
+	start_was_mate_list = 8281,898,973,1,
+	end_was = 973
+	end_was_mate_list = 8281,898,973,1,
+###
+	rotation happend
+	diffusion_siteid_now_list = 	973	82	7363
+blocking_list = 1,82,219,898,973,1054,7336,7363,7498,8233,8281,8362,
+		start = 82		end = 1054		jumps_possible[0] = 3.28264e+11
+		start = 82		end = 8362		jumps_possible[1] = 2.88335e+11
+		start = 82		end = 244		jumps_possible[2] = 1.72215e+11
+		start = 7363		end = 7498		jumps_possible[3] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[4] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[5] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[6] = 1.5041e+10
+		start = 973		end = 1		jumps_possible[7] = 3.4986e+11
+		start = 973		end = 898		jumps_possible[8] = 7.44598e+10
+		start = 973		end = 1459		jumps_possible[9] = 3.20114e+09
+		start = 973		end = 1486		jumps_possible[10] = 2.7367e+11
+
+		freq_sum = 2.08755e+12
+	start_was = 82
+	start_was_mate_list = 8362,219,1054,82,
+	end_was = 8362
+	end_was_mate_list = 8362,219,1054,82,
+	rotation happend
+	diffusion_siteid_now_list = 	973	8362	7363
+blocking_list = 1,82,219,898,973,1054,7336,7363,7498,8233,8281,8362,
+		start = 7363		end = 7498		jumps_possible[0] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[1] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 973		end = 1		jumps_possible[4] = 3.4986e+11
+		start = 973		end = 898		jumps_possible[5] = 7.44598e+10
+		start = 973		end = 1459		jumps_possible[6] = 3.20114e+09
+		start = 973		end = 1486		jumps_possible[7] = 2.7367e+11
+		start = 8362		end = 82		jumps_possible[8] = 3.28264e+11
+		start = 8362		end = 219		jumps_possible[9] = 1.02859e+11
+		start = 8362		end = 7471		jumps_possible[10] = 3.45855e+11
+		start = 8362		end = 7552		jumps_possible[11] = 1.59554e+11
+
+		freq_sum = 2.23527e+12
+	start_was = 8362
+	start_was_mate_list = 8362,219,1054,82,
+	end_was = 7471
+	end_was_mate_list = 8206,7446,7471,7309,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	973	7471	7363
+blocking_list = 1,898,973,7309,7336,7363,7446,7471,7498,8206,8233,8281,
+		start = 7363		end = 7498		jumps_possible[0] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[1] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 973		end = 1		jumps_possible[4] = 3.4986e+11
+		start = 973		end = 898		jumps_possible[5] = 7.44598e+10
+		start = 973		end = 1459		jumps_possible[6] = 3.20114e+09
+		start = 973		end = 1486		jumps_possible[7] = 2.7367e+11
+		start = 7471		end = 7309		jumps_possible[8] = 3.73299e+11
+		start = 7471		end = 7446		jumps_possible[9] = 2.08962e+11
+		start = 7471		end = 6904		jumps_possible[10] = 2.74776e+09
+		start = 7471		end = 8362		jumps_possible[11] = 2.7367e+11
+
+		freq_sum = 2.15741e+12
+	start_was = 7471
+	start_was_mate_list = 8206,7446,7471,7309,
+	end_was = 7309
+	end_was_mate_list = 8206,7446,7471,7309,
+####
+	rotation happend
+	diffusion_siteid_now_list = 	973	7309	7363
+blocking_list = 1,898,973,7309,7336,7363,7446,7471,7498,8206,8233,8281,
+		start = 7363		end = 7498		jumps_possible[0] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[1] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 973		end = 1		jumps_possible[4] = 3.4986e+11
+		start = 973		end = 898		jumps_possible[5] = 7.44598e+10
+		start = 973		end = 1459		jumps_possible[6] = 3.20114e+09
+		start = 973		end = 1486		jumps_possible[7] = 2.7367e+11
+		start = 7309		end = 7471		jumps_possible[8] = 3.73299e+11
+		start = 7309		end = 8206		jumps_possible[9] = 7.94482e+10
+		start = 7309		end = 6823		jumps_possible[10] = 2.3491e+11
+
+		freq_sum = 1.98639e+12
+	start_was = 7309
+	start_was_mate_list = 8206,7446,7471,7309,
+	end_was = 6823
+	end_was_mate_list = 6748,5851,5365,6823,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	973	6823	7363
+blocking_list = 1,898,973,5365,5851,6748,6823,7336,7363,7498,8233,8281,
+		start = 7363		end = 7498		jumps_possible[0] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[1] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 973		end = 1		jumps_possible[4] = 3.4986e+11
+		start = 973		end = 898		jumps_possible[5] = 7.44598e+10
+		start = 973		end = 1459		jumps_possible[6] = 3.20114e+09
+		start = 973		end = 1486		jumps_possible[7] = 2.7367e+11
+		start = 6823		end = 5851		jumps_possible[8] = 2.88335e+11
+		start = 6823		end = 6748		jumps_possible[9] = 2.88335e+11
+		start = 6823		end = 7309		jumps_possible[10] = 4.02921e+11
+
+		freq_sum = 2.27833e+12
+	start_was = 6823
+	start_was_mate_list = 6748,5851,5365,6823,
+	end_was = 7309
+	end_was_mate_list = 8206,7446,7471,7309,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	973	7309	7363
+blocking_list = 1,898,973,7309,7336,7363,7446,7471,7498,8206,8233,8281,
+		start = 7363		end = 7498		jumps_possible[0] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[1] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 973		end = 1		jumps_possible[4] = 3.4986e+11
+		start = 973		end = 898		jumps_possible[5] = 7.44598e+10
+		start = 973		end = 1459		jumps_possible[6] = 3.20114e+09
+		start = 973		end = 1486		jumps_possible[7] = 2.7367e+11
+		start = 7309		end = 7471		jumps_possible[8] = 3.73299e+11
+		start = 7309		end = 8206		jumps_possible[9] = 7.94482e+10
+		start = 7309		end = 6823		jumps_possible[10] = 2.3491e+11
+
+		freq_sum = 1.98639e+12
+	start_was = 973
+	start_was_mate_list = 8281,898,973,1,
+	end_was = 1
+	end_was_mate_list = 8281,898,973,1,
+#####
+	rotation happend
+	diffusion_siteid_now_list = 	1	7309	7363
+blocking_list = 1,898,973,7309,7336,7363,7446,7471,7498,8206,8233,8281,
+		start = 7363		end = 7498		jumps_possible[0] = 3.6652e+10
+		start = 7363		end = 8233		jumps_possible[1] = 3.6652e+10
+		start = 7363		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7363		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 7309		end = 7471		jumps_possible[4] = 3.73299e+11
+		start = 7309		end = 8206		jumps_possible[5] = 7.94482e+10
+		start = 7309		end = 6823		jumps_possible[6] = 2.3491e+11
+		start = 1		end = 973		jumps_possible[7] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[8] = 3.4986e+11
+		start = 1		end = 82		jumps_possible[9] = 2.5355e+11
+		start = 1		end = 109		jumps_possible[10] = 2.9658e+09
+
+		freq_sum = 2.28989e+12
+	start_was = 7363
+	start_was_mate_list = 8233,7336,7498,7363,
+	end_was = 6850
+	end_was_mate_list = 6775,5878,5392,6850,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	1	7309	6850
+blocking_list = 1,898,973,5392,5878,6775,6850,7309,7446,7471,8206,8281,
+		start = 7309		end = 7471		jumps_possible[0] = 3.73299e+11
+		start = 7309		end = 8206		jumps_possible[1] = 7.94482e+10
+		start = 7309		end = 6823		jumps_possible[2] = 2.3491e+11
+		start = 1		end = 973		jumps_possible[3] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[4] = 3.4986e+11
+		start = 1		end = 82		jumps_possible[5] = 2.5355e+11
+		start = 1		end = 109		jumps_possible[6] = 2.9658e+09
+		start = 6850		end = 5878		jumps_possible[7] = 7.44598e+10
+		start = 6850		end = 6775		jumps_possible[8] = 7.44598e+10
+		start = 6850		end = 7363		jumps_possible[9] = 7.33111e+12
+		start = 6850		end = 7390		jumps_possible[10] = 7.33111e+12
+
+		freq_sum = 1.65035e+13
+	start_was = 6850
+	start_was_mate_list = 6775,5878,5392,6850,
+	end_was = 7390
+	end_was_mate_list = 8260,7525,7390,7417,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	1	7309	7390
+blocking_list = 1,898,973,7309,7390,7417,7446,7471,7525,8206,8260,8281,
+		start = 7309		end = 7471		jumps_possible[0] = 3.73299e+11
+		start = 7309		end = 8206		jumps_possible[1] = 7.94482e+10
+		start = 7309		end = 6823		jumps_possible[2] = 2.3491e+11
+		start = 1		end = 973		jumps_possible[3] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[4] = 3.4986e+11
+		start = 1		end = 82		jumps_possible[5] = 2.5355e+11
+		start = 1		end = 109		jumps_possible[6] = 2.9658e+09
+		start = 7390		end = 7525		jumps_possible[7] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[8] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[9] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[10] = 1.5041e+10
+
+		freq_sum = 2.28989e+12
+	start_was = 1
+	start_was_mate_list = 8281,898,973,1,
+	end_was = 8281
+	end_was_mate_list = 8281,898,973,1,
+######
+	rotation happend
+	diffusion_siteid_now_list = 	8281	7309	7390
+blocking_list = 1,898,973,7309,7390,7417,7446,7471,7525,8206,8260,8281,
+		start = 7309		end = 7471		jumps_possible[0] = 3.73299e+11
+		start = 7309		end = 8206		jumps_possible[1] = 7.94482e+10
+		start = 7309		end = 6823		jumps_possible[2] = 2.3491e+11
+		start = 7390		end = 7525		jumps_possible[3] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[4] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[5] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[6] = 1.5041e+10
+		start = 8281		end = 1		jumps_possible[7] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[8] = 8.47709e+10
+		start = 8281		end = 7336		jumps_possible[9] = 2.3491e+11
+
+		freq_sum = 2.00319e+12
+	start_was = 7309
+	start_was_mate_list = 8206,7446,7471,7309,
+	end_was = 8206
+	end_was_mate_list = 8206,7446,7471,7309,
+	rotation happend
+	diffusion_siteid_now_list = 	8281	8206	7390
+blocking_list = 1,898,973,7309,7390,7417,7446,7471,7525,8206,8260,8281,
+		start = 7390		end = 7525		jumps_possible[0] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[1] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 8281		end = 1		jumps_possible[4] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[5] = 8.47709e+10
+		start = 8281		end = 7336		jumps_possible[6] = 2.3491e+11
+		start = 8206		end = 7309		jumps_possible[7] = 1.19134e+12
+		start = 8206		end = 7446		jumps_possible[8] = 1.19134e+12
+		start = 8206		end = 7234		jumps_possible[9] = 7.36074e+10
+		start = 8206		end = 8692		jumps_possible[10] = 8.57526e+10
+
+		freq_sum = 3.85758e+12
+	start_was = 8206
+	start_was_mate_list = 8206,7446,7471,7309,
+	end_was = 7446
+	end_was_mate_list = 8206,7446,7471,7309,
+	rotation happend
+	diffusion_siteid_now_list = 	8281	7446	7390
+blocking_list = 1,898,973,7309,7390,7417,7446,7471,7525,8206,8260,8281,
+		start = 7390		end = 7525		jumps_possible[0] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[1] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 8281		end = 1		jumps_possible[4] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[5] = 8.47709e+10
+		start = 8281		end = 7336		jumps_possible[6] = 2.3491e+11
+		start = 7446		end = 8206		jumps_possible[7] = 7.94482e+10
+		start = 7446		end = 7471		jumps_possible[8] = 2.08962e+11
+		start = 7446		end = 6879		jumps_possible[9] = 2.74776e+09
+		start = 7446		end = 8337		jumps_possible[10] = 2.7367e+11
+
+		freq_sum = 1.88036e+12
+	start_was = 8281
+	start_was_mate_list = 8281,898,973,1,
+	end_was = 898
+	end_was_mate_list = 8281,898,973,1,
+#######
+	rotation happend
+	diffusion_siteid_now_list = 	898	7446	7390
+blocking_list = 1,898,973,7309,7390,7417,7446,7471,7525,8206,8260,8281,
+		start = 7390		end = 7525		jumps_possible[0] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[1] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 7446		end = 8206		jumps_possible[4] = 7.94482e+10
+		start = 7446		end = 7471		jumps_possible[5] = 2.08962e+11
+		start = 7446		end = 6879		jumps_possible[6] = 2.74776e+09
+		start = 7446		end = 8337		jumps_possible[7] = 2.7367e+11
+		start = 898		end = 8281		jumps_possible[8] = 1.11654e+12
+		start = 898		end = 973		jumps_possible[9] = 1.27116e+12
+		start = 898		end = 736		jumps_possible[10] = 7.94482e+10
+		start = 898		end = 763		jumps_possible[11] = 7.94482e+10
+
+		freq_sum = 3.70897e+12
+	start_was = 898
+	start_was_mate_list = 8281,898,973,1,
+	end_was = 8281
+	end_was_mate_list = 8281,898,973,1,
+	rotation happend
+	diffusion_siteid_now_list = 	8281	7446	7390
+blocking_list = 1,898,973,7309,7390,7417,7446,7471,7525,8206,8260,8281,
+		start = 7390		end = 7525		jumps_possible[0] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[1] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 7446		end = 8206		jumps_possible[4] = 7.94482e+10
+		start = 7446		end = 7471		jumps_possible[5] = 2.08962e+11
+		start = 7446		end = 6879		jumps_possible[6] = 2.74776e+09
+		start = 7446		end = 8337		jumps_possible[7] = 2.7367e+11
+		start = 8281		end = 1		jumps_possible[8] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[9] = 8.47709e+10
+		start = 8281		end = 7336		jumps_possible[10] = 2.3491e+11
+
+		freq_sum = 1.88036e+12
+	start_was = 7446
+	start_was_mate_list = 8206,7446,7471,7309,
+	end_was = 8337
+	end_was_mate_list = 8337,954,1029,57,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	8281	8337	7390
+blocking_list = 1,57,898,954,973,1029,7390,7417,7525,8260,8281,8337,
+		start = 7390		end = 7525		jumps_possible[0] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[1] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[2] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[3] = 1.5041e+10
+		start = 8281		end = 1		jumps_possible[4] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[5] = 8.47709e+10
+		start = 8281		end = 7336		jumps_possible[6] = 2.3491e+11
+		start = 8337		end = 57		jumps_possible[7] = 1.02859e+11
+		start = 8337		end = 954		jumps_possible[8] = 3.28264e+11
+		start = 8337		end = 7419		jumps_possible[9] = 1.59554e+11
+		start = 8337		end = 7446		jumps_possible[10] = 3.45855e+11
+
+		freq_sum = 2.25207e+12
+	start_was = 7390
+	start_was_mate_list = 8260,7525,7390,7417,
+	end_was = 6850
+	end_was_mate_list = 6775,5878,5392,6850,
+########
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	8281	8337	6850
+blocking_list = 1,57,898,954,973,1029,5392,5878,6775,6850,8281,8337,
+		start = 8281		end = 1		jumps_possible[0] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[1] = 8.47709e+10
+		start = 8281		end = 7336		jumps_possible[2] = 2.3491e+11
+		start = 8337		end = 57		jumps_possible[3] = 1.02859e+11
+		start = 8337		end = 954		jumps_possible[4] = 3.28264e+11
+		start = 8337		end = 7419		jumps_possible[5] = 1.59554e+11
+		start = 8337		end = 7446		jumps_possible[6] = 3.45855e+11
+		start = 6850		end = 5878		jumps_possible[7] = 7.44598e+10
+		start = 6850		end = 6775		jumps_possible[8] = 7.44598e+10
+		start = 6850		end = 7363		jumps_possible[9] = 7.33111e+12
+		start = 6850		end = 7390		jumps_possible[10] = 7.33111e+12
+
+		freq_sum = 1.64657e+13
+	start_was = 6850
+	start_was_mate_list = 6775,5878,5392,6850,
+	end_was = 7390
+	end_was_mate_list = 8260,7525,7390,7417,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	8281	8337	7390
+blocking_list = 1,57,898,954,973,1029,7390,7417,7525,8260,8281,8337,
+		start = 8281		end = 1		jumps_possible[0] = 3.98309e+11
+		start = 8281		end = 898		jumps_possible[1] = 8.47709e+10
+		start = 8281		end = 7336		jumps_possible[2] = 2.3491e+11
+		start = 8337		end = 57		jumps_possible[3] = 1.02859e+11
+		start = 8337		end = 954		jumps_possible[4] = 3.28264e+11
+		start = 8337		end = 7419		jumps_possible[5] = 1.59554e+11
+		start = 8337		end = 7446		jumps_possible[6] = 3.45855e+11
+		start = 7390		end = 7525		jumps_possible[7] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[8] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[9] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[10] = 1.5041e+10
+
+		freq_sum = 2.25207e+12
+	start_was = 8281
+	start_was_mate_list = 8281,898,973,1,
+	end_was = 1
+	end_was_mate_list = 8281,898,973,1,
+	rotation happend
+	diffusion_siteid_now_list = 	1	8337	7390
+blocking_list = 1,57,898,954,973,1029,7390,7417,7525,8260,8281,8337,
+		start = 8337		end = 57		jumps_possible[0] = 1.02859e+11
+		start = 8337		end = 954		jumps_possible[1] = 3.28264e+11
+		start = 8337		end = 7419		jumps_possible[2] = 1.59554e+11
+		start = 8337		end = 7446		jumps_possible[3] = 3.45855e+11
+		start = 7390		end = 7525		jumps_possible[4] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[5] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[6] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[7] = 1.5041e+10
+		start = 1		end = 973		jumps_possible[8] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[9] = 3.4986e+11
+		start = 1		end = 82		jumps_possible[10] = 2.5355e+11
+		start = 1		end = 109		jumps_possible[11] = 2.9658e+09
+
+		freq_sum = 2.53876e+12
+	start_was = 7390
+	start_was_mate_list = 8260,7525,7390,7417,
+	end_was = 6850
+	end_was_mate_list = 6775,5878,5392,6850,
+#########
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	1	8337	6850
+blocking_list = 1,57,898,954,973,1029,5392,5878,6775,6850,8281,8337,
+		start = 8337		end = 57		jumps_possible[0] = 1.02859e+11
+		start = 8337		end = 954		jumps_possible[1] = 3.28264e+11
+		start = 8337		end = 7419		jumps_possible[2] = 1.59554e+11
+		start = 8337		end = 7446		jumps_possible[3] = 3.45855e+11
+		start = 1		end = 973		jumps_possible[4] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[5] = 3.4986e+11
+		start = 1		end = 82		jumps_possible[6] = 2.5355e+11
+		start = 1		end = 109		jumps_possible[7] = 2.9658e+09
+		start = 6850		end = 5878		jumps_possible[8] = 7.44598e+10
+		start = 6850		end = 6775		jumps_possible[9] = 7.44598e+10
+		start = 6850		end = 7363		jumps_possible[10] = 7.33111e+12
+		start = 6850		end = 7390		jumps_possible[11] = 7.33111e+12
+
+		freq_sum = 1.67523e+13
+	start_was = 6850
+	start_was_mate_list = 6775,5878,5392,6850,
+	end_was = 7390
+	end_was_mate_list = 8260,7525,7390,7417,
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	1	8337	7390
+blocking_list = 1,57,898,954,973,1029,7390,7417,7525,8260,8281,8337,
+		start = 8337		end = 57		jumps_possible[0] = 1.02859e+11
+		start = 8337		end = 954		jumps_possible[1] = 3.28264e+11
+		start = 8337		end = 7419		jumps_possible[2] = 1.59554e+11
+		start = 8337		end = 7446		jumps_possible[3] = 3.45855e+11
+		start = 1		end = 973		jumps_possible[4] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[5] = 3.4986e+11
+		start = 1		end = 82		jumps_possible[6] = 2.5355e+11
+		start = 1		end = 109		jumps_possible[7] = 2.9658e+09
+		start = 7390		end = 7525		jumps_possible[8] = 3.6652e+10
+		start = 7390		end = 8260		jumps_possible[9] = 3.6652e+10
+		start = 7390		end = 6850		jumps_possible[10] = 5.09199e+11
+		start = 7390		end = 8308		jumps_possible[11] = 1.5041e+10
+
+		freq_sum = 2.53876e+12
+	start_was = 7390
+	start_was_mate_list = 8260,7525,7390,7417,
+	end_was = 8260
+	end_was_mate_list = 8260,7525,7390,7417,
+	rotation happend
+	diffusion_siteid_now_list = 	1	8337	8260
+blocking_list = 1,57,898,954,973,1029,7390,7417,7525,8260,8281,8337,
+		start = 8337		end = 57		jumps_possible[0] = 1.02859e+11
+		start = 8337		end = 954		jumps_possible[1] = 3.28264e+11
+		start = 8337		end = 7419		jumps_possible[2] = 1.59554e+11
+		start = 8337		end = 7446		jumps_possible[3] = 3.45855e+11
+		start = 1		end = 973		jumps_possible[4] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[5] = 3.4986e+11
+		start = 1		end = 82		jumps_possible[6] = 2.5355e+11
+		start = 1		end = 109		jumps_possible[7] = 2.9658e+09
+		start = 8260		end = 7417		jumps_possible[8] = 3.07653e+11
+		start = 8260		end = 7390		jumps_possible[9] = 2.12827e+12
+		start = 8260		end = 7288		jumps_possible[10] = 1.59554e+11
+		start = 8260		end = 8746		jumps_possible[11] = 4.02921e+11
+
+		freq_sum = 4.93962e+12
+	start_was = 8337
+	start_was_mate_list = 8337,954,1029,57,
+	end_was = 7446
+	end_was_mate_list = 8206,7446,7471,7309,
+##########
+
+	hopping happend
+		search jump from end_was
+		search jump to start_was
+	diffusion_siteid_now_list = 	1	7446	8260
+blocking_list = 1,898,973,7309,7390,7417,7446,7471,7525,8206,8260,8281,
+		start = 1		end = 973		jumps_possible[0] = 3.98309e+11
+		start = 1		end = 8281		jumps_possible[1] = 3.4986e+11
+		start = 1		end = 82		jumps_possible[2] = 2.5355e+11
+		start = 1		end = 109		jumps_possible[3] = 2.9658e+09
+		start = 8260		end = 7417		jumps_possible[4] = 3.07653e+11
+		start = 8260		end = 7390		jumps_possible[5] = 2.12827e+12
+		start = 8260		end = 7288		jumps_possible[6] = 1.59554e+11
+		start = 8260		end = 8746		jumps_possible[7] = 4.02921e+11
+		start = 7446		end = 8206		jumps_possible[8] = 7.94482e+10
+		start = 7446		end = 7471		jumps_possible[9] = 2.08962e+11
+		start = 7446		end = 6879		jumps_possible[10] = 2.74776e+09
+		start = 7446		end = 8337		jumps_possible[11] = 2.7367e+11
+
+		freq_sum = 4.56791e+12
+	start_was = 8260
+	start_was_mate_list = 8260,7525,7390,7417,
+	end_was = 7390
+	end_was_mate_list = 8260,7525,7390,7417,
+	loop_counter finished
+	total_time = 1.198226e-11
+	1 times KMC finished
+Execution time = 0 sec
+
