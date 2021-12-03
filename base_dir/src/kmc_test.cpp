@@ -1042,7 +1042,7 @@ int main()
 					//回転経路=同一blocking area内で移動した場合
 					if (vector_finder(sites[start_was-1].get_blocking_mate_list(), end_was)) {
 
-						cout << "\t" << "rotation happend" << endl;
+						//cout << "\t" << "rotation happend" << endl;
 
 						/*//start_wasに向かうjumpを追加する…end_wasからのjumpですべてまかなえることに気づいた
 						vector<Jump> temp_jump_vector_to_start = sites[start_was-1].get_jumps_to_here();
@@ -1081,8 +1081,8 @@ int main()
 					//ホッピング経路=別のblocking areaへ移動した場合
 					else {
 						
-						cout << "\t" << "hopping happend" << endl;
-						cout << "\t" << "\t" << "search jump from end_was" << endl;
+						//cout << "\t" << "hopping happend" << endl;
+						//cout << "\t" << "\t" << "search jump from end_was" << endl;
 
 						//end_wasからのjumpを追加する
 						vector<Jump> temp_jump_vector_from_end = sites[end_was-1].get_jumps_from_here();
@@ -1091,28 +1091,32 @@ int main()
 							//回転経路内なら追加
 							if (vector_finder(sites[end_was-1].get_blocking_mate_list(), (*itr_2).get_end_site_id())) {
 								jumps_possible.push_back(*itr_2);
+								//cout << "\t" << "\t" << "\t" << (*itr_2).get_start_site_id() << " to " << (*itr_2).get_end_site_id() << "  rot path add" << endl;
 							}
 
 							//ホッピング経路の場合
 							else {
-								//終点がblocking_listになければ追加
-								if (!Diffusionspecie::blocking_list.count((*itr_2).get_end_site_id())) {
+								//終点がblocking_listにない、かつ終点がstart_wasじゃなけば追加
+								if (!Diffusionspecie::blocking_list.count((*itr_2).get_end_site_id())
+									&&
+									(*itr_2).get_end_site_id() != start_was) {
+									//cout << "\t" << "\t" << "\t" << (*itr_2).get_start_site_id() << " to " << (*itr_2).get_end_site_id() << "  hop path add" << endl;
 									jumps_possible.push_back(*itr_2);
 								}
 							}
 						}
 
 						//start_wasを含むblocking areaへのjumpを追加する
-						cout << "\t" << "\t" << "search jump to start_was" << endl;
+						//cout << "\t" << "\t" << "search jump to start_was" << endl;
 						//blocking_areaのsite_id(vector)を取得
 						vector<int> blocking_area_ids = sites[start_was-1].get_blocking_mate_list();
 						//blocking_area内のsiteについて、それぞれに向かうjumpを探して追加する
 						for (auto itr_mate_id = blocking_area_ids.begin(); itr_mate_id != blocking_area_ids.end(); itr_mate_id++) {
-							vector<Jump> temp_jump_vector_to_start = sites[*itr_mate_id].get_jumps_to_here();
+							vector<Jump> temp_jump_vector_to_start = sites[*itr_mate_id-1].get_jumps_to_here();
 							for (auto itr_2 = temp_jump_vector_to_start.begin(); itr_2 != temp_jump_vector_to_start.end(); itr_2++){
 								
 								//回転経路内にプロトンは存在しないので何もしない
-								if (vector_finder(sites[*itr_mate_id].get_blocking_mate_list(), (*itr_2).get_start_site_id())) {
+								if (vector_finder(sites[*itr_mate_id-1].get_blocking_mate_list(), (*itr_2).get_start_site_id())) {
 								}
 
 								//ホッピング経路の場合
@@ -1120,6 +1124,7 @@ int main()
 									
 									//始点にプロトンがあれば追加
 									if (vector_finder(Diffusionspecie::diffusion_siteid_now_list, (*itr_2).get_start_site_id())) {
+										//cout << "\t" << "\t" << "\t" << (*itr_2).get_start_site_id() << " to " << (*itr_2).get_end_site_id() << "  hop path add" << endl;
 										jumps_possible.push_back(*itr_2);
 									}
 								}
@@ -1183,7 +1188,7 @@ int main()
 			}
 
           //確認用
-
+/*
 			cout << "\t" << "diffusion_siteid_now_list = " ;
 			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size(); i++) {
 				cout << "\t" << Diffusionspecie::diffusion_siteid_now_list[i] ; 
@@ -1203,6 +1208,7 @@ int main()
 			cout << endl;
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
+			*/
 
 
 
@@ -1288,22 +1294,22 @@ int main()
 			if (blocking_yes) {
 
 				//start_wasのmate_listを削除する
-				cout << '\t' << "start_was = " << start_was << endl;
-				cout << '\t' << "start_was_mate_list = " ;
+				//cout << '\t' << "start_was = " << start_was << endl;
+				//cout << '\t' << "start_was_mate_list = " ;
 				for (int l = 0, n = sites[start_was-1].get_blocking_mate_list().size(); l != n; l++) {
-					cout << sites[start_was-1].get_blocking_mate_list()[l] << "," ;
+					//cout << sites[start_was-1].get_blocking_mate_list()[l] << "," ;
 					Diffusionspecie::blocking_list.erase(sites[start_was-1].get_blocking_mate_list()[l]);
 				}
-				cout << endl;
+				//cout << endl;
 
 				//end_wasのmate_listを追加する
-				cout << '\t' << "end_was = " << end_was << endl;
-				cout << '\t' <<  "end_was_mate_list = " ;
+				//cout << '\t' << "end_was = " << end_was << endl;
+				//cout << '\t' <<  "end_was_mate_list = " ;
 				for (int l = 0, n = sites[end_was-1].get_blocking_mate_list().size(); l != n; l++) {
-					cout << sites[end_was-1].get_blocking_mate_list()[l] << "," ;
+					//cout << sites[end_was-1].get_blocking_mate_list()[l] << "," ;
 					Diffusionspecie::blocking_list.insert(sites[end_was-1].get_blocking_mate_list()[l]);
 				}
-				cout << endl;
+				//cout << endl;
 			}
 		
 			
