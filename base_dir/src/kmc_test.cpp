@@ -756,7 +756,7 @@ int main()
 
 
 		//確認用
-//		cout << "step_counter = " << step_counter << " start " << endl;
+		cout << "step_counter = " << step_counter << " start " << endl;
 
 		//乱数を準備しておく
 		random_device rnd;
@@ -832,6 +832,7 @@ int main()
 		//それぞれのidを[i]にたいしてi+1で設定する(1からp_place_nまでdiffusion_idとして通し番号をふる)
 		for (int i = 0; i != diffusion_species.size(); i++) {
 			diffusion_species[i].set_diffusion_id(i+1);
+			diffusion_species[i].diffusion_counter = 0;
 		}
 		
 		
@@ -888,14 +889,15 @@ int main()
 	//	else
 			//cout << "d_id = p_place_n+1" << endl;
 
-/*		//確認用
-		for (int i = 0; i != sites.size(); i++) {
+		//確認用
+/*		for (int i = 0; i != sites.size(); i++) {
 			cout << "site[" << i << "] ";
 			cout << "site_id = " << sites[i].get_site_id() << " " ;
 			cout << "site_atom = " << sites[i].get_site_atom() << " " ;
 			cout << "diffusion_id = " << sites[i].get_diffusion_id() << endl;
 		}
-*/
+		*/
+
 		
 		
 		//シミュレーション時間total_timeを定義
@@ -1017,28 +1019,29 @@ int main()
 
 				//jumps_possibleを更新する
 
-				auto itr = jumps_possible.begin();
-				while (itr != jumps_possible.end()) {
-
-					//start_wasからのjumpを削除
-					if ((*itr).get_start_site_id() == start_was) {
-						itr = jumps_possible.erase(itr);
-					}
-
-					//end_wasに向かうjumpを削除
-					else if ((*itr).get_end_site_id() == end_was) {
-						itr = jumps_possible.erase(itr);
-					}
-
-					//他はスルー
-					else {
-						itr++;
-					}
-				}
-
 				//blockingあり
 				if (blocking_yes) {
 					
+					auto itr = jumps_possible.begin();
+					while (itr != jumps_possible.end()) {
+
+						//start_wasからのjumpを削除
+						if ((*itr).get_start_site_id() == start_was) {
+							itr = jumps_possible.erase(itr);
+						}
+
+						//end_wasおよびそのblocking_mate_listに向かうjumpを削除
+
+						else if (vector_finder(sites[end_was-1].get_blocking_mate_list(), (*itr).get_end_site_id())) {
+							itr = jumps_possible.erase(itr);
+						}
+
+						//他はスルー
+						else {
+							itr++;
+						}
+					}
+
 					//回転経路=同一blocking area内で移動した場合
 					if (vector_finder(sites[start_was-1].get_blocking_mate_list(), end_was)) {
 
@@ -1137,6 +1140,24 @@ int main()
 
 				//blockingなし
 				else {
+					auto itr = jumps_possible.begin();
+					while (itr != jumps_possible.end()) {
+
+						//start_wasからのjumpを削除
+						if ((*itr).get_start_site_id() == start_was) {
+							itr = jumps_possible.erase(itr);
+						}
+
+						//end_wasに向かうjumpを削除
+						else if ((*itr).get_end_site_id() == end_was) {
+							itr = jumps_possible.erase(itr);
+						}
+
+						//他はスルー
+						else {
+							itr++;
+						}
+					}
 
 					//start_wasに向かうjumpを追加
 					vector<Jump> temp_jump_vector_to_start = sites[start_was-1].get_jumps_to_here();
@@ -1208,7 +1229,7 @@ int main()
 			cout << endl;
 
 			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
-			*/
+		*/	
 
 
 
@@ -1264,10 +1285,9 @@ int main()
 					diffusion_species[i].diffusion_counter++;
 
 
-/*					//確認用
-					for (int j = 0; j != diffusion_species[i].get_jump_total().size();j++)
-					cout << "diffusion_species[" << i << "].jump_total = " << diffusion_species[i].get_jump_total()[j] << endl;
-*/
+					//cout << "diffusion_species[" << i << "].diffusion_counter = " << diffusion_species[i].diffusion_counter << endl;
+					
+
 
 				}
 
@@ -1533,6 +1553,9 @@ int main()
 	
 		//diffusion_siteid_now_listをリセットする
 		Diffusionspecie::diffusion_siteid_now_list.clear();
+
+		//blocking_listをリセットする
+		Diffusionspecie::blocking_list.clear();
 
 
 
