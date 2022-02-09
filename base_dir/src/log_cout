@@ -1,8 +1,8 @@
 INPUTファイルを読み込み
-	1粒子あたり平均何回イベントを起こすか MCSP =10
+	1粒子あたり平均何回イベントを起こすか MCSP =100
 	平均をとる粒子の個数 AVERAGE = 216
 	KMCのステップ数(何回行うか) NSTEPS =1
-	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =2160
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =21600
 	拡散種をいくつ配置するか NDIFFS = 216
 	電場の強さ EFIELD = 6.893867e-03 [V/Å] 
 	電場の強さ EFIELD = 6.893867e+05 [V/cm] 
@@ -45,7 +45,7 @@ blockingあり
 ##########
 
 	loop_counter finished
-	total_time = 9.070423e-12
+	total_time = 9.167320e-11
 	1 times KMC finished
-Execution time = 0 sec
+Execution time = 6 sec
 
