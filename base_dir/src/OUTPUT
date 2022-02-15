@@ -1,13 +1,21 @@
-KMC 1 times
-total_time t = 8.868569e-11 [s]
-mean_displacement_x = 9.384758e-01 [Å]
-mean_displacement_y = 2.959922e-01 [Å]
-mean_displacement_z = -1.393893e-01 [Å]
-concentration c = 3.897569e-03 [/Å^3]
-Efield_direction = x
-Efield_strength = 6.893867e-03 [V/Å]
-Efield_strength = 6.893867e+05 [V/cm]
-Sigma_xx = 9.585412e-02 [S/cm]
-Sigma_xy = 3.023207e-02 [S/cm]
-Sigma_xz = -1.423696e-02 [S/cm]
+#This is OUTPUT file written by toml format.
+#KMC = 1 times
+
+#total_time [s] 
+total_time = 9.145544e-11
+
+#concentration [/Ang.^3] 
+concentration = 3.897569e-03
+
+#Efield_strength [V/Ang.] 
+Efield_strength.Ang = 6.893867e-03
+
+#Efield_strength [V/cm] 
+Efield_strength.cm = 6.893867e+05
+
+#temperture [K] 
+temperture = 600
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
 

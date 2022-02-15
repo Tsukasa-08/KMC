@@ -220,8 +220,9 @@ int const number_proton = 2;
 double const kb = 1.380649 * pow(10,-23);
 double const ec = 1.60217662 * pow(10,-19);
 
-//拡散種(今回はプロトン)の電荷を定義、要改善
-double q_charge = 1 * ec;
+//拡散種の電荷を定義(今回はプロトン=1),要改善
+double ion_charge = 1;
+double q_charge = ion_charge * ec;
 
 
 //拡散種の配置一覧vectorを定義
@@ -259,7 +260,7 @@ int main()
 	//double E_field_strength_for_pow = param.get<double>("EFIELD", 0);
 	double correct_constant_for_pow = param.get<double>("CORRECT", 0);
 	double temperture = param.get<double>("TEMP", 0);
-	int E_field_axis = param.get<int>("AXIS", 1);
+	int E_field_axis = param.get<int>("AXIS", 0);
 	double distance_jump = param.get<double>("DISTANCEJUMP", 1); //単位は[Å]
 	int blocking_yes = param.get<int>("BLOCKING", 0);
 
@@ -1524,23 +1525,32 @@ int main()
 
 		//OUTPUTファイルをまとめる
 		ofstream ofs_output("OUTPUT", ios::app);
-		ofs_output << "KMC " << step_counter << " times" << endl;
-		ofs_output << "total_time t = " << scientific << total_time << " [s]" << endl;
-		ofs_output << "mean_displacement_x = " << average_displacement_eigen[0]  << " [Å]" << endl;
-		ofs_output << "mean_displacement_y = " << average_displacement_eigen[1]  << " [Å]" << endl;
-		ofs_output << "mean_displacement_z = " << average_displacement_eigen[2]  << " [Å]" << endl;
-		ofs_output << "concentration c = " << diffusion_species.size()/lattice_matrix.determinant() <<  " [/Å^3]" << endl;
-		if (E_field_yes) {
-			ofs_output << "Efield_direction = " << axis << endl;
-			ofs_output << "Efield_strength = " << E_field_strength << " [V/Å]" << endl;
-			ofs_output << "Efield_strength = " << E_field_strength*pow(10,8) << " [V/cm]" << endl;
-			ofs_output << "Sigma_" << axis << "x = " << Sigma_x[0] << " [S/cm]" << endl;
-			ofs_output << "Sigma_" << axis << "y = " << Sigma_x[1] << " [S/cm]" << endl;
-			ofs_output << "Sigma_" << axis << "z = " << Sigma_x[2] << " [S/cm]" << endl;
-		}
+		ofs_output << "#This is OUTPUT file written by toml format." << endl;
+		ofs_output << "#KMC = " << step_counter << " times" << endl;
 		ofs_output << endl;
-
-
+		ofs_output << "#total_time [s] " << endl;
+		ofs_output << "total_time = " << scientific << total_time << endl;
+		ofs_output << endl;
+		ofs_output << "#concentration [/Ang.^3] " << endl;
+		ofs_output << "concentration = " << diffusion_species.size()/lattice_matrix.determinant() <<  endl;
+		if (E_field_yes) {
+			ofs_output << endl;
+			ofs_output << "#Efield_strength [V/Ang.] " << endl;
+			ofs_output << "Efield_strength.Ang = " << E_field_strength << endl;
+			ofs_output << endl;
+			ofs_output << "#Efield_strength [V/cm] "  << endl;
+			ofs_output << "Efield_strength.cm = " << E_field_strength*pow(10,8) << endl;
+		}
+		ofs_output << defaultfloat;
+		ofs_output << endl;
+		ofs_output << "#temperture [K] " << endl;
+		ofs_output << "temperture = " << temperture << endl;
+		ofs_output << endl;
+		ofs_output << "#ion_charge 拡散種の電荷(整数) " << endl;
+		ofs_output << "ion_charge = " << ion_charge << endl;
+		ofs_output << endl;
+		
+		
 		
 		
 
