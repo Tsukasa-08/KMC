@@ -13,6 +13,7 @@ OBJS    = $(SRCS:.cpp=.o)
 # 必要なものはHOMEディレクトリ以下のincludeディレクトリに入れとく
 INCDIR  = -I../inc
 INCDIR  += -I$(HOME)/include/eigen-3.3.9
+INCDIR  += -I$(HOME)/include
  
 # (7)ライブラリファイルのあるディレクトリパス
 LIBDIR  = 
