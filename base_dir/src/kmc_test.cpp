@@ -1597,7 +1597,7 @@ int main()
 		ofstream ofs_diff("DiffusionCoefficient", ios::app);
 
 		//トレーサー拡散係数
-		ofs_diff << "トレーサー拡散係数 (cm^2/s)" << endl;
+		ofs_diff << "tracer diffusion coefficient (cm^2/s)" << endl;
 		double Dx = 0;
 		double Dy = 0;
 		double Dz = 0;
@@ -1622,7 +1622,7 @@ int main()
 		
 		
 		//自己拡散係数
-		ofs_diff << "自己拡散係数 (cm^2/s)" << endl;
+		ofs_diff << "self diffusion coefficient (cm^2/s)" << endl;
 		Dx = 0;
 		Dy = 0;
 		Dz = 0;
@@ -1646,7 +1646,7 @@ int main()
 		ofs_diff << "Dz = " << Dz << endl; 
 
 		//化学拡散係数
-		ofs_diff << "化学拡散係数 (cm^2/s)" << endl;
+		ofs_diff << "chemical diffusion coefficient (cm^2/s)" << endl;
 
 
 
