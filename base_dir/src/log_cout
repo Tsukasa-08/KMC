@@ -4,9 +4,9 @@ INPUTファイルを読み込み
 	KMCのステップ数(何回行うか) NSTEPS =1
 	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =21600
 	拡散種をいくつ配置するか NDIFFS = 216
-	電場の強さ EFIELD = 6.893867e-03 [V/Å] 
-	電場の強さ EFIELD = 6.893867e+05 [V/cm] 
-	温度 TEMP = 600
+	電場の強さ EFIELD = 1.148978e-02 [V/Å] 
+	電場の強さ EFIELD = 1.148978e+06 [V/cm] 
+	温度 TEMP = 1000
 	ジャンプ頻度補正係数 correct_constant = 0.1
 	電場方向 1 (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
 	ブロックリスト = 1 (1=あり、0=なし)
@@ -25,9 +25,9 @@ lattice_matrix =
 
 blocking_list.csv read
 
-E_field_vector = 0.00689387
-         0
-         0
+E_field_vector = 0.0114898
+        0
+        0
 step_counter = 1 start 
 blockingあり
 
@@ -45,7 +45,7 @@ blockingあり
 ##########
 
 	loop_counter finished
-	total_time = 8.966427e-11
+	total_time = 8.681171e-11
 	1 times KMC finished
 Execution time = 6 sec
 

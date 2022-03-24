@@ -226,9 +226,17 @@ double q_charge = ion_charge * ec;
 
 //Nernst-Einsteinの関係式より、拡散係数から伝導度を算出する関数
 double NernstEinstein_DtoSigma(double D, double concentration, int temperture, double ion_charge) {
-	double Sigma;
-	Sigma = D * pow(ion_charge * ec, 2) * concentration / (kb * temperture) ; 
+	double Sigma; //[S/cm]
+	Sigma = D * pow(ion_charge * ec, 2) * concentration / (kb * temperture) * pow(10, 24);
 	return Sigma;
+
+}
+
+//Nernst-Einsteinの関係式より、伝導度から拡散係数を算出する関数
+double NernstEinstein_SigmatoD(double Sigma, double concentration, int temperture, double ion_charge) {
+	double D; //[cm^2/s]
+	D = Sigma * (kb * temperture) * pow(10, -24) /  (pow(ion_charge * ec, 2) * concentration) ;
+	return D;
 
 }
 
@@ -279,6 +287,8 @@ int main()
 	//double E_field_strength = pow(10, E_field_strength_for_pow);
 	double E_field_strength = correct_constant * kb * temperture / (q_charge * 0.5 * distance_jump); //単位は[J/Å]
 	
+	//後半濃度算出用
+	double concentration;
 	
 	//入力確認用logファイルを作成
 
@@ -492,7 +502,11 @@ int main()
 			cout << '\t' << sites[i].get_site_frac_coords()[j] << endl;
 		}
 	}
+
+	
 */
+
+
 
 	//blocking_list.csvを読み込む
 	int csv_total_number = 0;
@@ -751,6 +765,7 @@ int main()
 	*/
 
 
+	concentration = p_place_n / lattice_matrix.determinant();
 	
 
 
@@ -1606,60 +1621,70 @@ int main()
 
 		//トレーサー拡散係数
 		ofs_diff << "tracer diffusion coefficient (cm^2/s)" << endl;
-		double Dx = 0;
-		double Dy = 0;
-		double Dz = 0;
+		double D_t_x = 0;
+		double D_t_y = 0;
+		double D_t_z = 0;
 		for (int i = 0; i != D_t_3d_vector.size(); i++) {
 
-			Dx += D_t_3d_vector[i][0];
-			Dy += D_t_3d_vector[i][1];
-			Dz += D_t_3d_vector[i][2];
+			D_t_x += D_t_3d_vector[i][0];
+			D_t_y += D_t_3d_vector[i][1];
+			D_t_z += D_t_3d_vector[i][2];
 				
 			if (i+1 == D_t_3d_vector.size()) {
 
-				Dx /= D_t_3d_vector.size();
-				Dy /= D_t_3d_vector.size();
-				Dz /= D_t_3d_vector.size();
+				D_t_x /= D_t_3d_vector.size();
+				D_t_y /= D_t_3d_vector.size();
+				D_t_z /= D_t_3d_vector.size();
 			}
 
 		}
 
-		ofs_diff << "Dx = " << Dx << endl; 
-		ofs_diff << "Dy = " << Dy << endl; 
-		ofs_diff << "Dz = " << Dz << endl; 
+		ofs_diff << "Dx = " << D_t_x << endl; 
+		ofs_diff << "Dy = " << D_t_y << endl; 
+		ofs_diff << "Dz = " << D_t_z << endl; 
+		ofs_diff << endl;
 		
 		
 		//自己拡散係数
 		ofs_diff << "self diffusion coefficient (cm^2/s)" << endl;
-		Dx = 0;
-		Dy = 0;
-		Dz = 0;
+		double D_j_x = 0;
+		double D_j_y = 0;
+		double D_j_z = 0;
 		for (int i = 0; i != D_j_3d_vector.size(); i++) {
 
-			Dx += D_j_3d_vector[i][0];
-			Dy += D_j_3d_vector[i][1];
-			Dz += D_j_3d_vector[i][2];
+			D_j_x += D_j_3d_vector[i][0];
+			D_j_y += D_j_3d_vector[i][1];
+			D_j_z += D_j_3d_vector[i][2];
 				
 			if (i+1 == D_j_3d_vector.size()) {
 
-				Dx /= D_j_3d_vector.size();
-				Dy /= D_j_3d_vector.size();
-				Dz /= D_j_3d_vector.size();
+				D_j_x /= D_j_3d_vector.size();
+				D_j_y /= D_j_3d_vector.size();
+				D_j_z /= D_j_3d_vector.size();
 			}
 
 		}
 
-		ofs_diff << "Dx = " << Dx << endl; 
-		ofs_diff << "Dy = " << Dy << endl; 
-		ofs_diff << "Dz = " << Dz << endl; 
+		ofs_diff << "Dx = " << D_j_x << endl; 
+		ofs_diff << "Dy = " << D_j_y << endl; 
+		ofs_diff << "Dz = " << D_j_z << endl; 
 
 
 		//結果を出力するアウトプットファイルを作成する
 		ofstream ofs_sigma("IonicConductivity", ios::app);
 
 		//トレーサー拡散係数からトレーサー伝導度
-		ofs_diff << "tracer ionic conductivity (S/cm)" << endl;
+		ofs_sigma << "tracer ionic conductivity (S/cm)" << endl;
+		ofs_sigma << "Sigma_x = " << NernstEinstein_DtoSigma(D_t_x, concentration, temperture, ion_charge) << endl;
+		ofs_sigma << "Sigma_y = " << NernstEinstein_DtoSigma(D_t_y, concentration, temperture, ion_charge) << endl;
+		ofs_sigma << "Sigma_z = " << NernstEinstein_DtoSigma(D_t_z, concentration, temperture, ion_charge) << endl;
+		ofs_sigma << endl;
 
+		//自己拡散係数から自己伝導度
+		ofs_sigma << "self ionic conductivity (S/cm)" << endl;
+		ofs_sigma << "Sigma_x = " << NernstEinstein_DtoSigma(D_j_x, concentration, temperture, ion_charge) << endl;
+		ofs_sigma << "Sigma_y = " << NernstEinstein_DtoSigma(D_j_y, concentration, temperture, ion_charge) << endl;
+		ofs_sigma << "Sigma_z = " << NernstEinstein_DtoSigma(D_j_z, concentration, temperture, ion_charge) << endl;
 
 	}
 
@@ -1670,7 +1695,11 @@ int main()
 
 		//結果を出力するアウトプットファイルを作成する
 		ofstream ofs_sigma("IonicConductivity", ios::app);
-		
+		ofstream ofs_diff("DiffusionCoefficient", ios::app);
+
+		ofs_diff << scientific << "concentration = " << concentration << endl;
+		ofs_diff << scientific << "temperture = " << temperture << endl;
+		ofs_diff << scientific << "ion_charge = " << ion_charge << endl;
 
 
 /*		//電場の向きにより出力する伝導度を変える(main関数の最初に書いた)
@@ -1686,7 +1715,9 @@ int main()
 */
 
 		//伝導度x成分
-		ofs_sigma << "ionic conductivity [S/cm]" << endl;
+		ofs_sigma << "chemical ionic conductivity [S/cm]" << endl;
+		ofs_diff << "chemical diffusion coefficient [cm^2/s]" << endl;
+
 		vector<double> Sigma_vector_total(3,0.0);
 		for (int j = 0; j != Sigma_vector_total.size(); j++) {
 			for (int i = 0; i != Sigma_vector.size(); i++) {
@@ -1695,13 +1726,14 @@ int main()
 
 				if (i+1 == Sigma_vector.size()) {
 					Sigma_vector_total[j] /= Sigma_vector.size();
-					ofs_sigma << "Sigma_" << axis << "[" << j << "] = " << scientific << Sigma_vector_total[j] << " ,  " ;
+					ofs_sigma << "Sigma_" << axis << "[" << j << "] = " << scientific << Sigma_vector_total[j] << endl;
+					ofs_diff << "D" << axis << "[" << j << "] = " << scientific << NernstEinstein_SigmatoD(Sigma_vector_total[j], concentration, temperture, ion_charge)  << endl;
 
 				}
 			
 			}
 
-			double variance_sigma = 0.0 ;
+			/*double variance_sigma = 0.0 ;
 			double standard_deviation = 0.0 ;
 			for (int i = 0; i != Sigma_vector.size(); i++) {
 				variance_sigma += pow(Sigma_vector[i][j] - Sigma_vector_total[j], 2);
@@ -1714,6 +1746,7 @@ int main()
 				}
 
 			}
+			*/
 		}
 
 		//化学拡散係数

@@ -2,19 +2,19 @@
 #KMC = 1 times
 
 #total_time [s] 
-total_time = 8.966427e-11
+total_time = 8.681171e-11
 
 #concentration [/Ang.^3] 
 concentration = 3.897569e-03
 
 #Efield_strength [V/Ang.] 
-Efield_strength.Ang = 6.893867e-03
+Efield_strength.Ang = 1.148978e-02
 
 #Efield_strength [V/cm] 
-Efield_strength.cm = 6.893867e+05
+Efield_strength.cm = 1.148978e+06
 
 #temperture [K] 
-temperture = 600
+temperture = 1000
 
 #ion_charge 拡散種の電荷(整数) 
 ion_charge = 1

@@ -22,7 +22,7 @@ CORRECT=-1
 DISTANCEJUMP=1.5
 
 #温度(K)
-TEMP=600
+TEMP=1000
 
 #軸方向(+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
 AXIS=1
