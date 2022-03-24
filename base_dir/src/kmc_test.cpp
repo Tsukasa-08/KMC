@@ -224,6 +224,14 @@ double const ec = 1.60217662 * pow(10,-19);
 double ion_charge = 1;
 double q_charge = ion_charge * ec;
 
+//Nernst-Einsteinの関係式より、拡散係数から伝導度を算出する関数
+double NernstEinstein_DtoSigma(double D, double concentration, int temperture, double ion_charge) {
+	double Sigma;
+	Sigma = D * pow(ion_charge * ec, 2) * concentration / (kb * temperture) ; 
+	return Sigma;
+
+}
+
 
 //拡散種の配置一覧vectorを定義
 std::vector<int> Diffusionspecie::diffusion_siteid_now_list;
@@ -1645,9 +1653,12 @@ int main()
 		ofs_diff << "Dy = " << Dy << endl; 
 		ofs_diff << "Dz = " << Dz << endl; 
 
-		//化学拡散係数
-		ofs_diff << "chemical diffusion coefficient (cm^2/s)" << endl;
 
+		//結果を出力するアウトプットファイルを作成する
+		ofstream ofs_sigma("IonicConductivity", ios::app);
+
+		//トレーサー拡散係数からトレーサー伝導度
+		ofs_diff << "tracer ionic conductivity (S/cm)" << endl;
 
 
 	}
@@ -1658,7 +1669,7 @@ int main()
 	if (E_field_yes) {
 
 		//結果を出力するアウトプットファイルを作成する
-		ofstream ofs_sigma("ElectricalConductivity", ios::app);
+		ofstream ofs_sigma("IonicConductivity", ios::app);
 		
 
 
@@ -1675,7 +1686,7 @@ int main()
 */
 
 		//伝導度x成分
-		ofs_sigma << "伝導度 [S/cm]" << endl;
+		ofs_sigma << "ionic conductivity [S/cm]" << endl;
 		vector<double> Sigma_vector_total(3,0.0);
 		for (int j = 0; j != Sigma_vector_total.size(); j++) {
 			for (int i = 0; i != Sigma_vector.size(); i++) {
@@ -1705,6 +1716,8 @@ int main()
 			}
 		}
 
+		//化学拡散係数
+		//ofs_diff << "chemical diffusion coefficient (cm^2/s)" << endl;
 		
 
 		

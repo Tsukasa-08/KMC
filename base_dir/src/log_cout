@@ -1,6 +1,6 @@
 INPUTファイルを読み込み
 	1粒子あたり平均何回イベントを起こすか MCSP =100
-	平均をとる粒子の個数 AVERAGE = 216
+	平均をとる粒子の個数 AVERAGE = 1
 	KMCのステップ数(何回行うか) NSTEPS =1
 	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =21600
 	拡散種をいくつ配置するか NDIFFS = 216
@@ -45,7 +45,7 @@ blockingあり
 ##########
 
 	loop_counter finished
-	total_time = 9.145544e-11
+	total_time = 8.966427e-11
 	1 times KMC finished
 Execution time = 6 sec
 
