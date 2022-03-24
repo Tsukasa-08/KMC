@@ -10,7 +10,7 @@ AVERAGE=1
 NDIFFS=216
 
 #電場のありなし、(あり=1, なし=0)
-EFIELDON=1
+EFIELDON=0
 
 #電場の強さ、10^()を入力,単位は[eV/Å]
 #EFIELD=-2
@@ -22,7 +22,7 @@ CORRECT=-1
 DISTANCEJUMP=1.5
 
 #温度(K)
-TEMP=1000
+TEMP=600
 
 #軸方向(+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
 AXIS=1

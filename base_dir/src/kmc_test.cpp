@@ -248,6 +248,8 @@ std::set<int> Diffusionspecie::blocking_list;
 //メイン関数の開始
 int main()
 {
+	//アウトプットファイルを作成しておく
+	ofstream ofs_output("OUTPUT", ios::app);
 
 	//実行時間を計測する
 	chrono::system_clock::time_point start, end;
@@ -1547,7 +1549,6 @@ int main()
 		ofs_ave_dis << endl;
 
 		//OUTPUTファイルをまとめる
-		ofstream ofs_output("OUTPUT", ios::app);
 		ofs_output << "#This is OUTPUT file written by toml format." << endl;
 		ofs_output << "#KMC = " << step_counter << " times" << endl;
 		ofs_output << endl;
@@ -1643,6 +1644,10 @@ int main()
 		ofs_diff << "Dy = " << D_t_y << endl; 
 		ofs_diff << "Dz = " << D_t_z << endl; 
 		ofs_diff << endl;
+
+		ofs_output << "#tracer diffusion coefficient [cm^2/s]" << endl;
+		ofs_output << "tracer_D = " << "[" << D_t_x << "," << D_t_y << "," << D_t_z << "]" << endl;
+		ofs_output << endl;
 		
 		
 		//自己拡散係数
@@ -1669,23 +1674,45 @@ int main()
 		ofs_diff << "Dy = " << D_j_y << endl; 
 		ofs_diff << "Dz = " << D_j_z << endl; 
 
+		ofs_output << "#self diffusion coefficient [cm^2/s]" << endl;
+		ofs_output << "self_D = " << "[" << D_j_x << "," << D_j_y << "," << D_j_z << "]" << endl;
+		ofs_output << endl;
+
 
 		//結果を出力するアウトプットファイルを作成する
 		ofstream ofs_sigma("IonicConductivity", ios::app);
-
+		
 		//トレーサー拡散係数からトレーサー伝導度
+		std::vector<double> tracer_Sigma(3, 0.0);
+		tracer_Sigma[0] = NernstEinstein_DtoSigma(D_t_x, concentration, temperture, ion_charge);
+		tracer_Sigma[1] = NernstEinstein_DtoSigma(D_t_y, concentration, temperture, ion_charge);
+		tracer_Sigma[2] = NernstEinstein_DtoSigma(D_t_z, concentration, temperture, ion_charge);
+
+
 		ofs_sigma << "tracer ionic conductivity (S/cm)" << endl;
-		ofs_sigma << "Sigma_x = " << NernstEinstein_DtoSigma(D_t_x, concentration, temperture, ion_charge) << endl;
-		ofs_sigma << "Sigma_y = " << NernstEinstein_DtoSigma(D_t_y, concentration, temperture, ion_charge) << endl;
-		ofs_sigma << "Sigma_z = " << NernstEinstein_DtoSigma(D_t_z, concentration, temperture, ion_charge) << endl;
+		ofs_sigma << "Sigma_x = " << tracer_Sigma[0] << endl;
+		ofs_sigma << "Sigma_y = " << tracer_Sigma[1] << endl;
+		ofs_sigma << "Sigma_z = " << tracer_Sigma[2] << endl;
 		ofs_sigma << endl;
 
-		//自己拡散係数から自己伝導度
-		ofs_sigma << "self ionic conductivity (S/cm)" << endl;
-		ofs_sigma << "Sigma_x = " << NernstEinstein_DtoSigma(D_j_x, concentration, temperture, ion_charge) << endl;
-		ofs_sigma << "Sigma_y = " << NernstEinstein_DtoSigma(D_j_y, concentration, temperture, ion_charge) << endl;
-		ofs_sigma << "Sigma_z = " << NernstEinstein_DtoSigma(D_j_z, concentration, temperture, ion_charge) << endl;
+		ofs_output << "#tracer ionic conductivity [S/cm]" << endl;
+		ofs_output << "tracer_Sigma = " << "[" << tracer_Sigma[0] << "," << tracer_Sigma[1] << "," << tracer_Sigma[2] << "]" << endl;
+		ofs_output << endl;
 
+		//自己拡散係数から自己伝導度
+		std::vector<double> self_Sigma (3,0.0);
+		self_Sigma[0] = NernstEinstein_DtoSigma(D_j_x, concentration, temperture, ion_charge);
+		self_Sigma[1] = NernstEinstein_DtoSigma(D_j_y, concentration, temperture, ion_charge);
+		self_Sigma[2] = NernstEinstein_DtoSigma(D_j_z, concentration, temperture, ion_charge);
+		ofs_sigma << "self ionic conductivity (S/cm)" << endl;
+		ofs_sigma << "Sigma_x = " << self_Sigma[0] << endl;
+		ofs_sigma << "Sigma_y = " << self_Sigma[1] << endl;
+		ofs_sigma << "Sigma_z = " << self_Sigma[2] << endl;
+		ofs_sigma << endl;
+
+		ofs_output << "#self ionic conductivity [S/cm]" << endl;
+		ofs_output << "self_Sigma = " << "[" << self_Sigma[0] << "," << self_Sigma[1] << "," << self_Sigma[2] << "]" << endl;
+		ofs_output << endl;
 	}
 
 

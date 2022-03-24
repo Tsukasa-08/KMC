@@ -2,20 +2,26 @@
 #KMC = 1 times
 
 #total_time [s] 
-total_time = 8.681171e-11
+total_time = 9.911046e-11
 
 #concentration [/Ang.^3] 
 concentration = 3.897569e-03
 
-#Efield_strength [V/Ang.] 
-Efield_strength.Ang = 1.148978e-02
-
-#Efield_strength [V/cm] 
-Efield_strength.cm = 1.148978e+06
-
 #temperture [K] 
-temperture = 1000
+temperture = 600
 
 #ion_charge 拡散種の電荷(整数) 
 ion_charge = 1
+
+#tracer diffusion coefficient [cm^2/s]
+tracer_D = [6.69508e-06,7.71932e-06,6.76568e-06]
+
+#self diffusion coefficient [cm^2/s]
+self_D = [1.82429e-05,9.72142e-06,1.6831e-06]
+
+#tracer ionic conductivity [S/cm]
+tracer_Sigma = [0.0808604,0.0932307,0.0817131]
+
+#self ionic conductivity [S/cm]
+self_Sigma = [0.22033,0.117411,0.0203278]
 

@@ -1,7 +1,9 @@
-concentration = 3.897569e-03
-temperture = 1.000000e+03
-ion_charge = 1.000000e+00
-chemical diffusion coefficient [cm^2/s]
-Dx[0] = 9.204823e-06
-Dx[1] = -4.781414e-07
-Dx[2] = 7.580949e-07
+tracer diffusion coefficient (cm^2/s)
+Dx = 6.69508e-06
+Dy = 7.71932e-06
+Dz = 6.76568e-06
+
+self diffusion coefficient (cm^2/s)
+Dx = 1.82429e-05
+Dy = 9.72142e-06
+Dz = 1.6831e-06
