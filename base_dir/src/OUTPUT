@@ -2,26 +2,161 @@
 #KMC = 1 times
 
 #total_time [s] 
-total_time = 9.911046e-11
+total_time = 1.867746e-11
 
 #concentration [/Ang.^3] 
-concentration = 3.897569e-03
+concentration = 6.944444e-02
 
 #temperture [K] 
-temperture = 600
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 2 times
+
+#total_time [s] 
+total_time = 1.929039e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 3 times
+
+#total_time [s] 
+total_time = 1.829572e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 4 times
+
+#total_time [s] 
+total_time = 2.007548e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 5 times
+
+#total_time [s] 
+total_time = 1.933791e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 6 times
+
+#total_time [s] 
+total_time = 1.947616e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 7 times
+
+#total_time [s] 
+total_time = 1.946531e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 8 times
+
+#total_time [s] 
+total_time = 1.875704e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 9 times
+
+#total_time [s] 
+total_time = 1.975669e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#This is OUTPUT file written by toml format.
+#KMC = 10 times
+
+#total_time [s] 
+total_time = 2.060460e-11
+
+#concentration [/Ang.^3] 
+concentration = 6.944444e-02
+
+#temperture [K] 
+temperture = 1000
 
 #ion_charge 拡散種の電荷(整数) 
 ion_charge = 1
 
 #tracer diffusion coefficient [cm^2/s]
-tracer_D = [6.69508e-06,7.71932e-06,6.76568e-06]
+tracer_D = [0.000151233,0.000181323,0]
 
 #self diffusion coefficient [cm^2/s]
-self_D = [1.82429e-05,9.72142e-06,1.6831e-06]
+self_D = [0.000148872,0.000199175,0]
 
-#tracer ionic conductivity [S/cm]
-tracer_Sigma = [0.0808604,0.0932307,0.0817131]
+#tracer ionic conductivity [S]
+tracer_Sigma = [19.5264,23.4115,0]
 
-#self ionic conductivity [S/cm]
-self_Sigma = [0.22033,0.117411,0.0203278]
+#self ionic conductivity [S]
+self_Sigma = [19.2216,25.7164,0]
 

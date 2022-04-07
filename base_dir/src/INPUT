@@ -4,10 +4,10 @@
 MCSP=100
 
 #平均を取る粒子数
-AVERAGE=1
+AVERAGE=100
 
 #拡散種を配置する数、今回だったらプロトン
-NDIFFS=216
+NDIFFS=10
 
 #電場のありなし、(あり=1, なし=0)
 EFIELDON=0
@@ -22,10 +22,13 @@ CORRECT=-1
 DISTANCEJUMP=1.5
 
 #温度(K)
-TEMP=600
+TEMP=1000
 
 #軸方向(+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
 AXIS=1
 
 #blocking_listのありなし
-BLOCKING=1
+BLOCKING=0
+
+#拡散を考える次元(default=3)
+DIMENSIONALITY=2

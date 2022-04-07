@@ -1,33 +1,31 @@
 INPUTファイルを読み込み
 	1粒子あたり平均何回イベントを起こすか MCSP =100
-	平均をとる粒子の個数 AVERAGE = 1
-	KMCのステップ数(何回行うか) NSTEPS =1
-	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =21600
-	拡散種をいくつ配置するか NDIFFS = 216
-	電場の強さ EFIELD = 6.893867e-03 [V/Å] 
-	電場の強さ EFIELD = 6.893867e+05 [V/cm] 
-	温度 TEMP = 600
+	平均をとる粒子の個数 AVERAGE = 100
+	KMCのステップ数(何回行うか) NSTEPS =10
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =1000
+	拡散種をいくつ配置するか NDIFFS = 10
+	電場の強さ EFIELD = 1.148978e-02 [V/Å] 
+	電場の強さ EFIELD = 1.148978e+06 [V/cm] 
+	温度 TEMP = 1000
 	ジャンプ頻度補正係数 correct_constant = 0.1
 	電場方向 1 (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
-	ブロックリスト = 1 (1=あり、0=なし)
+	ブロックリスト = 0 (1=あり、0=なし)
 
 JMPDATA read
-	jump_total_number = 34992
+	jump_total_number = 400
 
 Directは8行目にあります
 POSCAR read
-	site_total_number = 8748
+	site_total_number = 100
 
 lattice_matrix = 
-	38.1259       0       0
-	      0 38.1259       0
-	      0       0 38.1259
-
-blocking_list.csv read
+	12  0  0
+	 0 12  0
+	0 0 1
 
 	no E_field
 step_counter = 1 start 
-blockingあり
+blockingなし
 
 
 	loop processing…
@@ -43,7 +41,178 @@ blockingあり
 ##########
 
 	loop_counter finished
-	total_time = 9.911046e-11
+	total_time = 1.867746e-11
 	1 times KMC finished
-Execution time = 6 sec
+step_counter = 2 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.929039e-11
+	2 times KMC finished
+step_counter = 3 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.829572e-11
+	3 times KMC finished
+step_counter = 4 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.007548e-11
+	4 times KMC finished
+step_counter = 5 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.933791e-11
+	5 times KMC finished
+step_counter = 6 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.947616e-11
+	6 times KMC finished
+step_counter = 7 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.946531e-11
+	7 times KMC finished
+step_counter = 8 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.875704e-11
+	8 times KMC finished
+step_counter = 9 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.975669e-11
+	9 times KMC finished
+step_counter = 10 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.060460e-11
+	10 times KMC finished
+Execution time = 0 sec
 

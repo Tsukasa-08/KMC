@@ -224,7 +224,7 @@ double const ec = 1.60217662 * pow(10,-19);
 double ion_charge = 1;
 double q_charge = ion_charge * ec;
 
-//Nernst-Einsteinの関係式より、拡散係数から伝導度を算出する関数
+//Nernst-Einsteinの関係式より、拡散係数から伝導度を算出する関数(1次元、1方向)
 double NernstEinstein_DtoSigma(double D, double concentration, int temperture, double ion_charge) {
 	double Sigma; //[S/cm]
 	Sigma = D * pow(ion_charge * ec, 2) * concentration / (kb * temperture) * pow(10, 24);
@@ -232,7 +232,7 @@ double NernstEinstein_DtoSigma(double D, double concentration, int temperture, d
 
 }
 
-//Nernst-Einsteinの関係式より、伝導度から拡散係数を算出する関数
+//Nernst-Einsteinの関係式より、伝導度から拡散係数を算出する関数(1次元、1方向)
 double NernstEinstein_SigmatoD(double Sigma, double concentration, int temperture, double ion_charge) {
 	double D; //[cm^2/s]
 	D = Sigma * (kb * temperture) * pow(10, -24) /  (pow(ion_charge * ec, 2) * concentration) ;
@@ -281,6 +281,7 @@ int main()
 	int E_field_axis = param.get<int>("AXIS", 0);
 	double distance_jump = param.get<double>("DISTANCEJUMP", 1); //単位は[Å]
 	int blocking_yes = param.get<int>("BLOCKING", 0);
+	int dimensionality = param.get<int>("DIMENSIONALITY", 3);
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
@@ -289,8 +290,18 @@ int main()
 	//double E_field_strength = pow(10, E_field_strength_for_pow);
 	double E_field_strength = correct_constant * kb * temperture / (q_charge * 0.5 * distance_jump); //単位は[J/Å]
 	
+	//次元に応じて伝導度の単位を対応させておく
+	string conductivity_unit;
+	switch (dimensionality) {
+		case 1 : conductivity_unit = "[S*cm]"; break;
+		case 2 : conductivity_unit = "[S]"; break;
+		case 3 : conductivity_unit = "[S/cm]"; break;
+	}
+	
 	//後半濃度算出用
 	double concentration;
+
+
 	
 	//入力確認用logファイルを作成
 
@@ -1502,7 +1513,7 @@ int main()
 
 		//電場なしの場合、自己拡散係数を出力
 		else {
-			displacement_vector *= pow(10,-8);
+			displacement_vector *= pow(10,-8); //[Ang.]を[cm]に変換
 
 			//jump_total_allを2乗したあと拡散種の数で割って、自己拡散係数を出力する
 			vector<double> D_j_3d(3,0.0);
@@ -1522,7 +1533,7 @@ int main()
 		//平均変位を出力, vectorのvectorから平均vectorを作成する関数があってもいいかも
 		ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
 		ofs_ave_dis << "KMC " << step_counter << " times" << endl;
-		ofs_ave_dis << "#diffusion_id, mean displacement in x, mean_displacement in y, mean displacement in z [Å]" << endl;
+		ofs_ave_dis << "#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter" << endl;
 
 		//それぞれの拡散種について、変位を出力する
 		for (int i = 0, n = diffusion_species.size(); i != n ; i++) {
@@ -1621,7 +1632,7 @@ int main()
 		ofstream ofs_diff("DiffusionCoefficient", ios::app);
 
 		//トレーサー拡散係数
-		ofs_diff << "tracer diffusion coefficient (cm^2/s)" << endl;
+		ofs_diff << "tracer diffusion coefficient [cm^2/s]" << endl;
 		double D_t_x = 0;
 		double D_t_y = 0;
 		double D_t_z = 0;
@@ -1651,7 +1662,7 @@ int main()
 		
 		
 		//自己拡散係数
-		ofs_diff << "self diffusion coefficient (cm^2/s)" << endl;
+		ofs_diff << "self diffusion coefficient [cm^2/s]" << endl;
 		double D_j_x = 0;
 		double D_j_y = 0;
 		double D_j_z = 0;
@@ -1689,13 +1700,13 @@ int main()
 		tracer_Sigma[2] = NernstEinstein_DtoSigma(D_t_z, concentration, temperture, ion_charge);
 
 
-		ofs_sigma << "tracer ionic conductivity (S/cm)" << endl;
+		ofs_sigma << "tracer ionic conductivity " << conductivity_unit << endl;
 		ofs_sigma << "Sigma_x = " << tracer_Sigma[0] << endl;
 		ofs_sigma << "Sigma_y = " << tracer_Sigma[1] << endl;
 		ofs_sigma << "Sigma_z = " << tracer_Sigma[2] << endl;
 		ofs_sigma << endl;
 
-		ofs_output << "#tracer ionic conductivity [S/cm]" << endl;
+		ofs_output << "#tracer ionic conductivity " << conductivity_unit << endl;
 		ofs_output << "tracer_Sigma = " << "[" << tracer_Sigma[0] << "," << tracer_Sigma[1] << "," << tracer_Sigma[2] << "]" << endl;
 		ofs_output << endl;
 
@@ -1704,13 +1715,13 @@ int main()
 		self_Sigma[0] = NernstEinstein_DtoSigma(D_j_x, concentration, temperture, ion_charge);
 		self_Sigma[1] = NernstEinstein_DtoSigma(D_j_y, concentration, temperture, ion_charge);
 		self_Sigma[2] = NernstEinstein_DtoSigma(D_j_z, concentration, temperture, ion_charge);
-		ofs_sigma << "self ionic conductivity (S/cm)" << endl;
+		ofs_sigma << "self ionic conductivity " << conductivity_unit << endl;
 		ofs_sigma << "Sigma_x = " << self_Sigma[0] << endl;
 		ofs_sigma << "Sigma_y = " << self_Sigma[1] << endl;
 		ofs_sigma << "Sigma_z = " << self_Sigma[2] << endl;
 		ofs_sigma << endl;
 
-		ofs_output << "#self ionic conductivity [S/cm]" << endl;
+		ofs_output << "#self ionic conductivity " << conductivity_unit << endl;
 		ofs_output << "self_Sigma = " << "[" << self_Sigma[0] << "," << self_Sigma[1] << "," << self_Sigma[2] << "]" << endl;
 		ofs_output << endl;
 	}
@@ -1742,7 +1753,7 @@ int main()
 */
 
 		//伝導度x成分
-		ofs_sigma << "chemical ionic conductivity [S/cm]" << endl;
+		ofs_sigma << "chemical ionic conductivity " << conductivity_unit << endl;
 		ofs_diff << "chemical diffusion coefficient [cm^2/s]" << endl;
 
 		vector<double> Sigma_vector_total(3,0.0);
