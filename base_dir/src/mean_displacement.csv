@@ -1,130 +1,1300 @@
 KMC 1 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,0,-7.2,0,114
-2,4.8,8.4,0,103
-3,-2.4,-4.8,0,110
-4,-13.2,-3.33067e-16,0,99
-5,-2.4,-4.8,0,96
-6,2.4,-6,0,103
-7,4.8,1.2,0,103
-8,-4.8,-10.8,0,101
-9,1.2,-7.2,0,85
-10,-3.6,-6,0,86
+1,-4.8,3.6,0,1009
+2,40.8,21.6,0,1014
+3,-14.4,-21.6,0,994
+4,-16.8,-21.6,0,1002
+5,-38.4,-15.6,0,1033
+6,-19.2,-14.4,0,968
+7,-39.6,-32.4,0,1028
+8,-6.66134e-16,15.6,0,1009
+9,4.8,-32.4,0,965
+10,-6,-25.2,0,978
 
 KMC 2 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,6,-2.4,0,105
-2,-3.6,3.33067e-16,0,71
-3,-1.2,3.6,0,90
-4,4.8,1.2,0,121
-5,-3.6,-3.6,0,92
-6,-9.6,-1.2,0,117
-7,-7.2,-12,0,108
-8,-3.6,2.4,0,103
-9,-2.4,-2.4,0,86
-10,-12,-1.2,0,107
+1,-13.2,-45.6,0,1035
+2,7.2,-21.6,0,1008
+3,36,3.33067e-16,0,988
+4,-4.8,-18,0,1025
+5,26.4,-14.4,0,990
+6,14.4,-10.8,0,1007
+7,19.2,3.6,0,933
+8,45.6,-21.6,0,1002
+9,-13.2,22.8,0,1064
+10,3.6,6,0,948
 
 KMC 3 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,9.6,-6.66134e-16,0,106
-2,-9.99201e-16,7.2,0,96
-3,14.4,-8.4,0,91
-4,14.4,-9.6,0,118
-5,-13.2,6,0,102
-6,-7.2,-4.8,0,94
-7,1.2,14.4,0,93
-8,-2.4,-4.8,0,102
-9,-1.2,8.4,0,100
-10,-3.6,1.2,0,98
+1,-13.2,2.4,0,991
+2,-28.8,-14.4,0,966
+3,-13.2,36,0,1001
+4,26.4,-10.8,0,995
+5,-36,7.2,0,964
+6,-33.6,-24,0,964
+7,4.8,2.4,0,1050
+8,3.6,-14.4,0,1039
+9,-36,-56.4,0,1021
+10,-25.2,16.8,0,1009
 
 KMC 4 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,3.6,-3.6,0,116
-2,3.33067e-16,9.6,0,92
-3,-6,-8.4,0,96
-4,6,-7.2,0,107
-5,-6,-4.8,0,87
-6,0,-15.6,0,101
-7,0,-6,0,107
-8,-6.66134e-16,16.8,0,106
-9,8.4,13.2,0,88
-10,-15.6,13.2,0,100
+1,-26.4,34.8,0,1007
+2,-49.2,4.8,0,957
+3,-10.8,22.8,0,988
+4,37.2,15.6,0,1014
+5,26.4,-32.4,0,997
+6,-19.2,26.4,0,1018
+7,-13.2,24,0,1059
+8,-15.6,-37.2,0,1004
+9,-20.4,-7.2,0,979
+10,-6,-4.8,0,977
 
 KMC 5 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,-10.8,10.8,0,100
-2,-4.8,12,0,96
-3,-12,1.2,0,109
-4,-19.2,8.4,0,105
-5,-16.8,6.66134e-16,0,110
-6,-2.4,3.6,0,107
-7,12,1.2,0,121
-8,4.8,-4.8,0,82
-9,-9.6,12,0,90
-10,10.8,-10.8,0,80
+1,32.4,-28.8,0,1023
+2,-10.8,-6,0,924
+3,-37.2,44.4,0,990
+4,-25.2,-42,0,996
+5,-24,-14.4,0,1016
+6,10.8,-32.4,0,1034
+7,-2.4,13.2,0,1033
+8,7.2,10.8,0,977
+9,-24,-52.8,0,1004
+10,-2.4,-10.8,0,1003
 
 KMC 6 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,-6.66134e-16,0,0,80
-2,2.4,7.2,0,84
-3,-7.2,-9.6,0,106
-4,-4.8,-2.4,0,100
-5,-12,14.4,0,112
-6,-9.6,15.6,0,91
-7,-3.6,-10.8,0,112
-8,1.2,-9.6,0,107
-9,-12,-8.4,0,105
-10,3.6,-7.2,0,103
+1,-10.8,-2.4,0,957
+2,-10.8,-2.4,0,1017
+3,10.8,-26.4,0,1023
+4,58.8,-8.4,0,974
+5,-48,8.4,0,1003
+6,-30,20.4,0,1010
+7,28.8,-34.8,0,1061
+8,-24,4.8,0,964
+9,-44.4,8.4,0,988
+10,58.8,-21.6,0,1003
 
 KMC 7 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,3.6,3.6,0,102
-2,12,7.2,0,100
-3,13.2,10.8,0,100
-4,-3.6,0,0,93
-5,-12,6,0,91
-6,-3.6,-9.6,0,105
-7,1.2,-8.4,0,98
-8,-6,0,0,113
-9,-6,-13.2,0,84
-10,15.6,10.8,0,114
+1,22.8,27.6,0,986
+2,-14.4,-9.6,0,962
+3,-22.8,33.6,0,1015
+4,-19.2,22.8,0,985
+5,4.8,-31.2,0,1010
+6,-10.8,3.6,0,976
+7,-19.2,-7.2,0,1000
+8,-25.2,26.4,0,1015
+9,19.2,-21.6,0,1026
+10,15.6,-16.8,0,1025
 
 KMC 8 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,-8.4,-12,0,101
-2,-1.2,4.8,0,105
-3,-4.8,6,0,99
-4,8.4,2.4,0,83
-5,-3.6,20.4,0,104
-6,-7.2,3.6,0,97
-7,-2.4,10.8,0,105
-8,12,-3.6,0,99
-9,2.4,2.4,0,106
-10,4.8,3.6,0,101
+1,-20.4,-32.4,0,994
+2,-9.6,-18,0,1013
+3,32.4,3.6,0,1044
+4,24,-34.8,0,993
+5,-16.8,-3.6,0,961
+6,14.4,4.8,0,1010
+7,-13.2,15.6,0,996
+8,-12,-28.8,0,968
+9,21.6,-39.6,0,979
+10,32.4,13.2,0,1042
 
 KMC 9 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,-2.4,4.8,0,88
-2,3.6,18,0,104
-3,12,9.6,0,92
-4,1.2,-6,0,100
-5,1.2,3.6,0,90
-6,-10.8,1.2,0,126
-7,0,-12,0,98
-8,-4.8,-6.66134e-16,0,86
-9,4.8,-7.2,0,100
-10,0,2.4,0,116
+1,1.2,19.2,0,1017
+2,4.8,-44.4,0,985
+3,4.32987e-15,15.6,0,1011
+4,-12,10.8,0,965
+5,-33.6,-13.2,0,1031
+6,-31.2,-10.8,0,999
+7,8.4,19.2,0,955
+8,20.4,-6,0,1042
+9,-3.6,-26.4,0,1035
+10,38.4,-26.4,0,960
 
 KMC 10 times
 #diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
-1,14.4,-3.33067e-16,0,120
-2,-4.8,-1.2,0,83
-3,2.4,16.8,0,100
-4,-1.2,6,0,88
-5,-13.2,9.6,0,105
-6,-9.6,-4.8,0,108
-7,7.2,-7.2,0,106
-8,2.4,4.8,0,90
-9,-4.8,12,0,98
-10,7.2,19.2,0,102
+1,2.4,18,0,993
+2,34.8,21.6,0,1009
+3,-26.4,21.6,0,948
+4,25.2,32.4,0,1022
+5,25.2,19.2,0,1013
+6,9.6,19.2,0,1042
+7,34.8,3.6,0,984
+8,34.8,26.4,0,999
+9,-13.2,-39.6,0,936
+10,13.2,-15.6,0,1054
+
+KMC 11 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-7.2,-36,0,974
+2,7.2,19.2,0,1002
+3,3.6,44.4,0,990
+4,44.4,-8.4,0,922
+5,-10.8,25.2,0,1006
+6,-9.6,33.6,0,992
+7,2.4,-10.8,0,975
+8,-16.8,14.4,0,1032
+9,-13.2,36,0,1043
+10,18,-1.2,0,1064
+
+KMC 12 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-8.4,-20.4,0,962
+2,19.2,21.6,0,966
+3,-16.8,-13.2,0,1021
+4,14.4,-10.8,0,1075
+5,2.4,1.2,0,1017
+6,21.6,-32.4,0,1009
+7,28.8,-34.8,0,981
+8,-6.66134e-16,-33.6,0,1022
+9,-7.2,22.8,0,959
+10,-14.4,21.6,0,988
+
+KMC 13 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,16.8,-6.66134e-16,0,1002
+2,18,15.6,0,988
+3,-34.8,15.6,0,988
+4,-26.4,54,0,1007
+5,19.2,-56.4,0,1025
+6,6,-21.6,0,973
+7,-16.8,32.4,0,989
+8,-1.2,-4.8,0,969
+9,-30,-26.4,0,999
+10,50.4,0,0,1060
+
+KMC 14 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-32.4,10.8,0,986
+2,30,49.2,0,946
+3,75.6,-52.8,0,1003
+4,-13.2,30,0,1006
+5,-18,-19.2,0,1019
+6,-13.2,28.8,0,1023
+7,-22.8,7.2,0,1001
+8,14.4,-14.4,0,1032
+9,-8.4,-27.6,0,954
+10,33.6,12,0,1030
+
+KMC 15 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-14.4,25.2,0,1003
+2,36,-8.4,0,975
+3,-40.8,-38.4,0,1042
+4,42,26.4,0,1017
+5,16.8,2.4,0,1022
+6,-3.6,-43.2,0,1019
+7,-20.4,-40.8,0,963
+8,-16.8,-27.6,0,961
+9,12,-52.8,0,1012
+10,73.2,-37.2,0,986
+
+KMC 16 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-25.2,9.6,0,981
+2,-27.6,-25.2,0,1012
+3,-30,26.4,0,997
+4,3.6,13.2,0,1052
+5,4.8,2.4,0,972
+6,13.2,54,0,976
+7,37.2,-3.6,0,1034
+8,-16.8,45.6,0,962
+9,12,38.4,0,998
+10,-33.6,16.8,0,1016
+
+KMC 17 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-21.6,3.6,0,989
+2,15.6,6,0,1042
+3,14.4,20.4,0,1007
+4,-26.4,34.8,0,1035
+5,-25.2,-20.4,0,982
+6,-13.2,-30,0,1010
+7,16.8,48,0,968
+8,-14.4,30,0,959
+9,6,45.6,0,995
+10,24,3.6,0,1013
+
+KMC 18 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-25.2,-15.6,0,990
+2,26.4,21.6,0,986
+3,15.6,-7.2,0,963
+4,4.8,-51.6,0,1031
+5,-27.6,-21.6,0,1005
+6,-73.2,-3.6,0,1044
+7,-37.2,-7.2,0,967
+8,48,-2.4,0,994
+9,27.6,12,0,1003
+10,-67.2,-32.4,0,1017
+
+KMC 19 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-48,-22.8,0,933
+2,26.4,24,0,1014
+3,-8.4,48,0,1065
+4,-3.6,24,0,965
+5,-21.6,42,0,979
+6,-20.4,27.6,0,1020
+7,4.8,-3.6,0,1025
+8,7.2,-14.4,0,1026
+9,3.6,1.2,0,964
+10,-20.4,-33.6,0,1009
+
+KMC 20 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,8.4,-26.4,0,1013
+2,2.4,6,0,979
+3,12,0,0,1026
+4,-37.2,-4.8,0,1021
+5,-1.2,3.33067e-16,0,941
+6,3.6,-16.8,0,975
+7,4.8,20.4,0,1045
+8,10.8,10.8,0,926
+9,39.6,-20.4,0,1028
+10,15.6,-3.6,0,1046
+
+KMC 21 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,12,14.4,0,1020
+2,38.4,-14.4,0,1012
+3,7.2,-4.8,0,1012
+4,-22.8,42,0,984
+5,48,8.4,0,1029
+6,2.4,42,0,1049
+7,-42,-9.6,0,979
+8,-82.8,-8.4,0,998
+9,-3.6,27.6,0,952
+10,25.2,-12,0,965
+
+KMC 22 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,8.4,1.2,0,974
+2,14.4,-8.4,0,1007
+3,-1.2,28.8,0,1007
+4,34.8,6,0,1002
+5,46.8,24,0,975
+6,6,22.8,0,1018
+7,7.2,8.4,0,977
+8,-24,-40.8,0,1052
+9,1.2,16.8,0,971
+10,21.6,-3.6,0,1017
+
+KMC 23 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-12,-27.6,0,1045
+2,37.2,15.6,0,992
+3,36,18,0,1033
+4,-18,-22.8,0,962
+5,-10.8,46.8,0,1018
+6,-12,-46.8,0,957
+7,-54,-19.2,0,1015
+8,-3.9968e-15,9.6,0,966
+9,18,14.4,0,1003
+10,7.2,10.8,0,1009
+
+KMC 24 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,0,-37.2,0,1007
+2,-10.8,-50.4,0,1013
+3,0,7.2,0,1018
+4,-14.4,-8.4,0,939
+5,24,8.4,0,955
+6,-26.4,20.4,0,1017
+7,8.4,-22.8,0,1024
+8,-52.8,42,0,1017
+9,44.4,39.6,0,1010
+10,15.6,-32.4,0,1000
+
+KMC 25 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,21.6,-31.2,0,1046
+2,-34.8,15.6,0,942
+3,28.8,24,0,1040
+4,-3.6,7.2,0,965
+5,-15.6,-34.8,0,1044
+6,14.4,-33.6,0,1046
+7,-4.8,-1.2,0,993
+8,54,-13.2,0,968
+9,-8.4,24,0,1013
+10,-16.8,30,0,943
+
+KMC 26 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-14.4,-36,0,1046
+2,2.4,49.2,0,1035
+3,50.4,7.2,0,960
+4,7.2,8.4,0,991
+5,-8.4,30,0,1014
+6,-7.2,30,0,1019
+7,7.2,-21.6,0,952
+8,1.2,57.6,0,985
+9,37.2,-50.4,0,1041
+10,3.6,-9.6,0,957
+
+KMC 27 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-7.2,10.8,0,997
+2,-19.2,-33.6,0,962
+3,30,-3.6,0,1014
+4,-30,-14.4,0,985
+5,9.6,1.2,0,979
+6,-26.4,-9.6,0,1020
+7,42,-12,0,983
+8,44.4,-21.6,0,1031
+9,-28.8,22.8,0,1017
+10,12,-19.2,0,1012
+
+KMC 28 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-14.4,-3.6,0,1023
+2,-13.2,-1.2,0,976
+3,-13.2,1.2,0,966
+4,-48,18,0,1015
+5,-22.8,52.8,0,1059
+6,-62.4,13.2,0,985
+7,-16.8,21.6,0,1052
+8,-24,1.2,0,997
+9,4.8,-6,0,955
+10,7.2,-4.8,0,972
+
+KMC 29 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,21.6,57.6,0,992
+2,20.4,40.8,0,1005
+3,-36,-18,0,999
+4,4.8,-64.8,0,1010
+5,-3.6,7.2,0,997
+6,-5.32907e-15,-46.8,0,1005
+7,13.2,57.6,0,955
+8,-7.2,-15.6,0,985
+9,43.2,-10.8,0,1015
+10,-16.8,-10.8,0,1037
+
+KMC 30 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,25.2,-30,0,1016
+2,-7.2,-8.4,0,1011
+3,2.4,3.6,0,1013
+4,13.2,-30,0,972
+5,8.4,-52.8,0,963
+6,-20.4,12,0,983
+7,-10.8,-19.2,0,999
+8,12,1.2,0,1015
+9,33.6,32.4,0,1019
+10,13.2,43.2,0,1009
+
+KMC 31 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-19.2,10.8,0,1001
+2,-44.4,9.6,0,1007
+3,-9.6,-40.8,0,976
+4,-33.6,26.4,0,970
+5,10.8,-8.4,0,1006
+6,-46.8,-3.6,0,998
+7,-1.2,13.2,0,968
+8,-19.2,-2.4,0,1018
+9,49.2,-6,0,1026
+10,-24,31.2,0,1030
+
+KMC 32 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-52.8,-10.8,0,999
+2,-39.6,-9.6,0,1045
+3,-2.4,27.6,0,961
+4,-9.6,37.2,0,1017
+5,-16.8,20.4,0,979
+6,-36,8.4,0,1021
+7,-33.6,-4.8,0,960
+8,-12,12,0,1008
+9,-22.8,-37.2,0,1004
+10,-19.2,21.6,0,1006
+
+KMC 33 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,22.8,26.4,0,965
+2,-18,-9.6,0,1011
+3,66,36,0,965
+4,14.4,20.4,0,1045
+5,-36,-21.6,0,1018
+6,-42,37.2,0,994
+7,44.4,36,0,1027
+8,25.2,-7.2,0,993
+9,-13.2,-36,0,1051
+10,-32.4,-21.6,0,931
+
+KMC 34 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,4.8,40.8,0,1022
+2,25.2,8.4,0,992
+3,7.2,3.6,0,953
+4,2.4,-22.8,0,1007
+5,-2.4,-26.4,0,1020
+6,-1.2,-9.6,0,1063
+7,-50.4,6,0,973
+8,-34.8,-8.4,0,998
+9,9.6,20.4,0,985
+10,1.2,-16.8,0,987
+
+KMC 35 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-46.8,36,0,983
+2,54,14.4,0,975
+3,51.6,10.8,0,982
+4,44.4,-15.6,0,1006
+5,-6.66134e-16,-2.4,0,978
+6,15.6,24,0,999
+7,14.4,14.4,0,1016
+8,15.6,22.8,0,1014
+9,-30,-19.2,0,1013
+10,-14.4,-40.8,0,1034
+
+KMC 36 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-56.4,38.4,0,1003
+2,-3.6,21.6,0,1023
+3,-46.8,-33.6,0,979
+4,-2.4,1.2,0,1005
+5,13.2,-31.2,0,965
+6,-45.6,12,0,1036
+7,-10.8,-20.4,0,1006
+8,8.4,-21.6,0,1047
+9,33.6,1.2,0,945
+10,-34.8,-26.4,0,991
+
+KMC 37 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,2.4,24,0,926
+2,-28.8,25.2,0,981
+3,-49.2,-28.8,0,979
+4,10.8,27.6,0,1026
+5,-33.6,-3.33067e-16,0,1016
+6,18,2.4,0,1015
+7,-26.4,13.2,0,1031
+8,-8.4,-3.6,0,988
+9,3.6,-3.6,0,1002
+10,-28.8,21.6,0,1036
+
+KMC 38 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,62.4,22.8,0,1005
+2,-9.6,40.8,0,950
+3,-6,24,0,1051
+4,58.8,1.2,0,1002
+5,14.4,22.8,0,993
+6,-8.4,14.4,0,1015
+7,26.4,43.2,0,992
+8,6,-6,0,958
+9,22.8,42,0,1008
+10,22.8,46.8,0,1026
+
+KMC 39 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,25.2,4.8,0,959
+2,-57.6,-86.4,0,974
+3,19.2,-34.8,0,1011
+4,25.2,64.8,0,929
+5,44.4,-24,0,1025
+6,-24,43.2,0,1018
+7,34.8,2.4,0,1061
+8,24,-2.4,0,1026
+9,-6,46.8,0,970
+10,-39.6,16.8,0,1027
+
+KMC 40 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,39.6,22.8,0,1092
+2,-10.8,-8.4,0,1000
+3,-56.4,3.6,0,978
+4,-16.8,-3.6,0,1023
+5,-3.6,21.6,0,1005
+6,32.4,-50.4,0,997
+7,6,-15.6,0,1010
+8,-1.2,15.6,0,968
+9,24,-64.8,0,958
+10,36,8.4,0,969
+
+KMC 41 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,18,-8.4,0,992
+2,20.4,-26.4,0,1033
+3,-19.2,-30,0,1017
+4,-28.8,33.6,0,958
+5,-1.2,16.8,0,957
+6,15.6,38.4,0,1033
+7,26.4,-50.4,0,1014
+8,-38.4,-2.4,0,968
+9,-42,44.4,0,1020
+10,-15.6,37.2,0,1008
+
+KMC 42 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-39.6,14.4,0,1033
+2,-33.6,9.6,0,936
+3,-33.6,1.2,0,1003
+4,26.4,-52.8,0,1034
+5,8.4,-14.4,0,1009
+6,-6,-70.8,0,990
+7,21.6,-13.2,0,1031
+8,-10.8,-48,0,1005
+9,-22.8,15.6,0,976
+10,-30,-12,0,983
+
+KMC 43 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-9.6,-9.6,0,992
+2,9.6,45.6,0,974
+3,-31.2,12,0,1016
+4,18,-9.6,0,995
+5,-20.4,-45.6,0,1025
+6,-24,-30,0,979
+7,-7.2,-21.6,0,946
+8,55.2,-9.6,0,1058
+9,-38.4,-8.4,0,1019
+10,-31.2,7.2,0,996
+
+KMC 44 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-3.6,-1.2,0,944
+2,1.2,-14.4,0,979
+3,-14.4,10.8,0,1051
+4,19.2,28.8,0,1008
+5,48,-28.8,0,1024
+6,38.4,10.8,0,983
+7,-26.4,-8.4,0,995
+8,28.8,19.2,0,1026
+9,-2.4,6,0,977
+10,-15.6,16.8,0,1013
+
+KMC 45 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,2.4,-3.6,0,1005
+2,14.4,15.6,0,983
+3,12,-26.4,0,1004
+4,-33.6,-51.6,0,1001
+5,-10.8,8.4,0,962
+6,-3.6,-3.6,0,1032
+7,1.2,-9.6,0,1019
+8,10.8,3.6,0,1072
+9,-2.4,-38.4,0,982
+10,-13.2,-37.2,0,940
+
+KMC 46 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-32.4,27.6,0,1030
+2,-39.6,-24,0,1011
+3,40.8,-21.6,0,954
+4,70.8,9.6,0,1003
+5,-46.8,-9.6,0,985
+6,-28.8,46.8,0,1021
+7,-42,20.4,0,988
+8,-16.8,-12,0,1008
+9,-16.8,2.4,0,1000
+10,-10.8,13.2,0,1000
+
+KMC 47 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-15.6,31.2,0,1009
+2,15.6,27.6,0,1008
+3,-1.2,-31.2,0,1017
+4,-9.6,-2.4,0,994
+5,15.6,-12,0,1023
+6,-42,-37.2,0,1012
+7,7.2,-30,0,973
+8,25.2,-8.4,0,982
+9,-9.6,-10.8,0,1029
+10,-1.2,-19.2,0,953
+
+KMC 48 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-1.2,-16.8,0,1011
+2,44.4,-15.6,0,990
+3,-8.4,9.6,0,977
+4,13.2,36,0,975
+5,2.4,-12,0,988
+6,8.4,-24,0,1001
+7,-38.4,-19.2,0,1006
+8,52.8,4.8,0,1008
+9,18,-14.4,0,965
+10,-46.8,2.4,0,1079
+
+KMC 49 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-4.8,0,0,1008
+2,10.8,20.4,0,998
+3,7.2,20.4,0,977
+4,-12,-9.6,0,988
+5,-28.8,27.6,0,1011
+6,69.6,-34.8,0,1021
+7,24,14.4,0,954
+8,1.2,-49.2,0,970
+9,-13.2,2.4,0,1043
+10,-12,14.4,0,1030
+
+KMC 50 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-14.4,-20.4,0,1015
+2,-13.2,-34.8,0,1012
+3,-6,-12,0,917
+4,-10.8,36,0,995
+5,6,-24,0,1047
+6,-18,-22.8,0,990
+7,-28.8,-48,0,1040
+8,-15.6,8.4,0,982
+9,-19.2,-25.2,0,963
+10,30,-4.66294e-15,0,1039
+
+KMC 51 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-3.9968e-15,32.4,0,1019
+2,-14.4,33.6,0,978
+3,-6,-38.4,0,1015
+4,3.6,-9.6,0,1045
+5,-4.8,-24,0,1014
+6,14.4,28.8,0,1012
+7,-12,-4.8,0,980
+8,30,4.8,0,1011
+9,-10.8,-12,0,993
+10,10.8,-12,0,933
+
+KMC 52 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-42,20.4,0,978
+2,27.6,-6,0,1034
+3,-8.4,24,0,991
+4,-30,-45.6,0,1057
+5,-8.4,10.8,0,1006
+6,-10.8,-36,0,947
+7,-8.4,25.2,0,980
+8,43.2,13.2,0,995
+9,-50.4,-1.2,0,1021
+10,-64.8,-1.2,0,991
+
+KMC 53 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-42,-10.8,0,954
+2,2.4,-3.6,0,1001
+3,28.8,-12,0,976
+4,-24,21.6,0,954
+5,-80.4,7.2,0,1009
+6,-40.8,-8.4,0,1089
+7,-6,-7.2,0,1035
+8,-43.2,-56.4,0,1007
+9,2.4,-45.6,0,942
+10,-8.4,-38.4,0,1033
+
+KMC 54 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,1.2,-2.4,0,1103
+2,-36,26.4,0,1012
+3,33.6,30,0,1015
+4,2.4,30,0,997
+5,-15.6,45.6,0,985
+6,10.8,-27.6,0,1000
+7,31.2,12,0,978
+8,-19.2,2.4,0,938
+9,8.4,19.2,0,983
+10,0,-37.2,0,989
+
+KMC 55 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,1.2,-34.8,0,994
+2,12,12,0,1052
+3,3.33067e-16,-2.4,0,920
+4,10.8,39.6,0,1008
+5,48,-2.4,0,1036
+6,-34.8,76.8,0,1013
+7,-24,-44.4,0,963
+8,-13.2,4.8,0,991
+9,25.2,0,0,1027
+10,-18,44.4,0,996
+
+KMC 56 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-60,-21.6,0,1050
+2,20.4,6.66134e-16,0,945
+3,20.4,-8.4,0,1008
+4,-33.6,40.8,0,1000
+5,-14.4,-2.4,0,960
+6,4.8,-37.2,0,961
+7,-33.6,2.4,0,1092
+8,7.2,16.8,0,994
+9,-55.2,9.6,0,974
+10,-8.4,-6,0,1016
+
+KMC 57 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-12,-10.8,0,1007
+2,-39.6,-7.2,0,983
+3,-8.4,1.2,0,934
+4,-64.8,-40.8,0,1032
+5,-22.8,-36,0,993
+6,-7.2,16.8,0,996
+7,-33.6,-58.8,0,1061
+8,36,43.2,0,976
+9,-31.2,-1.2,0,1011
+10,4.8,13.2,0,1007
+
+KMC 58 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-15.6,67.2,0,985
+2,7.2,52.8,0,992
+3,-56.4,-1.2,0,1032
+4,44.4,-2.4,0,1035
+5,-8.4,-1.2,0,988
+6,-3.6,18,0,1022
+7,-22.8,7.2,0,935
+8,2.4,3.6,0,981
+9,-33.6,3.6,0,995
+10,-2.66454e-15,15.6,0,1035
+
+KMC 59 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-36,-4.8,0,990
+2,-9.6,-22.8,0,957
+3,9.6,-1.2,0,1005
+4,-61.2,-25.2,0,986
+5,3.33067e-16,28.8,0,950
+6,56.4,12,0,993
+7,-27.6,37.2,0,1038
+8,42,19.2,0,973
+9,-31.2,19.2,0,1030
+10,-26.4,9.6,0,1078
+
+KMC 60 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-12,32.4,0,967
+2,-8.4,-4.8,0,991
+3,-19.2,-14.4,0,1020
+4,27.6,20.4,0,990
+5,18,-9.6,0,1011
+6,30,-38.4,0,1061
+7,-1.2,-4.8,0,983
+8,-2.4,-43.2,0,1022
+9,20.4,-19.2,0,953
+10,14.4,26.4,0,1002
+
+KMC 61 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-14.4,-13.2,0,971
+2,10.8,21.6,0,963
+3,-34.8,-4.66294e-15,0,1017
+4,21.6,-13.2,0,989
+5,15.6,9.6,0,1043
+6,16.8,13.2,0,1023
+7,25.2,-1.2,0,980
+8,-10.8,-4.8,0,969
+9,10.8,-48,0,1029
+10,-34.8,-13.2,0,1016
+
+KMC 62 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-33.6,34.8,0,1013
+2,64.8,28.8,0,1016
+3,2.4,25.2,0,1003
+4,-4.8,-26.4,0,966
+5,39.6,-40.8,0,1009
+6,19.2,-18,0,991
+7,19.2,-6.66134e-16,0,1006
+8,-4.8,8.4,0,977
+9,-25.2,33.6,0,1055
+10,-42,30,0,964
+
+KMC 63 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-31.2,1.2,0,1017
+2,16.8,4.8,0,1016
+3,18,27.6,0,978
+4,9.6,16.8,0,994
+5,-8.4,-24,0,971
+6,-1.2,14.4,0,1049
+7,16.8,1.2,0,979
+8,8.4,-20.4,0,1026
+9,37.2,12,0,1051
+10,-20.4,-7.2,0,919
+
+KMC 64 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,55.2,-66,0,1005
+2,16.8,-3.6,0,1019
+3,-30,25.2,0,1002
+4,1.2,28.8,0,1017
+5,21.6,22.8,0,1031
+6,-32.4,-9.6,0,1017
+7,-39.6,8.4,0,1014
+8,48,-14.4,0,1010
+9,31.2,-39.6,0,925
+10,73.2,49.2,0,960
+
+KMC 65 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-31.2,-18,0,991
+2,22.8,-44.4,0,1024
+3,-3.6,2.4,0,989
+4,-7.2,39.6,0,937
+5,1.2,4.8,0,1001
+6,-30,-6,0,992
+7,48,10.8,0,1005
+8,16.8,-34.8,0,1023
+9,-2.4,-4.8,0,1042
+10,-37.2,30,0,996
+
+KMC 66 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-14.4,-1.2,0,999
+2,24,-12,0,966
+3,-1.2,-10.8,0,1024
+4,-54,-14.4,0,1019
+5,15.6,-2.4,0,941
+6,-14.4,-24,0,1088
+7,30,-7.2,0,953
+8,38.4,24,0,1016
+9,60,2.4,0,960
+10,12,16.8,0,1034
+
+KMC 67 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-39.6,-20.4,0,986
+2,13.2,42,0,1026
+3,-10.8,12,0,1041
+4,-6,-4.8,0,989
+5,32.4,-19.2,0,1029
+6,16.8,-32.4,0,901
+7,34.8,56.4,0,966
+8,15.6,57.6,0,1055
+9,-18,-14.4,0,995
+10,-7.2,14.4,0,1012
+
+KMC 68 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-10.8,21.6,0,1051
+2,-32.4,43.2,0,991
+3,49.2,21.6,0,973
+4,-14.4,-1.2,0,1043
+5,8.4,-26.4,0,997
+6,19.2,-12,0,980
+7,31.2,42,0,1019
+8,25.2,60,0,989
+9,-34.8,-15.6,0,946
+10,2.4,32.4,0,1011
+
+KMC 69 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-36,3.6,0,1011
+2,37.2,13.2,0,986
+3,-7.2,-2.4,0,1018
+4,1.2,12,0,967
+5,26.4,-25.2,0,995
+6,-62.4,9.6,0,962
+7,6,37.2,0,982
+8,-46.8,9.6,0,999
+9,36,9.6,0,1082
+10,-20.4,-3.6,0,998
+
+KMC 70 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,31.2,-18,0,971
+2,15.6,25.2,0,1002
+3,-1.2,13.2,0,996
+4,-4.8,22.8,0,911
+5,-10.8,33.6,0,1039
+6,-13.2,-2.4,0,1013
+7,18,-32.4,0,992
+8,-1.2,-20.4,0,1032
+9,-49.2,-18,0,996
+10,6,-15.6,0,1048
+
+KMC 71 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-22.8,-19.2,0,989
+2,36,-13.2,0,1069
+3,-32.4,25.2,0,1016
+4,18,13.2,0,982
+5,-68.4,28.8,0,975
+6,58.8,-18,0,968
+7,30,7.2,0,1009
+8,22.8,19.2,0,1041
+9,36,-13.2,0,953
+10,-45.6,12,0,998
+
+KMC 72 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,2.4,12,0,1016
+2,9.6,-33.6,0,948
+3,13.2,-9.6,0,979
+4,-57.6,56.4,0,1009
+5,-80.4,4.8,0,1015
+6,2.4,-34.8,0,1013
+7,-14.4,1.2,0,991
+8,-15.6,2.4,0,991
+9,9.6,20.4,0,1065
+10,-12,-3.6,0,973
+
+KMC 73 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,18,-28.8,0,1045
+2,38.4,-6,0,993
+3,-28.8,-4.8,0,1016
+4,-16.8,27.6,0,967
+5,7.2,2.4,0,1006
+6,-19.2,-40.8,0,1006
+7,24,-16.8,0,944
+8,-10.8,25.2,0,974
+9,-7.2,-28.8,0,1044
+10,-13.2,-36,0,1005
+
+KMC 74 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,2.9976e-15,37.2,0,981
+2,31.2,1.2,0,1053
+3,13.2,-4.8,0,973
+4,-26.4,34.8,0,1005
+5,-9.6,-34.8,0,991
+6,46.8,27.6,0,986
+7,7.2,30,0,995
+8,26.4,-20.4,0,987
+9,-6,40.8,0,1011
+10,9.6,-7.2,0,1018
+
+KMC 75 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,24,6,0,985
+2,-4.8,-12,0,928
+3,-20.4,45.6,0,1011
+4,24,-8.4,0,975
+5,-8.4,30,0,986
+6,2.4,21.6,0,1030
+7,30,-20.4,0,1024
+8,-24,-57.6,0,1044
+9,16.8,-33.6,0,984
+10,-3.6,14.4,0,1033
+
+KMC 76 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-22.8,2.4,0,1043
+2,-18,-15.6,0,1058
+3,14.4,14.4,0,960
+4,-33.6,-2.4,0,980
+5,6,33.6,0,1049
+6,-9.6,9.6,0,1024
+7,-61.2,1.2,0,968
+8,-1.2,-44.4,0,982
+9,-28.8,-21.6,0,958
+10,-2.4,1.33227e-15,0,978
+
+KMC 77 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-32.4,-33.6,0,991
+2,-70.8,-38.4,0,1013
+3,16.8,20.4,0,961
+4,-42,4.8,0,977
+5,45.6,13.2,0,1009
+6,-13.2,-14.4,0,987
+7,6,13.2,0,988
+8,-16.8,9.6,0,1050
+9,55.2,20.4,0,1019
+10,24,20.4,0,1005
+
+KMC 78 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-2.4,7.2,0,962
+2,-13.2,-37.2,0,986
+3,3.6,-13.2,0,976
+4,6,26.4,0,1001
+5,-3.33067e-16,-6,0,1015
+6,18,-1.2,0,1034
+7,-13.2,-19.2,0,1003
+8,24,-12,0,1020
+9,36,6,0,1019
+10,-16.8,-9.6,0,984
+
+KMC 79 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,86.4,-22.8,0,1031
+2,-70.8,31.2,0,1003
+3,-27.6,-12,0,959
+4,2.4,50.4,0,1066
+5,3.6,4.8,0,999
+6,16.8,-19.2,0,962
+7,-7.2,8.4,0,983
+8,31.2,4.8,0,1038
+9,-1.2,-3.6,0,984
+10,42,-24,0,975
+
+KMC 80 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-7.2,-30,0,1003
+2,-1.2,-9.6,0,995
+3,52.8,-16.8,0,964
+4,-22.8,-22.8,0,982
+5,-22.8,8.4,0,1014
+6,-39.6,13.2,0,1024
+7,25.2,-7.2,0,1005
+8,-7.2,4.8,0,996
+9,10.8,-31.2,0,1003
+10,-12,-48,0,1014
+
+KMC 81 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-25.2,-50.4,0,1041
+2,-25.2,-31.2,0,1037
+3,-1.2,12,0,1005
+4,12,-26.4,0,978
+5,-15.6,-8.4,0,980
+6,-20.4,-37.2,0,946
+7,2.4,6,0,1007
+8,-9.6,-4.8,0,1008
+9,21.6,-16.8,0,1048
+10,-25.2,13.2,0,950
+
+KMC 82 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-3.6,-10.8,0,1040
+2,8.4,28.8,0,973
+3,-33.6,-37.2,0,975
+4,4.8,36,0,998
+5,-64.8,-25.2,0,1003
+6,-27.6,-31.2,0,987
+7,-14.4,3.6,0,1013
+8,37.2,-19.2,0,1063
+9,-12,4.8,0,956
+10,-24,38.4,0,992
+
+KMC 83 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,1.2,25.2,0,1004
+2,-21.6,-31.2,0,982
+3,19.2,37.2,0,1079
+4,-9.6,-6,0,1045
+5,-6,-14.4,0,933
+6,-36,8.4,0,1007
+7,26.4,-2.4,0,936
+8,-18,26.4,0,1023
+9,3.6,46.8,0,974
+10,-12,25.2,0,1017
+
+KMC 84 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-3.6,-19.2,0,1017
+2,-4.8,24,0,1004
+3,-15.6,2.4,0,943
+4,-15.6,-10.8,0,1014
+5,9.6,22.8,0,991
+6,21.6,8.4,0,1035
+7,-18,22.8,0,986
+8,2.4,-16.8,0,1008
+9,-40.8,-33.6,0,986
+10,45.6,60,0,1016
+
+KMC 85 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-7.2,-18,0,1025
+2,18,14.4,0,1009
+3,-2.4,-12,0,986
+4,-22.8,-14.4,0,975
+5,-9.6,-9.6,0,1056
+6,-3.6,21.6,0,991
+7,15.6,0,0,993
+8,-27.6,19.2,0,1029
+9,-15.6,24,0,983
+10,-40.8,46.8,0,953
+
+KMC 86 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-1.2,8.4,0,1008
+2,-6,-27.6,0,1038
+3,13.2,22.8,0,968
+4,-14.4,-30,0,979
+5,39.6,-20.4,0,968
+6,7.2,27.6,0,957
+7,28.8,-7.2,0,1042
+8,-21.6,-4.8,0,1002
+9,3.6,2.4,0,1059
+10,-7.2,32.4,0,979
+
+KMC 87 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-46.8,40.8,0,1017
+2,-22.8,36,0,1001
+3,-20.4,-43.2,0,997
+4,-8.4,-7.2,0,977
+5,-24,27.6,0,955
+6,-6,28.8,0,1013
+7,-6,-38.4,0,995
+8,-33.6,18,0,1007
+9,-36,19.2,0,1042
+10,36,-57.6,0,996
+
+KMC 88 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-4.8,-14.4,0,990
+2,-45.6,-20.4,0,979
+3,16.8,33.6,0,1016
+4,18,-54,0,1010
+5,-69.6,-6,0,1015
+6,-10.8,-44.4,0,984
+7,48,8.4,0,999
+8,-27.6,27.6,0,1064
+9,-20.4,32.4,0,1010
+10,-10.8,21.6,0,933
+
+KMC 89 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-8.4,-18,0,982
+2,30,-18,0,978
+3,-4.8,4.8,0,1006
+4,4.8,-12,0,1002
+5,2.4,-19.2,0,976
+6,-8.4,52.8,0,1041
+7,7.2,28.8,0,962
+8,-16.8,4.8,0,1000
+9,-7.2,-51.6,0,1005
+10,19.2,-33.6,0,1048
+
+KMC 90 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-18,46.8,0,962
+2,-4.8,12,0,970
+3,-3.6,13.2,0,992
+4,13.2,34.8,0,1034
+5,16.8,-4.8,0,1000
+6,1.2,-34.8,0,1006
+7,-46.8,-31.2,0,975
+8,-13.2,-15.6,0,988
+9,42,-24,0,1007
+10,-22.8,46.8,0,1066
+
+KMC 91 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-1.2,-6,0,988
+2,-25.2,-21.6,0,961
+3,14.4,-21.6,0,1046
+4,-27.6,6,0,948
+5,-32.4,-12,0,999
+6,12,27.6,0,1019
+7,-12,-26.4,0,996
+8,-49.2,6,0,1006
+9,-38.4,-10.8,0,1031
+10,-1.2,-1.2,0,1006
+
+KMC 92 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,16.8,21.6,0,928
+2,13.2,-7.2,0,1021
+3,-25.2,-2.4,0,983
+4,37.2,46.8,0,1008
+5,-15.6,44.4,0,1018
+6,8.4,-38.4,0,1061
+7,2.4,18,0,975
+8,-2.4,-19.2,0,1022
+9,44.4,-24,0,989
+10,19.2,-20.4,0,995
+
+KMC 93 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-66,-19.2,0,1041
+2,-2.4,-33.6,0,980
+3,-50.4,-6,0,1011
+4,21.6,-16.8,0,1058
+5,-2.4,19.2,0,982
+6,26.4,7.2,0,976
+7,38.4,1.2,0,977
+8,-40.8,36,0,984
+9,18,44.4,0,1036
+10,19.2,15.6,0,955
+
+KMC 94 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-7.2,37.2,0,991
+2,-3.6,-10.8,0,1000
+3,13.2,13.2,0,1022
+4,18,-1.2,0,1032
+5,-4.8,-54,0,991
+6,-57.6,2.4,0,1014
+7,21.6,-40.8,0,964
+8,-6,-15.6,0,996
+9,-1.2,-3.33067e-16,0,1019
+10,50.4,-3.6,0,971
+
+KMC 95 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-19.2,-27.6,0,957
+2,-10.8,4.8,0,943
+3,20.4,-21.6,0,1063
+4,9.6,9.6,0,956
+5,-12,4.8,0,974
+6,26.4,54,0,989
+7,12,73.2,0,1069
+8,-14.4,-6,0,1025
+9,-2.4,-16.8,0,1030
+10,36,-38.4,0,994
+
+KMC 96 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-4.8,-18,0,1041
+2,-1.2,-31.2,0,971
+3,-54,3.6,0,1032
+4,-18,43.2,0,1013
+5,8.4,-10.8,0,970
+6,-7.2,-10.8,0,983
+7,-9.6,-14.4,0,982
+8,-31.2,28.8,0,984
+9,3.6,9.6,0,1009
+10,-25.2,-38.4,0,1015
+
+KMC 97 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-3.6,21.6,0,995
+2,37.2,1.2,0,1024
+3,-8.4,-3.6,0,1004
+4,36,27.6,0,999
+5,-2.4,31.2,0,1010
+6,-9.6,-28.8,0,1002
+7,26.4,19.2,0,1010
+8,-31.2,3.6,0,1017
+9,-12,-16.8,0,1018
+10,-14.4,13.2,0,921
+
+KMC 98 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-15.6,26.4,0,1043
+2,-19.2,-22.8,0,965
+3,54,-1.66533e-15,0,983
+4,32.4,-8.4,0,1040
+5,2.4,36,0,992
+6,10.8,18,0,998
+7,-15.6,-8.4,0,1000
+8,16.8,-48,0,958
+9,14.4,1.2,0,1033
+10,-2.4,38.4,0,988
+
+KMC 99 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,9.6,21.6,0,984
+2,-4.8,4.8,0,1022
+3,1.2,-8.4,0,1034
+4,-19.2,-8.4,0,991
+5,7.2,-6,0,1011
+6,45.6,9.6,0,944
+7,43.2,-20.4,0,977
+8,-15.6,-1.2,0,968
+9,52.8,-10.8,0,1035
+10,7.2,-9.6,0,1034
+
+KMC 100 times
+#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter
+1,-12,-8.4,0,1031
+2,4.8,-32.4,0,981
+3,-6,-3.6,0,1012
+4,-10.8,18,0,960
+5,3.6,7.2,0,971
+6,36,-24,0,1030
+7,-16.8,-28.8,0,958
+8,28.8,-37.2,0,1007
+9,21.6,-39.6,0,1047
+10,-27.6,-12,0,1003
 

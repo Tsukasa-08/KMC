@@ -1,8 +1,8 @@
 INPUTファイルを読み込み
-	1粒子あたり平均何回イベントを起こすか MCSP =100
-	平均をとる粒子の個数 AVERAGE = 100
-	KMCのステップ数(何回行うか) NSTEPS =10
-	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =1000
+	1粒子あたり平均何回イベントを起こすか MCSP =1000
+	平均をとる粒子の個数 AVERAGE = 1000
+	KMCのステップ数(何回行うか) NSTEPS =100
+	KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =10000
 	拡散種をいくつ配置するか NDIFFS = 10
 	電場の強さ EFIELD = 1.148978e-02 [V/Å] 
 	電場の強さ EFIELD = 1.148978e+06 [V/cm] 
@@ -41,7 +41,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 1.867746e-11
+	total_time = 1.970380e-10
 	1 times KMC finished
 step_counter = 2 start 
 blockingなし
@@ -60,7 +60,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 1.929039e-11
+	total_time = 1.976223e-10
 	2 times KMC finished
 step_counter = 3 start 
 blockingなし
@@ -79,7 +79,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 1.829572e-11
+	total_time = 1.911215e-10
 	3 times KMC finished
 step_counter = 4 start 
 blockingなし
@@ -98,7 +98,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 2.007548e-11
+	total_time = 1.963739e-10
 	4 times KMC finished
 step_counter = 5 start 
 blockingなし
@@ -117,7 +117,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 1.933791e-11
+	total_time = 1.933071e-10
 	5 times KMC finished
 step_counter = 6 start 
 blockingなし
@@ -136,7 +136,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 1.947616e-11
+	total_time = 1.981372e-10
 	6 times KMC finished
 step_counter = 7 start 
 blockingなし
@@ -155,7 +155,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 1.946531e-11
+	total_time = 1.968753e-10
 	7 times KMC finished
 step_counter = 8 start 
 blockingなし
@@ -174,7 +174,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 1.875704e-11
+	total_time = 1.961204e-10
 	8 times KMC finished
 step_counter = 9 start 
 blockingなし
@@ -193,7 +193,7 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 1.975669e-11
+	total_time = 1.990472e-10
 	9 times KMC finished
 step_counter = 10 start 
 blockingなし
@@ -212,7 +212,1717 @@ blockingなし
 ##########
 
 	loop_counter finished
-	total_time = 2.060460e-11
+	total_time = 1.943740e-10
 	10 times KMC finished
-Execution time = 0 sec
+step_counter = 11 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.949447e-10
+	11 times KMC finished
+step_counter = 12 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.951116e-10
+	12 times KMC finished
+step_counter = 13 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.990768e-10
+	13 times KMC finished
+step_counter = 14 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.950480e-10
+	14 times KMC finished
+step_counter = 15 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.953896e-10
+	15 times KMC finished
+step_counter = 16 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.989194e-10
+	16 times KMC finished
+step_counter = 17 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.989192e-10
+	17 times KMC finished
+step_counter = 18 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.963334e-10
+	18 times KMC finished
+step_counter = 19 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.992322e-10
+	19 times KMC finished
+step_counter = 20 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.969633e-10
+	20 times KMC finished
+step_counter = 21 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.991081e-10
+	21 times KMC finished
+step_counter = 22 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.950943e-10
+	22 times KMC finished
+step_counter = 23 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.983003e-10
+	23 times KMC finished
+step_counter = 24 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.955522e-10
+	24 times KMC finished
+step_counter = 25 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.982917e-10
+	25 times KMC finished
+step_counter = 26 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.964267e-10
+	26 times KMC finished
+step_counter = 27 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.020265e-10
+	27 times KMC finished
+step_counter = 28 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.981145e-10
+	28 times KMC finished
+step_counter = 29 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.966041e-10
+	29 times KMC finished
+step_counter = 30 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.965335e-10
+	30 times KMC finished
+step_counter = 31 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.955562e-10
+	31 times KMC finished
+step_counter = 32 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.983970e-10
+	32 times KMC finished
+step_counter = 33 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.944220e-10
+	33 times KMC finished
+step_counter = 34 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.970421e-10
+	34 times KMC finished
+step_counter = 35 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.954000e-10
+	35 times KMC finished
+step_counter = 36 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.985690e-10
+	36 times KMC finished
+step_counter = 37 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.957842e-10
+	37 times KMC finished
+step_counter = 38 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.978440e-10
+	38 times KMC finished
+step_counter = 39 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.989662e-10
+	39 times KMC finished
+step_counter = 40 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.966900e-10
+	40 times KMC finished
+step_counter = 41 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.963276e-10
+	41 times KMC finished
+step_counter = 42 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.008822e-10
+	42 times KMC finished
+step_counter = 43 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.989857e-10
+	43 times KMC finished
+step_counter = 44 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.969917e-10
+	44 times KMC finished
+step_counter = 45 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.983584e-10
+	45 times KMC finished
+step_counter = 46 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.004902e-10
+	46 times KMC finished
+step_counter = 47 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.010972e-10
+	47 times KMC finished
+step_counter = 48 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.974530e-10
+	48 times KMC finished
+step_counter = 49 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.999691e-10
+	49 times KMC finished
+step_counter = 50 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.973504e-10
+	50 times KMC finished
+step_counter = 51 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.954906e-10
+	51 times KMC finished
+step_counter = 52 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.007168e-10
+	52 times KMC finished
+step_counter = 53 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.971678e-10
+	53 times KMC finished
+step_counter = 54 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.962470e-10
+	54 times KMC finished
+step_counter = 55 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.960969e-10
+	55 times KMC finished
+step_counter = 56 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.969473e-10
+	56 times KMC finished
+step_counter = 57 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.974506e-10
+	57 times KMC finished
+step_counter = 58 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.960734e-10
+	58 times KMC finished
+step_counter = 59 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.948467e-10
+	59 times KMC finished
+step_counter = 60 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.974780e-10
+	60 times KMC finished
+step_counter = 61 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.965355e-10
+	61 times KMC finished
+step_counter = 62 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.996416e-10
+	62 times KMC finished
+step_counter = 63 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.977611e-10
+	63 times KMC finished
+step_counter = 64 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.944801e-10
+	64 times KMC finished
+step_counter = 65 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.955418e-10
+	65 times KMC finished
+step_counter = 66 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.004315e-10
+	66 times KMC finished
+step_counter = 67 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.966574e-10
+	67 times KMC finished
+step_counter = 68 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.990071e-10
+	68 times KMC finished
+step_counter = 69 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.960607e-10
+	69 times KMC finished
+step_counter = 70 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.964934e-10
+	70 times KMC finished
+step_counter = 71 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.984278e-10
+	71 times KMC finished
+step_counter = 72 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.992209e-10
+	72 times KMC finished
+step_counter = 73 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.015247e-10
+	73 times KMC finished
+step_counter = 74 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.962891e-10
+	74 times KMC finished
+step_counter = 75 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.961835e-10
+	75 times KMC finished
+step_counter = 76 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.984260e-10
+	76 times KMC finished
+step_counter = 77 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.977233e-10
+	77 times KMC finished
+step_counter = 78 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.984780e-10
+	78 times KMC finished
+step_counter = 79 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.982010e-10
+	79 times KMC finished
+step_counter = 80 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.035826e-10
+	80 times KMC finished
+step_counter = 81 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.976006e-10
+	81 times KMC finished
+step_counter = 82 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.992742e-10
+	82 times KMC finished
+step_counter = 83 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.958939e-10
+	83 times KMC finished
+step_counter = 84 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.957012e-10
+	84 times KMC finished
+step_counter = 85 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.995759e-10
+	85 times KMC finished
+step_counter = 86 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.959568e-10
+	86 times KMC finished
+step_counter = 87 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.947576e-10
+	87 times KMC finished
+step_counter = 88 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.984713e-10
+	88 times KMC finished
+step_counter = 89 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.991075e-10
+	89 times KMC finished
+step_counter = 90 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.003199e-10
+	90 times KMC finished
+step_counter = 91 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.988753e-10
+	91 times KMC finished
+step_counter = 92 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.958353e-10
+	92 times KMC finished
+step_counter = 93 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.967863e-10
+	93 times KMC finished
+step_counter = 94 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.979899e-10
+	94 times KMC finished
+step_counter = 95 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 2.006118e-10
+	95 times KMC finished
+step_counter = 96 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.970154e-10
+	96 times KMC finished
+step_counter = 97 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.974754e-10
+	97 times KMC finished
+step_counter = 98 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.943884e-10
+	98 times KMC finished
+step_counter = 99 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.950658e-10
+	99 times KMC finished
+step_counter = 100 start 
+blockingなし
+
+
+	loop processing…
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+
+	loop_counter finished
+	total_time = 1.991857e-10
+	100 times KMC finished
+Execution time = 14 sec
 

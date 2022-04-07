@@ -225,17 +225,17 @@ double ion_charge = 1;
 double q_charge = ion_charge * ec;
 
 //Nernst-Einsteinの関係式より、拡散係数から伝導度を算出する関数(1次元、1方向)
-double NernstEinstein_DtoSigma(double D, double concentration, int temperture, double ion_charge) {
+double NernstEinstein_DtoSigma(double D, double concentration, int temperture, double ion_charge, int dimensionality) {
 	double Sigma; //[S/cm]
-	Sigma = D * pow(ion_charge * ec, 2) * concentration / (kb * temperture) * pow(10, 24);
+	Sigma = D * pow(ion_charge * ec, 2) * concentration / (kb * temperture) * pow(10, 8*dimensionality);
 	return Sigma;
 
 }
 
 //Nernst-Einsteinの関係式より、伝導度から拡散係数を算出する関数(1次元、1方向)
-double NernstEinstein_SigmatoD(double Sigma, double concentration, int temperture, double ion_charge) {
+double NernstEinstein_SigmatoD(double Sigma, double concentration, int temperture, double ion_charge, int dimensionality) {
 	double D; //[cm^2/s]
-	D = Sigma * (kb * temperture) * pow(10, -24) /  (pow(ion_charge * ec, 2) * concentration) ;
+	D = Sigma * (kb * temperture) * pow(10, -8*dimensionality) /  (pow(ion_charge * ec, 2) * concentration) ;
 	return D;
 
 }
@@ -1695,9 +1695,9 @@ int main()
 		
 		//トレーサー拡散係数からトレーサー伝導度
 		std::vector<double> tracer_Sigma(3, 0.0);
-		tracer_Sigma[0] = NernstEinstein_DtoSigma(D_t_x, concentration, temperture, ion_charge);
-		tracer_Sigma[1] = NernstEinstein_DtoSigma(D_t_y, concentration, temperture, ion_charge);
-		tracer_Sigma[2] = NernstEinstein_DtoSigma(D_t_z, concentration, temperture, ion_charge);
+		tracer_Sigma[0] = NernstEinstein_DtoSigma(D_t_x, concentration, temperture, ion_charge, dimensionality);
+		tracer_Sigma[1] = NernstEinstein_DtoSigma(D_t_y, concentration, temperture, ion_charge, dimensionality);
+		tracer_Sigma[2] = NernstEinstein_DtoSigma(D_t_z, concentration, temperture, ion_charge, dimensionality);
 
 
 		ofs_sigma << "tracer ionic conductivity " << conductivity_unit << endl;
@@ -1712,9 +1712,9 @@ int main()
 
 		//自己拡散係数から自己伝導度
 		std::vector<double> self_Sigma (3,0.0);
-		self_Sigma[0] = NernstEinstein_DtoSigma(D_j_x, concentration, temperture, ion_charge);
-		self_Sigma[1] = NernstEinstein_DtoSigma(D_j_y, concentration, temperture, ion_charge);
-		self_Sigma[2] = NernstEinstein_DtoSigma(D_j_z, concentration, temperture, ion_charge);
+		self_Sigma[0] = NernstEinstein_DtoSigma(D_j_x, concentration, temperture, ion_charge, dimensionality);
+		self_Sigma[1] = NernstEinstein_DtoSigma(D_j_y, concentration, temperture, ion_charge, dimensionality);
+		self_Sigma[2] = NernstEinstein_DtoSigma(D_j_z, concentration, temperture, ion_charge, dimensionality);
 		ofs_sigma << "self ionic conductivity " << conductivity_unit << endl;
 		ofs_sigma << "Sigma_x = " << self_Sigma[0] << endl;
 		ofs_sigma << "Sigma_y = " << self_Sigma[1] << endl;
@@ -1765,7 +1765,7 @@ int main()
 				if (i+1 == Sigma_vector.size()) {
 					Sigma_vector_total[j] /= Sigma_vector.size();
 					ofs_sigma << "Sigma_" << axis << "[" << j << "] = " << scientific << Sigma_vector_total[j] << endl;
-					ofs_diff << "D" << axis << "[" << j << "] = " << scientific << NernstEinstein_SigmatoD(Sigma_vector_total[j], concentration, temperture, ion_charge)  << endl;
+					ofs_diff << "D" << axis << "[" << j << "] = " << scientific << NernstEinstein_SigmatoD(Sigma_vector_total[j], concentration, temperture, ion_charge, dimensionality)  << endl;
 
 				}
 			
