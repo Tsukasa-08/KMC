@@ -1,16 +1,10 @@
 #This is OUTPUT file written by toml format.
 
 #total_time [s] 
-total_time = 1.970963e-10
+total_time = 1.979882e-08
 
 #concentration [/Ang.^3] 
 concentration = 6.944444e-02
-
-#Efield_strength [V/Ang.] 
-Efield_strength.Ang = 1.148978e-02
-
-#Efield_strength [V/cm] 
-Efield_strength.cm = 1.148978e+06
 
 #temperture [K] 
 temperture = 1000
@@ -18,9 +12,18 @@ temperture = 1000
 #ion_charge 拡散種の電荷(整数) 
 ion_charge = 1
 
-#chemical ionic conductivity [S]
-chemical_Sigma = [1.29423,24.7701,0]
+#tracer diffusion coefficient [cm^2/s]
+tracer_D = [0.00017907,9.91808e-05,0]
 
-#chemical diffusion coefficient [cm^2/s]
-chemical_D = [1002.39,19184.6,0]
+#self diffusion coefficient [cm^2/s]
+self_D = [8.27427e-05,0.000206197,0]
+
+#tracer ionic conductivity [S]
+tracer_Sigma = [2.31205e-07,1.28057e-07,0]
+
+#self ionic conductivity [S]
+self_Sigma = [1.06833e-07,2.66231e-07,0]
+
+#mean displacement [Ang.] 
+mean_displacement = [57.24,-90.36,0]
 

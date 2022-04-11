@@ -197,6 +197,17 @@ Eigen::Vector3d transcoords(const vector<double> vector_frac, Eigen::Matrix3d la
 	return vector_cartesian;
 }
 
+//Eigen::VectorXdをstd::vectorに型変換
+vector<double> eigen2vector(Eigen::Vector3d eigen_vector) 
+{
+	vector<double> vector_cartesian(3,0.0);
+	for (int i = 0 ; i != vector_cartesian.size() ; i++) {
+		vector_cartesian[i] = eigen_vector(i) ; 
+	}
+
+	return vector_cartesian;
+}
+
 //ある値がvector内の要素に含まれているか否か判定する
 int vector_finder(std::vector<int> vec, int number) {
 	auto itr = std::find(vec.begin(), vec.end(), number);
@@ -765,7 +776,7 @@ int main()
 	}
 
 	else {
-		cout << '\t' << "no E_field" << endl;	
+		cout << "no E_field" << endl;	
 	}
 
 	//補正したジャンプ頻度情報をSiteと結びつける
@@ -1505,14 +1516,13 @@ int main()
 
 		} 
 
-		//平均変位をベクターに格納
+		//平均変位を計算する
 		vector<double> average_displacement(3,0.0);
 
 		for (int j = 0; j != jump_total_all.size(); j++) {
 			average_displacement[j] = jump_total_all[j] / diffusion_species.size();
 		}
 		
-		average_displacement_vector.push_back(average_displacement);
 
 			
 		//jump_total_allを分率座標からcartesian座標に直す(関数により用済みとなった)
@@ -1530,6 +1540,10 @@ int main()
 		//transcoords関数でaverage_displacementを分率座標からcartesian座標に直す
 		Eigen::Vector3d average_displacement_eigen;
 		average_displacement_eigen = transcoords(average_displacement, lattice_matrix);
+
+		//全原子の平均変位を出力するために、std::vectorに変換して格納しておく
+		vector<double> average_displacement_cartesian = eigen2vector(average_displacement_eigen);
+		average_displacement_vector.push_back(average_displacement_cartesian);
 
 
 		//電場ありの場合、伝導度テンソルを出力
@@ -1578,7 +1592,7 @@ int main()
 		//平均変位を出力, vectorのvectorから平均vectorを作成する関数があってもいいかも
 		ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
 		ofs_ave_dis << "KMC " << step_counter << " times" << endl;
-		ofs_ave_dis << "#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter" << endl;
+		ofs_ave_dis << "#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter [times]" << endl;
 
 		//それぞれの拡散種について、変位を出力する
 		for (int i = 0, n = diffusion_species.size(); i != n ; i++) {
@@ -1876,6 +1890,8 @@ int main()
 	}
 
 */
+
+	//全ての原子の平均変位を出力しておく
 	vector<double> av_dis_sum(3,0.0);
 	for (int i = 0; i != av_dis_sum.size(); i++) {
 		for (int j = 0; j != average_displacement_vector.size(); j++) {
@@ -1884,6 +1900,11 @@ int main()
 		av_dis_sum[i] /= average_displacement_vector.size();
 		
 	}
+	
+
+	ofs_output << "#mean displacement [Ang.] " << endl;
+	ofs_output << "mean_displacement = " << "[" << av_dis_sum[0] << "," << av_dis_sum[1] << "," << av_dis_sum[2] << "]" << endl;
+	ofs_output << endl;
 
 
 	
