@@ -13,6 +13,9 @@
 #include <Eigen/Dense>
 #include <regex>
 #include <set>
+#include <map>
+#include <numeric>
+#include <ctime>
 
 #include "Site.h"
 //#include "Jump.h"
@@ -248,15 +251,40 @@ std::set<int> Diffusionspecie::blocking_list;
 //メイン関数の開始
 int main()
 {
+	//プログラム開始時刻を表示
+	chrono::system_clock::time_point start, end;
+	chrono::milliseconds start_msec, end_msec;
+	time_t time_stamp;
+	start = chrono::system_clock::now();
+	
+	//開始時間のmsecを求める
+	start_msec = chrono::duration_cast<chrono::milliseconds>(start.time_since_epoch());
+	long long all_msec = start_msec.count();
+	int msec = all_msec % 1000 ;
+
+	time_stamp = chrono::system_clock::to_time_t(start);
+	struct tm* timer = localtime(&time_stamp);
+	cout << endl;
+	cout << "#################################" << endl;
+	cout << timer->tm_year + 1900 << "-" 
+		<< timer->tm_mon +1 << "-" 
+		<< timer->tm_mday << " " 
+		<< timer->tm_hour << ":"
+		<< timer->tm_min << ":"
+		<< timer->tm_sec << "."
+		<< setfill('0') << right << setw(3) << msec << setfill(' ') << endl;
+	cout << "Start program." << endl;
+	cout << "#################################" << endl;
+	cout << endl;
+
 	//アウトプットファイルを作成しておく
 	ofstream ofs_output("OUTPUT", ios::app);
 
-	//実行時間を計測する
-	chrono::system_clock::time_point start, end;
-	time_t time_stamp;
+	//アウトプットファイル用のディクショナリやvectorを作成しておく
+	map<string, double> map_for_output;
+	vector<double> total_time_for_output;
 
-
-	start = chrono::system_clock::now();
+	//実行時間の計測
 
 	//make DiffusionCoefficient vector
 	vector< vector<double> > D_t_3d_vector;
@@ -310,18 +338,18 @@ int main()
 		cerr << "Could not find file INPUT" << endl;
 		abort();
 	}
-	cout << "INPUTファイルを読み込み" << endl;
-	cout << "\t" << "1粒子あたり平均何回イベントを起こすか MCSP =" << mcsp << endl;
-	cout << "\t" << "平均をとる粒子の個数 AVERAGE = " << average << endl;
-	cout << "\t" << "KMCのステップ数(何回行うか) NSTEPS =" << step_max << endl;
-	cout << "\t" << "KMCのループ数(1回のKMCで何回イベントを起こすか) NLOOPS =" << loop_max << endl;
-	cout << "\t" << "拡散種をいくつ配置するか NDIFFS = " << p_place_n << endl;
-	cout << "\t" << "電場の強さ EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
-	cout << "\t" << "電場の強さ EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
-	cout << "\t" << "温度 TEMP = " << temperture << endl;
-	cout << "\t" << "ジャンプ頻度補正係数 correct_constant = " << correct_constant << endl;
-	cout << "\t" << "電場方向 " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
-	cout << "\t" << "ブロックリスト = " << blocking_yes << " (1=あり、0=なし)"<< endl;
+	cout << "INPUT read" << endl;
+	cout << "\t" << "Monte Carlo Step per Particle : MCSP =" << mcsp << endl;
+	cout << "\t" << "the number of particles for calculate ensemble average :  AVERAGE = " << average << endl;
+	cout << "\t" << "the number of executing KMCs : NSTEPS =" << step_max << endl;
+	cout << "\t" << "Monte Carlo Step (MCS) :  NLOOPS =" << loop_max << endl;
+	cout << "\t" << "the number of placing diffusion atoms :  NDIFFS = " << p_place_n << endl;
+	cout << "\t" << "Electrical field strength :  EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
+	cout << "\t" << "Electrical field strength :  EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
+	cout << "\t" << "temperture : TEMP = " << temperture << endl;
+	cout << "\t" << "the correct_constant for adjusting jump frequency gamma (default = 0.1) :  correct_constant = " << correct_constant << endl;
+	cout << "\t" << "the direction of E_field : E_field_axis = " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
+	cout << "\t" << "whether blocking_list is valid or not = " << blocking_yes << " (1=valid、0=invalid)"<< endl;
 	cout << endl;
 
 	
@@ -405,13 +433,13 @@ int main()
 		//Directがある行を特定しておく、だいたい7行目
 		if (regex_search(for_line_reader2, m, re)) {
 			DIRECT_num = site_total_number;
-			cout << "Directは" << site_total_number << "行目にあります" << endl;
 		}
 	}
 
 	//サイト数=POSCARの行数-(座標一覧までの行数)
 	site_total_number -= DIRECT_num;
 	cout << "POSCAR read" << endl;
+	cout << "\t" << "string [Direct] is on the " << DIRECT_num << " line." << endl;
 	cout << "\t" << "site_total_number = " << site_total_number << endl;
 	cout << endl;
 
@@ -698,7 +726,7 @@ int main()
 
 
 		E_field_vector *= E_field_strength;
-		cout << "E_field_vector = " << E_field_vector << endl;
+		cout << "E_field_vector = [ " << E_field_vector(0) << ", " << E_field_vector(1) << ", " << E_field_vector(2)  << " ]" << endl;
 
 		//生成したジャンプに対し操作を行っていく
 		for (int i = 0; i != jumps.size(); i++) {
@@ -784,17 +812,38 @@ int main()
 
 	for (int step_counter = 1; step_counter <= step_max; step_counter++) {
 		
-		//実行時間を計測する
-	//	chrono::system_clock::time_point start, end;
-	//	time_t time_stamp;
+		//KMC開始時刻を表示
+		chrono::system_clock::time_point kmc_start, kmc_end;
+		chrono::milliseconds kmc_start_msec, kmc_end_msec;
+		time_t kmc_time_stamp;
+		kmc_start = chrono::system_clock::now();
+		
+		//開始時間のmsecを求める
+		kmc_start_msec = chrono::duration_cast<chrono::milliseconds>(kmc_start.time_since_epoch());
+		long long kmc_all_msec = kmc_start_msec.count();
+		int kmc_msec = kmc_all_msec % 1000 ;
+
+		time_stamp = chrono::system_clock::to_time_t(kmc_start);
+		struct tm* kmc_timer = localtime(&time_stamp);
+		cout << endl;
+		cout << "\t" << "#################################" << endl;
+		cout << "\t" << kmc_timer->tm_year + 1900 << "-" 
+			<< kmc_timer->tm_mon +1 << "-" 
+			<< kmc_timer->tm_mday << " " 
+			<< kmc_timer->tm_hour << ":"
+			<< kmc_timer->tm_min << ":"
+			<< kmc_timer->tm_sec << "."
+			<< setfill('0') << right << setw(3) << kmc_msec << setfill(' ') << endl;
+		cout << "\t" << "Start KMC " << step_counter << " times" << endl;
+		cout << "\t" << "#################################" << endl;
+		cout << endl;
 
 
-	//	start = chrono::system_clock::now();
 
 
 
 		//確認用
-		cout << "step_counter = " << step_counter << " start " << endl;
+		//cout << "step_counter = " << step_counter << " start " << endl;
 
 		//乱数を準備しておく
 		random_device rnd;
@@ -823,7 +872,7 @@ int main()
 
 		//blockingありの場合
 		if (blocking_yes) {
-			cout << "blockingあり" << endl;
+			//cout << "blockingあり" << endl;
 
 			//乱数を生成し、blocking_list_csv(vector<vector<int>>)をシャッフルする
 			shuffle( blocking_list_csv.begin(), blocking_list_csv.end(), mt );
@@ -838,7 +887,7 @@ int main()
 
 		//blockingなしの場合
 		else {
-			cout << "blockingなし" << endl;
+			//cout << "blockingなし" << endl;
 			//(サイトの数-1)を要素にもつvectorを生成
 			random_proton_place_number_vector.resize(site_total_number-1);
 			for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
@@ -941,11 +990,6 @@ int main()
 		//シミュレーション時間total_timeを定義
 		double total_time = 0.0;
 
-		cout << endl;
-		//cout << "\t" << "total_time = " << total_time << endl;
-
-		
-
 
 		//メインループの開始
 		cout << endl;
@@ -957,7 +1001,7 @@ int main()
 		vector<Jump> jumps_impossible_tmp;
 
 		//cout << "\t" << "main loop start" << endl;
-		cout << "\t" << "loop processing…" << endl;
+		//cout << "\t" << "loop processing…" << endl;
 		string processing;
 		for (long long loop_counter = 1; loop_counter <= loop_max; loop_counter++) { 			
 
@@ -975,7 +1019,7 @@ int main()
 			
 			if (loop_counter % (loop_max/10) == 0) {
 				processing += "#";
-				cout  << processing << endl;
+				cout  << "\t" << processing << endl;
 				if (loop_counter == loop_max ) {
 					cout << endl;
 				}
@@ -1413,10 +1457,10 @@ int main()
 		}
 
 		//ループ終了後
-		cout << "\t" << "loop_counter finished" << endl;
+		//cout << "\t" << "loop_counter finished" << endl;
 		//cout << endl;
 		
-		cout << "\t" << "total_time = " << scientific << total_time << defaultfloat << endl;
+		//cout << "\t" << "total_time = " << scientific << total_time << defaultfloat << endl;
 		
 		//拡散係数を出力およびファイルに出力する
 
@@ -1559,37 +1603,22 @@ int main()
 		}
 		ofs_ave_dis << endl;
 
-		//OUTPUTファイルをまとめる
-		ofs_output << "#This is OUTPUT file written by toml format." << endl;
-		ofs_output << "#KMC = " << step_counter << " times" << endl;
-		ofs_output << endl;
-		ofs_output << "#total_time [s] " << endl;
-		ofs_output << "total_time = " << scientific << total_time << endl;
-		ofs_output << endl;
-		ofs_output << "#concentration [/Ang.^3] " << endl;
-		ofs_output << "concentration = " << diffusion_species.size()/lattice_matrix.determinant() <<  endl;
-		if (E_field_yes) {
-			ofs_output << endl;
-			ofs_output << "#Efield_strength [V/Ang.] " << endl;
-			ofs_output << "Efield_strength.Ang = " << E_field_strength << endl;
-			ofs_output << endl;
-			ofs_output << "#Efield_strength [V/cm] "  << endl;
-			ofs_output << "Efield_strength.cm = " << E_field_strength*pow(10,8) << endl;
-		}
-		ofs_output << defaultfloat;
-		ofs_output << endl;
-		ofs_output << "#temperture [K] " << endl;
-		ofs_output << "temperture = " << temperture << endl;
-		ofs_output << endl;
-		ofs_output << "#ion_charge 拡散種の電荷(整数) " << endl;
-		ofs_output << "ion_charge = " << ion_charge << endl;
-		ofs_output << endl;
-		
-		
-		
-		
+		//最初だけ代入する定数値
+		if (step_counter == 1) {
+			map_for_output["concentration"] = diffusion_species.size()/lattice_matrix.determinant();
+			map_for_output["temperture"] = temperture;
+			map_for_output["ion_charge"] = ion_charge;
 
-		//cout << endl;
+			if (E_field_yes) { 
+				map_for_output["Efield_strength_Ang"] = E_field_strength;
+				map_for_output["Efield_strength_cm"] = E_field_strength*pow(10,8);
+			}
+
+		}
+
+		//今回のstepのトータルシミュレーション時間を記録しておく
+		total_time_for_output.push_back(total_time);
+		
 
 		//sitesをリセットする
 		for (int i = 0; i != sites.size(); i++ ) {
@@ -1618,10 +1647,36 @@ int main()
 		//cout << endl;
 
 		//KMCが何回終わったか
-		cout << '\t' <<  step_counter << " times KMC finished" << endl;
+		//cout << '\t' <<  step_counter << " times KMC finished" << endl;
 
 
 	}
+	
+	//OUTPUTファイルをまとめる
+	ofs_output << "#This is OUTPUT file written by toml format." << endl;
+	//ofs_output << "#KMC = " << step_counter << " times" << endl;
+	ofs_output << endl;
+	ofs_output << "#total_time [s] " << endl;
+	ofs_output << "total_time = " << scientific << accumulate(total_time_for_output.begin(), total_time_for_output.end(), 0.0) / total_time_for_output.size()  << endl; //シミュレーション回数分の平均値を出す
+	ofs_output << endl;
+	ofs_output << "#concentration [/Ang.^3] " << endl;
+	ofs_output << "concentration = " << map_for_output["concentration"] <<  endl;
+	if (E_field_yes) {
+		ofs_output << endl;
+		ofs_output << "#Efield_strength [V/Ang.] " << endl;
+		ofs_output << "Efield_strength.Ang = " << map_for_output["Efield_strength_Ang"] << endl;
+		ofs_output << endl;
+		ofs_output << "#Efield_strength [V/cm] "  << endl;
+		ofs_output << "Efield_strength.cm = " << map_for_output["Efield_strength_cm"] << endl;
+	}
+	ofs_output << defaultfloat;
+	ofs_output << endl;
+	ofs_output << "#temperture [K] " << endl;
+	ofs_output << "temperture = " << map_for_output["temperture"] << endl;
+	ofs_output << endl;
+	ofs_output << "#ion_charge 拡散種の電荷(整数) " << endl;
+	ofs_output << "ion_charge = " << map_for_output["ion_charge"] << endl;
+	ofs_output << endl;
 
 
 
@@ -1735,9 +1790,9 @@ int main()
 		ofstream ofs_sigma("IonicConductivity", ios::app);
 		ofstream ofs_diff("DiffusionCoefficient", ios::app);
 
-		ofs_diff << scientific << "concentration = " << concentration << endl;
-		ofs_diff << scientific << "temperture = " << temperture << endl;
-		ofs_diff << scientific << "ion_charge = " << ion_charge << endl;
+		//ofs_diff << scientific << "concentration = " << concentration << endl;
+		//ofs_diff << scientific << "temperture = " << temperture << endl;
+		//ofs_diff << scientific << "ion_charge = " << ion_charge << endl;
 
 
 /*		//電場の向きにより出力する伝導度を変える(main関数の最初に書いた)
@@ -1757,15 +1812,21 @@ int main()
 		ofs_diff << "chemical diffusion coefficient [cm^2/s]" << endl;
 
 		vector<double> Sigma_vector_total(3,0.0);
+		string j_to_axis;
 		for (int j = 0; j != Sigma_vector_total.size(); j++) {
+			switch (j) {
+				case 0 : j_to_axis = "x"; break;
+				case 1 : j_to_axis = "y"; break;
+				case 2 : j_to_axis = "z"; break;
+			}
 			for (int i = 0; i != Sigma_vector.size(); i++) {
 
 				Sigma_vector_total[j] += Sigma_vector[i][j];
 
 				if (i+1 == Sigma_vector.size()) {
 					Sigma_vector_total[j] /= Sigma_vector.size();
-					ofs_sigma << "Sigma_" << axis << "[" << j << "] = " << scientific << Sigma_vector_total[j] << endl;
-					ofs_diff << "D" << axis << "[" << j << "] = " << scientific << NernstEinstein_SigmatoD(Sigma_vector_total[j], concentration, temperture, ion_charge, dimensionality)  << endl;
+					ofs_sigma << "Sigma_" << axis <<  j_to_axis << " = " << scientific << Sigma_vector_total[j] << endl;
+					ofs_diff << "D" << axis <<  j_to_axis << " = " << scientific << NernstEinstein_SigmatoD(Sigma_vector_total[j], concentration, temperture, ion_charge, dimensionality)  << endl;
 
 				}
 			
@@ -1787,6 +1848,13 @@ int main()
 			*/
 		}
 
+		ofs_output << "#chemical ionic conductivity " << conductivity_unit << endl;
+		ofs_output << "chemical_Sigma = " << "[" << Sigma_vector_total[0] << "," << Sigma_vector_total[1] << "," << Sigma_vector_total[2] << "]" << endl;
+		ofs_output << endl;
+		ofs_output << "#chemical diffusion coefficient [cm^2/s]" << endl;
+		ofs_output << "chemical_D = " << "[" << NernstEinstein_SigmatoD(Sigma_vector_total[0], concentration, temperture, ion_charge, dimensionality) << 
+ "," << NernstEinstein_SigmatoD(Sigma_vector_total[1], concentration, temperture, ion_charge, dimensionality) << "," << NernstEinstein_SigmatoD(Sigma_vector_total[2], concentration, temperture, ion_charge, dimensionality) << "]" << endl;
+		ofs_output << endl;
 		//化学拡散係数
 		//ofs_diff << "chemical diffusion coefficient (cm^2/s)" << endl;
 		
@@ -1806,6 +1874,7 @@ int main()
 		ofs_ave_dis << '\t' << "No E_field" << endl;
 	}
 
+*/
 	vector<double> av_dis_sum(3,0.0);
 	for (int i = 0; i != av_dis_sum.size(); i++) {
 		for (int j = 0; j != average_displacement_vector.size(); j++) {
@@ -1815,25 +1884,34 @@ int main()
 		
 	}
 
-	//fracからcartesianに変換
-	Eigen::Vector3d  av_dis_sum_eigen = transcoords(av_dis_sum,lattice_matrix);
 
-	ofs_ave_dis << "<x> = " << av_dis_sum_eigen[0] << endl;
-	ofs_ave_dis << "<y> = " << av_dis_sum_eigen[1] << endl;
-	ofs_ave_dis << "<z> = " << av_dis_sum_eigen[2] << endl;
-	*/
-
+	
 	//実行時間の計測
+	
+	//プログラム開始時刻を表示
 	end = chrono::system_clock::now();
-	auto time = end - start;
+	
+	//開始時間のmsecを求める
+	end_msec = chrono::duration_cast<chrono::milliseconds>(end.time_since_epoch());
+	all_msec = end_msec.count();
+	msec = all_msec % 1000 ;
 
-	time_stamp = chrono::system_clock::to_time_t(start);
-
-	auto sec = chrono::duration_cast<chrono::seconds>(time).count();
-
-	cout << "Execution time = " << sec << " sec" << endl;
+	time_stamp = chrono::system_clock::to_time_t(end);
+    timer = localtime(&time_stamp);
 	cout << endl;
-	
-	
+	cout << "#################################" << endl;
+	cout << timer->tm_year + 1900 << "-" 
+		<< timer->tm_mon +1 << "-" 
+		<< timer->tm_mday << " " 
+		<< timer->tm_hour << ":"
+		<< timer->tm_min << ":"
+		<< timer->tm_sec << "."
+		<< setfill('0') << right << setw(3) << msec << setfill(' ') << endl;
+	cout << "Program finished!" << endl;
+	auto time = end - start;
+	auto sec = chrono::duration_cast<chrono::seconds>(time).count();
+	cout << "Execution time = " << sec << " sec" << endl;
+	cout << "#################################" << endl;
+	cout << endl;
 }
 
