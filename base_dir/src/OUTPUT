@@ -1,7 +1,7 @@
 #This is OUTPUT file written by toml format.
 
 #total_time [s] 
-total_time = 1.966293e-10
+total_time = 1.970963e-10
 
 #concentration [/Ang.^3] 
 concentration = 6.944444e-02
@@ -19,8 +19,8 @@ temperture = 1000
 ion_charge = 1
 
 #chemical ionic conductivity [S]
-chemical_Sigma = [-0.944186,22.1164,0]
+chemical_Sigma = [1.29423,24.7701,0]
 
 #chemical diffusion coefficient [cm^2/s]
-chemical_D = [-731.278,17129.3,0]
+chemical_D = [1002.39,19184.6,0]
 

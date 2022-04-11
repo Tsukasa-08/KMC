@@ -271,7 +271,7 @@ int main()
 		<< timer->tm_mday << " " 
 		<< timer->tm_hour << ":"
 		<< timer->tm_min << ":"
-		<< timer->tm_sec << "."
+		<< setfill('0') << right << setw(2) << timer->tm_sec << setfill(' ') << "." 
 		<< setfill('0') << right << setw(3) << msec << setfill(' ') << endl;
 	cout << "Start program." << endl;
 	cout << "#################################" << endl;
@@ -339,10 +339,10 @@ int main()
 		abort();
 	}
 	cout << "INPUT read" << endl;
-	cout << "\t" << "Monte Carlo Step per Particle : MCSP =" << mcsp << endl;
+	cout << "\t" << "Monte Carlo Step per Particle : MCSP = " << mcsp << endl;
 	cout << "\t" << "the number of particles for calculate ensemble average :  AVERAGE = " << average << endl;
-	cout << "\t" << "the number of executing KMCs : NSTEPS =" << step_max << endl;
-	cout << "\t" << "Monte Carlo Step (MCS) :  NLOOPS =" << loop_max << endl;
+	cout << "\t" << "the number of executing KMCs : NSTEPS = " << step_max << endl;
+	cout << "\t" << "Monte Carlo Step (MCS) :  NLOOPS = " << loop_max << endl;
 	cout << "\t" << "the number of placing diffusion atoms :  NDIFFS = " << p_place_n << endl;
 	cout << "\t" << "Electrical field strength :  EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
 	cout << "\t" << "Electrical field strength :  EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
@@ -350,6 +350,7 @@ int main()
 	cout << "\t" << "the correct_constant for adjusting jump frequency gamma (default = 0.1) :  correct_constant = " << correct_constant << endl;
 	cout << "\t" << "the direction of E_field : E_field_axis = " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
 	cout << "\t" << "whether blocking_list is valid or not = " << blocking_yes << " (1=valid、0=invalid)"<< endl;
+	cout << "\t" << "the dimensionality in this diffusion situation : dimensionality = " << dimensionality << endl;
 	cout << endl;
 
 	
@@ -832,7 +833,7 @@ int main()
 			<< kmc_timer->tm_mday << " " 
 			<< kmc_timer->tm_hour << ":"
 			<< kmc_timer->tm_min << ":"
-			<< kmc_timer->tm_sec << "."
+			<< setfill('0') << right << setw(2) << kmc_timer->tm_sec << setfill(' ') << "." 
 			<< setfill('0') << right << setw(3) << kmc_msec << setfill(' ') << endl;
 		cout << "\t" << "Start KMC " << step_counter << " times" << endl;
 		cout << "\t" << "#################################" << endl;
@@ -1905,7 +1906,7 @@ int main()
 		<< timer->tm_mday << " " 
 		<< timer->tm_hour << ":"
 		<< timer->tm_min << ":"
-		<< timer->tm_sec << "."
+		<< setfill('0') << right << setw(2) << timer->tm_sec << setfill(' ') << "." 
 		<< setfill('0') << right << setw(3) << msec << setfill(' ') << endl;
 	cout << "Program finished!" << endl;
 	auto time = end - start;
