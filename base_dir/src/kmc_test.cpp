@@ -16,6 +16,7 @@
 #include <map>
 #include <numeric>
 #include <ctime>
+#include <iomanip>
 
 #include "Site.h"
 //#include "Jump.h"
@@ -294,6 +295,18 @@ int main()
 	//アウトプットファイル用のディクショナリやvectorを作成しておく
 	map<string, double> map_for_output;
 	vector<double> total_time_for_output;
+
+	//変位一覧を出力するmean_displacement.csvを開いておく
+	ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
+	//ofs_ave_dis << "#KMC " << step_counter << " times" << endl;
+	ofs_ave_dis << "#the number of KMC, diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter [times]" << endl;
+	ofs_ave_dis << "KMC_times,diffusion_id,dx,dy,dz,counter" << endl;
+
+	//結果を出力するアウトプットファイルを作成する
+	ofstream ofs_diff("DiffusionCoefficient", ios::app);
+
+	//結果を出力するアウトプットファイルを作成する
+	ofstream ofs_sigma("IonicConductivity", ios::app);
 
 	//実行時間の計測
 
@@ -1589,14 +1602,13 @@ int main()
 		}
 
 
-		//平均変位を出力, vectorのvectorから平均vectorを作成する関数があってもいいかも
-		ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
-		ofs_ave_dis << "KMC " << step_counter << " times" << endl;
-		ofs_ave_dis << "#diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter [times]" << endl;
 
 		//それぞれの拡散種について、変位を出力する
 		for (int i = 0, n = diffusion_species.size(); i != n ; i++) {
 			
+			//the_number_of_KMCを出力する
+			ofs_ave_dis << step_counter << ",";
+
 			//diffusion_idを出力する
 			ofs_ave_dis << diffusion_species[i].get_diffusion_id() << "," ;
 			
@@ -1605,18 +1617,18 @@ int main()
 			displacement_vector = transcoords(diffusion_species[i].get_jump_total(),lattice_matrix);
 
 			for (int j = 0; j != diffusion_species[i].get_jump_total().size(); j++) {
-				ofs_ave_dis << displacement_vector(j) << "," ;
+				ofs_ave_dis << fixed << setprecision(10) << displacement_vector(j) << defaultfloat << "," ;
 				
 			}
 
 			//diffusion_counterを出力する
-			ofs_ave_dis << diffusion_species[i].diffusion_counter;
+			ofs_ave_dis << diffusion_species[i].diffusion_counter ;
 
 			//１つの拡散種の変位を出力し終わったら改行する
 			ofs_ave_dis << endl;
 
 		}
-		ofs_ave_dis << endl;
+		ofs_ave_dis << "##############################"<< endl;
 
 		//最初だけ代入する定数値
 		if (step_counter == 1) {
@@ -1671,7 +1683,7 @@ int main()
 	ofs_output << "#This is OUTPUT file written by toml format." << endl;
 	//ofs_output << "#KMC = " << step_counter << " times" << endl;
 	ofs_output << endl;
-	ofs_output << "#total_time [s] " << endl;
+	ofs_output << "#total_time [s] (average of all KMCs)" << endl;
 	ofs_output << "total_time = " << scientific << accumulate(total_time_for_output.begin(), total_time_for_output.end(), 0.0) / total_time_for_output.size()  << endl; //シミュレーション回数分の平均値を出す
 	ofs_output << endl;
 	ofs_output << "#concentration [/Ang.^3] " << endl;
@@ -1698,8 +1710,6 @@ int main()
 	//電場なしの場合
 	if (!E_field_yes) {
 
-		//結果を出力するアウトプットファイルを作成する
-		ofstream ofs_diff("DiffusionCoefficient", ios::app);
 
 		//トレーサー拡散係数
 		ofs_diff << "tracer diffusion coefficient [cm^2/s]" << endl;
@@ -1760,8 +1770,6 @@ int main()
 		ofs_output << endl;
 
 
-		//結果を出力するアウトプットファイルを作成する
-		ofstream ofs_sigma("IonicConductivity", ios::app);
 		
 		//トレーサー拡散係数からトレーサー伝導度
 		std::vector<double> tracer_Sigma(3, 0.0);
@@ -1801,9 +1809,6 @@ int main()
 	//電場ありの場合
 	if (E_field_yes) {
 
-		//結果を出力するアウトプットファイルを作成する
-		ofstream ofs_sigma("IonicConductivity", ios::app);
-		ofstream ofs_diff("DiffusionCoefficient", ios::app);
 
 		//ofs_diff << scientific << "concentration = " << concentration << endl;
 		//ofs_diff << scientific << "temperture = " << temperture << endl;
