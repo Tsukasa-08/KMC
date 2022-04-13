@@ -1705,6 +1705,8 @@ int main()
 	ofs_output << "ion_charge = " << map_for_output["ion_charge"] << endl;
 	ofs_output << endl;
 
+	ofs_output << fixed << setprecision(10) ;
+
 
 
 	//電場なしの場合
@@ -1910,6 +1912,7 @@ int main()
 	ofs_output << "#mean displacement [Ang.] " << endl;
 	ofs_output << "mean_displacement = " << "[" << av_dis_sum[0] << "," << av_dis_sum[1] << "," << av_dis_sum[2] << "]" << endl;
 	ofs_output << endl;
+	ofs_output << defaultfloat ;
 
 
 	
