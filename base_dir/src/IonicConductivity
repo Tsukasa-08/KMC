@@ -1,10 +1,10 @@
 tracer ionic conductivity [S]
-Sigma_x = 2.23188e-07
-Sigma_y = 1.94671e-07
+Sigma_x = 2.13083e-07
+Sigma_y = 2.77105e-07
 Sigma_z = 0
 
 self ionic conductivity [S]
-Sigma_x = 3.99887e-07
-Sigma_y = 1.38924e-07
+Sigma_x = 2.70882e-07
+Sigma_y = 1.94613e-07
 Sigma_z = 0
 

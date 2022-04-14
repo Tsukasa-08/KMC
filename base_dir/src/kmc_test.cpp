@@ -1704,6 +1704,9 @@ int main()
 	ofs_output << "#ion_charge 拡散種の電荷(整数) " << endl;
 	ofs_output << "ion_charge = " << map_for_output["ion_charge"] << endl;
 	ofs_output << endl;
+	ofs_output << "#dimensionality : the dimension in this diffusion" << endl;
+	ofs_output << "dimensionality = " << dimensionality << endl;
+	ofs_output << endl;
 
 	ofs_output << fixed << setprecision(10) ;
 
