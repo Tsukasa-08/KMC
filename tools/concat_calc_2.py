@@ -27,7 +27,7 @@ def recursive_path_split(path_list, path):
 
 
 #parserを作成
-"""parser = argparse.ArgumentParser(description="concatnate all mean_displacement.csv under calc[n], with MultiIndex[calc, KMC_times, diffusion_id]. n is the number of calc directories.")
+parser = argparse.ArgumentParser(description="concatnate all mean_displacement.csv under calc[n], with MultiIndex[calc, KMC_times, diffusion_id]. n is the number of calc directories.")
 
 parser.add_argument('-p', '--search_dir_path', required=True, default='.',                    help="Directory path which you wanna search for mean_displacement.csv ")
 
@@ -35,8 +35,7 @@ parser.add_argument('-p', '--search_dir_path', required=True, default='.',      
 args = parser.parse_args()
 
 search_dir_path = args.search_dir_path
-"""
-search_dir_path = "."
+#search_dir_path = "."
 
 
 # In[30]:
@@ -92,138 +91,4 @@ for calc_path in calc_paths:
             print("file saved at ", os.path.join(calc_dir, "concat_mean_displacement.csv"))
             
         if (shutil.copy(output_path, calc_dir)):
-            print("file saved at ", os.path.join(calc_dir))
-         
-        
-
-
-# In[79]:
-
-
-ex_file_path = './mcsp_pow_10_1/n_average_pow_10_1/calc1/base_dir/src/mean_displacement.csv'
-
-
-# In[65]:
-
-
-os.path.exists(ex_file_path)
-
-
-# In[80]:
-
-
-type(os.path.split(ex_file_path))
-
-
-# In[81]:
-
-
-path_split_list = []
-def recursive_path_split(path_list, path):
-    if os.path.abspath(path) == os.getcwd() : 
-        return 0
-    
-    path_list.insert(0,os.path.split(path)[-1])
-    recursive_path_split(path_list, os.path.split(path)[0])
-    print("if do", datetime.datetime.now())
-
-#    else:
-#        print("else do", datetime.datetime.now())
-recursive_path_split(path_split_list, ex_file_path)
-
-
-# In[82]:
-
-
-print(path_split_list)
-
-
-# In[85]:
-
-
-calc_str = [l for l in path_split_list if 'calc' in l][0]
-mcsp_str = [l for l in path_split_list if 'mcsp' in l][0]
-naverage_str = [l for l in path_split_list if 'average' in l][0]
-
-
-# In[60]:
-
-
-os.path.abspath(ex_file_path)
-
-
-# In[23]:
-
-
-1 + 1
-
-
-# In[24]:
-
-
-print(_)
-
-
-# In[25]:
-
-
-1 == 1
-
-
-# In[26]:
-
-
-print(_)
-
-
-# In[27]:
-
-
-1 == 1
-if _ :
-    print("it is True!")
-
-
-# In[33]:
-
-
-print("what")
-print(1 + 1)
-print(_)
-
-
-# In[34]:
-
-
-1 + 1
-
-
-# In[35]:
-
-
-print(_)
-
-
-# In[36]:
-
-
-1 + 1
-
-
-# In[37]:
-
-
-print("hello")
-
-
-# In[38]:
-
-
-print(_)
-
-
-# In[ ]:
-
-
-
-
+            print("file saved at ", os.path.join(calc_dir, "OUTPUT"))
