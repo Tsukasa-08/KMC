@@ -1080,7 +1080,8 @@ int main()
 			//cout << endl;
 			//cout << "\t" << "loop_counter = " << loop_counter << endl;
 			
-			if (loop_counter % (loop_max/10) == 0) {
+			//切り上げしておよそ10%ごとに#を出力する
+			if (loop_counter % ((loop_max+10-1)/10) == 0) {
 				processing += "#";
 				cout  << "\t" << processing << endl;
 				if (loop_counter == loop_max ) {
