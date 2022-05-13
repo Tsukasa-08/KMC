@@ -11,13 +11,14 @@ private:
 	int diffusion_id;
 	int diffusion_siteid_now;
 	std::vector<double> jump_total;
+	std::vector<double> sum_squared_distance;
 
 public:
 	int diffusion_counter;
 	static std::vector<int> diffusion_siteid_now_list;
 	static std::set<int> blocking_list;
 
-	Diffusionspecie() : diffusion_id(-1), jump_total(3,0.0) {
+	Diffusionspecie() : diffusion_id(-1), jump_total(3,0.0), sum_squared_distance(3,0.0) {
 	};
 
 	//セッタ
@@ -29,6 +30,8 @@ public:
 
 	void set_jump_total(std::vector<double> jt) { jump_total = jt; }
 
+	void set_sum_squared_distance(std::vector<double> sum_s_d) { sum_squared_distance = sum_s_d; }
+
 	void set_diffusion_siteid_now_list(std::vector<int> ds_list) { diffusion_siteid_now_list = ds_list; }
 
 	//ゲッタ
@@ -39,6 +42,8 @@ public:
 	int get_diffusion_counter() { return diffusion_counter; }
 
 	std::vector<double> get_jump_total() { return jump_total; }
+
+	std::vector<double> get_sum_squared_distance() { return sum_squared_distance; }
 
 	std::vector<int> get_diffusion_siteid_now_list() { return diffusion_siteid_now_list; }
 

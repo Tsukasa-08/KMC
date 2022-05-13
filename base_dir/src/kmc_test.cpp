@@ -137,12 +137,13 @@ class Diffusionspecie {
 private:
 	int diffusion_id;
 	int diffusion_siteid_now;
-	vector<double> jump_total;
-	static std::vector<int> diffusion_siteid_now_list;
-	static std::set<int> blocking_list;
+	std::vector<double> jump_total;
+	std::vector<double> sum_squared_distance;
 
 public:
 	int diffusion_counter;
+	static std::vector<int> diffusion_siteid_now_list;
+	static std::set<int> blocking_list;
 
 	Diffusionspecie() : diffusion_id(-1), jump_total(3,0.0) {
 	};
@@ -152,7 +153,11 @@ public:
 
 	void set_diffusion_siteid_now(int d_sid_now) { diffusion_siteid_now = d_sid_now; }
 
+	void set_diffusion_counter(int d_ctr) { diffusion_counter = d_ctr; }
+
 	void set_jump_total(std::vector<double> jt) { jump_total = jt; }
+
+	void set_sum_squared_distance(std::vector<double> sum_s_d) { sum_squared_distance = sum_s_d; }
 
 	void set_diffusion_siteid_now_list(std::vector<int> ds_list) { diffusion_siteid_now_list = ds_list; }
 
@@ -161,9 +166,42 @@ public:
 
 	int get_diffusion_siteid_now() { return diffusion_siteid_now; }
 
-	vector<double> get_jump_total() { return jump_total; }
+	int get_diffusion_counter() { return diffusion_counter; }
+
+	std::vector<double> get_jump_total() { return jump_total; }
+
+	std::vector<double> get_sum_squared_distance() { return sum_squared_distance; }
 
 	std::vector<int> get_diffusion_siteid_now_list() { return diffusion_siteid_now_list; }
+
+	
+	//拡散係数を算出する関数(引数にlattice_matrixとtotal_time)
+	std::vector<double> get_D(Eigen::Matrix3d lattice_matrix, double t) {
+		Eigen::Vector3d eigen_jump_total;
+		eigen_jump_total << get_jump_total()[0], get_jump_total()[1], get_jump_total()[2];
+		Eigen::Vector3d displacement_vector = lattice_matrix*eigen_jump_total;
+		displacement_vector *= pow(10,-8);
+		std::vector<double> D_3d(3,0.0);
+		for (int i = 0; i != D_3d.size(); i++) { 
+			double mean_square_displacement = pow(displacement_vector(i),2.0);
+			D_3d[i] = mean_square_displacement/(2*t);
+		}
+		return D_3d;
+	}
+
+	//二乗変位を算出する関数(引数にlattice_matrix)
+	std::vector<double> get_mean_square_displacement(Eigen::Matrix3d lattice_matrix) {
+		Eigen::Vector3d eigen_jump_total;
+		eigen_jump_total << get_jump_total()[0], get_jump_total()[1], get_jump_total()[2];
+		Eigen::Vector3d displacement_vector = lattice_matrix*eigen_jump_total;
+		displacement_vector *= pow(10,-8);
+		std::vector<double> mean_square_displacement(3,0.0);
+		for (int i = 0; i != mean_square_displacement.size(); i++) { 
+			mean_square_displacement[i] = pow(displacement_vector(i),2.0);
+		}
+		return mean_square_displacement;
+	}
+
 };
 
 */
@@ -299,8 +337,8 @@ int main()
 	//変位一覧を出力するmean_displacement.csvを開いておく
 	ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
 	//ofs_ave_dis << "#KMC " << step_counter << " times" << endl;
-	ofs_ave_dis << "#the number of KMC, diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], jump_counter [times]" << endl;
-	ofs_ave_dis << "KMC_times,diffusion_id,dx,dy,dz,counter" << endl;
+	ofs_ave_dis << "#the number of KMC, diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], sum of squared displacement of each jumps in x, y, z [Ang.^2], jump_counter [times]" << endl;
+	ofs_ave_dis << "KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,counter" << endl;
 
 	//結果を出力するアウトプットファイルを作成する
 	ofstream ofs_diff("DiffusionCoefficient", ios::app);
@@ -1377,16 +1415,26 @@ int main()
 			int diff_tmp = sites[jumps_start_id-1].get_diffusion_id();
 			sites[jumps_start_id-1].set_diffusion_id(sites[jumps_end_id-1].get_diffusion_id());
 			sites[jumps_end_id-1].set_diffusion_id(diff_tmp);
+
+
 			
 			//diffusion_idをもつdiffusion_species[x].jump_totalにjump_vectorを追加する
+			//diffusion_species[x].sum_squared_distanceにAng.に直した変位の2乗を追加
+			Eigen::Vector3d eigen_happend_jump_vector;
+			eigen_happend_jump_vector = transcoords(jumps_possible[jump_happen_number].get_jump_vector(),lattice_matrix);
+			vector<double> cartesian_happend_jump_vector = eigen2vector(eigen_happend_jump_vector);
+
 			for (int i = 0, n = diffusion_species.size(); i != n ; i++) {
 				if ( diffusion_species[i].get_diffusion_id() == diff_tmp ) {
 					vector<double> jump_total_tmp(3,0.0);
+					vector<double> sum_squared_distance_tmp(3,0.0);
 					for (int k = 0; k != jump_total_tmp.size(); k++) {
 						jump_total_tmp[k] = diffusion_species[i].get_jump_total()[k] + jumps_possible[jump_happen_number].get_jump_vector()[k];
+						sum_squared_distance_tmp[k] = diffusion_species[i].get_sum_squared_distance()[k] + pow(cartesian_happend_jump_vector[k],2);
 						
 					}
 					diffusion_species[i].set_jump_total(jump_total_tmp);
+					diffusion_species[i].set_sum_squared_distance(sum_squared_distance_tmp);
 
 					//diffusion_counterを1つ増加
 					diffusion_species[i].diffusion_counter++;
@@ -1399,6 +1447,9 @@ int main()
 				}
 
 			}
+
+
+
 
 /*			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
 
@@ -1620,6 +1671,13 @@ int main()
 				ofs_ave_dis << fixed << setprecision(10) << displacement_vector(j) << defaultfloat << "," ;
 				
 			}
+
+			for (int j = 0; j != diffusion_species[i].get_sum_squared_distance().size(); j++) {
+				ofs_ave_dis << fixed << setprecision(10) << diffusion_species[i].get_sum_squared_distance()[j] << defaultfloat << "," ;
+				
+			}
+
+			
 
 			//diffusion_counterを出力する
 			ofs_ave_dis << diffusion_species[i].diffusion_counter ;
