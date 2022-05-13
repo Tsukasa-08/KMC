@@ -599,6 +599,7 @@ int main()
 		cout << endl;
 
 
+
 /*	//Site確認用
 	for (int i = 0; i != sites.size() ; i++) {
 		cout << "sites[" << i << "].id = " << sites[i].get_site_id() << endl;
@@ -636,22 +637,23 @@ int main()
 	vector< vector<int> > blocking_list_csv(csv_total_number);
 
 	if (blocking_yes) {
-	ifstream ifs3("blocking_list.csv");
-	n_lines = 0;
-	while (getline(ifs3, line)){
+		ifstream ifs3("blocking_list.csv");
+		n_lines = 0;
+		while (getline(ifs3, line)){
 
 
-		vector<string> strvec = split(line, ',');
+			vector<string> strvec = split(line, ',');
 
-		for (int i = 0; i != strvec.size(); i++){
-			blocking_list_csv[n_lines].push_back(stoi(strvec[i]));
-		}
+			for (int i = 0; i != strvec.size(); i++){
+				blocking_list_csv[n_lines].push_back(stoi(strvec[i]));
+			}
 
 
-	//	cout << "jumps[" << n_lines << "].freq = " << jumps[n_lines].get_freq() << endl;
-		
-		n_lines += 1;
-	}	
+		//	cout << "jumps[" << n_lines << "].freq = " << jumps[n_lines].get_freq() << endl;
+			
+			n_lines += 1;
+		}	
+
 
 /*	//csv確認用
 	for (auto itr = blocking_list_csv.begin(); itr != blocking_list_csv.end(); itr++) {
@@ -662,6 +664,13 @@ int main()
 	}
 
 */
+
+	//拡散種の配置数がオーバーしていないか確認する
+	//blocking_listがあるとき
+	if (p_place_n > csv_total_number -1) {
+		cerr << "NDIFF > effective site total number. Reduce NDIFF." << endl;
+		abort();
+	}
 
 	
 	//blocking_list_csvをもとに、各Siteのblocking_mate_listに追加していく
@@ -682,9 +691,20 @@ int main()
 
 	}
 	*/
-	
 
 	}
+	
+	//拡散種の配置数がオーバーしていないか確認する
+	//blocking_listがないとき
+	else {
+		if (p_place_n > site_total_number -1) {
+			cerr << "NDIFF > site total number. Reduce NDIFF." << endl;
+			abort();
+		}
+
+	}
+	
+
 		
 	
 

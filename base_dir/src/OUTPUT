@@ -1,10 +1,10 @@
 #This is OUTPUT file written by toml format.
 
 #total_time [s] (average of all KMCs)
-total_time = 1.775055e-12
+total_time = 1.639441e-11
 
 #concentration [/Ang.^3] 
-concentration = 6.944444e-03
+concentration = 5.413290e-02
 
 #temperture [K] 
 temperture = 1000
@@ -16,17 +16,17 @@ ion_charge = 1
 dimensionality = 2
 
 #tracer diffusion coefficient [cm^2/s]
-tracer_D = [0.0001380359,0.0002760468,0.0000000000]
+tracer_D = [0.0000107077,0.0000108374,0.0000108100]
 
 #self diffusion coefficient [cm^2/s]
-self_D = [0.0001380359,0.0002760468,0.0000000000]
+self_D = [0.0000001885,0.0000031343,0.0000041308]
 
 #tracer ionic conductivity [S]
-tracer_Sigma = [0.0000000178,0.0000000356,0.0000000000]
+tracer_Sigma = [0.0000000108,0.0000000109,0.0000000109]
 
 #self ionic conductivity [S]
-self_Sigma = [0.0000000178,0.0000000356,0.0000000000]
+self_Sigma = [0.0000000002,0.0000000032,0.0000000042]
 
 #mean displacement [Ang.] 
-mean_displacement = [0.1200000000,0.2880000000,0.0000000000]
+mean_displacement = [0.0045392897,-0.0185084501,0.0212479689]
 
