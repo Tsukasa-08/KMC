@@ -15,6 +15,8 @@ private:
 
 public:
 	int diffusion_counter;
+	int rotation_counter;
+	int hopping_counter;
 	static std::vector<int> diffusion_siteid_now_list;
 	static std::set<int> blocking_list;
 

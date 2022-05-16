@@ -1,10 +1,10 @@
-tracer ionic conductivity [S]
-Sigma_x = 1.0777e-08
-Sigma_y = 1.09074e-08
-Sigma_z = 1.08799e-08
+tracer ionic conductivity [S/cm]
+Sigma_x = 0.00367807
+Sigma_y = 0.00547791
+Sigma_z = 0.00756786
 
-self ionic conductivity [S]
-Sigma_x = 1.89745e-10
-Sigma_y = 3.15453e-09
-Sigma_z = 4.15747e-09
+self ionic conductivity [S/cm]
+Sigma_x = 0.00135133
+Sigma_y = 0.0130849
+Sigma_z = 0.0054053
 

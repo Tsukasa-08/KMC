@@ -337,8 +337,8 @@ int main()
 	//変位一覧を出力するmean_displacement.csvを開いておく
 	ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
 	//ofs_ave_dis << "#KMC " << step_counter << " times" << endl;
-	ofs_ave_dis << "#the number of KMC, diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], sum of squared displacement of each jumps in x, y, z [Ang.^2], jump_counter [times]" << endl;
-	ofs_ave_dis << "KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,counter" << endl;
+	ofs_ave_dis << "#the number of KMC, diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], sum of squared displacement of each jumps in x, y, z [Ang.^2], jump_counter of total, rotation, hopping [times]" << endl;
+	ofs_ave_dis << "KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,jump_counter,rot_counter,hop_counter" << endl;
 
 	//結果を出力するアウトプットファイルを作成する
 	ofstream ofs_diff("DiffusionCoefficient", ios::app);
@@ -371,6 +371,7 @@ int main()
 	int E_field_axis = param.get<int>("AXIS", 0);
 	double distance_jump = param.get<double>("DISTANCEJUMP", 1); //単位は[Å]
 	int blocking_yes = param.get<int>("BLOCKING", 0);
+	int rot_hop_count_yes = param.get<int>("ROTHOPCOUNT", 0);
 	int dimensionality = param.get<int>("DIMENSIONALITY", 3);
 
 	//読み込んだINPUTをもとに計算
@@ -1460,8 +1461,24 @@ int main()
 					//diffusion_counterを1つ増加
 					diffusion_species[i].diffusion_counter++;
 
+					cout << "here1" << endl;
 
+					//rot_hop_count is 1 (True)
+					if (rot_hop_count_yes) {
+										
+						//rotation
+						if (vector_finder(sites[jumps_start_id-1].get_blocking_mate_list(), jumps_end_id)) {
+							diffusion_species[i].rotation_counter++;
+						}
+							
+						//hopping
+						else {
+							diffusion_species[i].hopping_counter++;
+						}
+
+					}
 					//cout << "diffusion_species[" << i << "].diffusion_counter = " << diffusion_species[i].diffusion_counter << endl;
+					cout << "here2" << endl;
 					
 
 
@@ -1509,10 +1526,10 @@ int main()
 					Diffusionspecie::blocking_list.insert(sites[end_was-1].get_blocking_mate_list()[l]);
 				}
 				//cout << endl;
+
 			}
 		
 			
-
 
 			//時間を更新する
 			double rho_2 = random0to1(mt);
@@ -1701,7 +1718,12 @@ int main()
 			
 
 			//diffusion_counterを出力する
-			ofs_ave_dis << diffusion_species[i].diffusion_counter ;
+			ofs_ave_dis << diffusion_species[i].diffusion_counter << "," ;
+
+			if (rot_hop_count_yes) {
+				ofs_ave_dis << diffusion_species[i].rotation_counter << "," ;
+				ofs_ave_dis << diffusion_species[i].hopping_counter ;
+			}
 
 			//１つの拡散種の変位を出力し終わったら改行する
 			ofs_ave_dis << endl;
