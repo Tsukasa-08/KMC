@@ -667,12 +667,6 @@ int main()
 
 */
 
-	//拡散種の配置数がオーバーしていないか確認する
-	//blocking_listがあるとき
-	if (p_place_n > csv_total_number -1) {
-		cerr << "NDIFF > effective site total number. Reduce NDIFF." << endl;
-		abort();
-	}
 
 	
 	//blocking_list_csvをもとに、各Siteのblocking_mate_listに追加していく
@@ -697,7 +691,15 @@ int main()
 	}
 	
 	//拡散種の配置数がオーバーしていないか確認する
-	//blocking_listがないとき
+	//blockingするとき
+	if (blocking_yes) {
+		if (p_place_n > csv_total_number -1) {
+			cerr << "NDIFF > effective site total number. Reduce NDIFF." << endl;
+			abort();
+		}
+	}
+	
+	//blockingしないとき
 	else {
 		if (p_place_n > site_total_number -1) {
 			cerr << "NDIFF > site total number. Reduce NDIFF." << endl;
@@ -1462,7 +1464,6 @@ int main()
 					//diffusion_counterを1つ増加
 					diffusion_species[i].diffusion_counter++;
 
-					cout << "here1" << endl;
 
 					//rot_hop_count is 1 (True)
 					if (rot_hop_count_yes) {
@@ -1479,8 +1480,6 @@ int main()
 
 					}
 					//cout << "diffusion_species[" << i << "].diffusion_counter = " << diffusion_species[i].diffusion_counter << endl;
-					cout << "here2" << endl;
-					
 
 
 				}
