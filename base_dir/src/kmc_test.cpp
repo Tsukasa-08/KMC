@@ -1007,6 +1007,8 @@ int main()
 		for (int i = 0; i != diffusion_species.size(); i++) {
 			diffusion_species[i].set_diffusion_id(i+1);
 			diffusion_species[i].diffusion_counter = 0;
+			diffusion_species[i].rotation_counter = 0;
+			diffusion_species[i].hopping_counter = 0;
 		}
 		
 		

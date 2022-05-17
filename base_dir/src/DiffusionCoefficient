@@ -1,9 +1,9 @@
 tracer diffusion coefficient [cm^2/s]
-Dx = 0.000218318
-Dy = 0.000231348
-Dz = 0
+Dx = 2.18551e-05
+Dy = 2.32562e-05
+Dz = 2.49291e-05
 
 self diffusion coefficient [cm^2/s]
-Dx = 0.000218318
-Dy = 0.000231348
-Dz = 0
+Dx = 2.18551e-05
+Dy = 2.32562e-05
+Dz = 2.49291e-05
