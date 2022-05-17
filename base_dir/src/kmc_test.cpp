@@ -370,6 +370,7 @@ int main()
 	double temperture = param.get<double>("TEMP", 0);
 	int E_field_axis = param.get<int>("AXIS", 0);
 	double distance_jump = param.get<double>("DISTANCEJUMP", 1); //単位は[Å]
+	int blocking_list_read_yes = param.get<int>("BLOCKINGLISTREAD", 0);
 	int blocking_yes = param.get<int>("BLOCKING", 0);
 	int rot_hop_count_yes = param.get<int>("ROTHOPCOUNT", 0);
 	int dimensionality = param.get<int>("DIMENSIONALITY", 3);
@@ -616,7 +617,7 @@ int main()
 
 	//blocking_list.csvを読み込む
 	int csv_total_number = 0;
-	if (blocking_yes) {
+	if (blocking_list_read_yes) {
 		ifstream for_line3("blocking_list.csv");
 
 		//読み込めたか確認用
@@ -637,7 +638,7 @@ int main()
 
 	vector< vector<int> > blocking_list_csv(csv_total_number);
 
-	if (blocking_yes) {
+	if (blocking_list_read_yes) {
 		ifstream ifs3("blocking_list.csv");
 		n_lines = 0;
 		while (getline(ifs3, line)){
