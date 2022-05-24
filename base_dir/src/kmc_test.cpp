@@ -676,6 +676,9 @@ int main()
 		}
 	}
 
+	
+	
+
 	/*//mateがSitesに属しているか確認用
 	for (int i = 0; i != sites.size(); i++) {
 		cout << "sites " << sites[i].get_site_id() << "のmate一覧" << endl;
@@ -891,6 +894,24 @@ int main()
 
 	return 0;
 	*/
+	
+	//blocking_list_csvとJMPDATAに整合性があるかを確認する
+	int match_counter = 0;
+	cout << "size = " << sites[0].get_jumps_from_here().size() << endl;
+	for (int i = 0; i != sites[0].get_jumps_from_here().size() ; i++) {
+		cout << "for = " << i << " times" << endl;
+		//blocking_mate_listにjumps_from_hereのget_end_site_idが2つ以上含まれていれば(回転経路に相当)整合性あり
+		if (vector_finder(sites[0].get_blocking_mate_list(), sites[0].get_jumps_from_here()[i].get_end_site_id()))
+			match_counter++;
+	}
+
+	cout << "match_counter = " << match_counter << endl;
+
+	if (match_counter < 2) {
+		cout << "blocking_list_csv does not match JMPDATA." << endl;	
+		cerr << "blocking_list_csv does not match JMPDATA." << endl;	
+		abort();
+	}
 
 
 	concentration = p_place_n / lattice_matrix.determinant();

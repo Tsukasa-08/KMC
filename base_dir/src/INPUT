@@ -1,10 +1,10 @@
 #設定ファイル
 
 #Monte Carlo Step per Particle : 1度のKMC内で1粒子あたり何回イベントを起こすか
-MCSP=10
+MCSP=100
 
 #平均を取る粒子数
-AVERAGE=1000
+AVERAGE=10
 
 #拡散種を配置する数、今回だったらプロトン
 NDIFFS=1
