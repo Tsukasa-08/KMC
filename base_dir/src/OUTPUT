@@ -1,10 +1,16 @@
 #This is OUTPUT file written by toml format.
 
 #total_time [s] (average of all KMCs)
-total_time = 1.056610e-10
+total_time = 9.475770e-11
 
 #concentration [/Ang.^3] 
 concentration = 1.804430e-05
+
+#Efield_strength [V/Ang.] 
+Efield_strength.Ang = 6.893867e-03
+
+#Efield_strength [V/cm] 
+Efield_strength.cm = 6.893867e+05
 
 #temperture [K] 
 temperture = 600
@@ -15,18 +21,12 @@ ion_charge = 1
 #dimensionality : the dimension in this diffusion
 dimensionality = 3
 
-#tracer diffusion coefficient [cm^2/s]
-tracer_D = [0.0000391125,0.0000127143,0.0000102718]
+#chemical ionic conductivity [S/cm]
+chemical_Sigma = [0.0084365138,0.0033462082,0.0024088272]
 
-#self diffusion coefficient [cm^2/s]
-self_D = [0.0000391125,0.0000127143,0.0000102718]
-
-#tracer ionic conductivity [S/cm]
-tracer_Sigma = [0.0021869645,0.0007109182,0.0005743431]
-
-#self ionic conductivity [S/cm]
-self_Sigma = [0.0021869645,0.0007109182,0.0005743431]
+#chemical diffusion coefficient [cm^2/s]
+chemical_D = [0.0001508818,0.0000598448,0.0000430804]
 
 #mean displacement [Ang.] 
-mean_displacement = [-2.6623957127,-0.2118083819,0.2734160075]
+mean_displacement = [19.0629450000,7.5610121271,5.4429283082]
 
