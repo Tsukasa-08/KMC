@@ -30,29 +30,34 @@ filepaths = glob.glob(os.path.join(search_dir_path, '**/OUTPUT'), recursive=True
 for filepath in filepaths :
     
     print(filepath)
+    counter = 0
     with open(os.path.join(os.path.dirname(filepath),'modified_OUTPUT'), mode='w') as t:
 
         with open(os.path.join(os.path.dirname(filepath),'OUTPUT')) as f:
             for c,line in enumerate(f):
-                if ("total_time" in line):
-                    split_list = line.split()
-                    del split_list[-1]
-                    split_list.remove('t')
-                    modified_str = " ".join(split_list)
-                    t.write(modified_str+'\n')
-                if ("concentration" in line):
-                    split_list = line.split()
-                    del split_list[-1]
-                    split_list.remove('c')
-                    modified_str = " ".join(split_list)
-                    t.write(modified_str+'\n')
-                if (("Efield_strength" in line) and (not "cm" in line)):
-                    split_list = line.split()
-                    del split_list[-1]
-                    split_list[0] = split_list[0] + ".Ang"
-                    modified_str = " ".join(split_list)
-                    t.write(modified_str+'\n')
-
+                if ("KMC" in line):
+                    counter+=1
+                    if (counter >= 2) :
+                        break
+                else : 
+                 if ("total_time" in line):
+                     split_list = line.split()
+                     del split_list[-1]
+                     split_list.remove('t')
+                     modified_str = " ".join(split_list)
+                     t.write(modified_str+'\n')
+                 if ("concentration" in line):
+                     split_list = line.split()
+                     del split_list[-1]
+                     split_list.remove('c')
+                     modified_str = " ".join(split_list)
+                     t.write(modified_str+'\n')
+                 if (("Efield_strength" in line) and (not "cm" in line)):
+                     split_list = line.split()
+                     del split_list[-1]
+                     split_list[0] = split_list[0] + ".Ang"
+                     modified_str = " ".join(split_list)
+                     t.write(modified_str+'\n')
 
 # In[ ]:
 
