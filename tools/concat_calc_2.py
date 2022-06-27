@@ -87,8 +87,8 @@ for calc_path in calc_paths:
         
         #export and copy
     
-        if (dataset.to_csv(os.path.join(calc_dir, "concat_mean_displacement.csv"))) :
-            print("file saved at ", os.path.join(calc_dir, "concat_mean_displacement.csv"))
+        if (dataset.to_csv(os.path.join(calc_dir, "modified_mean_displacement.csv"))) :
+            print("file saved at ", os.path.join(calc_dir, "modified_mean_displacement.csv"))
             
-        if (shutil.copy(output_path, calc_dir)):
-            print("file saved at ", os.path.join(calc_dir, "OUTPUT"))
+        if (shutil.copy(output_path, os.path.join(calc_dir, "modified_OUTPUT"))):
+            print("file saved at ", os.path.join(calc_dir, "modified_OUTPUT"))
