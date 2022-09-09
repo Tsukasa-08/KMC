@@ -364,7 +364,7 @@ int main()
 	vector< vector<double> > average_displacement_vector;
 
 	//tomlファイルとしてINPUTを読み込む
-	auto toml_file = toml::parse("INNPUT");
+	auto toml_file = toml::parse("INPUT");
 	//INPUTを読み込む
 	//param::parameter param("INPUT");
 	long long mcsp = toml::find_or<int>(toml_file,"MCSP", 0);
@@ -380,6 +380,8 @@ int main()
 	int blocking_yes = toml::find_or<int>(toml_file,"BLOCKING", 0);
 	int rot_hop_count_yes = toml::find_or<int>(toml_file,"ROTHOPCOUNT", 0);
 	int dimensionality = toml::find_or<int>(toml_file,"DIMENSIONALITY", 3);
+	auto anti_drift_Efield = toml::find<std::vector<double>>(toml_file,"ANTIDRIFT");
+	cout << anti_drift_Efield[0] << endl;
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
