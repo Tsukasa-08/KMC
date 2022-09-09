@@ -1,0 +1,6 @@
+title = "TOML_examples"
+
+key = 'value'
+
+integers = [1,2,3]
+colors = ['red','yellow','green']

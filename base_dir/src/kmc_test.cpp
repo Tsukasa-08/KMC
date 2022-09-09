@@ -301,6 +301,10 @@ std::set<int> Diffusionspecie::blocking_list;
 //メイン関数の開始
 int main()
 {
+	//tomlファイルを読み込めるか確認しておく
+	//auto toml_file = toml::parse("INPUT");
+	//int MCSP = toml::find<int>(toml_file,"MCSP");
+
 	//プログラム開始時刻を表示
 	chrono::system_clock::time_point start, end;
 	chrono::milliseconds start_msec, end_msec;
@@ -359,21 +363,23 @@ int main()
 	//make average_displacement vector
 	vector< vector<double> > average_displacement_vector;
 
+	//tomlファイルとしてINPUTを読み込む
+	auto toml_file = toml::parse("INNPUT");
 	//INPUTを読み込む
-	param::parameter param("INPUT");
-	long long mcsp = param.get<int>("MCSP", 0);
-	int average = param.get<int>("AVERAGE", 0);
-	long long p_place_n = param.get<int>("NDIFFS", 0);
-	int E_field_yes = param.get<int>("EFIELDON", 0);
-	//double E_field_strength_for_pow = param.get<double>("EFIELD", 0);
-	double correct_constant_for_pow = param.get<double>("CORRECT", 0);
-	double temperture = param.get<double>("TEMP", 0);
-	int E_field_axis = param.get<int>("AXIS", 0);
-	double distance_jump = param.get<double>("DISTANCEJUMP", 1); //単位は[Å]
-	int blocking_list_read_yes = param.get<int>("BLOCKINGLISTREAD", 0);
-	int blocking_yes = param.get<int>("BLOCKING", 0);
-	int rot_hop_count_yes = param.get<int>("ROTHOPCOUNT", 0);
-	int dimensionality = param.get<int>("DIMENSIONALITY", 3);
+	//param::parameter param("INPUT");
+	long long mcsp = toml::find_or<int>(toml_file,"MCSP", 0);
+	int average = toml::find_or<int>(toml_file,"AVERAGE", 0);
+	long long p_place_n = toml::find_or<int>(toml_file,"NDIFFS", 0);
+	int E_field_yes = toml::find_or<int>(toml_file,"EFIELDON", 0);
+	//double E_field_strength_for_pow = toml::find_or<double>(toml_file,"EFIELD", 0);
+	double correct_constant_for_pow = toml::find_or<double>(toml_file,"CORRECT", 0);
+	double temperture = toml::find_or<double>(toml_file,"TEMP", 0);
+	int E_field_axis = toml::find_or<int>(toml_file,"AXIS", 0);
+	double distance_jump = toml::find_or<double>(toml_file,"DISTANCEJUMP", 1); //単位は[Å]
+	int blocking_list_read_yes = toml::find_or<int>(toml_file,"BLOCKINGLISTREAD", 0);
+	int blocking_yes = toml::find_or<int>(toml_file,"BLOCKING", 0);
+	int rot_hop_count_yes = toml::find_or<int>(toml_file,"ROTHOPCOUNT", 0);
+	int dimensionality = toml::find_or<int>(toml_file,"DIMENSIONALITY", 3);
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
@@ -398,10 +404,14 @@ int main()
 	//入力確認用logファイルを作成
 
 	//読み込めたか確認用
-	if (!param) {
+	//cout << "typeid(toml_file) = " << typeid(toml_file).name() << endl;
+	if (!typeid(toml_file).name()) {
 		cerr << "Could not find file INPUT" << endl;
 		abort();
 	}
+
+	return 0;
+
 	cout << "INPUT read" << endl;
 	cout << "\t" << "Monte Carlo Step per Particle : MCSP = " << mcsp << endl;
 	cout << "\t" << "the number of particles for calculate ensemble average :  AVERAGE = " << average << endl;
