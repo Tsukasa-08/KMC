@@ -835,7 +835,6 @@ int main()
 			}
 		}
 		cout << "E_field_vector = [ " << E_field_vector(0) << ", " << E_field_vector(1) << ", " << E_field_vector(2)  << " ]" << endl;
-		return 0;
 
 		//生成したジャンプに対し操作を行っていく
 		for (int i = 0; i != jumps.size(); i++) {
