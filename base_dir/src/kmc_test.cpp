@@ -373,7 +373,7 @@ int main()
 	int E_field_yes = toml::find_or<int>(toml_file,"EFIELDON", 0);
 	//double E_field_strength_for_pow = toml::find_or<double>(toml_file,"EFIELD", 0);
 	double correct_constant_for_pow = toml::find_or<double>(toml_file,"CORRECT", 0);
-	double temperture = toml::find_or<double>(toml_file,"TEMP", 0);
+	int temperture = toml::find_or<int>(toml_file,"TEMP", 0);
 	int E_field_axis = toml::find_or<int>(toml_file,"AXIS", 0);
 	double distance_jump = toml::find_or<double>(toml_file,"DISTANCEJUMP", 1); //単位は[Å]
 	int blocking_list_read_yes = toml::find_or<int>(toml_file,"BLOCKINGLISTREAD", 0);
@@ -381,7 +381,6 @@ int main()
 	int rot_hop_count_yes = toml::find_or<int>(toml_file,"ROTHOPCOUNT", 0);
 	int dimensionality = toml::find_or<int>(toml_file,"DIMENSIONALITY", 3);
 	auto anti_drift_Efield = toml::find<std::vector<double>>(toml_file,"ANTIDRIFT");
-	cout << anti_drift_Efield[2] << endl;
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
@@ -809,26 +808,34 @@ int main()
 
 
 
-	//電場がかかっていた場合、ジャンプ頻度を補正する
-	if (E_field_yes) {
+	//電場がかかっていた場合、もしくは勾配を打ち消す場合、ジャンプ頻度を補正する
+	if (E_field_yes || anti_drift_Efield[0]) {
 
 		//cartesian座標軸方向の単位ベクトルを作成し、電場の大きさをかけて電場ベクトルとする
 		//変数E_field_axisによって作成する単位ベクトルを変える(x=0, y=1, z=2)
 		
 		Eigen::Vector3d E_field_vector(3); 
 
-		switch (E_field_axis) {
-			case 1 : E_field_vector << 1,0,0 ; break;
-			case 2 : E_field_vector << 0,1,0 ; break;
-			case 3 : E_field_vector << 0,0,1 ; break;
-			case -1 : E_field_vector << -1,0,0 ; break;
-			case -2 : E_field_vector << 0,-1,0 ; break;
-			case -3 : E_field_vector << 0,0,-1 ; break;
+		if (E_field_yes) {
+			switch (E_field_axis) {
+				case 1 : E_field_vector << 1,0,0 ; break;
+				case 2 : E_field_vector << 0,1,0 ; break;
+				case 3 : E_field_vector << 0,0,1 ; break;
+				case -1 : E_field_vector << -1,0,0 ; break;
+				case -2 : E_field_vector << 0,-1,0 ; break;
+				case -3 : E_field_vector << 0,0,-1 ; break;
+			}
+
+			E_field_vector *= E_field_strength;
 		}
 
-
-		E_field_vector *= E_field_strength;
+		else if (anti_drift_Efield[0]) {
+			for (int i = 0; i != 3; i++) {
+				E_field_vector(i) = anti_drift_Efield[i];
+			}
+		}
 		cout << "E_field_vector = [ " << E_field_vector(0) << ", " << E_field_vector(1) << ", " << E_field_vector(2)  << " ]" << endl;
+		return 0;
 
 		//生成したジャンプに対し操作を行っていく
 		for (int i = 0; i != jumps.size(); i++) {
