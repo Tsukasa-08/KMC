@@ -1,0 +1,32 @@
+#This is OUTPUT file written by toml format.
+
+#total_time [s] (average of all KMCs)
+total_time = -nan
+
+#concentration [/Ang.^3] 
+concentration = 1.804430e-04
+
+#Efield_strength [V/Ang.] 
+Efield_strength.Ang = 0.000000e+00
+
+#Efield_strength [V/cm] 
+Efield_strength.cm = 0.000000e+00
+
+#temperture [K] 
+temperture = 0
+
+#ion_charge 拡散種の電荷(整数) 
+ion_charge = 1
+
+#dimensionality : the dimension in this diffusion
+dimensionality = 3
+
+#chemical ionic conductivity [S/cm]
+chemical_Sigma = [-nan,-nan,-nan]
+
+#chemical diffusion coefficient [cm^2/s]
+chemical_D = [-nan,-nan,-nan]
+
+#mean displacement [Ang.] 
+mean_displacement = [-0.0911399400,-0.2734217264,-0.0000019063]
+

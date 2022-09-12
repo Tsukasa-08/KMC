@@ -1,13 +1,13 @@
 #設定ファイル
 
 #Monte Carlo Step per Particle : 1度のKMC内で1粒子あたり何回イベントを起こすか
-MCSP=100
+MCSP=1000
 
 #平均を取る粒子数
-AVERAGE=1
+AVERAGE=20
 
 #拡散種を配置する数、今回だったらプロトン
-NDIFFS=1
+NDIFFS=10
 
 #電場のありなし、(あり=1, なし=0)
 EFIELDON=1
@@ -16,7 +16,8 @@ EFIELDON=1
 #EFIELD=-2
 
 #PES勾配を打ち消す用の電場ベクトル
-ANTIDRIFT = [10.1,20.1,30.1]
+ANTIDRIFT = [10.1,20.1,0.00000031]
+
 #ジャンプ頻度補正の目安、0.1が参考値、10の対数値で入力する
 CORRECT=-1
 

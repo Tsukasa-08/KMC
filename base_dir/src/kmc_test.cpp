@@ -381,7 +381,7 @@ int main()
 	int rot_hop_count_yes = toml::find_or<int>(toml_file,"ROTHOPCOUNT", 0);
 	int dimensionality = toml::find_or<int>(toml_file,"DIMENSIONALITY", 3);
 	auto anti_drift_Efield = toml::find<std::vector<double>>(toml_file,"ANTIDRIFT");
-	cout << anti_drift_Efield[0] << endl;
+	cout << anti_drift_Efield[2] << endl;
 
 	//読み込んだINPUTをもとに計算
 	int step_max = (average + p_place_n - 1) / p_place_n;
@@ -412,7 +412,7 @@ int main()
 		abort();
 	}
 
-	return 0;
+	//return 0;
 
 	cout << "INPUT read" << endl;
 	cout << "\t" << "Monte Carlo Step per Particle : MCSP = " << mcsp << endl;
@@ -910,15 +910,15 @@ int main()
 	//blocking_list_csvとJMPDATAに整合性があるかを確認する
 	if (blocking_list_read_yes) {
 		int match_counter = 0;
-		cout << "size = " << sites[0].get_jumps_from_here().size() << endl;
+		//cout << "size = " << sites[0].get_jumps_from_here().size() << endl;
 		for (int i = 0; i != sites[0].get_jumps_from_here().size() ; i++) {
-			cout << "for = " << i << " times" << endl;
+			//cout << "for = " << i << " times" << endl;
 			//blocking_mate_listにjumps_from_hereのget_end_site_idが2つ以上含まれていれば(回転経路に相当)整合性あり
 			if (vector_finder(sites[0].get_blocking_mate_list(), sites[0].get_jumps_from_here()[i].get_end_site_id()))
 				match_counter++;
 		}
 
-		cout << "match_counter = " << match_counter << endl;
+		//cout << "match_counter = " << match_counter << endl;
 
 		if (match_counter < 2) {
 			cout << "blocking_list_csv does not match JMPDATA." << endl;	
