@@ -376,6 +376,7 @@ int main()
 	int temperture = toml::find_or<int>(toml_file,"TEMP", 0);
 	int E_field_axis = toml::find_or<int>(toml_file,"AXIS", 0);
 	double distance_jump = toml::find_or<double>(toml_file,"DISTANCEJUMP", 1); //単位は[Å]
+	int site_PE_read_yes = toml::find_or<int>(toml_file,"SITEPEREAD", 0);
 	int blocking_list_read_yes = toml::find_or<int>(toml_file,"BLOCKINGLISTREAD", 0);
 	int blocking_yes = toml::find_or<int>(toml_file,"BLOCKING", 0);
 	int rot_hop_count_yes = toml::find_or<int>(toml_file,"ROTHOPCOUNT", 0);
@@ -424,6 +425,7 @@ int main()
 	cout << "\t" << "temperture : TEMP = " << temperture << endl;
 	cout << "\t" << "the correct_constant for adjusting jump frequency gamma (default = 0.1) :  correct_constant = " << correct_constant << endl;
 	cout << "\t" << "the direction of E_field : E_field_axis = " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
+	cout << "\t" << "whether sitePE is read or not = " << site_PE_read_yes << " (1=valid、0=invalid)"<< endl;
 	cout << "\t" << "whether blocking_list is valid or not = " << blocking_yes << " (1=valid、0=invalid)"<< endl;
 	cout << "\t" << "the dimensionality in this diffusion situation : dimensionality = " << dimensionality << endl;
 	cout << endl;
@@ -623,6 +625,84 @@ int main()
 
 	
 */
+
+	//sitePE.datを読み込む
+	//まずはPOSCARのサイト数と一致しているかを確認
+	int site_pe_dat_total_number = 0;
+	if (site_PE_read_yes) {
+		ifstream site_pe_dat("sitePE.dat");
+
+		if (!site_pe_dat) {
+			cerr << "Could not find file sitePE.dat" << endl;
+			abort();
+		}
+
+		string for_line_reader_sitepe;
+		while (getline(site_pe_dat, for_line_reader_sitepe)) {
+			
+			//コメント行はスルー
+			if (for_line_reader_sitepe[0] == '#' || for_line_reader_sitepe[0] == '/') {
+				continue;
+			}
+
+			else {
+				site_pe_dat_total_number++;
+			}
+
+		}
+
+		if (site_pe_dat_total_number == site_total_number) {
+			cout << "sitePE.dat read" << endl;
+			cout << endl;
+		}
+
+		else {
+			cerr << "sitePE.dat does not MATCH POSCAR." << endl;
+			abort();
+		}
+
+	}
+
+
+	
+	//2次元vectorに、サイト番号とエネルギーを格納する(初期配置のため)
+	vector< vector<double> > sitePE_dat(site_pe_dat_total_number, vector<double>(2));
+	if (site_PE_read_yes) {
+
+		ifstream ifs_sitepe("sitePE.dat");
+		int n_lines = 0;
+		while (getline(ifs_sitepe,line)) {
+
+			//コメント行はスルー
+			if (line[0] == '#' || line[0] == '/') {
+				continue;
+			}
+
+			istringstream is(line);
+			double site_id ;
+			double site_pe;
+			is >> site_id >> site_pe;
+
+			sitePE_dat[n_lines][0] = site_id;
+			sitePE_dat[n_lines][1] = site_pe;
+
+			n_lines++;
+			
+			
+		}
+	}
+
+	//sitePE確認用
+	for (auto itr = sitePE_dat.begin(); itr != sitePE_dat.end(); itr++) {
+		for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
+			cout << *itr2 << "," ;
+		}
+		cout << endl;
+	}
+
+	
+
+	return 0;
 
 
 

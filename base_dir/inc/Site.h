@@ -8,6 +8,7 @@ private:
 	int site_id;
 	int site_atom;
 	int diffusion_id;
+	double site_PE;
 	std::vector<double> site_frac_coords;
 	std::vector<Jump> jumps_from_here;
 	std::vector<Jump> jumps_to_here;
@@ -30,6 +31,8 @@ public:
 
 	void set_diffusion_id(int d_id) { diffusion_id = d_id; };
 
+	void set_site_PE(int s_PE) { site_PE = s_PE; };
+
 	void set_site_frac_coords(std::vector<double> v) { site_frac_coords = v; };
 
 	void set_jumps_from_here(std::vector<Jump> here) { jumps_from_here = here ; } ;
@@ -46,6 +49,8 @@ public:
 	int get_site_atom() { return site_atom; } ;
 
 	int get_diffusion_id() { return diffusion_id; } ;
+
+	double get_site_PE() { return site_PE; } ;
 
 	std::vector<double> get_site_frac_coords() { return site_frac_coords; } ;
 

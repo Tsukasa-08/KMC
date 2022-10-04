@@ -1,7 +1,7 @@
 #設定ファイル
 
 #Monte Carlo Step per Particle : 1度のKMC内で1粒子あたり何回イベントを起こすか
-MCSP=1000
+MCSP=10000
 
 #平均を取る粒子数
 AVERAGE=20
@@ -16,28 +16,32 @@ EFIELDON=0
 #EFIELD=-2
 
 #PES勾配を打ち消す用の電場ベクトル
-ANTIDRIFT = [1.394409e-3, -7.61987e-4, -7.36648e-4]
+ANTIDRIFT = [0.0, 0.0, 0.0]
+#ANTIDRIFT = [1.394409e-3, -7.61987e-4, -7.36648e-4]
 
 #ジャンプ頻度補正の目安、0.1が参考値、10の対数値で入力する
 CORRECT=-1.0
 
 #ジャンプリストの平均ジャンプ距離(Å),いずれはプログラムで抽出できたほうがいいかも
-DISTANCEJUMP=1.5
+DISTANCEJUMP=4.0
 
 #温度(K)
-TEMP=600
+TEMP=500
 
 #軸方向(+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
 AXIS=1
 
+#sitePE.datを読み込むかどうか(yes=1, no=0)
+SITEPEREAD=1
+
 #blocking_listを読み込むかどうか(yes=1, no=0)
-BLOCKINGLISTREAD=1
+BLOCKINGLISTREAD=0
 
 #blocking_listによるarea blockingを行うか(yes=1, no=0)
-BLOCKING=1
+BLOCKING=0
 
 #hoppingやrotationのcounterを出力するか(BaZrO3専用)
-ROTHOPCOUNT=1
+ROTHOPCOUNT=0
 
 #拡散を考える次元(default=3)
-DIMENSIONALITY=3
+DIMENSIONALITY=2
