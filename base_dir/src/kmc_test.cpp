@@ -665,8 +665,8 @@ int main()
 
 
 	
-	//2次元vectorに、サイト番号とエネルギーを格納する(初期配置のため)
-	vector< vector<double> > sitePE_dat(site_pe_dat_total_number, vector<double>(2));
+	//2次元vectorに、サイト番号とエネルギー,およびボルツマン因子を格納する(初期配置のため)
+	vector< vector<double> > sitePE_dat(site_pe_dat_total_number, vector<double>(3));
 	if (site_PE_read_yes) {
 
 		ifstream ifs_sitepe("sitePE.dat");
@@ -681,10 +681,13 @@ int main()
 			istringstream is(line);
 			double site_id ;
 			double site_pe;
+			double boltzmann_factor;
 			is >> site_id >> site_pe;
+			boltzmann_factor = exp(-site_pe/(kb/ec*temperture));
 
 			sitePE_dat[n_lines][0] = site_id;
 			sitePE_dat[n_lines][1] = site_pe;
+			sitePE_dat[n_lines][2] = boltzmann_factor;
 
 			n_lines++;
 			
@@ -692,6 +695,7 @@ int main()
 		}
 	}
 
+/*	
 	//sitePE確認用
 	for (auto itr = sitePE_dat.begin(); itr != sitePE_dat.end(); itr++) {
 		for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
@@ -699,10 +703,9 @@ int main()
 		}
 		cout << endl;
 	}
-
+*/
 	
 
-	return 0;
 
 
 
@@ -1074,47 +1077,102 @@ int main()
 		}
 
 		//cout << "NDIFFS = " << p_place_n << endl;
+		//sitePE_datのdeep_copyを取っておく(初期配置を決めるごとに変更するので)
+		vector<vector<double>> sitePE_dat_deepcopy = sitePE_dat;
 
 		//次に、どのサイトにプロトンを配置するかを決める
-		vector<int> random_proton_place_number_vector;
+		vector<int> proton_place_number_vector;
 
-		//blockingありの場合
-		if (blocking_yes) {
-			//cout << "blockingあり" << endl;
-
-			//乱数を生成し、blocking_list_csv(vector<vector<int>>)をシャッフルする
-			shuffle( blocking_list_csv.begin(), blocking_list_csv.end(), mt );
+		//sitePE.datに基づいて、ボルツマン因子に従ってプロトンを配置するサイトを選ぶ場合
+		if (site_PE_read_yes) {
+			//一旦2次元だけを考えて、blockingなしの場合のみ書く
 			
-			//先頭から抽出する
-			for (int i = 0; i != p_place_n; i++) {
-				shuffle ( blocking_list_csv[i].begin(), blocking_list_csv[i].end(), mt);
-				random_proton_place_number_vector.push_back(blocking_list_csv[i][0]);
-			}
+			//プロトンの初期配置数に達するまで繰り返す
+			while (proton_place_number_vector.size() < p_place_n) { 
+			
+				//sitePE_dat[i][2]の和(ボルツマン因子の総和:分配関数)を計算する
+				double part_func = 0;
+				for (auto itr = sitePE_dat_deepcopy.begin(); itr != sitePE_dat_deepcopy.end(); itr++) {
+					part_func += (*(itr))[2];
+				}
 
+				//cout << "part_func = " << part_func << endl;
+				
+				//0から1の乱数を生成する
+				uniform_real_distribution<double> random0to1(0,1);
+				double rho_0 = random0to1(mt);
+				
+				//sitePE_dat中のボルツマン因子を順に足し上げていき、和がrho_0*part_funcを超えたときの整数lを取得する
+				double part_func_tmp = 0.0;
+				int over_partial_number;
+				for (int l = 0, n = sitePE_dat_deepcopy.size() ; l != n; l++) {
+					part_func_tmp += sitePE_dat_deepcopy[l][2];
+
+					if (part_func_tmp > rho_0 * part_func) {
+						over_partial_number = l;
+						break;
+					}
+				}
+
+				//cout << "selected_site = " << sitePE_dat_deepcopy[over_partial_number][0] << endl;
+
+				//初期配置を格納したベクトルに、サイト番号を追加
+				proton_place_number_vector.push_back(sitePE_dat_deepcopy[over_partial_number][0]);
+
+				//初期配置として追加したサイトは分配関数から除く
+				sitePE_dat_deepcopy.erase(sitePE_dat_deepcopy.begin() + over_partial_number);
+				//cout << "sitePE_dat_deepcopy.size() = " << sitePE_dat_deepcopy.size() << endl;
+				//cout << endl;
+
+				if (blocking_yes) {
+					//先ほど初期配置としたサイトのarea blockingに関わるサイトもsitePE_datから削除する
+				}
+			}
 		}
 
-		//blockingなしの場合
+		
+
+
+		//ボルツマン因子は考慮せず、ランダムにプロトンを配置するサイトを選ぶ場合
 		else {
-			//cout << "blockingなし" << endl;
-			//(サイトの数-1)を要素にもつvectorを生成
-			random_proton_place_number_vector.resize(site_total_number-1);
-			for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
-				random_proton_place_number_vector[i] = i + 1;
+			//blockingありの場合
+			if (blocking_yes) {
+				//cout << "blockingあり" << endl;
+
+				//乱数を生成し、blocking_list_csv(vector<vector<int>>)をシャッフルする
+				shuffle( blocking_list_csv.begin(), blocking_list_csv.end(), mt );
+				
+				//先頭から抽出する
+				for (int i = 0; i != p_place_n; i++) {
+					shuffle ( blocking_list_csv[i].begin(), blocking_list_csv[i].end(), mt);
+					proton_place_number_vector.push_back(blocking_list_csv[i][0]);
+				}
+
 			}
 
-			//乱数を生成し、vectorをシャッフルする
-			shuffle( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end(), mt );
-			
+			//blockingなしの場合
+			else {
+				//cout << "blockingなし" << endl;
+				//(サイトの数-1)を要素にもつvectorを生成
+				proton_place_number_vector.resize(site_total_number-1);
+				for (int i = 0; i != proton_place_number_vector.size(); i++) {
+					proton_place_number_vector[i] = i + 1;
+				}
 
-			//先頭からプロトンを配置する数分(p_place_n)だけ抜き出しソートする
-			random_proton_place_number_vector.resize(p_place_n);
-			sort( random_proton_place_number_vector.begin(), random_proton_place_number_vector.end() );
+				//乱数を生成し、vectorをシャッフルする
+				shuffle( proton_place_number_vector.begin(), proton_place_number_vector.end(), mt );
+				
 
+				//先頭からプロトンを配置する数分(p_place_n)だけ抜き出しソートする
+				proton_place_number_vector.resize(p_place_n);
+				sort( proton_place_number_vector.begin(), proton_place_number_vector.end() );
+
+			}
 		}
 
 		/*//確認用
-		for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
-			cout << "random_proton_place_number_vector[" << i << "] = " << random_proton_place_number_vector[i] << endl;
+		for (int i = 0; i != proton_place_number_vector.size(); i++) {
+			cout << "proton_place_number_vector[" << i << "] = " << proton_place_number_vector[i] << endl;
 		}
 
 		return 0;
@@ -1140,11 +1198,11 @@ int main()
 		
 		int d_id = 1;
 
-		for (int i = 0; i != random_proton_place_number_vector.size(); i++) {
+		for (int i = 0; i != proton_place_number_vector.size(); i++) {
 			for (int k = 0; k != sites.size(); k++) {
 
 				//sites[k]=Siteクラスのsite_idが、プロトンを配置するsite_idかどうかを判定
-				if (sites[k].get_site_id() == random_proton_place_number_vector[i]) {
+				if (sites[k].get_site_id() == proton_place_number_vector[i]) {
 					sites[k].set_site_atom(number_proton);
 					sites[k].set_diffusion_id(d_id);
 
