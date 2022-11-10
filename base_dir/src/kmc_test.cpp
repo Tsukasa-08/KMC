@@ -1132,13 +1132,13 @@ int main()
 				//初期配置として追加したサイトは分配関数から除く
 				sitePE_dat_deepcopy.erase(sitePE_dat_deepcopy.begin() + over_partial_number);
 				//cout << "sitePE_dat_deepcopy.size() = " << sitePE_dat_deepcopy.size() << endl;
-				//cout << endl;
 
 				if (blocking_yes) {
 					//先ほど初期配置としたサイトのarea blockingに関わるサイトもsitePE_datから削除する
 					vector<int> temp_area_blocking_list = sites[added_proton_site_number-1].get_blocking_mate_list();
 					//area blockingに関わるサイトを1つずつ探索する
 					for (auto itr_blk = temp_area_blocking_list.begin() ; itr_blk != temp_area_blocking_list.end() ; itr_blk++){
+						//cout << "area blocking site = " << *itr_blk << endl;
 						auto itr_hit = find_if(sitePE_dat_deepcopy.begin(), sitePE_dat_deepcopy.end(), [=](const auto& row) { return (row[0] == *itr_blk); });
 						//見つからなかった場合は何もしない
 						if (itr_hit == sitePE_dat_deepcopy.end()) {
@@ -1155,6 +1155,8 @@ int main()
 					}
 					
 				}
+
+				//cout << endl;
 			}
 		}
 
@@ -1204,8 +1206,9 @@ int main()
 			cout << "proton_place_number_vector[" << i << "] = " << proton_place_number_vector[i] << endl;
 		}
 
+
 		return 0;
-		*/
+		/*/
 		
 		
 		
