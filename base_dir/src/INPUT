@@ -7,7 +7,7 @@ MCSP=100000
 AVERAGE=10000
 
 #拡散種を配置する数、今回だったらプロトン
-NDIFFS=1
+NDIFFS=10
 
 #電場のありなし、(あり=1, なし=0)
 EFIELDON=1
@@ -35,10 +35,10 @@ AXIS=1
 SITEPEREAD=1
 
 #blocking_listを読み込むかどうか(yes=1, no=0)
-BLOCKINGLISTREAD=0
+BLOCKINGLISTREAD=1
 
 #blocking_listによるarea blockingを行うか(yes=1, no=0)
-BLOCKING=0
+BLOCKING=1
 
 #hoppingやrotationのcounterを出力するか(BaZrO3専用)
 ROTHOPCOUNT=0

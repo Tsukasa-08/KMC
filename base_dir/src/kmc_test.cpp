@@ -996,6 +996,7 @@ int main()
 	return 0;
 	*/
 	
+	//*
 	//blocking_list_csvとJMPDATAに整合性があるかを確認する
 	if (blocking_list_read_yes) {
 		int match_counter = 0;
@@ -1015,6 +1016,7 @@ int main()
 			abort();
 		}
 	}
+	//*/
 
 
 	concentration = p_place_n / lattice_matrix.determinant();
@@ -1090,6 +1092,13 @@ int main()
 			//プロトンの初期配置数に達するまで繰り返す
 			while (proton_place_number_vector.size() < p_place_n) { 
 			
+				/*
+				//確認用
+				for (auto itr = sitePE_dat_deepcopy.begin(); itr != sitePE_dat_deepcopy.end(); itr++) {
+					cout << "site id = " << (*(itr))[0] << endl;
+				}
+				*/
+
 				//sitePE_dat[i][2]の和(ボルツマン因子の総和:分配関数)を計算する
 				double part_func = 0;
 				for (auto itr = sitePE_dat_deepcopy.begin(); itr != sitePE_dat_deepcopy.end(); itr++) {
@@ -1117,7 +1126,8 @@ int main()
 				//cout << "selected_site = " << sitePE_dat_deepcopy[over_partial_number][0] << endl;
 
 				//初期配置を格納したベクトルに、サイト番号を追加
-				proton_place_number_vector.push_back(sitePE_dat_deepcopy[over_partial_number][0]);
+				int added_proton_site_number = sitePE_dat_deepcopy[over_partial_number][0];
+				proton_place_number_vector.push_back(added_proton_site_number);
 
 				//初期配置として追加したサイトは分配関数から除く
 				sitePE_dat_deepcopy.erase(sitePE_dat_deepcopy.begin() + over_partial_number);
@@ -1126,6 +1136,24 @@ int main()
 
 				if (blocking_yes) {
 					//先ほど初期配置としたサイトのarea blockingに関わるサイトもsitePE_datから削除する
+					vector<int> temp_area_blocking_list = sites[added_proton_site_number-1].get_blocking_mate_list();
+					//area blockingに関わるサイトを1つずつ探索する
+					for (auto itr_blk = temp_area_blocking_list.begin() ; itr_blk != temp_area_blocking_list.end() ; itr_blk++){
+						auto itr_hit = find_if(sitePE_dat_deepcopy.begin(), sitePE_dat_deepcopy.end(), [=](const auto& row) { return (row[0] == *itr_blk); });
+						//見つからなかった場合は何もしない
+						if (itr_hit == sitePE_dat_deepcopy.end()) {
+							//cout << "not found" << endl;
+						}
+						//見つかった場合は2つの位置の距離を計算後、削除する
+						else {
+							//cout << "found" << endl;
+							auto dist = distance(sitePE_dat_deepcopy.begin(), itr_hit);
+							sitePE_dat_deepcopy.erase(sitePE_dat_deepcopy.begin() + dist);
+							
+						}
+						
+					}
+					
 				}
 			}
 		}
@@ -1170,13 +1198,15 @@ int main()
 			}
 		}
 
-		/*//確認用
+		/*
+		//確認用
 		for (int i = 0; i != proton_place_number_vector.size(); i++) {
 			cout << "proton_place_number_vector[" << i << "] = " << proton_place_number_vector[i] << endl;
 		}
 
 		return 0;
 		*/
+		
 		
 		
 
@@ -2203,10 +2233,10 @@ int main()
 	
 	//実行時間の計測
 	
-	//プログラム開始時刻を表示
+	//プログラム終了時刻を表示
 	end = chrono::system_clock::now();
 	
-	//開始時間のmsecを求める
+	//終了時間のmsecを求める
 	end_msec = chrono::duration_cast<chrono::milliseconds>(end.time_since_epoch());
 	all_msec = end_msec.count();
 	msec = all_msec % 1000 ;
