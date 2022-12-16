@@ -141,6 +141,8 @@ private:
 	std::vector<double> sum_squared_distance;
 
 public:
+	int diffusion_start_site;
+	int diffusion_end_site;
 	int diffusion_counter;
 	static std::vector<int> diffusion_siteid_now_list;
 	static std::set<int> blocking_list;
@@ -341,8 +343,8 @@ int main()
 	//変位一覧を出力するmean_displacement.csvを開いておく
 	ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
 	//ofs_ave_dis << "#KMC " << step_counter << " times" << endl;
-	ofs_ave_dis << "#the number of KMC, diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], sum of squared displacement of each jumps in x, y, z [Ang.^2], jump_counter of total, rotation, hopping [times]" << endl;
-	ofs_ave_dis << "KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,jump_counter,rot_counter,hop_counter" << endl;
+	ofs_ave_dis << "#the number of KMC, diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], sum of squared displacement of each jumps in x, y, z [Ang.^2], start_site, end_site, jump_counter of total, rotation, hopping [times]" << endl;
+	ofs_ave_dis << "KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,start_site,end_site,jump_counter,rot_counter,hop_counter" << endl;
 
 	//結果を出力するアウトプットファイルを作成する
 	ofstream ofs_diff("DiffusionCoefficient", ios::app);
@@ -1217,7 +1219,10 @@ int main()
 		vector<Diffusionspecie> diffusion_species(p_place_n);
 		//それぞれのidを[i]にたいしてi+1で設定する(1からp_place_nまでdiffusion_idとして通し番号をふる)
 		for (int i = 0; i != diffusion_species.size(); i++) {
+
+			int diffusion_start_site;
 			diffusion_species[i].set_diffusion_id(i+1);
+			diffusion_species[i].diffusion_start_site = proton_place_number_vector[i] ;
 			diffusion_species[i].diffusion_counter = 0;
 			diffusion_species[i].rotation_counter = 0;
 			diffusion_species[i].hopping_counter = 0;
@@ -1239,6 +1244,7 @@ int main()
 					sites[k].set_site_atom(number_proton);
 					sites[k].set_diffusion_id(d_id);
 
+					
 					//同時に、静的メンバ変数であるdiffusion_siteid_now_listにも追加しておく
 					Diffusionspecie::diffusion_siteid_now_list.push_back(sites[k].get_site_id());
 
@@ -1266,6 +1272,11 @@ int main()
 			cout << *itr << "," ;
 		}
 		cout << endl;
+		cout << "Diffusionspecie::diffusion_siteid_now_list = " ;
+		for (auto itr = Diffusionspecie::diffusion_siteid_now_list.begin(); itr != Diffusionspecie::diffusion_siteid_now_list.end() ; itr++) {
+			cout << *itr << "," ;
+		}
+		cout << endl;
 */
 
 
@@ -1278,7 +1289,8 @@ int main()
 			//cout << "d_id = p_place_n+1" << endl;
 
 		//確認用
-/*		for (int i = 0; i != sites.size(); i++) {
+/*
+		for (int i = 0; i != sites.size(); i++) {
 			cout << "site[" << i << "] ";
 			cout << "site_id = " << sites[i].get_site_id() << " " ;
 			cout << "site_atom = " << sites[i].get_site_atom() << " " ;
@@ -1777,8 +1789,16 @@ int main()
 
 			//cout << "loop_counter " << loop_counter << " finished" << endl;
 
-			
+			//ループの最後の時
+			if (loop_counter == loop_max) { 
+				//end_siteを設定する
+				for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
 
+					int tmp_diff_id = sites[Diffusionspecie::diffusion_siteid_now_list[i]-1].get_diffusion_id() ;
+					diffusion_species[tmp_diff_id-1].diffusion_end_site = Diffusionspecie::diffusion_siteid_now_list[i] ;
+				}
+				
+			}
 
 
 
@@ -1928,6 +1948,10 @@ int main()
 				ofs_ave_dis << fixed << setprecision(10) << diffusion_species[i].get_sum_squared_distance()[j] << defaultfloat << "," ;
 				
 			}
+
+			//start_site,end_siteを出力する
+			ofs_ave_dis << diffusion_species[i].diffusion_start_site << "," ;
+			ofs_ave_dis << diffusion_species[i].diffusion_end_site << "," ;
 
 			
 

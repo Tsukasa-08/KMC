@@ -14,6 +14,8 @@ private:
 	std::vector<double> sum_squared_distance;
 
 public:
+	int diffusion_start_site;
+	int diffusion_end_site;
 	int diffusion_counter;
 	int rotation_counter;
 	int hopping_counter;
