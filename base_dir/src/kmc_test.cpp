@@ -695,7 +695,7 @@ int main()
 		}
 	}
 
-//*	
+/*	
 	//sitePE確認用
 	for (auto itr = sitePE_dat.begin(); itr != sitePE_dat.end(); itr++) {
 		for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
@@ -703,8 +703,7 @@ int main()
 		}
 		cout << endl;
 	}
-//*/
-	return 0;
+/*/
 	
 
 
