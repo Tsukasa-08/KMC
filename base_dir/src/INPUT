@@ -1,7 +1,7 @@
 #設定ファイル
 
 #Monte Carlo Step per Particle : 1度のKMC内で1粒子あたり何回イベントを起こすか
-MCSP=100000
+MCSP=10
 
 #平均を取る粒子数
 AVERAGE=1
