@@ -238,7 +238,7 @@ Eigen::Vector3d transcoords(const vector<double> vector_frac, Eigen::Matrix3d la
 	return vector_cartesian;
 }
 
-//Eigen::VectorXdをstd::vectorに型変換
+//Eigen::VectorXdをstd::vectorに型変換する関数
 vector<double> eigen2vector(Eigen::Vector3d eigen_vector) 
 {
 	vector<double> vector_cartesian(3,0.0);
@@ -249,7 +249,7 @@ vector<double> eigen2vector(Eigen::Vector3d eigen_vector)
 	return vector_cartesian;
 }
 
-//ある値がvector内の要素に含まれているか否か判定する
+//ある値がvector内の要素に含まれているか否か判定する関数
 int vector_finder(std::vector<int> vec, int number) {
 	auto itr = std::find(vec.begin(), vec.end(), number);
 	size_t index = std::distance(vec.begin(), itr);
@@ -300,6 +300,8 @@ double NernstEinstein_SigmatoD(double Sigma, double concentration, int tempertur
 std::vector<int> Diffusionspecie::diffusion_siteid_now_list;
 std::set<int> Diffusionspecie::blocking_list;
 
+
+
 //メイン関数の開始
 int main()
 {
@@ -343,7 +345,7 @@ int main()
 	//変位一覧を出力するmean_displacement.csvを開いておく
 	ofstream ofs_ave_dis("mean_displacement.csv", ios::app);
 	//ofs_ave_dis << "#KMC " << step_counter << " times" << endl;
-	ofs_ave_dis << "#the number of KMC, diffusion_id, mean displacement in x [Ang.], mean_displacement in y [Ang.], mean displacement in z [Ang.], sum of squared displacement of each jumps in x, y, z [Ang.^2], start_site, end_site, jump_counter of total, rotation, hopping [times]" << endl;
+	ofs_ave_dis << "#the number of KMC, diffusion_id, displacement in x direction [Ang.], displacement in y direction [Ang.], displacement in z direction [Ang.], sum of squared displacement of each jumps in x, y, z [Ang.^2], start_site, end_site, jump_counter of total, rotation, hopping [times]" << endl;
 	ofs_ave_dis << "KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,start_site,end_site,jump_counter,rot_counter,hop_counter" << endl;
 
 	//結果を出力するアウトプットファイルを作成する
@@ -352,7 +354,6 @@ int main()
 	//結果を出力するアウトプットファイルを作成する
 	ofstream ofs_sigma("IonicConductivity", ios::app);
 
-	//実行時間の計測
 
 	//make DiffusionCoefficient vector
 	vector< vector<double> > D_t_3d_vector;
@@ -367,13 +368,11 @@ int main()
 
 	//tomlファイルとしてINPUTを読み込む
 	auto toml_file = toml::parse("INPUT");
-	//INPUTを読み込む
-	//param::parameter param("INPUT");
+	//INPUTを読み込む, find_or関数は該当するパラメータ(第2引数)が存在しない場合, デフォルト値(第3引数)を読み込む
 	long long mcsp = toml::find_or<int>(toml_file,"MCSP", 0);
 	int average = toml::find_or<int>(toml_file,"AVERAGE", 0);
 	long long p_place_n = toml::find_or<int>(toml_file,"NDIFFS", 0);
 	int E_field_yes = toml::find_or<int>(toml_file,"EFIELDON", 0);
-	//double E_field_strength_for_pow = toml::find_or<double>(toml_file,"EFIELD", 0);
 	double correct_constant_for_pow = toml::find_or<double>(toml_file,"CORRECT", 0);
 	int temperture = toml::find_or<int>(toml_file,"TEMP", 0);
 	int E_field_axis = toml::find_or<int>(toml_file,"AXIS", 0);
@@ -419,15 +418,15 @@ int main()
 	cout << "INPUT read" << endl;
 	cout << "\t" << "Monte Carlo Step per Particle : MCSP = " << mcsp << endl;
 	cout << "\t" << "the number of particles for calculate ensemble average :  AVERAGE = " << average << endl;
-	cout << "\t" << "the number of executing KMCs : NSTEPS = " << step_max << endl;
-	cout << "\t" << "Monte Carlo Step (MCS) :  NLOOPS = " << loop_max << endl;
+	cout << "\t" << "the number of executing KMCs : N_KMC = " << step_max << endl;
+	cout << "\t" << "Monte Carlo Step (=MCSP*NDIFFS) :  MCS = " << loop_max << endl;
 	cout << "\t" << "the number of placing diffusion atoms :  NDIFFS = " << p_place_n << endl;
 	cout << "\t" << "Electrical field strength :  EFIELD = " << scientific << E_field_strength << " [V/Å] " << endl;
 	cout << "\t" << "Electrical field strength :  EFIELD = " << E_field_strength*pow(10,8) << defaultfloat << " [V/cm] " << endl;
 	cout << "\t" << "temperture : TEMP = " << temperture << endl;
 	cout << "\t" << "the correct_constant for adjusting jump frequency gamma (default = 0.1) :  correct_constant = " << correct_constant << endl;
 	cout << "\t" << "the direction of E_field : E_field_axis = " << E_field_axis << " (+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)" << endl;
-	cout << "\t" << "whether sitePE is read or not = " << site_PE_read_yes << " (1=valid、0=invalid)"<< endl;
+	cout << "\t" << "whether sitePE is read or not = " << site_PE_read_yes << " (1=read、0=not read)"<< endl;
 	cout << "\t" << "whether blocking_list is valid or not = " << blocking_yes << " (1=valid、0=invalid)"<< endl;
 	cout << "\t" << "the dimensionality in this diffusion situation : dimensionality = " << dimensionality << endl;
 	cout << endl;
@@ -466,7 +465,6 @@ int main()
 	cout << endl;
 
 
-	//int	const jump_total_number = 256;
 	ifstream ifs1("JMPDATA");
 	vector<Jump> jumps(jump_total_number, Jump());
 	string line;
@@ -482,8 +480,6 @@ int main()
 		jumps[n_lines].set_end_site_atom(stoi(strvec[3]));
 		jumps[n_lines].set_freq(stod(strvec[4]));
 
-	//	cout << "jumps[" << n_lines << "].freq = " << jumps[n_lines].get_freq() << endl;
-		
 		n_lines += 1;
 	}	
 			
@@ -539,7 +535,6 @@ int main()
 			//格子ベクトルのある3~5行目だった場合は読み込む
 			if(n_lines >= 3 && n_lines <= 5) {
 				
-			//	cout << "n_lines = " << n_lines << endl;
 				stringstream ss_line;
 				ss_line << line;
 
@@ -563,8 +558,6 @@ int main()
 
 		//座標一覧に到達以降
 		else {
-		//	cout << "n_lines = "  << n_lines << endl;
-
 			stringstream ss_line; 
 			ss_line << line;
 			string s;
@@ -572,22 +565,10 @@ int main()
 
 			//座標をコピーするためのfrac_dblvecを作成する
 			vector<double> frac_dblvec(3,0.0);
-			//cout << "s = " << s << endl;
-			//cout << "s_counter = " << s_counter << endl;
 			for (int i = 0; i <= 2; i++) {
 				ss_line >> s;
 				frac_dblvec[i] = stod(s);
-				//cout << "frac_dblvec[" << i << "] = "<< frac_dblvec[i] << endl;
-				
 			}
-
-			//1行を空白で3つの座標に分割していく
-			//while(getline(ss_line, s, ' ')){
-
-			//	frac_dblvec[s_counter] = stod(s);
-			//	cout << "frac_dblvec[" << s_counter << "] = "<< frac_dblvec[s_counter] << endl;
-			//	s_counter += 1;
-			//}
 
 			//siteのidは「現在の行数-"DIRECT"の行数」
 			int site_id_tmp = n_lines - DIRECT_num;
@@ -595,13 +576,6 @@ int main()
 			//sites自体は0から始まるので、1つずらして代入する
 			sites[site_id_tmp-1].set_site_id(site_id_tmp);
 			sites[site_id_tmp-1].set_site_frac_coords(frac_dblvec);
-
-				//cout << sites[site_id_tmp-1].get_site_id() << endl;
-				//for (int i=0; i <3; i++) {
-					//cout << sites[site_id_tmp-1].get_site_frac_coords()[i] << endl;
-				//}
-			
-			
 		}
 
 		n_lines += 1;
@@ -615,18 +589,6 @@ int main()
 		} 
 		cout << endl;
 
-
-
-/*	//Site確認用
-	for (int i = 0; i != sites.size() ; i++) {
-		cout << "sites[" << i << "].id = " << sites[i].get_site_id() << endl;
-		for (int j = 0; j <= 2; j++){
-			cout << '\t' << sites[i].get_site_frac_coords()[j] << endl;
-		}
-	}
-
-	
-*/
 
 	//sitePE.datを読み込む
 	//まずはPOSCARのサイト数と一致しているかを確認
@@ -697,19 +659,6 @@ int main()
 		}
 	}
 
-/*	
-	//sitePE確認用
-	for (auto itr = sitePE_dat.begin(); itr != sitePE_dat.end(); itr++) {
-		for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
-			cout << *itr2 << "," ;
-		}
-		cout << endl;
-	}
-/*/
-	
-
-
-
 
 	//blocking_list.csvを読み込む
 	int csv_total_number = 0;
@@ -739,58 +688,26 @@ int main()
 		n_lines = 0;
 		while (getline(ifs3, line)){
 
-
 			vector<string> strvec = split(line, ',');
 
 			for (int i = 0; i != strvec.size(); i++){
 				blocking_list_csv[n_lines].push_back(stoi(strvec[i]));
 			}
-
-
-		//	cout << "jumps[" << n_lines << "].freq = " << jumps[n_lines].get_freq() << endl;
 			
 			n_lines += 1;
 		}	
-
-
-/*	//csv確認用
-	for (auto itr = blocking_list_csv.begin(); itr != blocking_list_csv.end(); itr++) {
-		for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
-			cout << *itr2 << "," ;
+	
+		//blocking_list_csvをもとに、各Siteのblocking_mate_listに追加していく
+		for (auto itr = blocking_list_csv.begin(); itr != blocking_list_csv.end(); itr++) {
+			for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
+				sites[*itr2-1].set_blocking_mate_list(*itr);
+			}
 		}
-		cout << endl;
-	}
-
-*/
-
-
-	
-	//blocking_list_csvをもとに、各Siteのblocking_mate_listに追加していく
-	for (auto itr = blocking_list_csv.begin(); itr != blocking_list_csv.end(); itr++) {
-		for (auto itr2 = (*(itr)).begin(); itr2 != (*(itr)).end(); itr2++){
-			sites[*itr2-1].set_blocking_mate_list(*itr);
-		}
-	}
-
-	
-	
-
-	/*//mateがSitesに属しているか確認用
-	for (int i = 0; i != sites.size(); i++) {
-		cout << "sites " << sites[i].get_site_id() << "のmate一覧" << endl;
-		vector<int> mate_tmp = sites[i].get_blocking_mate_list();
-	
-		for (auto itr = mate_tmp.begin() ; itr != mate_tmp.end() ; itr++) {
-			cout << '\t' << *itr << endl;
-		}	
-
-	}
-	*/
 
 	}
 	
 	//拡散種の配置数がオーバーしていないか確認する
-	//blockingするとき
+	//blockingするとき, blocking_list_csvの行数が有効サイト数の上限ゆえに, 上限を上回ってないか確認
 	if (blocking_yes) {
 		if (p_place_n > csv_total_number -1) {
 			cerr << "NDIFF > effective site total number. Reduce NDIFF." << endl;
@@ -806,10 +723,6 @@ int main()
 		}
 
 	}
-	
-
-		
-	
 
 
 
@@ -818,16 +731,12 @@ int main()
 
 		//始点と終点のsite_idを取得
 		int start_site_id_tmp = jumps[i].get_start_site_id();
-		//cout << "start_site_id_tmp = " << start_site_id_tmp << endl;
 		int end_site_id_tmp = jumps[i].get_end_site_id();
-		//cout << "end_site_id_tmp = " << end_site_id_tmp << endl;
 
 		//始点と終点の分率座標を取得
 		//sites[i]のsite_idはi+1なので、tmpから1を引いておく
 		vector<double> start_frac_coords = sites[start_site_id_tmp-1].get_site_frac_coords();
-		//cout << "start_frac_coords = " << start_frac_coords[0] << endl;
 		vector<double> end_frac_coords = sites[end_site_id_tmp-1].get_site_frac_coords();
-		//cout << "end_frac_coords = " << end_frac_coords[0] << endl;
 
 		//仮のjump_vector_tmpを作成する
 		vector<double> jump_vector_tmp(3,0.0);
@@ -835,7 +744,7 @@ int main()
 		//成分ごとに計算していく
 		for (int k = 0; k != jump_vector_tmp.size(); k++) {
 			jump_vector_tmp[k] = end_frac_coords[k] - start_frac_coords[k];
-
+			
 			//周期的境界条件
 			//ベクトルの成分の絶対値が0.5を超えている(=ユニットセルの半分を移動している)場合に
 			//1を足し引きして補正する
@@ -846,50 +755,13 @@ int main()
 				if (jump_vector_tmp[k] < -0.5) {
 					jump_vector_tmp[k] += 1;
 				}
-				else {
-					//continue;
-				}
 			}
-
-
-		//cout << "jump_vector_tmp[" << k << "] = " << jump_vector_tmp[k] << endl;
 		}
-		
 
 		//jump_vector_tmpをjump_vectorに代入する
 		jumps[i].set_jump_vector(jump_vector_tmp);
 
-
-/*		//確認用
-		for (int j = 0; j != jumps[i].get_jump_vector().size(); j++) {
-			cout << "jump[" << i << "].jump_vector[" << j << "] = " << jumps[i].get_jump_vector()[j] << endl;
-		}
-		*/
-		
-
-		
-
-
 	}
-
-/*//ジャンプがSitesに属しているか確認用
-	for (int i = 0; i != sites.size(); i++) {
-		cout << "sites[" << i << "]のjump一覧" << endl;
-	
-		for (int j = 0; j != sites[i].get_jumps_to_here().size() ; j++) {
-			cout << "vector " << j << "番目" << endl;
-		
-
-			for (int k = 0 ; k <= 2 ; k++) {
-
-				cout << '\t' << sites[i].get_jumps_to_here()[j].get_jump_vector()[k] << endl;
-			}
-
-		}	
-
-	}
-	*/
-
 
 
 
@@ -924,33 +796,18 @@ int main()
 		//生成したジャンプに対し操作を行っていく
 		for (int i = 0; i != jumps.size(); i++) {
 			
-			//ジャンプベクトルをfracからcartesianに直す(関数作ったので必要なし)
-			/*
-			Eigen::Vector3d jump_vector_frac;
-			Eigen::Vector3d jump_vector_cartesian;
-			jump_vector_frac << jumps[i].get_jump_vector()[0], jumps[i].get_jump_vector()[1], jumps[i].get_jump_vector()[2];
-			jump_vector_cartesian = lattice_matrix*jump_vector_frac;
-			cout << "jump_vector_cartesian = " << jump_vector_cartesian << endl;
-			
-			*/
-
 			//transcoords関数でジャンプベクトルをfracからcartesianに直す
 			Eigen::Vector3d jump_vector_cartesian = transcoords(jumps[i].get_jump_vector(), lattice_matrix);
 			
 			//ジャンプベクトル方向の電場の大きさを計算する
 			double E_j_dot = E_field_vector.dot(jump_vector_cartesian);
-			//cout << "E_j_dot = " << E_j_dot << endl;
 			double E_along_jump_strength = E_j_dot / jump_vector_cartesian.norm();
-			//cout << "E_along_jump_strength = " << E_along_jump_strength << endl;
 		
 			//ΔEmigを求める、1*で良いのはプロトンのみなことに注意
 			double delta_E_mig = q_charge * E_along_jump_strength * jump_vector_cartesian.norm()/2;
-			//cout << "delta_E_mig [J] = " << delta_E_mig << endl;
 
 			//ジャンプ頻度を補正する
 			double fixed_jump_freq = jumps[i].get_freq() * exp(delta_E_mig/(kb*temperture));
-		//	cout << "jump_frep = " << jumps[i].get_freq() << endl;
-		//	cout << "fixed_jump_freq = " << fixed_jump_freq << endl;
 			jumps[i].set_freq(fixed_jump_freq);
 		}
 
@@ -972,40 +829,14 @@ int main()
 
 		sites[end_site_id_tmp-1].set_a_jump_jumps_to_here(jumps[i]);
 	}
-
-
-/*	//確認用
-	for (int i = 0; i != sites.size(); i++) {
-		for (int j = 0; j != sites[i].get_jumps_from_here().size(); j++) {
-
-			cout << "\t" << "\t" << "start = " << sites[i].get_jumps_from_here()[j].get_start_site_id() ; 
-			cout << "\t" << "\t" << "end = " << sites[i].get_jumps_from_here()[j].get_end_site_id() ; 
-			cout << "\t" << "\t" << "jumps_from_here[" << j << "] = " << sites[i].get_jumps_from_here()[j].get_freq() << endl;
-		}
-	}
-	cout << endl;
-	//
-	//確認用
-	for (int i = 0; i != sites.size(); i++) {
-		for (int j = 0; j != sites[i].get_jumps_to_here().size(); j++) {
-
-			cout << "\t" << "\t" << "start = " << sites[i].get_jumps_to_here()[j].get_start_site_id() ; 
-			cout << "\t" << "\t" << "end = " << sites[i].get_jumps_to_here()[j].get_end_site_id() ; 
-			cout << "\t" << "\t" << "jumps_to_here[" << j << "] = " << sites[i].get_jumps_to_here()[j].get_freq() << endl;
-		}
-	}
-
-	return 0;
-	*/
 	
-	//*
-	//blocking_list_csvとJMPDATAに整合性があるかを確認する
+	//blocking_list_csvとJMPDATAに整合性があるかを確認する(このブロックはBZY中のプロトン拡散にのみ適用可能)
 	if (blocking_list_read_yes) {
 		int match_counter = 0;
 		//cout << "size = " << sites[0].get_jumps_from_here().size() << endl;
 		for (int i = 0; i != sites[0].get_jumps_from_here().size() ; i++) {
 			//cout << "for = " << i << " times" << endl;
-			//blocking_mate_listにjumps_from_hereのget_end_site_idが2つ以上含まれていれば(回転経路に相当)整合性あり
+			//blocking_mate_listにjumps_from_hereのget_end_site_idが2つ以上含まれていれば(回転経路に相当)整合性あり, BZYのみ
 			if (vector_finder(sites[0].get_blocking_mate_list(), sites[0].get_jumps_from_here()[i].get_end_site_id()))
 				match_counter++;
 		}
@@ -1018,13 +849,13 @@ int main()
 			abort();
 		}
 	}
-	//*/
 
-
+	//濃度を定義、セル内の拡散粒子数/セルの体積より単位は[1/Ang.^3]
 	concentration = p_place_n / lattice_matrix.determinant();
 	
 
 
+	//ここからKMCシミュレーション開始, 指定回数のシミュレーションを繰り返す
 	for (int step_counter = 1; step_counter <= step_max; step_counter++) {
 		
 		//KMC開始時刻を表示
@@ -1054,20 +885,15 @@ int main()
 		cout << endl;
 
 
-
-
-
-		//確認用
-		//cout << "step_counter = " << step_counter << " start " << endl;
-
 		//乱数を準備しておく
 		random_device rnd;
 		mt19937 mt(rnd());
 
+		
 		//初期配置を生成する
 
-		//まずはプロトンを配置する数を決定する(input.cfgで入力済みのはず)
-		//もしinput.cfgでプロトンの配置数が設定されておらず、デフォルトの0が採用されていた場合
+		//まずはプロトンを配置する数を決定する(INPUTで指定されているはず)
+		//もしINPUTでプロトンの配置数が設定されておらず、デフォルトの0が採用されていた場合
 		if (p_place_n == 0) {
 
 			cout << "NDIFFS not defined. decide NDIFFS." << endl;
@@ -1080,7 +906,6 @@ int main()
 
 		}
 
-		//cout << "NDIFFS = " << p_place_n << endl;
 		//sitePE_datのdeep_copyを取っておく(初期配置を決めるごとに変更するので)
 		vector<vector<double>> sitePE_dat_deepcopy = sitePE_dat;
 
@@ -1089,25 +914,15 @@ int main()
 
 		//sitePE.datに基づいて、ボルツマン因子に従ってプロトンを配置するサイトを選ぶ場合
 		if (site_PE_read_yes) {
-			//一旦2次元だけを考えて、blockingなしの場合のみ書く
 			
 			//プロトンの初期配置数に達するまで繰り返す
 			while (proton_place_number_vector.size() < p_place_n) { 
-			
-				/*
-				//確認用
-				for (auto itr = sitePE_dat_deepcopy.begin(); itr != sitePE_dat_deepcopy.end(); itr++) {
-					cout << "site id = " << (*(itr))[0] << endl;
-				}
-				*/
 
 				//sitePE_dat[i][2]の和(ボルツマン因子の総和:分配関数)を計算する
 				double part_func = 0;
 				for (auto itr = sitePE_dat_deepcopy.begin(); itr != sitePE_dat_deepcopy.end(); itr++) {
 					part_func += (*(itr))[2];
 				}
-
-				//cout << "part_func = " << part_func << endl;
 				
 				//0から1の乱数を生成する
 				uniform_real_distribution<double> random0to1(0,1);
@@ -1125,16 +940,14 @@ int main()
 					}
 				}
 
-				//cout << "selected_site = " << sitePE_dat_deepcopy[over_partial_number][0] << endl;
-
 				//初期配置を格納したベクトルに、サイト番号を追加
 				int added_proton_site_number = sitePE_dat_deepcopy[over_partial_number][0];
 				proton_place_number_vector.push_back(added_proton_site_number);
 
 				//初期配置として追加したサイトは分配関数から除く
 				sitePE_dat_deepcopy.erase(sitePE_dat_deepcopy.begin() + over_partial_number);
-				//cout << "sitePE_dat_deepcopy.size() = " << sitePE_dat_deepcopy.size() << endl;
 
+				//area blockingを考慮する場合
 				if (blocking_yes) {
 					//先ほど初期配置としたサイトのarea blockingに関わるサイトもsitePE_datから削除する
 					vector<int> temp_area_blocking_list = sites[added_proton_site_number-1].get_blocking_mate_list();
@@ -1157,8 +970,6 @@ int main()
 					}
 					
 				}
-
-				//cout << endl;
 			}
 		}
 
@@ -1169,7 +980,6 @@ int main()
 		else {
 			//blockingありの場合
 			if (blocking_yes) {
-				//cout << "blockingあり" << endl;
 
 				//乱数を生成し、blocking_list_csv(vector<vector<int>>)をシャッフルする
 				shuffle( blocking_list_csv.begin(), blocking_list_csv.end(), mt );
@@ -1184,7 +994,6 @@ int main()
 
 			//blockingなしの場合
 			else {
-				//cout << "blockingなし" << endl;
 				//(サイトの数-1)を要素にもつvectorを生成
 				proton_place_number_vector.resize(site_total_number-1);
 				for (int i = 0; i != proton_place_number_vector.size(); i++) {
@@ -1201,17 +1010,6 @@ int main()
 
 			}
 		}
-
-		/*
-		//確認用
-		for (int i = 0; i != proton_place_number_vector.size(); i++) {
-			cout << "proton_place_number_vector[" << i << "] = " << proton_place_number_vector[i] << endl;
-		}
-
-
-		return 0;
-		/*/
-		
 		
 		
 
@@ -1228,10 +1026,8 @@ int main()
 			diffusion_species[i].hopping_counter = 0;
 		}
 		
-		
 
-
-		//プロトンを配置するSiteクラスのsite_atomをnumber_proton(今回は2を割当)に変更する
+		//プロトンを配置するSiteクラスのsite_atomをnumber_proton(本プログラムの最初で2を割り当てている)に変更する
 		//と同時に、diffusion_idを設定する
 		
 		int d_id = 1;
@@ -1254,10 +1050,8 @@ int main()
 						Diffusionspecie::blocking_list.insert(*itr);
 					}
 
-
 					d_id++;
 
-					//cout << "proton at site id = " << sites[k].get_site_id() << endl;
 					break;
 				}
 				else {
@@ -1265,72 +1059,22 @@ int main()
 				}
 			}
 		}
-
-/*		//確認用
-		cout << "blocking_list = " ;
-		for (auto itr = Diffusionspecie::blocking_list.begin(); itr != Diffusionspecie::blocking_list.end() ; itr++) {
-			cout << *itr << "," ;
-		}
-		cout << endl;
-		cout << "Diffusionspecie::diffusion_siteid_now_list = " ;
-		for (auto itr = Diffusionspecie::diffusion_siteid_now_list.begin(); itr != Diffusionspecie::diffusion_siteid_now_list.end() ; itr++) {
-			cout << *itr << "," ;
-		}
-		cout << endl;
-*/
-
-
-
-
-
-	//	if ( d_id != p_place_n+1 )
-			//cout << "d_id != p_place_n+1" << endl;
-	//	else
-			//cout << "d_id = p_place_n+1" << endl;
-
-		//確認用
-/*
-		for (int i = 0; i != sites.size(); i++) {
-			cout << "site[" << i << "] ";
-			cout << "site_id = " << sites[i].get_site_id() << " " ;
-			cout << "site_atom = " << sites[i].get_site_atom() << " " ;
-			cout << "diffusion_id = " << sites[i].get_diffusion_id() << endl;
-		}
-		*/
-
 		
 		
 		//シミュレーション時間total_timeを定義
 		double total_time = 0.0;
 
-
-		//メインループの開始
+		//ここから1回のKMCシミュレーション内で指定されたステップ数を繰り返していく
 		cout << endl;
 		
 		int start_was = 0;
 		int end_was = 0;
-		vector<Jump> jumps_possible_tmp;
 		vector<Jump> jumps_possible;
-		vector<Jump> jumps_impossible_tmp;
 
-		//cout << "\t" << "main loop start" << endl;
-		//cout << "\t" << "loop processing…" << endl;
 		string processing;
 		for (long long loop_counter = 1; loop_counter <= loop_max; loop_counter++) { 			
-
-
-			//実行時間を計測する
-	//		chrono::system_clock::time_point start, end;
-	//		time_t time_stamp;
-
-	//		start = chrono::system_clock::now();
-
-
-			//確認用
-			//cout << endl;
-			//cout << "\t" << "loop_counter = " << loop_counter << endl;
 			
-			//切り上げしておよそ10%ごとに#を出力する
+			//切り上げしておよそ10%ごとに#を出力する, log_coutに追記される, pythonでいうtqdmを簡略に実装
 			if (loop_counter % ((loop_max+10-1)/10) == 0) {
 				processing += "#";
 				cout  << "\t" << processing << endl;
@@ -1338,16 +1082,11 @@ int main()
 					cout << endl;
 				}
 			}
-			
-
-
 
 			//1ループ目のみ
 			if (loop_counter == 1) {
 						
 				//系で起きうる事象(今回はジャンプ)を列挙し、jumps_possibleに入れていく
-				//vector<Jump> jumps_possible_tmp;
-				//vector<Jump> jumps_possible;
 
 				//diffusion_siteid_now_listにあるサイト上からのジャンプを追加したい
 				for (int i = 0, n = Diffusionspecie::diffusion_siteid_now_list.size() ; i != n; i++) {
@@ -1383,29 +1122,7 @@ int main()
 						}
 					}
 
-					
 				}
-				
-				/*for (int i = 0, n = jumps.size() ; i != n; i++) {
-					
-					//jumps[i]の始点サイトidが、プロトンの現在サイトのリストに入っていればtmpに追加
-					if (vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps[i].get_start_site_id())) {
-						jumps_possible_tmp.push_back(jumps[i]);
-					}
-				}
-
-				for (int i = 0, n = jumps_possible_tmp.size() ; i != n; i++) {
-					
-					//jumps[i]の終点サイトidが、プロトンの現在サイトのリストに入っていなければtmpに追加
-					if (!vector_finder(Diffusionspecie::diffusion_siteid_now_list, jumps_possible_tmp[i].get_end_site_id())) {
-						jumps_possible.push_back(jumps_possible_tmp[i]);
-					}
-					else {
-						jumps_impossible_tmp.push_back(jumps_possible_tmp[i]);
-					}
-				}
-				*/
-
 
 			}
 
@@ -1415,18 +1132,18 @@ int main()
 
 				//jumps_possibleを更新する
 
-				//blockingあり
+				//blockingあり, これは一般的なarea blockingに適用可能か?(高橋はBZYにのみ適用確認)
 				if (blocking_yes) {
 					
 					auto itr = jumps_possible.begin();
 					while (itr != jumps_possible.end()) {
 
-						//start_wasからのjumpを削除
+						//start_was(直前のジャンプの開始点だったサイト)からのjumpを削除
 						if ((*itr).get_start_site_id() == start_was) {
 							itr = jumps_possible.erase(itr);
 						}
 
-						//end_wasおよびそのblocking_mate_listに向かうjumpを削除
+						//end_was(直前のジャンプの終着点だったサイト)およびそのblocking_mate_listに向かうjumpを削除
 
 						else if (vector_finder(sites[end_was-1].get_blocking_mate_list(), (*itr).get_end_site_id())) {
 							itr = jumps_possible.erase(itr);
@@ -1441,23 +1158,7 @@ int main()
 					//回転経路=同一blocking area内で移動した場合
 					if (vector_finder(sites[start_was-1].get_blocking_mate_list(), end_was)) {
 
-						//cout << "\t" << "rotation happend" << endl;
-
-						/*//start_wasに向かうjumpを追加する…end_wasからのjumpですべてまかなえることに気づいた
-						vector<Jump> temp_jump_vector_to_start = sites[start_was-1].get_jumps_to_here();
-						for (auto itr_1 = temp_jump_vector_to_start.begin(); itr_1 != temp_jump_vector_to_start.end(); itr_1++) {
-
-							//回転経路内かつ始点にプロトンがいれば追加
-							if (vector_finder(sites[start_was-1].get_blocking_mate_list(), (*itr_1).get_start_site_id())
-								&&
-								vector_finder(Diffusionspecie::diffusion_siteid_now_list, (*itr_1).get_start_site_id())){
-								jumps_possible.push_back(*itr_1);
-							}
-							//ホッピング経路なら追加はできないのでスルー
-						}
-						*/
-
-						//end_wasからのjumpを追加する
+						//end_was(直前のジャンプの終着点だったサイト)からのjumpを追加する
 						vector<Jump> temp_jump_vector_from_end = sites[end_was-1].get_jumps_from_here();
 						for (auto itr_1 = temp_jump_vector_from_end.begin(); itr_1 != temp_jump_vector_from_end.end(); itr_1++) {
 							
@@ -1480,9 +1181,6 @@ int main()
 					//ホッピング経路=別のblocking areaへ移動した場合
 					else {
 						
-						//cout << "\t" << "hopping happend" << endl;
-						//cout << "\t" << "\t" << "search jump from end_was" << endl;
-
 						//end_wasからのjumpを追加する
 						vector<Jump> temp_jump_vector_from_end = sites[end_was-1].get_jumps_from_here();
 						for (auto itr_2 = temp_jump_vector_from_end.begin(); itr_2 != temp_jump_vector_from_end.end(); itr_2++) {
@@ -1490,7 +1188,6 @@ int main()
 							//回転経路内なら追加
 							if (vector_finder(sites[end_was-1].get_blocking_mate_list(), (*itr_2).get_end_site_id())) {
 								jumps_possible.push_back(*itr_2);
-								//cout << "\t" << "\t" << "\t" << (*itr_2).get_start_site_id() << " to " << (*itr_2).get_end_site_id() << "  rot path add" << endl;
 							}
 
 							//ホッピング経路の場合
@@ -1499,14 +1196,13 @@ int main()
 								if (!Diffusionspecie::blocking_list.count((*itr_2).get_end_site_id())
 									&&
 									(*itr_2).get_end_site_id() != start_was) {
-									//cout << "\t" << "\t" << "\t" << (*itr_2).get_start_site_id() << " to " << (*itr_2).get_end_site_id() << "  hop path add" << endl;
+
 									jumps_possible.push_back(*itr_2);
 								}
 							}
 						}
 
 						//start_wasを含むblocking areaへのjumpを追加する
-						//cout << "\t" << "\t" << "search jump to start_was" << endl;
 						//blocking_areaのsite_id(vector)を取得
 						vector<int> blocking_area_ids = sites[start_was-1].get_blocking_mate_list();
 						//blocking_area内のsiteについて、それぞれに向かうjumpを探して追加する
@@ -1577,17 +1273,6 @@ int main()
 						}
 					}
 			
-
-				/*	//jumps_impossible_tmpをjumps_possibleに追加する
-					for (int i = 0; i != jumps_impossible_tmp.size(); i++) {
-						jumps_possible.push_back(jumps_impossible_tmp[i]);
-					}
-
-					//jumps_impossible_tmpを空にする
-					jumps_impossible_tmp.clear();
-					jumps_impossible_tmp.shrink_to_fit();
-				*/
-			
 				}
 
 
@@ -1597,44 +1282,18 @@ int main()
 			}
 
 
-			//起きうるジャンプについて、freqの総和をとりfreq_sumに格納する
+			//起きうるジャンプについて、ジャンプ頻度freqの総和をとりfreq_sumに格納する
 			
 			double freq_sum = 0.0;
 			for (int i = 0, n = jumps_possible.size(); i != n; i++) {
 				freq_sum += jumps_possible[i].get_freq();
 			}
 
-          //確認用
-/*
-			cout << "\t" << "diffusion_siteid_now_list = " ;
-			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size(); i++) {
-				cout << "\t" << Diffusionspecie::diffusion_siteid_now_list[i] ; 
-			}
-			cout << endl;
-			//確認用
-			cout << "blocking_list = " ;
-			for (auto itr = Diffusionspecie::blocking_list.begin(); itr != Diffusionspecie::blocking_list.end() ; itr++) {
-				cout << *itr << "," ;
-			}
-			cout << endl;
-			for (int i = 0; i != jumps_possible.size(); i++) {
-				cout << "\t" << "\t" << "start = " << jumps_possible[i].get_start_site_id() ; 
-				cout << "\t" << "\t" << "end = " << jumps_possible[i].get_end_site_id() ; 
-				cout << "\t" << "\t" << "jumps_possible[" << i << "] = " << jumps_possible[i].get_freq() << endl;
-			}
-			cout << endl;
-
-			cout << "\t"  << "\t" << "freq_sum = " <<  freq_sum << endl;
-		*/	
-
-
-
 
 			//実際に起こるイベントを決める
 			//0から1の乱数を生成する
 			uniform_real_distribution<double> random0to1(0,1);
 			double rho_1 = random0to1(mt);
-			//cout << "\t" << "\t" << "rho_1 = " << rho_1 << endl;
 			
 			//jumps_possibleのfreqを順に足し上げていき、和がfreq_sumを超えたときの整数lを取得する
 			double freq_sum_tmp = 0.0;
@@ -1647,10 +1306,6 @@ int main()
 					break;
 				}
 			}
-
-			//cout << "\t" << "\t"<< "jump_happen_number = " << jump_happen_number  << endl;
-
-
 
 			
 			//実際にイベントを起こす
@@ -1666,8 +1321,6 @@ int main()
 			int diff_tmp = sites[jumps_start_id-1].get_diffusion_id();
 			sites[jumps_start_id-1].set_diffusion_id(sites[jumps_end_id-1].get_diffusion_id());
 			sites[jumps_end_id-1].set_diffusion_id(diff_tmp);
-
-
 			
 			//diffusion_idをもつdiffusion_species[x].jump_totalにjump_vectorを追加する
 			//diffusion_species[x].sum_squared_distanceにAng.に直した変位の2乗を追加
@@ -1690,7 +1343,6 @@ int main()
 					//diffusion_counterを1つ増加
 					diffusion_species[i].diffusion_counter++;
 
-
 					//rot_hop_count is 1 (True)
 					if (rot_hop_count_yes) {
 										
@@ -1705,27 +1357,16 @@ int main()
 						}
 
 					}
-					//cout << "diffusion_species[" << i << "].diffusion_counter = " << diffusion_species[i].diffusion_counter << endl;
-
 
 				}
 
 			}
 
 
-
-
-/*			for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
-
-				cout << "diffusion_siteid_now_list[" << i  << "] = " << Diffusionspecie::diffusion_siteid_now_list[i] << endl;
-			}
-*/
-
-
 			//diffusion_siteid_now_listを更新する
 			vector<int>::iterator itr;
-			start_was = jumps_start_id;
-			end_was = jumps_end_id;
+			start_was = jumps_start_id; //直前のジャンプの始点サイトid
+			end_was = jumps_end_id;     //直前のジャンプの終点サイトid
 			itr = find(Diffusionspecie::diffusion_siteid_now_list.begin(), Diffusionspecie::diffusion_siteid_now_list.end(), start_was);
 			if (itr == Diffusionspecie::diffusion_siteid_now_list.end()) cout << "search failed" << endl;
 			int wanted_index = distance(Diffusionspecie::diffusion_siteid_now_list.begin(), itr);
@@ -1736,22 +1377,15 @@ int main()
 			if (blocking_yes) {
 
 				//start_wasのmate_listを削除する
-				//cout << '\t' << "start_was = " << start_was << endl;
-				//cout << '\t' << "start_was_mate_list = " ;
 				for (int l = 0, n = sites[start_was-1].get_blocking_mate_list().size(); l != n; l++) {
-					//cout << sites[start_was-1].get_blocking_mate_list()[l] << "," ;
 					Diffusionspecie::blocking_list.erase(sites[start_was-1].get_blocking_mate_list()[l]);
 				}
-				//cout << endl;
 
 				//end_wasのmate_listを追加する
-				//cout << '\t' << "end_was = " << end_was << endl;
-				//cout << '\t' <<  "end_was_mate_list = " ;
 				for (int l = 0, n = sites[end_was-1].get_blocking_mate_list().size(); l != n; l++) {
 					//cout << sites[end_was-1].get_blocking_mate_list()[l] << "," ;
 					Diffusionspecie::blocking_list.insert(sites[end_was-1].get_blocking_mate_list()[l]);
 				}
-				//cout << endl;
 
 			}
 		
@@ -1759,66 +1393,30 @@ int main()
 
 			//時間を更新する
 			double rho_2 = random0to1(mt);
-			//cout << "\t" << "\t" << "rho_2 = " << rho_2 << endl;
 
 			double dt = -log(rho_2)/freq_sum;
 			total_time += dt;
-			//cout << "dt = " << dt << endl;
-			//cout << endl;
-
-/*			//確認用
-			for (int i = 0; i != sites.size(); i++) {
-				cout << "site[" << i << "] ";
-				cout << "site_id = " << sites[i].get_site_id() << " " ;
-				cout << "site_atom = " << sites[i].get_site_atom() << " " ;
-				cout << "diffusion_id = " << sites[i].get_diffusion_id() << endl;
-			}
-*/
-
-
-			//実行時間の計測
-	//		end = chrono::system_clock::now();
-
-	//		auto time = end - start;
-
-	//		time_stamp = chrono::system_clock::to_time_t(start);
-			//cout << "\t" << ctime(&time_stamp);
-
-	//		auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
-			//cout << "\t" << msec << " msec" << endl;
-
-			//cout << "loop_counter " << loop_counter << " finished" << endl;
 
 			//ループの最後の時
 			if (loop_counter == loop_max) { 
 				//end_siteを設定する
 				for (int i = 0; i != Diffusionspecie::diffusion_siteid_now_list.size() ; i++) {
-
 					int tmp_diff_id = sites[Diffusionspecie::diffusion_siteid_now_list[i]-1].get_diffusion_id() ;
 					diffusion_species[tmp_diff_id-1].diffusion_end_site = Diffusionspecie::diffusion_siteid_now_list[i] ;
 				}
-				
 			}
-
-
 
 		}
 
-		//ループ終了後
-		//cout << "\t" << "loop_counter finished" << endl;
-		//cout << endl;
+		//1度のKMCシミュレーションでの既定ステップ数が終了したあと
 		
-		//cout << "\t" << "total_time = " << scientific << total_time << defaultfloat << endl;
-		
-		//拡散係数を出力およびファイルに出力する
+		//拡散係数を出力およびファイルに出力する(この出力された拡散係数はドリフトを考慮しておらず、平均変位によるセンタリングも行っていない点に注意)
 
-
-		//自己拡散係数を求めるために拡散種ごとのjump_totalを準備する
+		//集団拡散係数および伝導度拡散係数を求めるために拡散種ごとのjump_totalを準備する
 		vector<double> jump_total_all(3,0.0);
 
-		//拡散種1つ1つに対し操作を行う
+		//拡散粒子1つ1つに対し操作を行う
 		for (int j = 0, n = diffusion_species.size(); j != n; j++) {
-
 
 			//自己拡散係数(および電場勾配化では伝導度)を求めるため
 			//拡散種ごとのjump_totalを足して合計変位を出す
@@ -1830,21 +1428,8 @@ int main()
 
 			//トレーサー拡散係数を計算し出力
 			vector<double> D_t_3d = diffusion_species[j].get_D(lattice_matrix,total_time);
+
 			D_t_3d_vector.push_back(D_t_3d);
-
-			
-
-			//もともとOUTPUTに出力していたが不必要になった
-			/*
-			for (int i = 0; i != D_t_3d.size(); i++) {
-				//cout << "\t"  << "diffusion_species[" << j << "]:D_t_3d[" << i << "] = " << D_t_3d[i] << endl;
-				ofs << D_t_3d[i] << "," ;
-				if (i+1 == D_t_3d.size()) {
-					ofs << endl;
-				}
-			}
-			//cout << endl;
-			*/
 
 			}
 
@@ -1858,16 +1443,6 @@ int main()
 		for (int j = 0; j != jump_total_all.size(); j++) {
 			average_displacement[j] = jump_total_all[j] / diffusion_species.size();
 		}
-		
-
-			
-		//jump_total_allを分率座標からcartesian座標に直す(関数により用済みとなった)
-		/*
-		Eigen::Vector3d jump_total_all_cartesian;
-		jump_total_all_cartesian << jump_total_all[0], jump_total_all[1], jump_total_all[2];
-		Eigen::Vector3d displacement_vector = lattice_matrix*jump_total_all_cartesian;
-		cout << "displacement_vector = " << displacement_vector << endl;
-		*/
 
 		//transcoords関数でjump_total_allを分率座標からcartesian座標に直す
 		Eigen::Vector3d displacement_vector;
@@ -1886,17 +1461,12 @@ int main()
 		vector<double> Sigma_x(3,0.0);
 		if (E_field_yes) {
 			double concentration = diffusion_species.size() / lattice_matrix.determinant();
-			//cout << "lattice_matrix.determinant() = " << lattice_matrix.determinant() << endl;
-			//cout << "concentration = " << concentration << endl;
-		
+
 			for (int j = 0; j != Sigma_x.size(); j++) {
 				
 				Sigma_x[j] = average_displacement_eigen[j];
 				Sigma_x[j] *= q_charge * concentration / (E_field_strength * total_time);
 				Sigma_x[j] *= pow(10,8); //Å^-1をcm^-1に変換
-				//cout << "Sigma_x[" << j << "]  [S/cm] = " << Sigma_x[j] << endl;
-
-
 			}
 			
 			Sigma_vector.push_back(Sigma_x);
@@ -1953,7 +1523,6 @@ int main()
 			ofs_ave_dis << diffusion_species[i].diffusion_start_site << "," ;
 			ofs_ave_dis << diffusion_species[i].diffusion_end_site << "," ;
 
-			
 
 			//diffusion_counterを出力する
 			ofs_ave_dis << diffusion_species[i].diffusion_counter << "," ;
@@ -1997,24 +1566,6 @@ int main()
 
 		//blocking_listをリセットする
 		Diffusionspecie::blocking_list.clear();
-
-
-
-		//実行時間の計測
-	//	end = chrono::system_clock::now();
-
-	//	auto time = end - start;
-
-	//	time_stamp = chrono::system_clock::to_time_t(start);
-		//cout <<  ctime(&time_stamp);
-
-	//	auto msec = chrono::duration_cast<chrono::microseconds>(time).count();
-		//cout <<  msec << " msec" << endl;
-		//cout << endl;
-
-		//KMCが何回終わったか
-		//cout << '\t' <<  step_counter << " times KMC finished" << endl;
-
 
 	}
 	
@@ -2152,24 +1703,6 @@ int main()
 
 	//電場ありの場合
 	if (E_field_yes) {
-
-
-		//ofs_diff << scientific << "concentration = " << concentration << endl;
-		//ofs_diff << scientific << "temperture = " << temperture << endl;
-		//ofs_diff << scientific << "ion_charge = " << ion_charge << endl;
-
-
-/*		//電場の向きにより出力する伝導度を変える(main関数の最初に書いた)
-		string axis;
-		switch (E_field_axis) {
-			case 1 : axis = "x"; break;
-			case 2 : axis = "y"; break;
-			case 3 : axis = "z"; break;
-			case -1 : axis = "-x"; break;
-			case -2 : axis = "-y"; break;
-			case -3 : axis = "-z"; break;
-		}
-*/
 
 		//伝導度x成分
 		ofs_sigma << "chemical ionic conductivity " << conductivity_unit << endl;

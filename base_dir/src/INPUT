@@ -4,13 +4,13 @@
 MCSP=10
 
 #平均を取る粒子数
-AVERAGE=1
+AVERAGE=10000
 
 #拡散種を配置する数、今回だったらプロトン
-NDIFFS=1
+NDIFFS=16
 
 #電場のありなし、(あり=1, なし=0)
-EFIELDON=1
+EFIELDON=0
 
 #電場の強さ、10^()を入力,単位は[eV/Å]
 #EFIELD=-2
@@ -23,22 +23,22 @@ ANTIDRIFT = [0.0, 0.0, 0.0]
 CORRECT=-1.6
 
 #ジャンプリストの平均ジャンプ距離(Å),いずれはプログラムで抽出できたほうがいいかも
-DISTANCEJUMP=1.5
+DISTANCEJUMP=4.0
 
 #温度(K)
-TEMP=600
+TEMP=500
 
 #軸方向(+x=1, +y=2, +z=3, -x=-1, -y=-2, -z=-3)
 AXIS=1
 
 #sitePE.datを読み込むかどうか(yes=1, no=0)
-SITEPEREAD=1
+SITEPEREAD=0
 
 #blocking_listを読み込むかどうか(yes=1, no=0)
-BLOCKINGLISTREAD=1
+BLOCKINGLISTREAD=0
 
 #blocking_listによるarea blockingを行うか(yes=1, no=0)
-BLOCKING=1
+BLOCKING=0
 
 #hoppingやrotationのcounterを出力するか(BaZrO3専用)
 ROTHOPCOUNT=0
