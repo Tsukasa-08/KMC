@@ -145,6 +145,10 @@ KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,start_site,end_site,jump_co
 5. ログや経過は標準出力に出力されるので、適宜 >& log_coutなどでファイルにリダイレクトする
 
 ## プログラムの修正を行う場合
+- base_dir/src/kmc_test.cpp がソースコード
+- base_dir/inc に必要なインクルードファイルはすべて入っている
+- base_dir/src/Makefile に従ってmakeが実行される
+
 
 ## 計算前の確認事項
 
