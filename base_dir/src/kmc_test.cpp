@@ -1418,7 +1418,7 @@ int main()
 		//拡散粒子1つ1つに対し操作を行う
 		for (int j = 0, n = diffusion_species.size(); j != n; j++) {
 
-			//自己拡散係数(および電場勾配化では伝導度)を求めるため
+			//集団拡散係数(および電場勾配化では伝導度)を求めるため
 			//拡散種ごとのjump_totalを足して合計変位を出す
 			for (int i = 0; i != jump_total_all.size(); i++) {
 				jump_total_all[i] += diffusion_species[j].get_jump_total()[i];
@@ -1476,11 +1476,11 @@ int main()
 
 
 
-		//電場なしの場合、自己拡散係数を出力
+		//電場なしの場合、集団拡散係数を出力
 		else {
 			displacement_vector *= pow(10,-8); //[Ang.]を[cm]に変換
 
-			//jump_total_allを2乗したあと拡散種の数で割って、自己拡散係数を出力する
+			//jump_total_allを2乗したあと拡散種の数で割って、集団拡散係数を出力する
 			vector<double> D_j_3d(3,0.0);
 
 			for (int j = 0; j != jump_total_all.size(); j++) {
@@ -1636,8 +1636,8 @@ int main()
 		ofs_output << endl;
 		
 		
-		//自己拡散係数
-		ofs_diff << "self diffusion coefficient [cm^2/s]" << endl;
+		//集団拡散係数
+		ofs_diff << "collective diffusion coefficient [cm^2/s]" << endl;
 		double D_j_x = 0;
 		double D_j_y = 0;
 		double D_j_z = 0;
@@ -1660,8 +1660,8 @@ int main()
 		ofs_diff << "Dy = " << D_j_y << endl; 
 		ofs_diff << "Dz = " << D_j_z << endl; 
 
-		ofs_output << "#self diffusion coefficient [cm^2/s]" << endl;
-		ofs_output << "self_D = " << "[" << D_j_x << "," << D_j_y << "," << D_j_z << "]" << endl;
+		ofs_output << "#collective diffusion coefficient [cm^2/s]" << endl;
+		ofs_output << "collective_D = " << "[" << D_j_x << "," << D_j_y << "," << D_j_z << "]" << endl;
 		ofs_output << endl;
 
 
@@ -1683,19 +1683,19 @@ int main()
 		ofs_output << "tracer_Sigma = " << "[" << tracer_Sigma[0] << "," << tracer_Sigma[1] << "," << tracer_Sigma[2] << "]" << endl;
 		ofs_output << endl;
 
-		//自己拡散係数から自己伝導度
-		std::vector<double> self_Sigma (3,0.0);
-		self_Sigma[0] = NernstEinstein_DtoSigma(D_j_x, concentration, temperture, ion_charge, dimensionality);
-		self_Sigma[1] = NernstEinstein_DtoSigma(D_j_y, concentration, temperture, ion_charge, dimensionality);
-		self_Sigma[2] = NernstEinstein_DtoSigma(D_j_z, concentration, temperture, ion_charge, dimensionality);
-		ofs_sigma << "self ionic conductivity " << conductivity_unit << endl;
-		ofs_sigma << "Sigma_x = " << self_Sigma[0] << endl;
-		ofs_sigma << "Sigma_y = " << self_Sigma[1] << endl;
-		ofs_sigma << "Sigma_z = " << self_Sigma[2] << endl;
+		//集団拡散係数から集団伝導度
+		std::vector<double> collective_Sigma (3,0.0);
+		collective_Sigma[0] = NernstEinstein_DtoSigma(D_j_x, concentration, temperture, ion_charge, dimensionality);
+		collective_Sigma[1] = NernstEinstein_DtoSigma(D_j_y, concentration, temperture, ion_charge, dimensionality);
+		collective_Sigma[2] = NernstEinstein_DtoSigma(D_j_z, concentration, temperture, ion_charge, dimensionality);
+		ofs_sigma << "collective ionic conductivity " << conductivity_unit << endl;
+		ofs_sigma << "Sigma_x = " << collective_Sigma[0] << endl;
+		ofs_sigma << "Sigma_y = " << collective_Sigma[1] << endl;
+		ofs_sigma << "Sigma_z = " << collective_Sigma[2] << endl;
 		ofs_sigma << endl;
 
-		ofs_output << "#self ionic conductivity " << conductivity_unit << endl;
-		ofs_output << "self_Sigma = " << "[" << self_Sigma[0] << "," << self_Sigma[1] << "," << self_Sigma[2] << "]" << endl;
+		ofs_output << "#collective ionic conductivity " << conductivity_unit << endl;
+		ofs_output << "collective_Sigma = " << "[" << collective_Sigma[0] << "," << collective_Sigma[1] << "," << collective_Sigma[2] << "]" << endl;
 		ofs_output << endl;
 	}
 
@@ -1704,9 +1704,9 @@ int main()
 	//電場ありの場合
 	if (E_field_yes) {
 
-		//伝導度x成分
-		ofs_sigma << "chemical ionic conductivity " << conductivity_unit << endl;
-		ofs_diff << "chemical diffusion coefficient [cm^2/s]" << endl;
+		//伝導度の各軸成分
+		ofs_sigma << "ionic conductivity from drift velocity" << conductivity_unit << endl;
+		ofs_diff << "conductivity diffusion coefficient [cm^2/s]" << endl;
 
 		vector<double> Sigma_vector_total(3,0.0);
 		string j_to_axis;
@@ -1745,11 +1745,11 @@ int main()
 			*/
 		}
 
-		ofs_output << "#chemical ionic conductivity " << conductivity_unit << endl;
-		ofs_output << "chemical_Sigma = " << "[" << Sigma_vector_total[0] << "," << Sigma_vector_total[1] << "," << Sigma_vector_total[2] << "]" << endl;
+		ofs_output << "#ionic conductivity from drift velocity" << conductivity_unit << endl;
+		ofs_output << "Sigma = " << "[" << Sigma_vector_total[0] << "," << Sigma_vector_total[1] << "," << Sigma_vector_total[2] << "]" << endl;
 		ofs_output << endl;
-		ofs_output << "#chemical diffusion coefficient [cm^2/s]" << endl;
-		ofs_output << "chemical_D = " << "[" << NernstEinstein_SigmatoD(Sigma_vector_total[0], concentration, temperture, ion_charge, dimensionality) << 
+		ofs_output << "#conductivity diffusion coefficient [cm^2/s]" << endl;
+		ofs_output << "D_sigma = " << "[" << NernstEinstein_SigmatoD(Sigma_vector_total[0], concentration, temperture, ion_charge, dimensionality) << 
  "," << NernstEinstein_SigmatoD(Sigma_vector_total[1], concentration, temperture, ion_charge, dimensionality) << "," << NernstEinstein_SigmatoD(Sigma_vector_total[2], concentration, temperture, ion_charge, dimensionality) << "]" << endl;
 		ofs_output << endl;
 		//化学拡散係数
