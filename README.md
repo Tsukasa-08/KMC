@@ -79,8 +79,16 @@ DIMENSIONALITY=3
 <details>
 <summary>sitePE.dat</summary>
 
-- 各サイトのエネルギーを記載したファイル
+- 各サイトのエネルギー(単位:eV)を記載したファイル
 - POSCARの行と対応している必要あり
+
+```txt
+#siteごとのPotential Energy(eV)
+0.987634
+0.023498
+...
+```
+
 </details>
 
 <details>
