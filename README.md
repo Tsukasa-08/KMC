@@ -135,11 +135,28 @@ KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,start_site,end_site,jump_co
 ```
 </details>
 
+<details>
+<summary>DiffusionCoefficient</summary>
+
+- 電場の影響がない場合、トレーサー拡散係数および集団拡散係数を出力するファイル
+- 電場の影響がある場合、伝導度拡散係数を出力するファイル
+- PES勾配によるドリフトを考慮していないので注意(=平均変位によるセンタリングを行っていない)
+
+</details>
+
+<details>
+<summary>IonicConductivity</summary>
+
+- 電場の影響がない場合、トレーサー拡散係数および集団拡散係数をNernst-Einsteinの関係式を用いて伝導度に換算した値を出力するファイル
+- 電場の影響がある場合、ドリフト速度から算出した伝導度を出力するファイル
+- PES勾配によるドリフトを考慮していないので注意(=平均変位によるセンタリングを行っていない)
+
+</details>
 
 ## 使用方法
 
 1. `KMC/base_dir`を任意のディレクトリにダウンロードする
-2. Makefileのあるディレクトリ内で、`make all`コマンドを実行しコンパイルを完了させる
+2. Makefileのあるディレクトリ内(=`KMC/base_dir/src`)で、`make all`コマンドを実行しコンパイルを完了させる
 3. 入力ファイルが用意されたディレクトリを用意する
 4. 入力ファイルが用意されたディレクトリ内で、C++の実行ファイルである`test_kmc_test`を実行 (プログラム自体はどこにあるものを呼び出してもよい)
 5. ログや経過は標準出力に出力されるので、適宜 `>& log_cout`などでファイルにリダイレクトする
@@ -161,4 +178,3 @@ KMC_times,diffusion_id,dx,dy,dz,sum_x2,sum_y2,sum_z2,start_site,end_site,jump_co
 - POSCARとJMPDATAは対応しているか
 - POSCARとblocking_list.csvは対応しているか
 - POSCARとsitePE.datは対応しているか
-- make_calc_directory.shによるsedの際にdefaultになるべき値はその通りか
