@@ -12,6 +12,7 @@ OBJS    = $(SRCS:.cpp=.o)
 # (6)インクルードファイルのあるディレクトリパス
 # 必要なものはHOMEディレクトリ以下のincludeディレクトリに入れとく
 INCDIR  = -I../inc
+INCDIR  += -I../inc/eigen-3.3.9
 INCDIR  += -I$(HOME)/include/eigen-3.3.9
 INCDIR  += -I$(HOME)/include
  
